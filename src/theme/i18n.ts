@@ -55,7 +55,20 @@ export type TranslationKey =
   | 'stories.variants'
   | 'stories.sizes'
   | 'stories.states'
-  | 'stories.examples';
+  | 'stories.examples'
+  // FileUpload
+  | 'fileupload.dropHere'
+  | 'fileupload.dragOrBrowse'
+  | 'fileupload.browse'
+  | 'fileupload.uploading'
+  | 'fileupload.removeFile'
+  // NotificationCenter
+  | 'notifications.title'
+  | 'notifications.markAllRead'
+  | 'notifications.empty'
+  | 'notifications.viewAll'
+  | 'notifications.all'
+  | 'notifications.unread';
 
 type TranslationMap = Record<TranslationKey, string>;
 
@@ -104,6 +117,17 @@ const en: TranslationMap = {
   'stories.sizes':            'Sizes',
   'stories.states':           'States',
   'stories.examples':         'Examples',
+  'fileupload.dropHere':      'Drop files here',
+  'fileupload.dragOrBrowse':  'Drag & drop or browse',
+  'fileupload.browse':        'browse',
+  'fileupload.uploading':     'Uploading…',
+  'fileupload.removeFile':    'Remove file',
+  'notifications.title':      'Notifications',
+  'notifications.markAllRead':'Mark all as read',
+  'notifications.empty':      "You're all caught up",
+  'notifications.viewAll':    'View all notifications',
+  'notifications.all':        'All',
+  'notifications.unread':     'Unread',
 };
 
 const es: TranslationMap = {
@@ -151,6 +175,17 @@ const es: TranslationMap = {
   'stories.sizes':            'Tamaños',
   'stories.states':           'Estados',
   'stories.examples':         'Ejemplos',
+  'fileupload.dropHere':      'Suelta los archivos aquí',
+  'fileupload.dragOrBrowse':  'Arrastra y suelta o explora',
+  'fileupload.browse':        'explorar',
+  'fileupload.uploading':     'Subiendo…',
+  'fileupload.removeFile':    'Eliminar archivo',
+  'notifications.title':      'Notificaciones',
+  'notifications.markAllRead':'Marcar todo como leído',
+  'notifications.empty':      'Estás al día',
+  'notifications.viewAll':    'Ver todas las notificaciones',
+  'notifications.all':        'Todas',
+  'notifications.unread':     'Sin leer',
 };
 
 const fr: TranslationMap = {
@@ -198,6 +233,17 @@ const fr: TranslationMap = {
   'stories.sizes':            'Tailles',
   'stories.states':           'États',
   'stories.examples':         'Exemples',
+  'fileupload.dropHere':      'Déposez les fichiers ici',
+  'fileupload.dragOrBrowse':  'Glisser-déposer ou parcourir',
+  'fileupload.browse':        'parcourir',
+  'fileupload.uploading':     'Envoi en cours…',
+  'fileupload.removeFile':    'Supprimer le fichier',
+  'notifications.title':      'Notifications',
+  'notifications.markAllRead':'Tout marquer comme lu',
+  'notifications.empty':      'Vous êtes à jour',
+  'notifications.viewAll':    'Voir toutes les notifications',
+  'notifications.all':        'Toutes',
+  'notifications.unread':     'Non lues',
 };
 
 export const translations: Record<Language, TranslationMap> = { en, es, fr };

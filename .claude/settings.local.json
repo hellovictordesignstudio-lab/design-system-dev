@@ -4,7 +4,12 @@
       "Bash(npx tsc:*)",
       "Bash(timeout 60 npx storybook dev --port 6006 --no-open)",
       "Bash(npm run:*)",
-      "Bash(kill %2)"
+      "Bash(kill %2)",
+      "Bash(for comp:*)",
+      "Bash(do)",
+      "Bash(echo \"── $comp ──\")",
+      "Read(//Users/victor/Projects/design-system/src/components/**)",
+      "Bash(done)"
     ]
   }
 }

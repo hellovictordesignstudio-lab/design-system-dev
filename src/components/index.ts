@@ -32,3 +32,8 @@ export * from './Stepper';
 export * from './Timeline';
 export * from './TagInput';
 export * from './Drawer';
+export * from './FileUpload';
+export * from './ColorPicker';
+export * from './NotificationCenter';
+export * from './ContextMenu';
+export * from './Carousel';
