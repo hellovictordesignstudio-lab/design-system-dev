@@ -9,7 +9,15 @@
       "Bash(do)",
       "Bash(echo \"── $comp ──\")",
       "Read(//Users/victor/Projects/design-system/src/components/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(/Users/victor/Projects/design-system/.storybook/storybook-docs.css:*)",
+      "Bash(/Users/victor/Projects/design-system/.storybook/preview-head.html:*)"
     ]
   }
 }
