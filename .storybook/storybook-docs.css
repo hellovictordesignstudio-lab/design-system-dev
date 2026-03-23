@@ -1,0 +1,15 @@
+/* Fix black background in Docs canvas */
+.docs-story,
+.sb-story-container,
+.sbdocs-preview .docs-story,
+.sbdocs .sbdocs-preview,
+#storybook-root,
+#storybook-docs {
+  background: white !important;
+}
+
+[data-color-mode="dark"] .docs-story,
+[data-color-mode="dark"] .sb-story-container,
+[data-color-mode="dark"] #storybook-root {
+  background: #0C0D10 !important;
+}

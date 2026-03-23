@@ -1,3 +1,4 @@
+import './storybook-docs.css';
 import React from 'react';
 import type { Preview, Decorator } from '@storybook/react';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
@@ -25,9 +26,9 @@ const withProviders: Decorator = (Story, context) => {
         <ToastProvider>
           <div
             style={{
-              padding: '24px',
-              minHeight: '100vh',
-              backgroundColor: bg,
+              background: colorMode === 'dark' ? '#0C0D10' : '#FFFFFF',
+              minHeight: '100%',
+              padding: '1rem',
             }}
           >
             <Story />
@@ -94,6 +95,12 @@ const preview: Preview = {
     layout: 'fullscreen',
     docs: {
       toc: true,
+      canvas: {
+        className: undefined,
+      },
+      story: {
+        inline: true,
+      },
     },
     options: {
       storySort: {
