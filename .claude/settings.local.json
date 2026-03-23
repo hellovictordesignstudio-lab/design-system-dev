@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(timeout 60 npx storybook dev --port 6006 --no-open)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
