@@ -1,6 +1,7 @@
 import './storybook-docs.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
 import { LangProvider } from '../src/theme/LangContext';
 import { ToastProvider } from '../src/components/Toast/ToastProvider';
@@ -9,16 +10,16 @@ import type { Language } from '../src/theme/i18n';
 
 // ── Decorators ────────────────────────────────────────────────────────────────
 
-const CANVAS_BG: Record<string, string> = {
-  light: '#FFFFFF',
-  dark:  '#0C0D10',
-  system: '#FFFFFF',
-};
+const withProviders: Decorator = (Story) => {
+  const [globals] = useGlobals();
+  const colorMode = (globals.colorMode ?? 'light') as ColorMode;
+  const lang     = (globals.lang      ?? 'en')    as Language;
 
-const withProviders: Decorator = (Story, context) => {
-  const colorMode = (context.globals.colorMode ?? 'light') as ColorMode;
-  const lang = (context.globals.lang ?? 'en') as Language;
-  const bg = CANVAS_BG[colorMode] ?? '#FFFFFF';
+  // Stamp the resolved color mode on <html> so preview-head.html and
+  // storybook-docs.css selectors ([data-color-mode="dark"]) stay in sync.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-color-mode', colorMode);
+  }, [colorMode]);
 
   return (
     <LangProvider defaultLang={lang}>

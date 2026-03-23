@@ -1,6 +1,12 @@
 <style>
-  /* Force white background in iframe canvas (Docs + Canvas modes) */
+  /* Default canvas background — overridden by data-color-mode stamp from decorator */
   html, body, #storybook-root, #storybook-docs {
-    background: #ffffff !important;
+    background: #ffffff;
+  }
+  html[data-color-mode="dark"],
+  html[data-color-mode="dark"] body,
+  html[data-color-mode="dark"] #storybook-root,
+  html[data-color-mode="dark"] #storybook-docs {
+    background: #0C0D10 !important;
   }
 </style>
