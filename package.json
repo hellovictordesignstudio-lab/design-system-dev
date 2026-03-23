@@ -2,6 +2,7 @@
   "name": "@design-system/core",
   "version": "1.0.0",
   "description": "Professional Design System with React 18, TypeScript, and Styled Components",
+  "homepage": "https://hellovictordesignstudio-lab.github.io/design-system",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -11,7 +12,8 @@
     "build": "tsc --emitDeclarationOnly && rollup -c",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
-    "deploy": "npm run build-storybook && gh-pages -d storybook-static",
+    "predeploy": "npm run build-storybook",
+    "deploy": "gh-pages -d storybook-static",
     "tokens": "style-dictionary build --config style-dictionary.config.js",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx"
