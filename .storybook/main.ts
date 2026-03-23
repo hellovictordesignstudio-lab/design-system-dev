@@ -34,7 +34,7 @@ const config: StorybookConfig = {
   viteFinal: async (config) => {
     return {
       ...config,
-      base: '/design-system/',
+      base: '/design-system-dev/',
       resolve: {
         ...config.resolve,
         alias: {
