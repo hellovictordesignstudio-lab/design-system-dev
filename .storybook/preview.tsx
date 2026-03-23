@@ -8,9 +8,16 @@ import type { Language } from '../src/theme/i18n';
 
 // ── Decorators ────────────────────────────────────────────────────────────────
 
+const CANVAS_BG: Record<string, string> = {
+  light: '#FFFFFF',
+  dark:  '#0C0D10',
+  system: '#FFFFFF',
+};
+
 const withProviders: Decorator = (Story, context) => {
   const colorMode = (context.globals.colorMode ?? 'light') as ColorMode;
   const lang = (context.globals.lang ?? 'en') as Language;
+  const bg = CANVAS_BG[colorMode] ?? '#FFFFFF';
 
   return (
     <LangProvider defaultLang={lang}>
@@ -20,7 +27,7 @@ const withProviders: Decorator = (Story, context) => {
             style={{
               padding: '24px',
               minHeight: '100vh',
-              backgroundColor: 'var(--color-bg-canvas)',
+              backgroundColor: bg,
             }}
           >
             <Story />
@@ -77,7 +84,13 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    backgrounds: { disable: true },
+    backgrounds: {
+      default: 'light',
+      values: [
+        { name: 'light', value: '#FFFFFF' },
+        { name: 'dark',  value: '#0C0D10' },
+      ],
+    },
     layout: 'fullscreen',
     docs: {
       toc: true,
