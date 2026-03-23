@@ -3,7 +3,7 @@ import type { InputSize } from './TextInput.types';
 
 const inputHeight: Record<InputSize, string> = { sm: '32px', md: '40px', lg: '48px' };
 const inputFontSize: Record<InputSize, string> = { sm: '13px', md: '14px', lg: '16px' };
-const inputPadX: Record<InputSize, string> = { sm: '10px', md: '12px', lg: '16px' };
+const inputPadX: Record<InputSize, string> = { sm: '12px', md: '16px', lg: '20px' };
 
 export const FieldRoot = styled.div`
   display: flex;
@@ -35,20 +35,14 @@ export const InputGroup = styled.div<{
 }>`
   display: flex;
   align-items: stretch;
-  border-radius: 8px;
+  border-radius: 14px;
   overflow: hidden;
-  border: 1px solid ${({ theme, $hasError, $hasSuccess }) =>
-    $hasError
-      ? theme.colors['color-error-default']
-      : $hasSuccess
-      ? theme.colors['color-success-default']
-      : theme.colors['color-border-default']};
+  border: 1.5px solid ${({ $hasError, $hasSuccess }) =>
+    $hasError ? '#D22232' : $hasSuccess ? '#0A8853' : '#C8D4E8'};
   background-color: ${({ theme, $isDisabled, $isReadOnly }) =>
-    $isDisabled
-      ? theme.colors['color-bg-muted']
-      : $isReadOnly
+    $isReadOnly
       ? theme.colors['color-bg-subtle']
-      : theme.colors['color-bg-default']};
+      : '#FFFFFF'};
   transition:
     border-color ${({ theme }) => theme.transitions.duration.base} ${({ theme }) => theme.transitions.easing.easeInOut},
     box-shadow ${({ theme }) => theme.transitions.duration.base} ${({ theme }) => theme.transitions.easing.easeInOut};
@@ -56,7 +50,9 @@ export const InputGroup = styled.div<{
   ${({ $isDisabled }) =>
     $isDisabled &&
     css`
-      opacity: 0.6;
+      background-color: #F8F9FC;
+      border-color: #DDE1EA;
+      opacity: 0.7;
       cursor: not-allowed;
     `}
 
@@ -65,19 +61,14 @@ export const InputGroup = styled.div<{
     !$isReadOnly &&
     css`
       &:focus-within {
-        border-color: ${({ theme }) =>
+        border-color: ${$hasError ? '#D22232' : $hasSuccess ? '#0A8853' : '#0055FF'};
+        box-shadow: 0 0 0 3px ${
           $hasError
-            ? theme.colors['color-error-default']
+            ? 'rgba(210, 34, 50, 0.10)'
             : $hasSuccess
-            ? theme.colors['color-success-default']
-            : theme.colors['color-border-focus']};
-        box-shadow: 0 0 0 3px
-          ${({ theme }) =>
-            $hasError
-              ? theme.colors['color-error-subtle']
-              : $hasSuccess
-              ? theme.colors['color-success-subtle']
-              : theme.colors['color-brand-primary-subtle']};
+            ? 'rgba(10, 136, 83, 0.10)'
+            : 'rgba(0, 85, 255, 0.10)'
+        };
       }
     `}
 `;

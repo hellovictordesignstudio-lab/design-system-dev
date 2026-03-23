@@ -5,9 +5,9 @@ import type { CardPadding, CardShadow, FooterAlign, ImageAspectRatio, ImageObjec
 
 export const cardShadowMap: Record<CardShadow, string> = {
   none: 'none',
-  sm: '0 1px 3px rgba(0, 0, 0, 0.08)',
-  md: '0 4px 16px rgba(0, 0, 0, 0.10)',
-  lg: '0 8px 32px rgba(0, 0, 0, 0.14)',
+  sm: '0 2px 8px rgba(0, 0, 0, 0.05)',
+  md: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  lg: '0 8px 32px rgba(0, 0, 0, 0.12)',
 };
 
 /** One shadow step up — used for the hover state of isHoverable cards */
@@ -45,9 +45,8 @@ export const StyledCard = styled.div<{
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors['color-bg-default']};
-  border-radius: 12px;
-  border: ${({ $hasBorder, theme }) =>
-    $hasBorder ? `1px solid ${theme.colors['color-border-default']}` : 'none'};
+  border-radius: 14px;
+  border: ${({ $hasBorder }) => ($hasBorder ? '1px solid #E2E5ED' : 'none')};
   box-shadow: ${({ $shadow_val }) => $shadow_val};
   overflow: hidden;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};

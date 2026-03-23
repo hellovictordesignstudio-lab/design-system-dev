@@ -17,19 +17,19 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const sizeStyles = {
   sm: css`
     height: 32px;
-    padding: 0 ${({ theme }) => theme.spacing[3]};
+    padding: 0 16px;
     font-size: ${({ theme }) => theme.typography.fontSize.sm};
     gap: ${({ theme }) => theme.spacing[1]};
   `,
   md: css`
     height: 40px;
-    padding: 0 ${({ theme }) => theme.spacing[4]};
+    padding: 0 24px;
     font-size: ${({ theme }) => theme.typography.fontSize.base};
     gap: ${({ theme }) => theme.spacing[2]};
   `,
   lg: css`
     height: 48px;
-    padding: 0 ${({ theme }) => theme.spacing[6]};
+    padding: 0 32px;
     font-size: ${({ theme }) => theme.typography.fontSize.lg};
     gap: ${({ theme }) => theme.spacing[2]};
   `,
@@ -37,64 +37,67 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: css`
-    background-color: ${({ theme }) => theme.colors['color-brand-primary']};
-    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
+    background-color: #0055FF;
+    color: #ffffff;
     border: 1px solid transparent;
+    font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
+      background-color: #0044CC;
     }
     &:active:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-brand-primary-active']};
+      background-color: #003399;
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-muted']};
+      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
     }
   `,
   secondary: css`
-    background-color: ${({ theme }) => theme.colors['color-bg-default']};
-    color: ${({ theme }) => theme.colors['color-text-primary']};
-    border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+    background-color: transparent;
+    color: #0055FF;
+    border: 1.5px solid #0055FF;
+    font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
-      border-color: ${({ theme }) => theme.colors['color-border-strong']};
+      background-color: rgba(0, 85, 255, 0.06);
     }
     &:active:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+      background-color: rgba(0, 85, 255, 0.12);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-muted']};
+      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
     }
   `,
   ghost: css`
     background-color: transparent;
-    color: ${({ theme }) => theme.colors['color-text-primary']};
+    color: #6B7694;
     border: 1px solid transparent;
+    font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
+      background-color: #F0F2F5;
     }
     &:active:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+      background-color: #E4E7EF;
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-muted']};
+      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
     }
   `,
   danger: css`
-    background-color: ${({ theme }) => theme.colors['color-error-default']};
+    background-color: #D22232;
     color: #ffffff;
     border: 1px solid transparent;
+    font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors['color-error-text']};
+      background-color: #B01C29;
     }
     &:active:not(:disabled) {
       filter: brightness(0.9);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-error-subtle']};
+      box-shadow: 0 0 0 3px rgba(210, 34, 50, 0.25);
     }
   `,
 };
@@ -109,7 +112,7 @@ const StyledButton = styled.button<{
   align-items: center;
   justify-content: center;
   position: relative;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
+  border-radius: 9999px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
   line-height: 1;

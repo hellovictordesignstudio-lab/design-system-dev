@@ -58,7 +58,7 @@ export const Panel = styled.div<{ $size: ModalSize }>`
   outline: none;
   width: 100%;
   max-width: ${({ $size }) => sizeMaxWidth[$size]};
-  border-radius: ${({ $size }) => ($size === 'fullscreen' ? '0' : '16px')};
+  border-radius: ${({ $size }) => ($size === 'fullscreen' ? '0' : '20px')};
   max-height: ${({ $size }) => ($size === 'fullscreen' ? '100vh' : 'calc(100vh - 80px)')};
   height: ${({ $size }) => ($size === 'fullscreen' ? '100vh' : 'auto')};
   animation: ${scaleIn} 200ms ease forwards;

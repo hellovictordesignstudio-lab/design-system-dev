@@ -39,8 +39,8 @@ const StyledAlert = styled.div<{ $variant: AlertVariant }>`
   display: flex;
   gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[4]};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  border: 1px solid;
+  border-radius: 12px;
+  border-left: 4px solid;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 
   ${({ $variant }) => variantStyles[$variant]}

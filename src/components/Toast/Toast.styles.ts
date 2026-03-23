@@ -69,7 +69,7 @@ export const ToastCard = styled.div<{ $variant: ToastVariant; $isExiting: boolea
   gap: 10px;
   width: 360px;
   padding: 14px 16px 17px; /* extra 3px bottom for progress bar */
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid ${({ $variant }) => variantConfig[$variant].border};
   border-left: 4px solid ${({ $variant }) => variantConfig[$variant].accent};
   background-color: ${({ theme, $variant }) =>
