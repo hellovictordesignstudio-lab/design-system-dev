@@ -1,7 +1,6 @@
 import './storybook-docs.css';
 import React, { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react';
-import { useGlobals } from '@storybook/preview-api';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
 import { LangProvider } from '../src/theme/LangContext';
 import { ToastProvider } from '../src/components/Toast/ToastProvider';
@@ -9,14 +8,10 @@ import type { ColorMode } from '../src/theme/theme';
 import type { Language } from '../src/theme/i18n';
 
 // ── Decorators ────────────────────────────────────────────────────────────────
+const withProviders: Decorator = (Story, context) => {
+  const colorMode = (context.globals.colorMode ?? 'light') as ColorMode;
+  const lang      = (context.globals.lang      ?? 'en')    as Language;
 
-const withProviders: Decorator = (Story) => {
-  const [globals] = useGlobals();
-  const colorMode = (globals.colorMode ?? 'light') as ColorMode;
-  const lang     = (globals.lang      ?? 'en')    as Language;
-
-  // Stamp the resolved color mode on <html> so preview-head.html and
-  // storybook-docs.css selectors ([data-color-mode="dark"]) stay in sync.
   useEffect(() => {
     document.documentElement.setAttribute('data-color-mode', colorMode);
   }, [colorMode]);
@@ -41,7 +36,6 @@ const withProviders: Decorator = (Story) => {
 };
 
 // ── Global types (toolbar controls) ──────────────────────────────────────────
-
 const preview: Preview = {
   globalTypes: {
     colorMode: {
@@ -71,14 +65,11 @@ const preview: Preview = {
       },
     },
   },
-
   initialGlobals: {
     colorMode: 'light',
     lang: 'en',
   },
-
   decorators: [withProviders],
-
   parameters: {
     controls: {
       matchers: {
