@@ -2,6 +2,7 @@ import React from 'react';
 import type { Preview, Decorator } from '@storybook/react';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
 import { LangProvider } from '../src/theme/LangContext';
+import { ToastProvider } from '../src/components/Toast/ToastProvider';
 import type { ColorMode } from '../src/theme/theme';
 import type { Language } from '../src/theme/i18n';
 
@@ -14,15 +15,17 @@ const withProviders: Decorator = (Story, context) => {
   return (
     <LangProvider defaultLang={lang}>
       <ThemeProvider defaultColorMode={colorMode}>
-        <div
-          style={{
-            padding: '24px',
-            minHeight: '100vh',
-            backgroundColor: 'var(--color-bg-canvas)',
-          }}
-        >
-          <Story />
-        </div>
+        <ToastProvider>
+          <div
+            style={{
+              padding: '24px',
+              minHeight: '100vh',
+              backgroundColor: 'var(--color-bg-canvas)',
+            }}
+          >
+            <Story />
+          </div>
+        </ToastProvider>
       </ThemeProvider>
     </LangProvider>
   );
