@@ -1,47 +1,37 @@
 import { addons } from '@storybook/manager-api';
 import { create } from '@storybook/theming/create';
 
-// ── Custom Storybook Manager Theme ────────────────────────────────────────────
-
 const brandTheme = create({
   base: 'light',
+  brandTitle: 'Design System',
+  brandUrl:   '/',
+  brandTarget:'_self',
 
-  // Brand
-  brandTitle:    'Design System',
-  brandUrl:      '/',
-  brandTarget:   '_self',
+  colorPrimary:   '#E8EEFF',
+  colorSecondary: '#E8EEFF',
 
-  // Colors
-  colorPrimary:  '#0055FF',
-  colorSecondary:'#0055FF',
-
-  // UI
-  appBg:          '#F5F6F8',
+  appBg:          '#FFFFFF',
   appContentBg:   '#FFFFFF',
   appPreviewBg:   '#FFFFFF',
-  appBorderColor: '#D8DCE5',
-  appBorderRadius:8,
+  appBorderColor: '#F0F0F0',
+  appBorderRadius: 0,
 
-  // Typography
-  fontBase:       '"Nunito Sans", system-ui, sans-serif',
-  fontCode:       '"JetBrains Mono", monospace',
+  fontBase: '"Nunito Sans", system-ui, sans-serif',
+  fontCode: '"JetBrains Mono", monospace',
 
-  // Text
-  textColor:      '#0C0D10',
-  textInverseColor:'#FFFFFF',
-  textMutedColor: '#6B7589',
+  textColor:        '#1A1A1A',
+  textInverseColor: '#FFFFFF',
+  textMutedColor:   '#9BA5BE',
 
-  // Toolbar
-  barTextColor:   '#4E5A6E',
-  barHoverColor:  '#0055FF',
+  barTextColor:    '#9BA5BE',
+  barHoverColor:   '#0055FF',
   barSelectedColor:'#0055FF',
-  barBg:          '#FFFFFF',
+  barBg:           '#FFFFFF',
 
-  // Input
-  inputBg:        '#FFFFFF',
-  inputBorder:    '#D8DCE5',
-  inputTextColor: '#0C0D10',
-  inputBorderRadius:6,
+  inputBg:          '#F8F8F8',
+  inputBorder:      '#E8E8E8',
+  inputTextColor:   '#1A1A1A',
+  inputBorderRadius: 6,
 });
 
 addons.setConfig({

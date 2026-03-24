@@ -1,0 +1,40 @@
+<style>
+    /* Item activo — sutil */
+    [data-selected="true"] > button,
+    [data-selected="true"] > a {
+      background: #EEF2FF !important;
+      color: #0044CC !important;
+      font-weight: 600 !important;
+      border-radius: 6px !important;
+      box-shadow: none !important;
+    }
+  
+    [data-selected="true"] {
+      background: transparent !important;
+    }
+  
+    /* Stories indentadas */
+    [data-nodetype="story"] button,
+    [data-nodetype="docs"] button {
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      color: #6B7694 !important;
+    }
+  
+    [data-nodetype="story"][data-selected="true"] button,
+    [data-nodetype="docs"][data-selected="true"] button {
+      color: #0044CC !important;
+      background: #EEF2FF !important;
+      font-weight: 600 !important;
+    }
+  
+    /* Componentes */
+    [data-nodetype="component"] > button {
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      color: #1A1A1A !important;
+    }
+  
+    /* Hover */
+    button:hover { background: #F5F7FF !important; }
+  </style>

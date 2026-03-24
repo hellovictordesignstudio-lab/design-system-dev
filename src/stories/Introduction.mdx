@@ -2,51 +2,291 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 
-# Design System
+<style>{`
+  * { box-sizing: border-box; }
+  .ds { font-family: 'Nunito Sans', -apple-system, sans-serif; color: #0C0D10; }
 
-> React 18 · TypeScript · Styled Components v6 · Storybook 8
+  .ds-hero {
+    padding: 72px 56px 64px;
+    border-bottom: 1px solid #EFF1F5;
+  }
+  .ds-h1 {
+    font-size: 72px; font-weight: 900; letter-spacing: -0.04em;
+    line-height: 0.95; margin: 0 0 28px; color: #0C0D10; max-width: 720px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .ds-h1 em { font-style: normal; color: #0055FF; }
+  .ds-lead {
+    font-size: 18px; line-height: 1.65; color: #4A5270;
+    max-width: 520px; margin: 0 0 36px;
+  }
+  .ds-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ds-pill {
+    padding: 5px 13px; border-radius: 100px; font-size: 12px; font-weight: 700;
+    background: #F8F9FC; color: #4A5270; border: 1px solid #DDE1EA;
+  }
 
-Bienvenido a la documentación interactiva del Design System. Aquí puedes explorar todos los componentes, ver sus variantes, y copiar el código listo para usar.
+  .ds-stats {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: #EFF1F5;
+    border-top: 1px solid #EFF1F5; border-bottom: 1px solid #EFF1F5;
+    margin-bottom: 72px;
+  }
+  .ds-stat { background: #fff; padding: 36px 32px; }
+  .ds-stat-n { font-size: 48px; font-weight: 900; letter-spacing: -0.04em; color: #0055FF; line-height: 1; margin-bottom: 6px; }
+  .ds-stat-l { font-size: 13px; color: #6B7694; font-weight: 600; }
 
----
+  .ds-sec { padding: 0 56px; margin-bottom: 72px; }
+  .ds-sec-h { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #9BA5BE; margin-bottom: 24px; }
 
-## Cómo usar este sitio
+  .ds-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .ds-grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 
-- **Sidebar izquierda** — navega por componentes
-- **Toolbar arriba** — cambia entre Light / Dark mode y ES / EN / FR
-- **Docs tab** — ve la documentación y props de cada componente
-- **Canvas tab** — interactúa con el componente en vivo
-- **Controls panel** — modifica las props en tiempo real
+  .ds-card {
+    border: 1px solid #E8ECF5; border-radius: 20px; overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s; background: #fff;
+  }
+  .ds-card:hover { box-shadow: 0 16px 48px rgba(0,0,20,0.1); transform: translateY(-3px); }
 
----
+  .ds-card-vis {
+    overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px 24px;
+  }
+  .vis-h200 { height: 200px; padding: 0; }
+  .blue-vis   { background: linear-gradient(145deg,#001A66 0%,#0044CC 60%,#0055FF 100%); }
+  .green-vis  { background: linear-gradient(145deg,#043521 0%,#065F36 60%,#0A8853 100%); }
+  .purple-vis { background: linear-gradient(145deg,#2D1060 0%,#5B21B6 60%,#7C3AED 100%); }
+  .dark-vis   { background: linear-gradient(145deg,#060608 0%,#0C0D10 60%,#1A1F35 100%); }
+  .slate-vis  { background: linear-gradient(145deg,#1A1F35 0%,#2E3550 60%,#4A5270 100%); }
+  .teal-vis   { background: linear-gradient(145deg,#002B33 0%,#065F4A 60%,#0A8870 100%); }
 
-## Stack
+  .ds-card-body { padding: 22px 24px 26px; }
+  .ds-card-title { font-size: 16px; font-weight: 800; color: #0C0D10; margin-bottom: 6px; }
+  .ds-card-desc { font-size: 13px; color: #6B7694; line-height: 1.6; margin-bottom: 14px; }
+  .ds-card-link { font-size: 13px; font-weight: 800; color: #0055FF; text-decoration: none; }
 
-| | |
-|---|---|
-| React 18 + TypeScript | Base del sistema |
-| Styled Components v6 | Theming con tokens semánticos |
-| Storybook 8.6.18 | Esta documentación |
-| GitHub Pages | Hosting |
+  .ds-stack { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .ds-si { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: #F8F9FC; border: 1px solid #EFF1F5; border-radius: 10px; }
+  .ds-sd { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .ds-sn { font-size: 13px; font-weight: 800; color: #0C0D10; }
+  .ds-sv { font-size: 11px; color: #9BA5BE; margin-left: auto; font-family: monospace; }
 
----
+  .ds-chips { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+  .ds-chip { padding: 9px 6px; background: #F8F9FC; border: 1px solid #EFF1F5; border-radius: 8px; font-size: 11px; font-weight: 700; color: #4A5270; text-align: center; transition: all 0.12s; }
+  .ds-chip:hover { background: #EEF2FF; border-color: #99BDFF; color: #0044CC; }
 
-## 39 Componentes disponibles
+  .ds-footer { margin: 56px 56px 0; padding-top: 28px; border-top: 1px solid #EFF1F5; display: flex; align-items: center; justify-content: space-between; }
+  .ds-ft { font-size: 12px; color: #9BA5BE; }
+  .ds-fl { font-size: 13px; font-weight: 800; color: #0055FF; text-decoration: none; }
+`}</style>
 
-Accordion · Alert · Avatar · Badge · Breadcrumb · Button · Card · Carousel ·
-Checkbox · ColorPicker · CommandPalette · ContextMenu · DatePicker · Divider ·
-Drawer · EmptyState · FileUpload · Kbd · Modal · Navigation · NotificationCenter ·
-Pagination · Popover · ProgressBar · Radio · Rating · Select · Skeleton ·
-Spinner · StatCard · Switch · Tabs · TextInput · Toast · Tooltip · y más.
+<div className="ds">
 
----
+{/* HERO — sin eyebrow, título más bold */}
+<div className="ds-hero">
+  <h1 className="ds-h1">Design once.<br/><em>Build</em> everywhere.</h1>
+  <p className="ds-lead">39 production-ready components. Full TypeScript, design tokens, Light & Dark mode. Built to scale.</p>
+  <div className="ds-pills">
+    <span className="ds-pill">React 18</span>
+    <span className="ds-pill">TypeScript</span>
+    <span className="ds-pill">Styled Components v6</span>
+    <span className="ds-pill">Storybook 8</span>
+    <span className="ds-pill">GitHub Pages</span>
+  </div>
+</div>
 
-## Tokens
+{/* STATS */}
+<div className="ds-stats">
+  <div className="ds-stat"><div className="ds-stat-n">39</div><div className="ds-stat-l">Components</div></div>
+  <div className="ds-stat"><div className="ds-stat-n">3</div><div className="ds-stat-l">Color modes</div></div>
+  <div className="ds-stat"><div className="ds-stat-n">3</div><div className="ds-stat-l">Languages</div></div>
+  <div className="ds-stat"><div className="ds-stat-n">100%</div><div className="ds-stat-l">TypeScript</div></div>
+</div>
 
-El sistema usa tres capas de tokens:
+{/* GET STARTED */}
+<div className="ds-sec">
+  <div className="ds-sec-h">Get started</div>
+  <div className="ds-grid2">
 
-**Primitivos** → valores crudos (`blue/500: #0055FF`)
+    {/* Card — Components */}
+    <div className="ds-card">
+      <div className="ds-card-vis vis-h200 blue-vis">
+        <svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="280" height="160" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+          <rect x="36" y="36" width="80" height="30" rx="8" fill="#0055FF"/>
+          <text x="76" y="56" fill="white" fontSize="12" fontWeight="700" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Primary</text>
+          <rect x="126" y="36" width="80" height="30" rx="8" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
+          <text x="166" y="56" fill="rgba(255,255,255,0.85)" fontSize="12" fontWeight="700" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Secondary</text>
+          <rect x="216" y="36" width="68" height="30" rx="8" fill="rgba(255,255,255,0.07)"/>
+          <text x="250" y="56" fill="rgba(255,255,255,0.6)" fontSize="12" fontWeight="700" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Ghost</text>
+          <rect x="36" y="78" width="52" height="20" rx="10" fill="rgba(10,136,83,0.35)"/>
+          <text x="62" y="92" fill="#80CCAA" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Success</text>
+          <rect x="96" y="78" width="48" height="20" rx="10" fill="rgba(240,115,50,0.35)"/>
+          <text x="120" y="92" fill="#F9C08C" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Warning</text>
+          <rect x="152" y="78" width="40" height="20" rx="10" fill="rgba(210,34,50,0.35)"/>
+          <text x="172" y="92" fill="#F4A0A8" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Error</text>
+          <rect x="200" y="78" width="48" height="20" rx="10" fill="rgba(153,165,190,0.2)"/>
+          <text x="224" y="92" fill="rgba(255,255,255,0.45)" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Neutral</text>
+          <rect x="36" y="110" width="210" height="32" rx="8" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" strokeWidth="1"/>
+          <text x="56" y="131" fill="rgba(255,255,255,0.3)" fontSize="12" fontFamily="Nunito Sans,sans-serif">Search components...</text>
+          <rect x="36" y="154" width="120" height="18" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+          <text x="48" y="167" fill="rgba(255,255,255,0.35)" fontSize="10" fontFamily="Nunito Sans,sans-serif">Card component</text>
+          <rect x="164" y="154" width="100" height="18" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+          <text x="176" y="167" fill="rgba(255,255,255,0.35)" fontSize="10" fontFamily="Nunito Sans,sans-serif">Avatar group</text>
+        </svg>
+      </div>
+      <div className="ds-card-body">
+        <div className="ds-card-title">Browse Components</div>
+        <div className="ds-card-desc">39 production-ready components with live previews, interactive controls, and copy-ready code.</div>
+        <span className="ds-card-link">Explore components →</span>
+      </div>
+    </div>
 
-**Semánticos** → con significado (`color/interactive/default`)
+    {/* Card — Tokens */}
+    <div className="ds-card">
+      <div className="ds-card-vis vis-h200 green-vis">
+        <svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="280" height="160" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+          <rect x="36" y="36" width="22" height="22" rx="5" fill="#E6EEFF"/>
+          <rect x="62" y="36" width="22" height="22" rx="5" fill="#99BDFF"/>
+          <rect x="88" y="36" width="22" height="22" rx="5" fill="#337BFF"/>
+          <rect x="114" y="36" width="22" height="22" rx="5" fill="#0055FF"/>
+          <rect x="140" y="36" width="22" height="22" rx="5" fill="#0044CC"/>
+          <rect x="166" y="36" width="22" height="22" rx="5" fill="#003399"/>
+          <rect x="192" y="36" width="22" height="22" rx="5" fill="#002266"/>
+          <text x="36" y="74" fill="rgba(255,255,255,0.45)" fontSize="10" fontFamily="Nunito Sans,sans-serif" fontWeight="700">blue/50 → blue/800</text>
+          <rect x="36" y="82" width="18" height="18" rx="4" fill="white"/>
+          <rect x="58" y="82" width="18" height="18" rx="4" fill="#F8F9FC"/>
+          <rect x="80" y="82" width="18" height="18" rx="4" fill="#DDE1EA"/>
+          <rect x="102" y="82" width="18" height="18" rx="4" fill="#9BA5BE"/>
+          <rect x="124" y="82" width="18" height="18" rx="4" fill="#4A5270"/>
+          <rect x="146" y="82" width="18" height="18" rx="4" fill="#2E3550"/>
+          <rect x="168" y="82" width="18" height="18" rx="4" fill="#0C0D10"/>
+          <text x="36" y="118" fill="rgba(255,255,255,0.45)" fontSize="10" fontFamily="Nunito Sans,sans-serif" fontWeight="700">neutral/0 → neutral/900</text>
+          <rect x="36" y="124" width="250" height="16" rx="4" fill="rgba(255,255,255,0.07)"/>
+          <text x="44" y="136" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily="JetBrains Mono,monospace">color/interactive/default → #0055FF</text>
+          <rect x="36" y="144" width="220" height="16" rx="4" fill="rgba(255,255,255,0.07)"/>
+          <text x="44" y="156" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily="JetBrains Mono,monospace">color/bg/primary → #FFFFFF</text>
+          <rect x="36" y="164" width="235" height="16" rx="4" fill="rgba(255,255,255,0.07)"/>
+          <text x="44" y="176" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily="JetBrains Mono,monospace">color/text/secondary → #4A5270</text>
+        </svg>
+      </div>
+      <div className="ds-card-body">
+        <div className="ds-card-title">Design Tokens</div>
+        <div className="ds-card-desc">Color primitives, semantic tokens, and typography scale that power every component.</div>
+        <span className="ds-card-link">View color tokens →</span>
+      </div>
+    </div>
 
-**Componentes** → usan semánticos, cambian automáticamente con el tema
+  </div>
+
+  <div className="ds-grid3">
+
+    {/* Card — Dark Mode */}
+    <div className="ds-card">
+      <div className="ds-card-vis dark-vis" style={{height:'160px'}}>
+        <svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="10" width="112" height="120" rx="10" fill="white" fillOpacity="0.06" stroke="white" strokeOpacity="0.1" strokeWidth="1"/>
+          <rect x="26" y="24" width="64" height="8" rx="3" fill="white" fillOpacity="0.75"/>
+          <rect x="26" y="36" width="88" height="5" rx="2" fill="white" fillOpacity="0.2"/>
+          <rect x="26" y="44" width="76" height="5" rx="2" fill="white" fillOpacity="0.2"/>
+          <rect x="26" y="70" width="56" height="24" rx="7" fill="#0055FF"/>
+          <text x="54" y="86" fill="white" fontSize="11" fontWeight="700" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Button</text>
+          <text x="70" y="122" fill="white" fillOpacity="0.3" fontSize="9" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Light mode</text>
+          <rect x="154" y="10" width="112" height="120" rx="10" fill="#1A1F35" stroke="white" strokeOpacity="0.07" strokeWidth="1"/>
+          <rect x="166" y="24" width="64" height="8" rx="3" fill="white" fillOpacity="0.85"/>
+          <rect x="166" y="36" width="88" height="5" rx="2" fill="white" fillOpacity="0.18"/>
+          <rect x="166" y="44" width="76" height="5" rx="2" fill="white" fillOpacity="0.18"/>
+          <rect x="166" y="70" width="56" height="24" rx="7" fill="#337BFF"/>
+          <text x="194" y="86" fill="white" fontSize="11" fontWeight="700" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Button</text>
+          <text x="210" y="122" fill="white" fillOpacity="0.3" fontSize="9" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">Dark mode</text>
+        </svg>
+      </div>
+      <div className="ds-card-body">
+        <div className="ds-card-title">Light & Dark Mode</div>
+        <div className="ds-card-desc">Every token switches automatically. Toggle from the toolbar above.</div>
+      </div>
+    </div>
+
+    {/* Card — Languages */}
+    <div className="ds-card">
+      <div className="ds-card-vis purple-vis" style={{height:'160px'}}>
+        <svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="14" width="252" height="112" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" strokeWidth="1"/>
+          <rect x="28" y="28" width="224" height="24" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+          <text x="44" y="44" fill="white" fillOpacity="0.9" fontSize="12" fontWeight="700" fontFamily="Nunito Sans,sans-serif">Button component</text>
+          <rect x="28" y="60" width="224" height="18" rx="5" fill="rgba(255,255,255,0.05)"/>
+          <text x="40" y="73" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="Nunito Sans,sans-serif">🇺🇸  A versatile button with multiple variants</text>
+          <rect x="28" y="82" width="224" height="18" rx="5" fill="rgba(255,255,255,0.05)"/>
+          <text x="40" y="95" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="Nunito Sans,sans-serif">🇪🇸  Un botón versátil con múltiples variantes</text>
+          <rect x="28" y="104" width="224" height="18" rx="5" fill="rgba(255,255,255,0.05)"/>
+          <text x="40" y="117" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="Nunito Sans,sans-serif">🇫🇷  Un bouton polyvalent avec plusieurs variantes</text>
+        </svg>
+      </div>
+      <div className="ds-card-body">
+        <div className="ds-card-title">3 Languages</div>
+        <div className="ds-card-desc">Documentation in English, Español, and Français. Toggle from the toolbar.</div>
+      </div>
+    </div>
+
+    {/* Card — A11y */}
+    <div className="ds-card">
+      <div className="ds-card-vis slate-vis" style={{height:'160px'}}>
+        <svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="14" width="252" height="112" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
+          <circle cx="32" cy="36" r="7" fill="rgba(10,136,83,0.5)" stroke="#0A8853" strokeWidth="1"/>
+          <text x="32" y="40" fill="#80CCAA" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">✓</text>
+          <text x="46" y="40" fill="rgba(255,255,255,0.8)" fontSize="11" fontWeight="700" fontFamily="Nunito Sans,sans-serif">Color contrast AA</text>
+          <circle cx="32" cy="62" r="7" fill="rgba(10,136,83,0.5)" stroke="#0A8853" strokeWidth="1"/>
+          <text x="32" y="66" fill="#80CCAA" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">✓</text>
+          <text x="46" y="66" fill="rgba(255,255,255,0.8)" fontSize="11" fontWeight="700" fontFamily="Nunito Sans,sans-serif">Keyboard navigation</text>
+          <circle cx="32" cy="88" r="7" fill="rgba(10,136,83,0.5)" stroke="#0A8853" strokeWidth="1"/>
+          <text x="32" y="92" fill="#80CCAA" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">✓</text>
+          <text x="46" y="92" fill="rgba(255,255,255,0.8)" fontSize="11" fontWeight="700" fontFamily="Nunito Sans,sans-serif">ARIA roles & labels</text>
+          <circle cx="32" cy="114" r="7" fill="rgba(240,115,50,0.4)" stroke="#F07332" strokeWidth="1"/>
+          <text x="32" y="118" fill="#F9B484" fontSize="10" fontWeight="800" fontFamily="Nunito Sans,sans-serif" textAnchor="middle">!</text>
+          <text x="46" y="118" fill="rgba(255,255,255,0.5)" fontSize="11" fontFamily="Nunito Sans,sans-serif">Touch target size</text>
+        </svg>
+      </div>
+      <div className="ds-card-body">
+        <div className="ds-card-title">Accessibility</div>
+        <div className="ds-card-desc">Built-in a11y audit on every component via Storybook's Accessibility panel.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{/* STACK */}
+<div className="ds-sec">
+  <div className="ds-sec-h">Tech stack</div>
+  <div className="ds-stack">
+    <div className="ds-si"><div className="ds-sd" style={{background:'#0055FF'}}></div><span className="ds-sn">React</span><span className="ds-sv">18</span></div>
+    <div className="ds-si"><div className="ds-sd" style={{background:'#3178C6'}}></div><span className="ds-sn">TypeScript</span><span className="ds-sv">5</span></div>
+    <div className="ds-si"><div className="ds-sd" style={{background:'#DB7093'}}></div><span className="ds-sn">Styled Components</span><span className="ds-sv">v6</span></div>
+    <div className="ds-si"><div className="ds-sd" style={{background:'#FF4785'}}></div><span className="ds-sn">Storybook</span><span className="ds-sv">8.6.18</span></div>
+    <div className="ds-si"><div className="ds-sd" style={{background:'#646CFF'}}></div><span className="ds-sn">Vite</span><span className="ds-sv">5</span></div>
+    <div className="ds-si"><div className="ds-sd" style={{background:'#0A8853'}}></div><span className="ds-sn">GitHub Pages</span><span className="ds-sv">deploy</span></div>
+  </div>
+</div>
+
+{/* ALL COMPONENTS */}
+<div className="ds-sec">
+  <div className="ds-sec-h">All components — 39 total</div>
+  <div className="ds-chips">
+    {['Accordion','Alert','Avatar','Badge','Breadcrumb',
+      'Button','Card','Carousel','Checkbox','ColorPicker',
+      'CommandPalette','ContextMenu','DatePicker','Divider','Drawer',
+      'EmptyState','FileUpload','Kbd','Modal','Navigation',
+      'NotificationCenter','Pagination','Popover','ProgressBar','Radio',
+      'Rating','Select','Skeleton','Spinner','StatCard',
+      'Switch','Tabs','TextInput','Toast','Tooltip'].map(c => (
+      <div key={c} className="ds-chip">{c}</div>
+    ))}
+  </div>
+</div>
+
+
+
+</div>
