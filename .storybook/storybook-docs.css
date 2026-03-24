@@ -1,8 +1,174 @@
-/* Fix black background in Docs canvas */
+/* ── DOCS PAGE LAYOUT ── */
+.sbdocs-wrapper {
+  padding: 48px 56px !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  font-family: 'Nunito Sans', system-ui, sans-serif !important;
+}
+
+/* ── COMPONENT TITLE ── */
+.sbdocs-wrapper h1 {
+  font-size: 40px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.025em !important;
+  color: #0C0D10 !important;
+  margin-bottom: 12px !important;
+  line-height: 1.1 !important;
+}
+
+/* ── DESCRIPTION ── */
+.sbdocs-wrapper .sbdocs-p,
+.sbdocs-wrapper > p {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  color: #4A5270 !important;
+  max-width: 680px !important;
+  margin-bottom: 32px !important;
+}
+
+/* ── STORY TITLES (Playground, Variants, etc) ── */
+.sbdocs-wrapper h2 {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #9BA5BE !important;
+  margin: 48px 0 16px !important;
+  padding-top: 40px !important;
+  border-top: 1px solid #EFF1F5 !important;
+}
+
+.sbdocs-wrapper h3 {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #0C0D10 !important;
+  margin: 32px 0 12px !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ── CANVAS (preview del componente) ── */
+.docs-story {
+  border: 1px solid #EFF1F5 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background: #FAFBFF !important;
+}
+
+.sb-story-container,
+.sbdocs-preview {
+  background: #FAFBFF !important;
+  border-radius: 16px !important;
+}
+
+/* ── TOOLBAR DEL CANVAS ── */
+.docs-story .os-viewport {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* ── SHOW CODE BUTTON ── */
+button[aria-label="Show code"] {
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #0055FF !important;
+  background: transparent !important;
+  border: 1px solid #C5D5FF !important;
+  border-radius: 6px !important;
+  padding: 4px 12px !important;
+}
+
+/* ── PROPS TABLE ── */
+.docblock-argstable {
+  border: 1px solid #EFF1F5 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  margin-top: 8px !important;
+}
+
+.docblock-argstable thead tr th {
+  background: #F8F9FC !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #9BA5BE !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid #EFF1F5 !important;
+}
+
+.docblock-argstable tbody tr td {
+  padding: 12px 16px !important;
+  font-size: 13px !important;
+  color: #4A5270 !important;
+  border-bottom: 1px solid #F5F6FA !important;
+}
+
+.docblock-argstable tbody tr td:first-child {
+  font-weight: 700 !important;
+  color: #0C0D10 !important;
+}
+
+.docblock-argstable tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.docblock-argstable tbody tr:hover td {
+  background: #F8F9FC !important;
+}
+
+/* ── DARK MODE ── */
+[data-color-mode="dark"] .docs-story,
+[data-color-mode="dark"] .sb-story-container,
+[data-color-mode="dark"] .sbdocs-preview {
+  background: #1A1F35 !important;
+  border-color: #2E3550 !important;
+}
+
+[data-color-mode="dark"] .sbdocs-wrapper h1 {
+  color: #F0F2F8 !important;
+}
+
+[data-color-mode="dark"] .sbdocs-wrapper h2 {
+  color: #4A5270 !important;
+  border-top-color: #2E3550 !important;
+}
+
+[data-color-mode="dark"] .sbdocs-wrapper h3 {
+  color: #F0F2F8 !important;
+}
+
+[data-color-mode="dark"] .sbdocs-wrapper .sbdocs-p,
+[data-color-mode="dark"] .sbdocs-wrapper > p {
+  color: #6B7694 !important;
+}
+
+[data-color-mode="dark"] .docblock-argstable {
+  border-color: #2E3550 !important;
+}
+
+[data-color-mode="dark"] .docblock-argstable thead tr th {
+  background: #1A1F35 !important;
+  border-bottom-color: #2E3550 !important;
+  color: #4A5270 !important;
+}
+
+[data-color-mode="dark"] .docblock-argstable tbody tr td {
+  color: #6B7694 !important;
+  border-bottom-color: #1A1F35 !important;
+}
+
+[data-color-mode="dark"] .docblock-argstable tbody tr td:first-child {
+  color: #C5CBDA !important;
+}
+
+[data-color-mode="dark"] .docblock-argstable tbody tr:hover td {
+  background: #1A1F35 !important;
+}
+
+/* ── STORYBOOK ROOT BG ── */
 .docs-story,
 .sb-story-container,
 .sbdocs-preview .docs-story,
-.sbdocs .sbdocs-preview,
 #storybook-root,
 #storybook-docs {
   background: white !important;
