@@ -52,7 +52,7 @@ export const Variants: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column',10 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       <Link href="#" size="sm">Small link</Link>
       <Link href="#" size="md">Medium link</Link>
       <Link href="#" size="lg">Large link</Link>

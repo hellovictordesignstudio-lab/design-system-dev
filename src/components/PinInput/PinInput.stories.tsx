@@ -87,7 +87,11 @@ export const States: Story = {
 
 export const Controlled: Story = {
   parameters: {
-    docs: { description: { story: 'Controlled — value managed externally. onComplete fires when all cells are filled.',
+    docs: {
+      description: {
+        story: 'Controlled — value managed externally. onComplete fires when all cells are filled.',
+      },
+    },
   },
   render: () => {
     const [val, setVal] = useState('');
@@ -112,7 +116,7 @@ export const Controlled: Story = {
 };
 
 export const DarkMode: Story = {
-  parars: { backgrounds: { default: 'dark' } },
+  parameters: { backgrounds: { default: 'dark' } },
   render: () => (
     <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 28 }}>
       <PinInput label="Verification code" length={6} helperText="Enter the code from your authenticator app." />
