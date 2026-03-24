@@ -117,6 +117,24 @@ export const WithAction: Story = {
   ),
 };
 
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 480 }}>
+      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+        <EmptyState variant="default" title="Empty list" description="No items yet." />
+      </div>
+      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+        <EmptyState variant="error" title="Something went wrong" description="Try again later." />
+      </div>
+      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+        <EmptyState variant="offline" title="You are offline" description="Reconnect to sync." />
+      </div>
+    </div>
+  ),
+};
+
 // ── DarkMode ──────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

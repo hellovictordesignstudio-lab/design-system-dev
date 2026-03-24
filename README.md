@@ -61,21 +61,26 @@ El DS necesita theming dinámico con tokens semánticos que cambien en runtime (
 `useGlobals` es un hook de React que falla en el build de producción de Storybook. El decorator recibe `context` como segundo parámetro que contiene los globals directamente — sin hooks, sin problemas en producción.
 
 **¿Por qué el base path importa?**
-Storybook buildea assets con rutas relativas al `base`. Si el repo se llama `design-system-dev` pero el base es `/design-system/`, los assets dan 404 en GitHub Pages.
+Storybook buildea assets con rutas relativas al `base` de Vite (`.storybook/main.ts` → `viteFinal.base`, hoy `/design-system-dev/`). Debe coincidir con el segmento de la URL en GitHub Pages: `https://hellovictordesignstudio-lab.github.io/design-system-dev/`. Si cambias el nombre del repo o la ruta de Pages, actualiza ese `base` y el campo `homepage` en `package.json`.
 
 ---
 
-## Componentes completados (39)
+## Componentes exportados (60)
+
+Inventario alineado con `src/components/index.ts`. **Chip** es un alias de **Tag**; **Menu** suele usarse junto a **DropdownMenu**.
 
 | Categoría | Componentes |
 |---|---|
-| **Inputs** | Button, Checkbox, Radio, Switch, TextInput, Select, DatePicker, ColorPicker, FileUpload |
-| **Display** | Avatar, Badge, Card, Carousel, Divider, EmptyState, Kbd, ProgressBar, Rating, StatCard |
+| **Inputs y formulario** | Button, ButtonGroup, Checkbox, Radio, Switch, TextInput, Textarea, Select, DatePicker, ColorPicker, FileUpload, NumberInput, Slider, PinInput, SegmentedControl, TagInput, Combobox, TimePicker, RichTextEditor |
+| **Display** | Avatar, Badge, Card, Carousel, Divider, EmptyState, Kbd, ProgressBar, Rating, StatCard, Tag, Table, Timeline, List |
 | **Feedback** | Alert, Modal, Drawer, Popover, Toast, NotificationCenter |
-| **Navigation** | Breadcrumb, Navigation, Pagination, Tabs |
+| **Navegación** | Breadcrumb, Navigation, Pagination, Tabs, BottomNavigation, Link |
 | **Overlay** | ContextMenu, CommandPalette |
-| **Layout** | Accordion |
-| **Utility** | Tooltip, Spinner, Skeleton |
+| **Layout y flujos** | Accordion, Stepper, Wizard |
+| **Menús** | DropdownMenu, SplitButton |
+| **Marketing** | PricingTable, Testimonial, Footer |
+| **Datos** | Charts (BarChart, LineChart, PieChart, DonutChart, Sparkline, contenedor) |
+| **Utilidad** | Tooltip, Spinner, Skeleton, TreeView |
 
 ---
 
@@ -84,7 +89,7 @@ Storybook buildea assets con rutas relativas al `base`. Si el repo se llama `des
 - 🌗 **Light / Dark / System** mode — persiste en localStorage
 - 🌐 **EN / ES / FR** — selector de idioma en Storybook toolbar
 - ♿ **A11y** — addon de accesibilidad en cada story
-- 📋 **Autodocs** — props table auto-generada desde TypeScript
+- 📋 **Autodocs** — props table auto-generada desde TypeScript; muchas stories incluyen Playground, Variants, Sizes, States y Dark Mode cuando aplica
 - ⚡ **GitHub Actions** — deploy automático en cada `git push`
 
 ---
@@ -137,6 +142,8 @@ npm run build            # Build de la librería
 ---
 
 ## Deploy
+
+**URL publicada:** la misma que el enlace “Live” del encabezado (Storybook estático).
 
 Cada `git push` a `main` dispara el GitHub Action `.github/workflows/deploy.yml` que:
 1. Instala dependencias

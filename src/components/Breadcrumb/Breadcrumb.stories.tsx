@@ -41,9 +41,9 @@ export const Playground: Story = {
   },
 };
 
-// ── Separators ────────────────────────────────────────────────────────────────
+// ── Variants ──────────────────────────────────────────────────────────────────
 
-export const Separators: Story = {
+export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div>
@@ -96,14 +96,63 @@ export const Collapsed: Story = {
   },
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Breadcrumb wraps; constrain width to see how items flow on small screens.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ maxWidth: 360 }}>
+        <Breadcrumb items={baseItems.slice(0, 4)} separator="chevron" />
+      </div>
+      <div style={{ maxWidth: '100%' }}>
+        <Breadcrumb items={baseItems.slice(0, 4)} separator="chevron" />
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Default trail</p>
+        <Breadcrumb items={baseItems.slice(0, 3)} separator="slash" />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Collapsed (maxItems)</p>
+        <Breadcrumb items={baseItems} maxItems={3} separator="chevron" />
+      </div>
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div
+      data-theme="dark"
+      style={{
+        background: '#0c0d10',
+        padding: 24,
+        borderRadius: 12,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+      }}
+    >
       <Breadcrumb items={baseItems} separator="slash" />
       <Breadcrumb items={baseItems} separator="chevron" />
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { backgrounds: { default: 'dark' } },
 };

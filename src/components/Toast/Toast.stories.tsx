@@ -109,8 +109,34 @@ function AllVariantsDemo() {
   );
 }
 
-export const AllVariants: Story = {
+export const Variants: Story = {
   render: () => <AllVariantsDemo />,
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toast width is capped; long messages wrap. Fire from a narrow vs wide page layout.',
+      },
+    },
+  },
+  render: () => <PlaygroundDemo />,
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 480 }}>
+      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>
+        Use the buttons — includes persistent toast (duration 0) and dismiss-all.
+      </p>
+      <PlaygroundDemo />
+    </div>
+  ),
 };
 
 // ── Positions ─────────────────────────────────────────────────────────────────

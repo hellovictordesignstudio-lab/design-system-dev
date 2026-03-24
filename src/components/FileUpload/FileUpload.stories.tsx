@@ -46,6 +46,23 @@ export const Playground: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single file</p>
+        <FileUpload multiple={false} accept="image/*" maxSize={5 * 1024 * 1024} onUpload={() => {}} />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Multiple files</p>
+        <FileUpload multiple maxFiles={5} accept="image/*,.pdf" maxSize={10 * 1024 * 1024} onUpload={() => {}} />
+      </div>
+    </div>
+  ),
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {

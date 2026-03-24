@@ -72,6 +72,27 @@ export const Sizes: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [p1, setP1] = useState(3);
+    const [p2, setP2] = useState(3);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div>
+          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>With first/last</p>
+          <Pagination size="md" currentPage={p1} totalPages={10} onPageChange={setP1} showFirstLast />
+        </div>
+        <div>
+          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Without first/last</p>
+          <Pagination size="md" currentPage={p2} totalPages={10} onPageChange={setP2} showFirstLast={false} />
+        </div>
+      </div>
+    );
+  },
+};
+
 // ── Many Pages ────────────────────────────────────────────────────────────────
 
 export const ManyPages: Story = {
@@ -116,12 +137,42 @@ export const ManyPages: Story = {
   },
 };
 
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => {
+    const [a, setA] = useState(1);
+    const [b, setB] = useState(5);
+    const [c, setC] = useState(12);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div>
+          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>First page</p>
+          <Pagination currentPage={a} totalPages={10} onPageChange={setA} />
+        </div>
+        <div>
+          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Middle page</p>
+          <Pagination currentPage={b} totalPages={10} onPageChange={setB} />
+        </div>
+        <div>
+          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Last page</p>
+          <Pagination currentPage={c} totalPages={12} onPageChange={setC} />
+        </div>
+      </div>
+    );
+  },
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   render: () => {
     const [page, setPage] = useState(5);
-    return <Pagination currentPage={page} totalPages={20} onPageChange={setPage} />;
+    return (
+      <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12 }}>
+        <Pagination currentPage={page} totalPages={20} onPageChange={setPage} />
+      </div>
+    );
   },
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { backgrounds: { default: 'dark' } },
 };

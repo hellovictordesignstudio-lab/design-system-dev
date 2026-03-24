@@ -116,6 +116,90 @@ export const Sizes: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <ModalDemo label="With subtitle">
+        {(isOpen, close) => (
+          <Modal isOpen={isOpen} onClose={close} size="md">
+            <Modal.Header title="Edit settings" subtitle="Changes apply immediately." onClose={close} />
+            <Modal.Body>
+              <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Body content.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button size="sm" variant="ghost" onClick={close}>
+                Cancel
+              </Button>
+              <Button size="sm" onClick={close}>
+                Save
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+      </ModalDemo>
+      <ModalDemo label="Title only">
+        {(isOpen, close) => (
+          <Modal isOpen={isOpen} onClose={close} size="sm">
+            <Modal.Header title="Quick confirm" onClose={close} />
+            <Modal.Body>
+              <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Short message.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button size="sm" onClick={close}>
+                OK
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+      </ModalDemo>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <ModalDemo label="Default">
+        {(isOpen, close) => (
+          <Modal isOpen={isOpen} onClose={close} size="sm">
+            <Modal.Header title="Notice" onClose={close} />
+            <Modal.Body>
+              <p style={{ margin: 0 }}>Standard dialog.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button size="sm" onClick={close}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+      </ModalDemo>
+      <ModalDemo label="Danger">
+        {(isOpen, close) => (
+          <Modal isOpen={isOpen} onClose={close} size="sm">
+            <Modal.Header title="Remove item" onClose={close} />
+            <Modal.Body>
+              <p style={{ margin: 0 }}>This cannot be undone.</p>
+            </Modal.Body>
+            <Modal.Footer align="space-between">
+              <Button variant="ghost" size="sm" onClick={close}>
+                Cancel
+              </Button>
+              <Button variant="danger" size="sm" leftIcon={<Trash2 size={14} />} onClick={close}>
+                Remove
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+      </ModalDemo>
+    </div>
+  ),
+};
+
 // ── With Form ─────────────────────────────────────────────────────────────────
 
 export const WithForm: Story = {

@@ -129,6 +129,94 @@ export const Languages: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [notifs, setNotifs] = useState<Notification[]>([
+      { id: 'a', type: 'success', title: 'Success', description: 'Done.', time: Date.now(), isRead: false },
+      { id: 'b', type: 'error', title: 'Error', description: 'Failed.', time: Date.now(), isRead: false },
+    ]);
+    const markRead = (id: string) => setNotifs((p) => p.map((n) => (n.id === id ? { ...n, isRead: true } : n)));
+    return (
+      <div style={{ padding: 24, display: 'flex', justifyContent: 'center' }}>
+        <NotificationCenter
+          notifications={notifs}
+          onMarkRead={markRead}
+          onMarkAllRead={() => setNotifs((p) => p.map((n) => ({ ...n, isRead: true })))}
+          onRemove={(id) => setNotifs((p) => p.filter((n) => n.id !== id))}
+        />
+      </div>
+    );
+  },
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Panel width is fixed; position the trigger in your header toolbar.',
+      },
+    },
+  },
+  render: () => {
+    const [notifs, setNotifs] = useState<Notification[]>(SAMPLE);
+    const markRead = (id: string) => setNotifs((p) => p.map((n) => (n.id === id ? { ...n, isRead: true } : n)));
+    const markAllRead = () => setNotifs((p) => p.map((n) => ({ ...n, isRead: true })));
+    const remove = (id: string) => setNotifs((p) => p.filter((n) => n.id !== id));
+    const inner = (
+      <NotificationCenter
+        notifications={notifs}
+        onMarkRead={markRead}
+        onMarkAllRead={markAllRead}
+        onRemove={remove}
+        onViewAll={() => {}}
+      />
+    );
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center' }}>
+        <div style={{ width: 320, border: '1px solid #e2e5ed', borderRadius: 8, padding: 12, display: 'flex', justifyContent: 'center' }}>{inner}</div>
+        <div style={{ width: '100%', maxWidth: 560, display: 'flex', justifyContent: 'center' }}>{inner}</div>
+      </div>
+    );
+  },
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => {
+    const [notifs, setNotifs] = useState<Notification[]>(SAMPLE);
+    const markRead = (id: string) => setNotifs((p) => p.map((n) => (n.id === id ? { ...n, isRead: true } : n)));
+    const markAllRead = () => setNotifs((p) => p.map((n) => ({ ...n, isRead: true })));
+    const remove = (id: string) => setNotifs((p) => p.filter((n) => n.id !== id));
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center' }}>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With notifications</p>
+          <div style={{ padding: 24, display: 'flex', justifyContent: 'center' }}>
+            <NotificationCenter
+              notifications={notifs}
+              onMarkRead={markRead}
+              onMarkAllRead={markAllRead}
+              onRemove={remove}
+              onViewAll={() => {}}
+            />
+          </div>
+        </div>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Empty</p>
+          <div style={{ padding: 24, display: 'flex', justifyContent: 'center' }}>
+            <NotificationCenter notifications={[]} onMarkRead={() => {}} onMarkAllRead={() => {}} />
+          </div>
+        </div>
+      </div>
+    );
+  },
+};
+
 // ── DarkMode ──────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

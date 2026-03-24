@@ -169,6 +169,60 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '**Expanded** (Playground): full labels and section headers. **Collapsed** (Collapsed story): narrow rail with tooltips.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ padding: 16, fontSize: 14, color: '#6b7694', lineHeight: 1.6 }}>
+      Use <strong>Playground</strong> for the expanded sidebar and <strong>Collapsed</strong> for the
+      icon-only variant. <strong>WithBadges</strong> and <strong>WithSubItems</strong> show common composition patterns.
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sidebar width follows expanded vs collapsed; the shell preview uses a fixed 560px height.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ padding: 16, fontSize: 14, color: '#6b7694' }}>
+      Resize the Storybook viewport or wrap <code>Sidebar</code> in your app layout; the component fills the column height.
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Active item highlighting, badges, and nested items are covered in the dedicated stories below.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ padding: 16, fontSize: 14, color: '#6b7694' }}>
+      Open <strong>WithBadges</strong> for counts and <strong>WithSubItems</strong> for nested navigation.{' '}
+      <strong>DarkMode</strong> shows token-aware styling.
+    </div>
+  ),
+};
+
 // ── Collapsed ─────────────────────────────────────────────────────────────────
 
 export const Collapsed: Story = {

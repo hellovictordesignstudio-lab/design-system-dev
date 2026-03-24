@@ -74,6 +74,86 @@ export const Playground: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>One slide visible</p>
+        <Carousel visibleItems={1} gap={16}>
+          {SLIDES.map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Two slides visible</p>
+        <Carousel visibleItems={2} gap={12}>
+          {SLIDES.map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Carousel width follows the container; use max-width on the wrapper.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 360 }}>
+        <Carousel visibleItems={1}>
+          {SLIDES.slice(0, 4).map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+      <div style={{ maxWidth: 720 }}>
+        <Carousel visibleItems={2} gap={16}>
+          {SLIDES.map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With arrows & dots</p>
+        <Carousel showArrows showDots loop>
+          {SLIDES.slice(0, 4).map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>No loop</p>
+        <Carousel loop={false} showArrows>
+          {SLIDES.slice(0, 3).map((s) => (
+            <SlideCard key={s.label} {...s} />
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  ),
+};
+
 // ── AutoPlay ──────────────────────────────────────────────────────────────────
 
 export const AutoPlay: Story = {

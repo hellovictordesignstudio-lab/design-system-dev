@@ -37,6 +37,23 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: '#6b7694' }}>Circle</span>
+        <Avatar name="Circle User" shape="circle" size="lg" />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: '#6b7694' }}>Square</span>
+        <Avatar name="Square User" shape="square" size="lg" />
+      </div>
+    </div>
+  ),
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {
@@ -47,6 +64,22 @@ export const Sizes: Story = {
       <Avatar size="md" name="Carlos Diaz" />
       <Avatar size="lg" name="Diana Lee" />
       <Avatar size="xl" name="Eve Martin" />
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+      <Avatar name="Initials only" size="lg" />
+      <Avatar name="With status" size="lg" status="online" />
+      <Avatar
+        name="With image"
+        size="lg"
+        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+      />
     </div>
   ),
 };

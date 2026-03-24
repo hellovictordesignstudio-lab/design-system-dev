@@ -34,6 +34,8 @@ const meta: Meta<typeof NumberInput> = {
 export default meta;
 type Story = StoryObj<typeof NumberInput>;
 
+// ── Playground ────────────────────────────────────────────────────────────────
+
 export const Playground: Story = {
   args: {
     label: 'Quantity',
@@ -45,6 +47,21 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
+      <NumberInput label="Plain" defaultValue={1} />
+      <NumberInput label="With prefix" prefix="$" defaultValue={99} precision={2} />
+      <NumberInput label="With suffix" suffix="kg" defaultValue={70} />
+      <NumberInput label="No stepper" noControls defaultValue={42} helperText="Type only." />
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
@@ -55,6 +72,8 @@ export const Sizes: Story = {
   ),
 };
 
+// ── PrefixSuffix ─────────────────────────────────────────────────────────────
+
 export const PrefixSuffix: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
@@ -64,6 +83,8 @@ export const PrefixSuffix: Story = {
     </div>
   ),
 };
+
+// ── States ────────────────────────────────────────────────────────────────────
 
 export const States: Story = {
   render: () => (
@@ -78,6 +99,8 @@ export const States: Story = {
   ),
 };
 
+// ── MinMax ────────────────────────────────────────────────────────────────────
+
 export const MinMax: Story = {
   parameters: {
     docs: { description: { story: 'Stepper buttons disable automatically when reaching min or max.' } },
@@ -90,6 +113,8 @@ export const MinMax: Story = {
     </div>
   ),
 };
+
+// ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },

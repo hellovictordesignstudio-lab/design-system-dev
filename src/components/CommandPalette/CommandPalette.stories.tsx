@@ -138,6 +138,45 @@ export const WithShortcuts: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => <Demo groups={BASIC_GROUPS} placeholder="Basic group set…" />,
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Palette width follows the overlay; narrow vs wide triggers use the same panel.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 400 }}>
+        <Demo groups={BASIC_GROUPS} placeholder="Narrow shell…" />
+      </div>
+      <div style={{ maxWidth: 560 }}>
+        <Demo groups={FULL_GROUPS} placeholder="Wide shell…" />
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>Open the palette and type to filter; empty queries show all groups.</p>
+      <Demo groups={FULL_GROUPS} placeholder="Try searching…" />
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

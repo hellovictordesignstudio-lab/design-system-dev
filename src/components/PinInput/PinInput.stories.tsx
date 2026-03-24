@@ -44,6 +44,20 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <PinInput label="Numeric" type="number" length={6} />
+      <PinInput label="Alphanumeric" type="alphanumeric" length={6} />
+      <PinInput label="Masked" type="number" length={6} mask />
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>

@@ -36,6 +36,55 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 400 }}>
+      <div>
+        <p style={{ fontSize: 11, color: '#9ba5be', marginBottom: 8, fontWeight: 600 }}>Primitives</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <Skeleton width="100%" height="12px" />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Skeleton.Avatar size="md" />
+            <Skeleton.Button size="md" />
+          </div>
+          <Skeleton.Card />
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 360 }}>
+      <Skeleton width="100%" height="8px" borderRadius="4px" />
+      <Skeleton width="80%" height="16px" borderRadius="8px" />
+      <Skeleton width="60%" height="24px" borderRadius="8px" />
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
+      <div>
+        <p style={{ fontSize: 11, color: '#9ba5be', marginBottom: 8, fontWeight: 600 }}>Animated</p>
+        <Skeleton.Text lines={2} isAnimated />
+      </div>
+      <div>
+        <p style={{ fontSize: 11, color: '#9ba5be', marginBottom: 8, fontWeight: 600 }}>Static</p>
+        <Skeleton.Text lines={2} isAnimated={false} />
+      </div>
+    </div>
+  ),
+};
+
 // ── Text Variants ─────────────────────────────────────────────────────────────
 
 export const TextVariants: Story = {

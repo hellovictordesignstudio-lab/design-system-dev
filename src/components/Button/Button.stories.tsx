@@ -115,3 +115,30 @@ export const FullWidth: Story = {
     </div>
   ),
 };
+
+// ── Dark Mode ─────────────────────────────────────────────────────────────────
+
+export const DarkMode: Story = {
+  parameters: { backgrounds: { default: 'dark' } },
+  render: () => (
+    <div
+      data-theme="dark"
+      style={{
+        background: '#0c0d10',
+        padding: 24,
+        borderRadius: 12,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 12,
+        alignItems: 'center',
+      }}
+    >
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="danger">Danger</Button>
+      <Button isLoading>Loading</Button>
+      <Button disabled>Disabled</Button>
+    </div>
+  ),
+};

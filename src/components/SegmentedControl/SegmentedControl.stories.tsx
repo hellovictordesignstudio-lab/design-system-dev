@@ -38,6 +38,40 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'flex-start' }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Text only</p>
+        <SegmentedControl
+          defaultValue="a"
+          aria-label="View"
+          options={[
+            { value: 'a', label: 'List' },
+            { value: 'b', label: 'Board' },
+          ]}
+        />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With icons</p>
+        <SegmentedControl
+          defaultValue="left"
+          aria-label="Align"
+          options={[
+            { value: 'left', label: 'Left', icon: <AlignLeft size={14} /> },
+            { value: 'center', label: 'Center', icon: <AlignCenter size={14} /> },
+            { value: 'right', label: 'Right', icon: <AlignRight size={14} /> },
+          ]}
+        />
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start' }}>

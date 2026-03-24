@@ -97,6 +97,19 @@ export const Animated: Story = {
   },
 };
 
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: 320 }}>
+      <ProgressBar value={40} label="In progress" showValue />
+      <ProgressBar value={100} variant="success" label="Complete" showValue />
+      <ProgressBar value={15} variant="error" label="Failed" showValue />
+      <ProgressBar isIndeterminate label="Unknown remaining" />
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

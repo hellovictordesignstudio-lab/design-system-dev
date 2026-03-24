@@ -40,6 +40,53 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [a, setA] = useState(['alpha']);
+    const [b, setB] = useState<string[]>([]);
+    const suggestions = ['React', 'Vue', 'Svelte'];
+    return (
+      <div style={{ maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <TagInput label="Free tags" value={a} onChange={setA} placeholder="Type and press Enter…" />
+        <TagInput
+          label="With suggestions"
+          value={b}
+          onChange={setB}
+          suggestions={suggestions}
+          placeholder="Pick or type…"
+        />
+      </div>
+    );
+  },
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input width follows the container.',
+      },
+    },
+  },
+  render: () => {
+    const [tags, setTags] = useState(['one', 'two']);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ maxWidth: 280 }}>
+          <TagInput label="Narrow" value={tags} onChange={setTags} />
+        </div>
+        <div style={{ maxWidth: 520 }}>
+          <TagInput label="Wide" value={tags} onChange={setTags} />
+        </div>
+      </div>
+    );
+  },
+};
+
 // ── WithSuggestions ───────────────────────────────────────────────────────────
 
 export const WithSuggestions: Story = {

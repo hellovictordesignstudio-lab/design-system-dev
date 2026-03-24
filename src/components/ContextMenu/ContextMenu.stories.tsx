@@ -83,6 +83,61 @@ export const Playground: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const flat: ContextMenuItemDef[] = [
+      { label: 'Copy', icon: <Copy size={16} />, onAction: () => {} },
+      { label: 'Paste', icon: <ClipboardPaste size={16} />, onAction: () => {} },
+      { type: 'separator' },
+      { label: 'Delete', icon: <Trash2 size={16} />, destructive: true, onAction: () => {} },
+    ];
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 480 }}>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Flat list</p>
+          <ContextMenu items={flat}>
+            <div style={triggerStyle}>Right-click</div>
+          </ContextMenu>
+        </div>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With sub-menu</p>
+          <ContextMenu items={fileItems}>
+            <div style={triggerStyle}>Right-click</div>
+          </ContextMenu>
+        </div>
+      </div>
+    );
+  },
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Panel width adapts to content; trigger area size is up to your layout.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ maxWidth: 280 }}>
+        <ContextMenu items={fileItems}>
+          <div style={{ ...triggerStyle, minHeight: 80 }}>Narrow</div>
+        </ContextMenu>
+      </div>
+      <div style={{ maxWidth: 520 }}>
+        <ContextMenu items={fileItems}>
+          <div style={triggerStyle}>Wide</div>
+        </ContextMenu>
+      </div>
+    </div>
+  ),
+};
+
 // ── WithSubMenu ───────────────────────────────────────────────────────────────
 
 export const WithSubMenu: Story = {

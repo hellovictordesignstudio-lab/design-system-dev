@@ -51,6 +51,27 @@ export const Playground: Story = {
   args: { size: 'md' },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [a, setA] = useState<Date | undefined>();
+    const [b, setB] = useState<Date | undefined>();
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: 280 }}>
+        <DatePicker value={a} onChange={setA} label="Default (no min/max)" />
+        <DatePicker
+          value={b}
+          onChange={setB}
+          label="With min / max"
+          minDate={new Date(2026, 0, 1)}
+          maxDate={new Date(2026, 11, 31)}
+        />
+      </div>
+    );
+  },
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {

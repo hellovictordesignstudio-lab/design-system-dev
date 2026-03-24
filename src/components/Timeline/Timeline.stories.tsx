@@ -58,6 +58,70 @@ export const Playground: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+      <div style={{ minWidth: 260 }}>
+        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: '#9BA5BE' }}>default</p>
+        <Timeline variant="default">
+          <Timeline.Item title="Step one" description="Done" date="Mar 1" />
+          <Timeline.Item title="Step two" description="Now" date="Mar 5" />
+        </Timeline>
+      </div>
+      <div style={{ minWidth: 260 }}>
+        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: '#9BA5BE' }}>compact</p>
+        <Timeline variant="compact">
+          <Timeline.Item title="Step one" description="Done" date="Mar 1" />
+          <Timeline.Item title="Step two" description="Now" date="Mar 5" />
+        </Timeline>
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Timeline width is controlled by the parent; icons and text reflow in narrow columns.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 320 }}>
+        <Timeline>
+          <Timeline.Item title="Narrow" description="320px container" date="Mar 1" />
+          <Timeline.Item title="Next" description="…" date="Mar 2" />
+        </Timeline>
+      </div>
+      <div style={{ maxWidth: 560 }}>
+        <Timeline>
+          <Timeline.Item title="Wide" description="560px container" date="Mar 1" />
+          <Timeline.Item title="Next" description="…" date="Mar 2" />
+        </Timeline>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ maxWidth: 480 }}>
+      <Timeline>
+        <Timeline.Item title="Dot only (no icon)" description="Uses default dot connector." date="Mar 1" />
+        <Timeline.Item title="With icon" description="Colored icon circle." date="Mar 2" icon={<Star />} iconColor="blue" />
+      </Timeline>
+    </div>
+  ),
+};
+
 // ── WithIcons ─────────────────────────────────────────────────────────────────
 
 export const WithIcons: Story = {

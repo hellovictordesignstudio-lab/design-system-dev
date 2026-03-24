@@ -35,6 +35,17 @@ export const Playground: Story = {
   args: { size: 'md', labelPosition: 'right' },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <Switch checked label="Label on the right" labelPosition="right" onChange={() => {}} />
+      <Switch checked label="Label on the left" labelPosition="left" onChange={() => {}} />
+    </div>
+  ),
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {

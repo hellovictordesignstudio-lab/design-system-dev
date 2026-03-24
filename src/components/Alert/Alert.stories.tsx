@@ -22,6 +22,8 @@ const meta: Meta<typeof Alert> = {
 export default meta;
 type Story = StoryObj<typeof Alert>;
 
+// ── Playground ────────────────────────────────────────────────────────────────
+
 export const Playground: Story = {
   args: {
     variant: 'info',
@@ -29,6 +31,8 @@ export const Playground: Story = {
     children: 'This is an informational alert message.',
   },
 };
+
+// ── Variants ──────────────────────────────────────────────────────────────────
 
 export const Variants: Story = {
   render: () => (
@@ -49,6 +53,64 @@ export const Variants: Story = {
   ),
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Width follows the container. Use max-width or grid to control layout on large screens.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div style={{ maxWidth: 360 }}>
+        <Alert variant="info" title="Narrow (360px)">
+          Short content in a constrained column.
+        </Alert>
+      </div>
+      <div style={{ maxWidth: 560 }}>
+        <Alert variant="info" title="Medium (560px)">
+          Default documentation width for readable line length.
+        </Alert>
+      </div>
+      <div style={{ maxWidth: '100%' }}>
+        <Alert variant="info" title="Full width">
+          Stretches to fill the parent container.
+        </Alert>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}>
+      <Alert variant="success" title="Dismissible" onClose={() => {}}>
+        Includes a close button for transient messages.
+      </Alert>
+      <Alert variant="warning" title="No action">
+        Static alert without dismiss or extra actions.
+      </Alert>
+      <Alert variant="error" title="Long content">
+        {Array(3)
+          .fill(0)
+          .map((_, i) => (
+            <p key={i} style={{ margin: i ? '8px 0 0' : 0 }}>
+              This paragraph demonstrates multi-line body copy inside an alert. Use for validation or
+              error details.
+            </p>
+          ))}
+      </Alert>
+    </div>
+  ),
+};
+
+// ── Dismissible ───────────────────────────────────────────────────────────────
+
 export const Dismissible: Story = {
   render: () => (
     <div style={{ maxWidth: '560px' }}>
@@ -58,6 +120,31 @@ export const Dismissible: Story = {
         onClose={() => alert('Closed!')}
       >
         Your profile information has been updated successfully.
+      </Alert>
+    </div>
+  ),
+};
+
+// ── Dark Mode ─────────────────────────────────────────────────────────────────
+
+export const DarkMode: Story = {
+  parameters: { backgrounds: { default: 'dark' } },
+  render: () => (
+    <div
+      data-theme="dark"
+      style={{ background: '#0c0d10', padding: 24, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}
+    >
+      <Alert variant="info" title="Information">
+        Neutral message on dark background.
+      </Alert>
+      <Alert variant="success" title="Saved">
+        Changes saved successfully.
+      </Alert>
+      <Alert variant="warning" title="Warning">
+        Please review before continuing.
+      </Alert>
+      <Alert variant="error" title="Error">
+        Request failed. Try again.
       </Alert>
     </div>
   ),

@@ -164,16 +164,98 @@ export const WithBadges: Story = {
   ),
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tab list width follows the container — use narrow or wide layouts to match your shell.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 320 }}>
+        <Tabs defaultValue="a" variant="line">
+          <Tabs.List>
+            <Tabs.Tab value="a">One</Tabs.Tab>
+            <Tabs.Tab value="b">Two</Tabs.Tab>
+            <Tabs.Tab value="c">Three</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="a"><p style={PANEL_STYLE}>Narrow</p></Tabs.Panel>
+          <Tabs.Panel value="b"><p style={PANEL_STYLE}>…</p></Tabs.Panel>
+          <Tabs.Panel value="c"><p style={PANEL_STYLE}>…</p></Tabs.Panel>
+        </Tabs>
+      </div>
+      <div style={{ maxWidth: 560 }}>
+        <Tabs defaultValue="a" variant="line">
+          <Tabs.List>
+            <Tabs.Tab value="a">Overview</Tabs.Tab>
+            <Tabs.Tab value="b">Analytics</Tabs.Tab>
+            <Tabs.Tab value="c">Reports</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="a"><p style={PANEL_STYLE}>Wide</p></Tabs.Panel>
+          <Tabs.Panel value="b"><p style={PANEL_STYLE}>…</p></Tabs.Panel>
+          <Tabs.Panel value="c"><p style={PANEL_STYLE}>…</p></Tabs.Panel>
+        </Tabs>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <Tabs defaultValue="a" variant="line">
+        <Tabs.List aria-label="With disabled tab">
+          <Tabs.Tab value="a">Active</Tabs.Tab>
+          <Tabs.Tab value="b" isDisabled>
+            Disabled
+          </Tabs.Tab>
+          <Tabs.Tab value="c">Other</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="a"><p style={PANEL_STYLE}>Enabled tab content.</p></Tabs.Panel>
+        <Tabs.Panel value="c"><p style={PANEL_STYLE}>Other panel.</p></Tabs.Panel>
+      </Tabs>
+      <Tabs defaultValue="inbox" variant="pill">
+        <Tabs.List>
+          <Tabs.Tab value="inbox" badge={3}>
+            Inbox
+          </Tabs.Tab>
+          <Tabs.Tab value="sent">Sent</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="inbox"><p style={PANEL_STYLE}>With badge.</p></Tabs.Panel>
+        <Tabs.Panel value="sent"><p style={PANEL_STYLE}>Sent</p></Tabs.Panel>
+      </Tabs>
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+    <div
+      data-theme="dark"
+      style={{
+        background: '#0c0d10',
+        padding: 24,
+        borderRadius: 12,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+      }}
+    >
       <Tabs defaultValue="a" variant="line">
         <Tabs.List>
           <Tabs.Tab value="a">Overview</Tabs.Tab>
           <Tabs.Tab value="b">Analytics</Tabs.Tab>
-          <Tabs.Tab value="c" badge={5}>Reports</Tabs.Tab>
+          <Tabs.Tab value="c" badge={5}>
+            Reports
+          </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="a"><p style={PANEL_STYLE}>Line variant</p></Tabs.Panel>
         <Tabs.Panel value="b"><p style={PANEL_STYLE}>Analytics</p></Tabs.Panel>
@@ -191,5 +273,5 @@ export const DarkMode: Story = {
       </Tabs>
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { backgrounds: { default: 'dark' } },
 };

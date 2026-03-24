@@ -2,14 +2,16 @@
   "name": "@design-system/core",
   "version": "1.0.0",
   "description": "Professional Design System with React 18, TypeScript, and Styled Components",
-  "homepage": "https://hellovictordesignstudio-lab.github.io/design-system",
+  "homepage": "https://hellovictordesignstudio-lab.github.io/design-system-dev/",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "tsc --emitDeclarationOnly && rollup -c",
+    "build": "tsc -p tsconfig.build.json && vite build --config vite.lib.config.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
     "predeploy": "npm run build-storybook",
@@ -19,9 +21,15 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@tiptap/extension-link": "^3.20.5",
+    "@tiptap/extension-placeholder": "^3.20.5",
+    "@tiptap/extension-underline": "^3.20.5",
+    "@tiptap/react": "^3.20.5",
+    "@tiptap/starter-kit": "^3.20.5",
     "lucide-react": "^0.446.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "recharts": "^3.8.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

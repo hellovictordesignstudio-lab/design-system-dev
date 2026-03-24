@@ -32,6 +32,8 @@ const meta: Meta<typeof Textarea> = {
 export default meta;
 type Story = StoryObj<typeof Textarea>;
 
+// ── Playground ────────────────────────────────────────────────────────────────
+
 export const Playground: Story = {
   args: {
     label: 'Description',
@@ -42,6 +44,20 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 480 }}>
+      <Textarea label="Resize: vertical (default)" resize="vertical" placeholder="Drag corner vertically…" />
+      <Textarea label="Resize: none" resize="none" placeholder="Fixed dimensions…" />
+      <Textarea label="Resize: both" resize="both" placeholder="Resize both axes…" />
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 480 }}>
@@ -51,6 +67,8 @@ export const Sizes: Story = {
     </div>
   ),
 };
+
+// ── States ────────────────────────────────────────────────────────────────────
 
 export const States: Story = {
   render: () => (
@@ -65,6 +83,8 @@ export const States: Story = {
     </div>
   ),
 };
+
+// ── WithCharCount ─────────────────────────────────────────────────────────────
 
 export const WithCharCount: Story = {
   render: () => (
@@ -86,6 +106,8 @@ export const WithCharCount: Story = {
   ),
 };
 
+// ── AutoResize ────────────────────────────────────────────────────────────────
+
 export const AutoResize: Story = {
   parameters: {
     docs: { description: { story: 'Grows automatically as you type. No manual resize handle.' } },
@@ -101,6 +123,8 @@ export const AutoResize: Story = {
     </div>
   ),
 };
+
+// ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },

@@ -159,6 +159,73 @@ export const WithIcons: Story = {
   ),
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Accordion width follows the container; use in narrow sidebars or full-width FAQs.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 320 }}>
+        <Accordion type="single" defaultValue="a" variant="bordered">
+          {sampleItems.slice(0, 2).map(({ value, label, content }) => (
+            <Accordion.Item key={value} value={value}>
+              <Accordion.Trigger>{label}</Accordion.Trigger>
+              <Accordion.Content>{content}</Accordion.Content>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </div>
+      <div style={{ maxWidth: 560 }}>
+        <Accordion type="single" defaultValue="a" variant="bordered">
+          {sampleItems.map(({ value, label, content }) => (
+            <Accordion.Item key={value} value={value}>
+              <Accordion.Trigger>{label}</Accordion.Trigger>
+              <Accordion.Content>{content}</Accordion.Content>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ maxWidth: 560, display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single open</p>
+        <Accordion type="single" defaultValue="a" variant="bordered">
+          {sampleItems.map(({ value, label, content }) => (
+            <Accordion.Item key={value} value={value}>
+              <Accordion.Trigger>{label}</Accordion.Trigger>
+              <Accordion.Content>{content}</Accordion.Content>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Multiple open</p>
+        <Accordion type="multiple" defaultValue={['a']} variant="bordered">
+          {sampleItems.map(({ value, label, content }) => (
+            <Accordion.Item key={value} value={value}>
+              <Accordion.Trigger>{label}</Accordion.Trigger>
+              <Accordion.Content>{content}</Accordion.Content>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </div>
+    </div>
+  ),
+};
+
 // ── DarkMode ──────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

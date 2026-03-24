@@ -57,6 +57,36 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [open, setOpen] = useState<'left' | 'right' | null>(null);
+    return (
+      <>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <Button variant="secondary" size="sm" onClick={() => setOpen('left')}>
+            From left
+          </Button>
+          <Button variant="secondary" size="sm" onClick={() => setOpen('right')}>
+            From right
+          </Button>
+        </div>
+        <Drawer isOpen={open === 'left'} onClose={() => setOpen(null)} placement="left" title="Left drawer" size="sm">
+          <Drawer.Body>
+            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Left placement.</p>
+          </Drawer.Body>
+        </Drawer>
+        <Drawer isOpen={open === 'right'} onClose={() => setOpen(null)} placement="right" title="Right drawer" size="sm">
+          <Drawer.Body>
+            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Right placement.</p>
+          </Drawer.Body>
+        </Drawer>
+      </>
+    );
+  },
+};
+
 // ── Placements ────────────────────────────────────────────────────────────────
 
 export const Placements: Story = {
@@ -182,6 +212,29 @@ export const WithForm: Story = {
           <Drawer.Footer>
             <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>Cancel</Button>
             <Button size="sm" onClick={() => setIsOpen(false)}>Save changes</Button>
+          </Drawer.Footer>
+        </Drawer>
+      </>
+    );
+  },
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open drawer</Button>
+        <Drawer isOpen={open} onClose={() => setOpen(false)} title="Interactive" size="md">
+          <Drawer.Body>
+            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Close via overlay, Esc, or footer actions.</p>
+          </Drawer.Body>
+          <Drawer.Footer>
+            <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
+              Close
+            </Button>
           </Drawer.Footer>
         </Drawer>
       </>

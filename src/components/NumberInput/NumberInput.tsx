@@ -137,7 +137,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             readOnly={isReadOnly}
             required={isRequired}
             onChange={handleChange}
-            onFocus={() => setIsFocused(te)}
+            onFocus={() => setIsFocused(true)}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             aria-invalid={hasError || undefined}

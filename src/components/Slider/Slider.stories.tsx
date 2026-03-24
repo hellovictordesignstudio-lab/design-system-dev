@@ -30,6 +30,8 @@ const meta: Meta<typeof Slider> = {
 export default meta;
 type Story = StoryObj<typeof Slider>;
 
+// ── Playground ────────────────────────────────────────────────────────────────
+
 export const Playground: Story = {
   args: {
     label: 'Volume',
@@ -44,6 +46,22 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 28, maxWidth: 400 }}>
+      <Slider label="Horizontal (default)" orientation="horizontal" defaultValue={40} />
+      <div style={{ display: 'flex', gap: 32, alignItems: 'flex-end', height: 200, paddingTop: 8 }}>
+        <Slider label="Vertical A" orientation="vertical" defaultValue={55} />
+        <Slider label="Vertical B" orientation="vertical" defaultValue={30} />
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28, maxWidth: 400 }}>
@@ -53,6 +71,8 @@ export const Sizes: Story = {
     </div>
   ),
 };
+
+// ── WithFormatting ────────────────────────────────────────────────────────────
 
 export const WithFormatting: Story = {
   render: () => (
@@ -112,6 +132,8 @@ export const Controlled: Story = {
   },
 };
 
+// ── Vertical ──────────────────────────────────────────────────────────────────
+
 export const Vertical: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 40, alignItems: 'flex-start', height: 280, padding: '20px 0' }}>
@@ -121,6 +143,8 @@ export const Vertical: Story = {
     </div>
   ),
 };
+
+// ── States ────────────────────────────────────────────────────────────────────
 
 export const States: Story = {
   render: () => (
@@ -132,6 +156,8 @@ export const States: Story = {
     </div>
   ),
 };
+
+// ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },

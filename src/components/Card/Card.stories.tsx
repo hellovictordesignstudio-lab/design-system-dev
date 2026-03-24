@@ -323,6 +323,56 @@ export const Compositions: Story = {
   ),
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Card width is set by the parent; padding and shadow are component props.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+      <div style={{ width: 240 }}>
+        <Card>
+          <Card.Body>Narrow (240px)</Card.Body>
+        </Card>
+      </div>
+      <div style={{ width: 400 }}>
+        <Card>
+          <Card.Body>Wide (400px)</Card.Body>
+        </Card>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+      <div style={{ width: 280 }}>
+        <Card>
+          <Card.Body>Default</Card.Body>
+        </Card>
+      </div>
+      <div style={{ width: 280 }}>
+        <Card isHoverable>
+          <Card.Body>Hoverable</Card.Body>
+        </Card>
+      </div>
+      <div style={{ width: 280 }}>
+        <Card isClickable>
+          <Card.Body>Clickable</Card.Body>
+        </Card>
+      </div>
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

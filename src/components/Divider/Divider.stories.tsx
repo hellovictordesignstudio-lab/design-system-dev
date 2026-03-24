@@ -100,6 +100,37 @@ export const WithLabel: Story = {
   ),
 };
 
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `spacing` for vertical rhythm; width follows the parent.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 400 }}>
+      <Divider spacing="sm" />
+      <Divider spacing="md" />
+      <Divider spacing="lg" />
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ maxWidth: 400 }}>
+      <Divider />
+      <Divider label="With label" labelPosition="center" />
+      <Divider variant="dashed" />
+    </div>
+  ),
+};
+
 // ── DarkMode ──────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

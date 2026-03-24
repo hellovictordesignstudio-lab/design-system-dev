@@ -45,6 +45,23 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Full stars</p>
+        <Rating value={4} precision="full" isReadOnly showValue />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Half stars</p>
+        <Rating value={3.5} precision="half" isReadOnly showValue />
+      </div>
+    </div>
+  ),
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {
@@ -58,6 +75,26 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => {
+    const [v, setV] = useState(2.5);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Interactive</p>
+          <Rating value={v} onChange={setV} precision="half" showValue />
+        </div>
+        <div>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Read-only</p>
+          <Rating value={4} isReadOnly showValue />
+        </div>
+      </div>
+    );
+  },
 };
 
 // ── HalfPrecision ─────────────────────────────────────────────────────────────

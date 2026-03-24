@@ -45,6 +45,64 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, padding: 60, flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Tooltip content="Short tip" delay={0}>
+        <Button size="sm">Short</Button>
+      </Tooltip>
+      <Tooltip
+        content="This tooltip has more text so you can see wrapping when maxWidth is set."
+        delay={0}
+        maxWidth={200}
+      >
+        <Button size="sm">Long content</Button>
+      </Tooltip>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tooltip width is capped; adjust `maxWidth` for dense vs wide hints.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, padding: 60, flexWrap: 'wrap' }}>
+      <Tooltip content="Narrow" maxWidth={120} delay={0}>
+        <Button size="sm">maxWidth 120</Button>
+      </Tooltip>
+      <Tooltip content="Wider default panel for longer help text." maxWidth={320} delay={0}>
+        <Button size="sm">maxWidth 320</Button>
+      </Tooltip>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, padding: 60, flexWrap: 'wrap', alignItems: 'center' }}>
+      <Tooltip content="Enabled" delay={0}>
+        <Button size="sm">Hover</Button>
+      </Tooltip>
+      <Tooltip content="Should not show" isDisabled delay={0}>
+        <Button size="sm" disabled>
+          Disabled trigger
+        </Button>
+      </Tooltip>
+    </div>
+  ),
+};
+
 // ── Placements ────────────────────────────────────────────────────────────────
 
 export const Placements: Story = {

@@ -51,6 +51,44 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => {
+    const [color, setColor] = useState('#0055FF');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Output format</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {(['hex', 'rgb', 'hsl'] as const).map((fmt) => (
+            <div key={fmt} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ width: 36, fontSize: 12, fontWeight: 700, color: '#9ba5be', textTransform: 'uppercase' }}>
+                {fmt}
+              </span>
+              <ColorPicker value={color} onChange={setColor} format={fmt} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  },
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  render: () => {
+    const [a, setA] = useState('#0055FF');
+    const [b, setB] = useState('#0055FF');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <ColorPicker value={a} onChange={setA} size="sm" presets={PRESETS} />
+        <ColorPicker value={b} onChange={setB} size="md" presets={PRESETS} />
+      </div>
+    );
+  },
+};
+
 // ── Formats ───────────────────────────────────────────────────────────────────
 
 export const Formats: Story = {

@@ -183,6 +183,52 @@ export const Empty: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Bordered, not striped</p>
+        <DataTable columns={BASE_COLUMNS} data={USERS as Record<string, unknown>[]} hasBorder isStriped={false} />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Striped rows</p>
+        <DataTable columns={BASE_COLUMNS} data={USERS as Record<string, unknown>[]} isStriped hasBorder />
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <DataTable columns={BASE_COLUMNS} data={USERS.slice(0, 3) as Record<string, unknown>[]} size="sm" />
+      <DataTable columns={BASE_COLUMNS} data={USERS.slice(0, 3) as Record<string, unknown>[]} size="md" />
+      <DataTable columns={BASE_COLUMNS} data={USERS.slice(0, 3) as Record<string, unknown>[]} size="lg" />
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Loading</p>
+        <DataTable columns={BASE_COLUMNS} data={[]} isLoading />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Empty</p>
+        <DataTable columns={BASE_COLUMNS} data={[]} emptyMessage="No rows to display." />
+      </div>
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

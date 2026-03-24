@@ -131,7 +131,7 @@ export const PinInput = forwardRef<HTMLDivElement, PinInputProps>(
                 $isDisabled={isDisabled}
                 type={mask ? 'password' : type === 'number' ? 'tel' : 'text'}
                 inputMode={type === 'number' ? 'numeric' : 'text'}
-                maxLgth={1}
+                maxLength={1}
                 value={cell}
                 placeholder={focusedIndex === index ? '' : placeholder}
                 disabled={isDisabled}

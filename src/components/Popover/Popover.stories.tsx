@@ -175,6 +175,75 @@ export const WithMenu: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, padding: 60, flexWrap: 'wrap' }}>
+      <Popover placement="bottom-start">
+        <Popover.Trigger>
+          <Button size="sm">Text only</Button>
+        </Popover.Trigger>
+        <Popover.Content>
+          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Simple body copy.</p>
+        </Popover.Content>
+      </Popover>
+      <Popover placement="bottom-start">
+        <Popover.Trigger>
+          <Button size="sm" variant="secondary">
+            With title
+          </Button>
+        </Popover.Trigger>
+        <Popover.Content title="Settings" width={260}>
+          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Titled panel with fixed width.</p>
+        </Popover.Content>
+      </Popover>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, padding: 60, flexWrap: 'wrap' }}>
+      <Popover placement="bottom-start">
+        <Popover.Trigger>
+          <Button size="sm">Narrow</Button>
+        </Popover.Trigger>
+        <Popover.Content width={200}>
+          <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>width 200</p>
+        </Popover.Content>
+      </Popover>
+      <Popover placement="bottom-start">
+        <Popover.Trigger>
+          <Button size="sm">Wide</Button>
+        </Popover.Trigger>
+        <Popover.Content width={360}>
+          <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>width 360</p>
+        </Popover.Content>
+      </Popover>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ padding: 60 }}>
+      <Popover placement="bottom-start">
+        <Popover.Trigger>
+          <Button>Open</Button>
+        </Popover.Trigger>
+        <Popover.Content title="Interactive">
+          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Click outside or Escape to close.</p>
+        </Popover.Content>
+      </Popover>
+    </div>
+  ),
+};
+
 // ── Dark Mode ─────────────────────────────────────────────────────────────────
 
 export const DarkMode: Story = {

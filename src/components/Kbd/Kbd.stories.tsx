@@ -34,6 +34,30 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single keys (Kbd)</p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <Kbd>⌘</Kbd>
+          <Kbd>K</Kbd>
+          <Kbd>Enter</Kbd>
+        </div>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Shortcuts (Shortcut)</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <Shortcut keys={['⌘', 'K']} />
+          <Shortcut keys={['Ctrl', 'Shift', 'P']} />
+        </div>
+      </div>
+    </div>
+  ),
+};
+
 // ── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Sizes: Story = {
@@ -49,6 +73,26 @@ export const Sizes: Story = {
           <Kbd size={size}>Backspace</Kbd>
         </div>
       ))}
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keys are presentational; pair with your app’s actual keyboard handlers.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+      <Kbd size="md">Esc</Kbd>
+      <span style={{ fontSize: 13, color: '#6b7694' }}>Close</span>
+      <Kbd size="md">?</Kbd>
+      <span style={{ fontSize: 13, color: '#6b7694' }}>Help</span>
     </div>
   ),
 };

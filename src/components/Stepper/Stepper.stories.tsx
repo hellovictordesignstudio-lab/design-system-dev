@@ -49,6 +49,74 @@ export const Playground: Story = {
   },
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 600 }}>
+      <div>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Horizontal</p>
+        <Stepper activeStep={1}>
+          <Stepper.Step label="One" />
+          <Stepper.Step label="Two" />
+          <Stepper.Step label="Three" />
+        </Stepper>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Vertical</p>
+        <Stepper activeStep={1} orientation="vertical">
+          <Stepper.Step label="One" description="First" />
+          <Stepper.Step label="Two" description="Second" />
+        </Stepper>
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Stepper stretches to the container; constrain max-width for checkout vs wide wizards.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ maxWidth: 400 }}>
+        <Stepper activeStep={2}>
+          <Stepper.Step label="A" />
+          <Stepper.Step label="B" />
+          <Stepper.Step label="C" />
+        </Stepper>
+      </div>
+      <div style={{ maxWidth: 720 }}>
+        <Stepper activeStep={2}>
+          <Stepper.Step label="A" />
+          <Stepper.Step label="B" />
+          <Stepper.Step label="C" />
+        </Stepper>
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ maxWidth: 600 }}>
+      <Stepper activeStep={1}>
+        <Stepper.Step label="Done" />
+        <Stepper.Step label="Active" />
+        <Stepper.Step label="Todo" />
+      </Stepper>
+    </div>
+  ),
+};
+
 // ── Horizontal ────────────────────────────────────────────────────────────────
 
 export const Horizontal: Story = {

@@ -45,6 +45,61 @@ export const Playground: Story = {
   ),
 };
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+      <div style={{ width: 260 }}>
+        <StatCard label="Revenue" value="$12k" change={5.2} changeLabel="vs LY" icon={<DollarSign />} iconColor="green" />
+      </div>
+      <div style={{ width: 260 }}>
+        <StatCard label="Users" value="1.2k" change={-1.2} changeLabel="vs LW" icon={<Users />} iconColor="blue" trend="down" />
+      </div>
+    </div>
+  ),
+};
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Card width is controlled by the parent; common grid is 240–280px per tile.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+      <div style={{ width: 200 }}>
+        <StatCard label="Narrow" value="42" icon={<Activity />} iconColor="purple" />
+      </div>
+      <div style={{ width: 320 }}>
+        <StatCard label="Wide" value="$48,295" change={12.4} changeLabel="vs last month" icon={<DollarSign />} iconColor="blue" />
+      </div>
+    </div>
+  ),
+};
+
+// ── States ────────────────────────────────────────────────────────────────────
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+      <div style={{ width: 260 }}>
+        <StatCard label="Up" value="120" change={10} changeLabel="%" icon={<TrendingUp />} iconColor="green" trend="up" />
+      </div>
+      <div style={{ width: 260 }}>
+        <StatCard label="Down" value="80" change={-5} changeLabel="%" icon={<TrendingUp />} iconColor="red" trend="down" />
+      </div>
+      <div style={{ width: 260 }}>
+        <StatCard label="Neutral" value="100%" change={0} changeLabel="flat" icon={<Activity />} iconColor="purple" trend="neutral" />
+      </div>
+    </div>
+  ),
+};
+
 // ── Grid ──────────────────────────────────────────────────────────────────────
 
 export const Grid: Story = {
