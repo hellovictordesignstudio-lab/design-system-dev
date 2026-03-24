@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 
 const meta: Meta<typeof ButtonGroup> = {
-  title: 'Components/Actions/ButtonGroup',
+  title: 'Components/ButtonGroup',
   component: ButtonGroup,
   tags: ['autodocs'],
   parameters: {

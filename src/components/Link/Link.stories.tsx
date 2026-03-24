@@ -3,7 +3,7 @@ import { Link } from './Link';
 import { ArrowRight, Download, Mail, FileText } from 'lucide-react';
 
 const meta: Meta<typeof Link> = {
-  title: 'Components/Actions/Link',
+  title: 'Components/Link',
   component: Link,
   tags: ['autodocs'],
   parameters: {

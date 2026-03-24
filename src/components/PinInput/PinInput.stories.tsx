@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { PinInput } from './PinInput';
 
 const meta: Meta<typeof PinInput> = {
-  title: 'Components/Inputs/PinInput',
+  title: 'Components/PinInput',
   component: PinInput,
   tags: ['autodocs'],
   parameters: {

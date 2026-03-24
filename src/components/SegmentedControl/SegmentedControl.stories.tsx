@@ -4,7 +4,7 @@ import { SegmentedControl } from './SegmentedControl';
 import { Grid, List, LayoutGrid, Sun, Moon, Monitor, AlignLeft, AlignCenter, AlignRight } from 'lucide-react';
 
 const meta: Meta<typeof SegmentedControl> = {
-  title: 'Components/Navigation/SegmentedControl',
+  title: 'Components/SegmentedControl',
   component: SegmentedControl,
   tags: ['autodocs'],
   parameters: {
