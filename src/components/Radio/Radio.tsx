@@ -58,12 +58,13 @@ const RadioCircle = styled.span<{
   width: ${({ $size }) => BOX_SIZE[$size]}px;
   height: ${({ $size }) => BOX_SIZE[$size]}px;
   border-radius: 50%;
-  background-color: ${({ $checked }) => ($checked ? '#0055FF' : '#ffffff')};
+  background-color: ${({ theme, $checked }) =>
+    $checked ? theme.colors['color-brand-primary'] : theme.colors['color-bg-default']};
   border: 1.5px solid
-    ${({ $checked, $hasError }) => {
-      if ($hasError) return '#D22232';
-      if ($checked) return '#0055FF';
-      return '#C8D4E8';
+    ${({ theme, $checked, $hasError }) => {
+      if ($hasError) return theme.colors['color-error-default'];
+      if ($checked) return theme.colors['color-brand-primary'];
+      return theme.colors['color-border-default'];
     }};
   transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 `;
@@ -72,7 +73,7 @@ const RadioDot = styled.span<{ $size: RadioSize }>`
   width: ${({ $size }) => DOT_SIZE[$size]}px;
   height: ${({ $size }) => DOT_SIZE[$size]}px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors['color-brand-on-primary']};
 `;
 
 const Row = styled.span`
@@ -82,7 +83,7 @@ const Row = styled.span`
   position: relative;
 
   &:focus-within ${RadioCircle} {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 `;
 
@@ -94,20 +95,20 @@ const Wrapper = styled.label<{ $isDisabled: boolean }>`
   user-select: none;
 
   &:hover:not([data-disabled]) ${RadioCircle} {
-    border-color: #0055FF;
+    border-color: ${({ theme }) => theme.colors['color-brand-primary']};
   }
 `;
 
 const LabelText = styled.span`
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
 const HelperText = styled.span<{ $indent: number }>`
   font-size: 12px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-top: 4px;
   padding-left: ${({ $indent }) => $indent}px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
@@ -115,7 +116,7 @@ const HelperText = styled.span<{ $indent: number }>`
 
 const ErrorText = styled.span<{ $indent: number }>`
   font-size: 12px;
-  color: #d22232;
+  color: ${({ theme }) => theme.colors['color-error-text']};
   margin-top: 4px;
   padding-left: ${({ $indent }) => $indent}px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};

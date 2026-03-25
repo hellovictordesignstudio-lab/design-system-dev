@@ -13,18 +13,27 @@ const meta: Meta<typeof ButtonGroup> = {
   parameters: {
     docs: {
       description: {
-        component: 'Groups related actions into a cohesive unit. Supports attached and detached modes, all variants, sizes, and both orientations.',
+        component:
+          'Groups related actions in one unit. Supports attached and detached layouts, all button variants and sizes, and horizontal or vertical orientation.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'destructive'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
-    isAttached: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    fullWidth: { control: 'boolean' },
-    gap: { control: { type: 'range', min: 0, max: 24, step: 2 }, if: { arg: 'isAttached', eq: false } },
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'ghost', 'destructive'],
+      description: 'Visual style applied to each item.',
+    },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Height of each item.' },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'], description: 'Stack direction.' },
+    isAttached: { control: 'boolean', description: 'Joins adjacent borders (segmented look).' },
+    isDisabled: { control: 'boolean', description: 'Disables all items.' },
+    fullWidth: { control: 'boolean', description: 'Stretches to the container width.' },
+    gap: {
+      control: { type: 'range', min: 0, max: 24, step: 2 },
+      if: { arg: 'isAttached', eq: false },
+      description: 'Space between items when not attached.',
+    },
   },
 };
 
@@ -181,7 +190,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: 'var(--color-bg-primary, #0C0D10)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 16 }}>
       {(['secondary', 'primary', 'ghost'] as const).map((variant) => (
         <ButtonGroup key={variant} variant={variant} aria-label={`dark ${variant}`}>
           <ButtonGroup.Item isActive>Active</ButtonGroup.Item>

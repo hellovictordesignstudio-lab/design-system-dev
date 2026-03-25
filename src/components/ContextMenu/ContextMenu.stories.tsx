@@ -19,7 +19,7 @@ const meta: Meta<typeof ContextMenu> = {
     docs: {
       description: {
         component:
-          'Right-click context menu that opens at cursor position with smart viewport flip. Supports items, separators, labels, and nested sub-menus. Closes on click outside, ESC, or scroll.',
+          'Opens at the pointer with viewport-aware positioning. Supports items, separators, section labels, and nested submenus. Closes on outside click, Esc, or scroll.',
       },
     },
   },
@@ -59,14 +59,14 @@ const triggerStyle: React.CSSProperties = {
   justifyContent: 'center',
   width: '100%',
   minHeight: '120px',
-  border: '1.5px dashed #C8D4E8',
+  border: '1.5px dashed var(--color-border-strong)',
   borderRadius: '14px',
-  color: '#9BA5BE',
+  color: 'var(--color-text-tertiary)',
   fontSize: '14px',
   fontFamily: 'Nunito Sans, sans-serif',
   userSelect: 'none',
   cursor: 'context-menu',
-  background: '#F8F9FC',
+  background: 'var(--color-bg-subtle)',
 };
 
 // ── Playground ────────────────────────────────────────────────────────────────
@@ -96,13 +96,13 @@ export const Variants: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 480 }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Flat list</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Flat list</p>
           <ContextMenu items={flat}>
             <div style={triggerStyle}>Right-click</div>
           </ContextMenu>
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With sub-menu</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With sub-menu</p>
           <ContextMenu items={fileItems}>
             <div style={triggerStyle}>Right-click</div>
           </ContextMenu>
@@ -208,7 +208,7 @@ export const Languages: Story = {
       {(['en', 'es', 'fr'] as const).map((lang) => (
         <LangProvider key={lang} defaultLang={lang}>
           <div style={{ flex: '1', minWidth: '200px' }}>
-            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>{lang}</p>
+            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>{lang}</p>
             <ContextMenu items={fileItems}>
               <div style={{ ...triggerStyle, minHeight: '80px', fontSize: '12px' }}>
                 Right-click ({lang})
@@ -230,9 +230,9 @@ export const DarkMode: Story = {
         <ContextMenu items={fileItems}>
           <div style={{
             ...triggerStyle,
-            background: '#1A1F35',
-            borderColor: '#2E3550',
-            color: '#6B7694',
+            background: 'var(--color-bg-default)',
+            borderColor: 'var(--color-border-default)',
+            color: 'var(--color-text-tertiary)',
           }}>
             Right-click anywhere (dark mode)
           </div>

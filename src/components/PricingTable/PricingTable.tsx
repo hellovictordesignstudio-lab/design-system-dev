@@ -12,7 +12,7 @@ const Title = styled.h2`
   margin: 0 0 20px;
   font-size: 22px;
   font-weight: 800;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   text-align: center;
 `;
 
@@ -29,15 +29,17 @@ const Card = styled.article<{ $highlight: boolean }>`
   flex-direction: column;
   padding: 22px;
   border-radius: 18px;
-  border: 1px solid #e2e5ed;
-  background: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
 
-  ${({ $highlight }) =>
+  ${({ $highlight, theme }) =>
     $highlight &&
     css`
-      border-color: #0055ff;
-      box-shadow: 0 12px 40px rgba(0, 85, 255, 0.12);
+      border-color: ${theme.colors['color-border-focus']};
+      box-shadow: ${theme.mode === 'dark'
+        ? '0 12px 40px rgba(10, 132, 255, 0.25)'
+        : '0 12px 40px rgba(0, 85, 255, 0.12)'};
     `}
 `;
 
@@ -49,8 +51,8 @@ const Badge = styled.span`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #0055ff;
-  background: #e8eeff;
+  color: ${({ theme }) => theme.colors['color-text-link']};
+  background: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   padding: 4px 10px;
   border-radius: 9999px;
 `;
@@ -59,14 +61,14 @@ const PlanName = styled.h3`
   margin: 0 0 6px;
   font-size: 18px;
   font-weight: 800;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const PlanDesc = styled.p`
   margin: 0 0 16px;
   font-size: 13px;
   line-height: 1.5;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   min-height: 2.6em;
 `;
 
@@ -80,13 +82,13 @@ const PriceRow = styled.div`
 const Price = styled.span`
   font-size: 32px;
   font-weight: 800;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   letter-spacing: -0.02em;
 `;
 
 const Period = styled.span`
   font-size: 14px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 const FeatList = styled.ul`
@@ -104,19 +106,19 @@ const Feat = styled.li`
   align-items: flex-start;
   gap: 10px;
   font-size: 14px;
-  color: #374151;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   line-height: 1.4;
 `;
 
 const IconOk = styled.span`
   display: inline-flex;
-  color: #0a9f6e;
+  color: ${({ theme }) => theme.colors['color-success-default']};
   margin-top: 2px;
 `;
 
 const IconNo = styled.span`
   display: inline-flex;
-  color: #d22232;
+  color: ${({ theme }) => theme.colors['color-error-default']};
   margin-top: 2px;
 `;
 

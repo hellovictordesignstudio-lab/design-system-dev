@@ -13,7 +13,7 @@ const meta: Meta<typeof TextInput> = {
     docs: {
       description: {
         component:
-          'A flexible text input with support for labels, icons, prefix/suffix addons, validation states, and multiple sizes.',
+          'A single-line text field with optional label, icons, prefix and suffix, validation states, and multiple sizes.',
       },
     },
   },
@@ -21,20 +21,20 @@ const meta: Meta<typeof TextInput> = {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Height and font-size of the input',
+      description: 'Height and font size.',
     },
-    label: { control: 'text' },
-    placeholder: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
-    prefix: { control: 'text' },
-    suffix: { control: 'text' },
-    isDisabled: { control: 'boolean' },
-    isReadOnly: { control: 'boolean' },
-    isRequired: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    hasSuccess: { control: 'boolean' },
-    value: { control: 'text' },
+    label: { control: 'text', description: 'Label above the field.' },
+    placeholder: { control: 'text', description: 'Placeholder when empty.' },
+    helperText: { control: 'text', description: 'Hint below the field.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
+    prefix: { control: 'text', description: 'Content before the value.' },
+    suffix: { control: 'text', description: 'Content after the value.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    isReadOnly: { control: 'boolean', description: 'Focusable but not editable.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    hasSuccess: { control: 'boolean', description: 'Applies success styling.' },
+    value: { control: 'text', description: 'Controlled string value.' },
   },
 };
 

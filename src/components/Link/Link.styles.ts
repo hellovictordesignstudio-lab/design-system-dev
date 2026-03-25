@@ -9,19 +9,31 @@ const sizeStyles = {
 
 const variantStyles: Record<LinkVariant, ReturnType<typeof css>> = {
   default: css`
-    color: var(--color-text-brand, #0055FF);
-    &:hover:not([aria-disabled='true']) { color: var(--color-interactive-hover, #0044CC); }
-    &:active:not([aria-disabled='true']) { color: var(--color-interactive-active, #003399); }
+    color: ${({ theme }) => theme.colors['color-text-link']};
+    &:hover:not([aria-disabled='true']) {
+      color: ${({ theme }) => theme.colors['color-text-link-hover']};
+    }
+    &:active:not([aria-disabled='true']) {
+      color: ${({ theme }) => theme.colors['color-brand-primary-active']};
+    }
   `,
   subtle: css`
-    color: var(--color-text-secondary, #4A5270);
-    &:hover:not([aria-disabled='true']) { color: var(--color-text-primary, #0C0D10); }
-    &:active:not([aria-disabled='true']) { color: var(--color-text-primary, #0C0D10); }
+    color: ${({ theme }) => theme.colors['color-text-secondary']};
+    &:hover:not([aria-disabled='true']) {
+      color: ${({ theme }) => theme.colors['color-text-primary']};
+    }
+    &:active:not([aria-disabled='true']) {
+      color: ${({ theme }) => theme.colors['color-text-primary']};
+    }
   `,
   inverse: css`
-    color: var(--color-text-inverse, #FFFFFF);
-    &:hover:not([aria-disabled='true']) { color: rgba(255,255,255,0.8); }
-    &:active:not([aria-disabled='true']) { color: rgba(255,255,255,0.65); }
+    color: ${({ theme }) => theme.colors['color-text-inverse']};
+    &:hover:not([aria-disabled='true']) {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    &:active:not([aria-disabled='true']) {
+      color: rgba(255, 255, 255, 0.65);
+    }
   `,
 };
 
@@ -59,7 +71,9 @@ export const StyledLink = styled.a<StyledLinkProps>`
   ${({ $underline }) => underlineStyles[$underline]}
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px var(--color-interactive-focus, #99BDFF);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.4)' : 'rgba(0, 85, 255, 0.25)'};
   }
 
   svg {

@@ -118,7 +118,7 @@ const Panel = styled.div<{
   $isOpen: boolean;
 }>`
   position: absolute;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   display: flex;
   flex-direction: column;
   box-shadow: ${({ $placement }) => panelShadow($placement)};
@@ -129,10 +129,6 @@ const Panel = styled.div<{
   }
 
   ${({ $placement, $size }) => panelPosition($placement, $size)}
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-  }
 `;
 
 const StyledHeader = styled.div`
@@ -140,24 +136,16 @@ const StyledHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  border-bottom: 1px solid #F0F2F5;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   flex-shrink: 0;
-
-  [data-theme='dark'] &, .dark & {
-    border-bottom-color: #2E3550;
-  }
 `;
 
 const HeaderTitle = styled.h2`
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 const CloseButton = styled.button`
@@ -170,15 +158,15 @@ const CloseButton = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   transition: background-color 150ms ease, color 150ms ease;
 
-  &:hover { background-color: #F0F2F5; color: #111827; }
-  &:focus-visible { outline: 2px solid #0055FF; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #9BA5BE;
-    &:hover { background-color: #2E3550; color: #F0F2F5; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
+    color: ${({ theme }) => theme.colors['color-text-primary']};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
   }
 `;
 
@@ -191,17 +179,13 @@ const StyledBody = styled.div`
 
 const StyledFooter = styled.div`
   padding: 16px 24px;
-  border-top: 1px solid #F0F2F5;
+  border-top: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-
-  [data-theme='dark'] &, .dark & {
-    border-top-color: #2E3550;
-  }
 `;
 
 // ── Focus trap ────────────────────────────────────────────────────────────────

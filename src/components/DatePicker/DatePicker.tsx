@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css, keyframes } from 'styled-components';
+import { colorPrimitives } from '../../tokens/primitives';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export type DatePickerSize = 'sm' | 'md' | 'lg';
@@ -121,35 +122,44 @@ const Trigger = styled.button<{
   padding: 0 12px 0 16px;
   border-radius: 14px;
   border: 1.5px solid
-    ${({ $hasError, $isOpen }) => ($hasError ? '#D22232' : $isOpen ? '#0055FF' : '#C8D4E8')};
-  background: #ffffff;
+    ${({ theme, $hasError, $isOpen }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isOpen
+          ? theme.colors['color-border-focus']
+          : theme.colors['color-border-strong']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   font-size: ${({ $size }) => FONT_SIZE[$size]};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  color: ${({ $hasValue }) => ($hasValue ? '#111827' : '#9BA5BE')};
+  color: ${({ theme, $hasValue }) =>
+    $hasValue ? theme.colors['color-text-primary'] : theme.colors['color-text-tertiary']};
   cursor: pointer;
   text-align: left;
   outline: none;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-visible {
-    border-color: #0055ff;
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.10);
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.2)' : 'rgba(0, 85, 255, 0.1)'};
   }
 
-  ${({ $isOpen }) =>
+  ${({ $isOpen, theme }) =>
     $isOpen &&
     css`
-      border-color: #0055ff;
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.10);
+      border-color: ${theme.colors['color-border-focus']};
+      box-shadow: 0 0 0 3px
+        ${theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.2)' : 'rgba(0, 85, 255, 0.1)'};
     `}
 
-  ${({ $isDisabled }) =>
+  ${({ $isDisabled, theme }) =>
     $isDisabled &&
     css`
       opacity: 0.7;
       cursor: not-allowed;
-      background: #f8f9fc;
-      border-color: #dde1ea;
+      background: ${theme.colors['color-bg-subtle']};
+      border-color: ${theme.colors['color-border-default']};
     `}
 `;
 
@@ -160,15 +170,15 @@ const TriggerLabel = styled.span`
 const CalIcon = styled.span`
   display: flex;
   align-items: center;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   flex-shrink: 0;
 `;
 
 const CalPanel = styled.div`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 16px;
-  border: 1px solid #e2e5ed;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   padding: 16px;
   width: 280px;
   animation: ${scaleIn} 150ms ease forwards;
@@ -186,7 +196,7 @@ const CalHeader = styled.div`
 const MonthTitle = styled.span`
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const NavBtn = styled.button`
@@ -198,17 +208,19 @@ const NavBtn = styled.button`
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   cursor: pointer;
   outline: none;
   transition: background-color 150ms ease;
 
   &:hover {
-    background: #f0f2f5;
+    background: ${({ theme }) => theme.colors['color-bg-muted']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -225,7 +237,7 @@ const WeekdayLabel = styled.span`
   height: 32px;
   font-size: 11px;
   font-weight: 600;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 const DayGrid = styled.div`
@@ -254,31 +266,36 @@ const DayBtn = styled.button<{
   outline: none;
   transition: background-color 100ms ease, color 100ms ease;
 
-  background-color: ${({ $isSelected }) => ($isSelected ? '#0055FF' : 'transparent')};
-  border: ${({ $isSelected, $isToday }) =>
-    $isSelected ? 'none' : $isToday ? '1.5px solid #0055FF' : 'none'};
-  color: ${({ $isSelected, $isToday, $isCurrentMonth }) =>
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors['color-brand-primary'] : 'transparent'};
+  border: ${({ theme, $isSelected, $isToday }) =>
+    $isSelected ? 'none' : $isToday ? `1.5px solid ${theme.colors['color-border-focus']}` : 'none'};
+  color: ${({ theme, $isSelected, $isToday, $isCurrentMonth }) =>
     $isSelected
-      ? '#ffffff'
+      ? colorPrimitives.white
       : $isToday
-      ? '#0055ff'
-      : $isCurrentMonth
-      ? '#111827'
-      : '#c5cbda'};
+        ? theme.colors['color-text-link']
+        : $isCurrentMonth
+          ? theme.colors['color-text-primary']
+          : theme.colors['color-border-strong']};
 
   &:hover:not(:disabled) {
-    background-color: ${({ $isSelected }) => ($isSelected ? '#0044CC' : '#f0f2f5')};
+    background-color: ${({ theme, $isSelected }) =>
+      $isSelected ? theme.colors['color-brand-primary-hover'] : theme.colors['color-bg-muted']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
 const HelperText = styled.p<{ $isError?: boolean }>`
   margin: 6px 0 0;
   font-size: 12px;
-  color: ${({ $isError }) => ($isError ? '#D22232' : '#9BA5BE')};
+  color: ${({ theme, $isError }) =>
+    $isError ? theme.colors['color-error-default'] : theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 

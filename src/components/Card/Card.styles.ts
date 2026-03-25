@@ -46,7 +46,8 @@ export const StyledCard = styled.div<{
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
-  border: ${({ $hasBorder }) => ($hasBorder ? '1px solid #E2E5ED' : 'none')};
+  border: ${({ $hasBorder, theme }) =>
+    $hasBorder ? `1px solid ${theme.colors['color-border-default']}` : 'none'};
   box-shadow: ${({ $shadow_val }) => $shadow_val};
   overflow: hidden;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};

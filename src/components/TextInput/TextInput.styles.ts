@@ -37,21 +37,23 @@ export const InputGroup = styled.div<{
   align-items: stretch;
   border-radius: 14px;
   overflow: hidden;
-  border: 1.5px solid ${({ $hasError, $hasSuccess }) =>
-    $hasError ? '#D22232' : $hasSuccess ? '#0A8853' : '#C8D4E8'};
+  border: 1.5px solid ${({ theme, $hasError, $hasSuccess }) =>
+    $hasError
+      ? theme.colors['color-error-default']
+      : $hasSuccess
+        ? theme.colors['color-success-default']
+        : theme.colors['color-border-default']};
   background-color: ${({ theme, $isDisabled, $isReadOnly }) =>
-    $isReadOnly
-      ? theme.colors['color-bg-subtle']
-      : '#FFFFFF'};
+    $isReadOnly ? theme.colors['color-bg-subtle'] : theme.colors['color-bg-default']};
   transition:
     border-color ${({ theme }) => theme.transitions.duration.base} ${({ theme }) => theme.transitions.easing.easeInOut},
     box-shadow ${({ theme }) => theme.transitions.duration.base} ${({ theme }) => theme.transitions.easing.easeInOut};
 
-  ${({ $isDisabled }) =>
+  ${({ theme, $isDisabled }) =>
     $isDisabled &&
     css`
-      background-color: #F8F9FC;
-      border-color: #DDE1EA;
+      background-color: ${theme.colors['color-bg-subtle']};
+      border-color: ${theme.colors['color-border-default']};
       opacity: 0.7;
       cursor: not-allowed;
     `}
@@ -61,14 +63,19 @@ export const InputGroup = styled.div<{
     !$isReadOnly &&
     css`
       &:focus-within {
-        border-color: ${$hasError ? '#D22232' : $hasSuccess ? '#0A8853' : '#0055FF'};
-        box-shadow: 0 0 0 3px ${
+        border-color: ${({ theme }) =>
           $hasError
-            ? 'rgba(210, 34, 50, 0.10)'
+            ? theme.colors['color-error-default']
             : $hasSuccess
-            ? 'rgba(10, 136, 83, 0.10)'
-            : 'rgba(0, 85, 255, 0.10)'
-        };
+              ? theme.colors['color-success-default']
+              : theme.colors['color-brand-primary']};
+        box-shadow: 0 0 0 3px
+          ${({ theme }) =>
+            $hasError
+              ? theme.colors['color-error-subtle']
+              : $hasSuccess
+                ? theme.colors['color-success-subtle']
+                : theme.colors['color-brand-primary-subtle']};
       }
     `}
 `;

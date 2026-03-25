@@ -15,9 +15,19 @@ const meta: Meta<typeof NotificationCenter> = {
     docs: {
       description: {
         component:
-          'A Bell icon trigger with a dropdown panel showing notifications. Tabs for All / Unread. Persists to localStorage via the useNotifications() hook. Supports info, success, warning, and error types.',
+          'A bell trigger opens a panel of notifications with All and Unread tabs. Optional persistence uses `useNotifications()` and localStorage. Supports info, success, warning, and error types.',
       },
     },
+  },
+  argTypes: {
+    notifications: {
+      control: 'object',
+      description: 'List of notifications. Use `useNotifications()` for persisted state.',
+    },
+    onMarkRead: { control: false, description: 'Called when one notification is marked read.' },
+    onMarkAllRead: { control: false, description: 'Called when all are marked read.' },
+    onRemove: { control: false, description: 'Called when a notification is dismissed.' },
+    onViewAll: { control: false, description: 'Called when “view all” is activated.' },
   },
 };
 
@@ -115,7 +125,7 @@ export const Languages: Story = {
         {(['en', 'es', 'fr'] as const).map((lang) => (
           <LangProvider key={lang} defaultLang={lang}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>{lang}</span>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>{lang}</span>
               <NotificationCenter
                 notifications={notifs}
                 onMarkRead={markRead}
@@ -177,7 +187,7 @@ export const Sizes: Story = {
     );
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center' }}>
-        <div style={{ width: 320, border: '1px solid #e2e5ed', borderRadius: 8, padding: 12, display: 'flex', justifyContent: 'center' }}>{inner}</div>
+        <div style={{ width: 320, border: '1px solid var(--color-border-default)', borderRadius: 8, padding: 12, display: 'flex', justifyContent: 'center' }}>{inner}</div>
         <div style={{ width: '100%', maxWidth: 560, display: 'flex', justifyContent: 'center' }}>{inner}</div>
       </div>
     );
@@ -195,7 +205,7 @@ export const States: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center' }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With notifications</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With notifications</p>
           <div style={{ padding: 24, display: 'flex', justifyContent: 'center' }}>
             <NotificationCenter
               notifications={notifs}
@@ -207,7 +217,7 @@ export const States: Story = {
           </div>
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Empty</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Empty</p>
           <div style={{ padding: 24, display: 'flex', justifyContent: 'center' }}>
             <NotificationCenter notifications={[]} onMarkRead={() => {}} onMarkAllRead={() => {}} />
           </div>

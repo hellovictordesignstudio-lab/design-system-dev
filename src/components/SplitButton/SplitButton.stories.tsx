@@ -11,14 +11,23 @@ const meta: Meta<typeof SplitButton> = {
     docs: {
       description: {
         component:
-          'Primary action plus a chevron menu for secondary actions. Shares sizing and variants with Button.',
+          'A primary action with a chevron that opens secondary actions. Uses the same sizes and variants as **Button**.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    primaryLabel: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'ghost', 'danger'],
+      description: 'Visual style (same as **Button**).',
+    },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Height of both segments.' },
+    primaryLabel: { control: 'text', description: 'Label on the main (left) action.' },
+    menuItems: { control: false, description: 'Dropdown items with `id`, `label`, optional `icon`.' },
+    onMenuItemSelect: { control: false, description: 'Called when a menu item is chosen.' },
+    menuTriggerAriaLabel: { control: 'text', description: 'Accessible name for the chevron trigger.' },
+    disabled: { control: 'boolean', description: 'Disables both segments.' },
+    isLoading: { control: 'boolean', description: 'Shows loading on the primary segment.' },
   },
 };
 
@@ -85,7 +94,7 @@ export const States: Story = {
             ]}
             onMenuItemSelect={(id) => setLast(`menu:${id}`)}
           />
-          {last && <span style={{ fontSize: 13, color: '#6b7694' }}>Last: {last}</span>}
+          {last && <span style={{ fontSize: 13, color: 'var(--color-text-tertiary)' }}>Last: {last}</span>}
         </div>
         <SplitButton
           primaryLabel="Disabled"
@@ -116,7 +125,7 @@ export const WithAction: Story = {
           ]}
           onMenuItemSelect={(id) => setLast(`menu:${id}`)}
         />
-        {last && <span style={{ fontSize: 13, color: '#6b7694' }}>Last: {last}</span>}
+        {last && <span style={{ fontSize: 13, color: 'var(--color-text-tertiary)' }}>Last: {last}</span>}
       </div>
     );
   },
@@ -127,7 +136,7 @@ export const WithAction: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12 }}>
       <SplitButton primaryLabel="Publish" variant="primary" menuItems={items} onMenuItemSelect={() => {}} />
     </div>
   ),

@@ -83,10 +83,10 @@ const Overlay = styled.div`
 const Panel = styled.div`
   width: 560px;
   max-height: 420px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 20px;
-  border: 1px solid #e2e5ed;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.xl};
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -99,9 +99,9 @@ const SearchBar = styled.div`
   align-items: center;
   gap: 12px;
   padding: 0 20px;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   flex-shrink: 0;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 const SearchInput = styled.input`
@@ -110,12 +110,12 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   font-size: 16px;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   background: transparent;
   font-family: inherit;
 
   &::placeholder {
-    color: #9ba5be;
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
   }
 `;
 
@@ -130,7 +130,7 @@ const GroupLabel = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   padding: 8px 20px 4px;
 `;
 
@@ -142,11 +142,12 @@ const Item = styled.div<{ $isFocused: boolean }>`
   margin: 2px 8px;
   border-radius: 10px;
   cursor: pointer;
-  background: ${({ $isFocused }) => ($isFocused ? '#F0F2F5' : 'transparent')};
+  background: ${({ theme, $isFocused }) =>
+    $isFocused ? theme.colors['color-bg-muted'] : 'transparent'};
   transition: background-color 80ms ease;
 
   &:hover {
-    background: #f0f2f5;
+    background: ${({ theme }) => theme.colors['color-bg-muted']};
   }
 `;
 
@@ -155,7 +156,7 @@ const ItemIcon = styled.span`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   width: 18px;
   height: 18px;
 
@@ -169,7 +170,7 @@ const ItemLabel = styled.span`
   flex: 1;
   font-size: 14px;
   font-weight: 500;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const ShortcutGroup = styled.div`
@@ -187,8 +188,8 @@ const ShortcutKey = styled.kbd`
   font-size: 11px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-weight: 500;
-  color: #4a5270;
-  background: #f0f2f5;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
+  background: ${({ theme }) => theme.colors['color-bg-muted']};
   border: none;
 `;
 
@@ -198,7 +199,7 @@ const EmptyState = styled.div`
   justify-content: center;
   padding: 48px 20px;
   font-size: 14px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 

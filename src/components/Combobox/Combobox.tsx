@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes, useTheme } from 'styled-components';
 import { Check, ChevronDown } from 'lucide-react';
 import type { ComboboxOption, ComboboxProps, ComboboxSize } from './Combobox.types';
 
@@ -41,9 +41,13 @@ const InputWrap = styled.div<{
   padding: 0 ${({ $size }) => PAD_X[$size]};
   border-radius: 14px;
   border: 1.5px solid
-    ${({ $hasError, $isOpen }) =>
-      $hasError ? '#D22232' : $isOpen ? '#0055FF' : '#C8D4E8'};
-  background-color: #ffffff;
+    ${({ theme, $hasError, $isOpen }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isOpen
+          ? theme.colors['color-border-focus']
+          : theme.colors['color-border-strong']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   font-size: ${({ $size }) => FONT_SIZE[$size]};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'text')};
@@ -51,16 +55,18 @@ const InputWrap = styled.div<{
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-within {
-    border-color: #0055ff;
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.2)' : 'rgba(0, 85, 255, 0.1)'};
   }
 
-  ${({ $isDisabled }) =>
+  ${({ $isDisabled, theme }) =>
     $isDisabled &&
     css`
       opacity: 0.7;
-      background-color: #f8f9fc;
-      border-color: #dde1ea;
+      background-color: ${theme.colors['color-bg-subtle']};
+      border-color: ${theme.colors['color-border-default']};
     `}
 `;
 
@@ -71,10 +77,10 @@ const NativeInput = styled.input`
   outline: none;
   background: transparent;
   font: inherit;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 
   &::placeholder {
-    color: #9ba5be;
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
   }
 `;
 
@@ -85,17 +91,17 @@ const ChevronBtn = styled.button<{ $isOpen: boolean }>`
   background: transparent;
   padding: 0;
   cursor: pointer;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   flex-shrink: 0;
   transition: transform 200ms ease;
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
 
 const PanelWrapper = styled.div<{ $openUp: boolean }>`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
-  border: 1px solid #e2e5ed;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   overflow: hidden;
   animation: ${fadeIn} 150ms ease forwards;
   transform-origin: ${({ $openUp }) => ($openUp ? 'bottom center' : 'top center')};
@@ -119,8 +125,10 @@ const OptionItem = styled.li<{ $isSelected: boolean; $isDisabled: boolean }>`
   font-size: 14px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
-  color: ${({ $isSelected }) => ($isSelected ? '#2952CC' : '#111827')};
-  background-color: ${({ $isSelected }) => ($isSelected ? '#E8EEFF' : 'transparent')};
+  color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors['color-brand-primary-hover'] : theme.colors['color-text-primary']};
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors['color-brand-primary-subtle'] : 'transparent'};
   font-weight: ${({ $isSelected }) => ($isSelected ? '600' : '400')};
   transition: background-color 100ms ease;
   user-select: none;
@@ -133,7 +141,8 @@ const OptionItem = styled.li<{ $isSelected: boolean; $isDisabled: boolean }>`
     `}
 
   &:hover {
-    background-color: ${({ $isSelected }) => ($isSelected ? '#E8EEFF' : '#F0F2F5')};
+    background-color: ${({ theme, $isSelected }) =>
+      $isSelected ? theme.colors['color-brand-primary-subtle'] : theme.colors['color-bg-muted']};
   }
 `;
 
@@ -141,13 +150,13 @@ const CheckMark = styled.span`
   margin-left: auto;
   display: flex;
   align-items: center;
-  color: #2952cc;
+  color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
 `;
 
 const EmptyMsg = styled.div`
   padding: 12px 16px;
   font-size: 13px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   text-align: center;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
@@ -155,7 +164,8 @@ const EmptyMsg = styled.div`
 const HelperText = styled.p<{ $isError?: boolean }>`
   margin: 6px 0 0;
   font-size: 12px;
-  color: ${({ $isError }) => ($isError ? '#D22232' : '#9BA5BE')};
+  color: ${({ theme, $isError }) =>
+    $isError ? theme.colors['color-error-default'] : theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
@@ -183,6 +193,7 @@ export function Combobox({
   id,
   emptyText = 'No matches',
 }: ComboboxProps) {
+  const theme = useTheme();
   const autoId = useId();
   const inputId = id ?? autoId;
   const selected = options.find((o) => o.value === value);
@@ -285,7 +296,9 @@ export function Combobox({
       {label && (
         <FieldLabel htmlFor={inputId}>
           {label}
-          {isRequired && <span style={{ color: '#D22232', marginLeft: 2 }}>*</span>}
+          {isRequired && (
+            <span style={{ color: theme.colors['color-error-default'], marginLeft: 2 }}>*</span>
+          )}
         </FieldLabel>
       )}
 

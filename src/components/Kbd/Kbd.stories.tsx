@@ -12,13 +12,13 @@ const meta: Meta<typeof Kbd> = {
     docs: {
       description: {
         component:
-          'Keyboard key and shortcut display components. Use `Kbd` for a single key and `Shortcut` for key combinations.',
+          'Displays keyboard keys and shortcuts. Use **Kbd** for a single key and **Shortcut** for combinations.',
       },
     },
   },
   argTypes: {
-    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
-    children: { control: 'text' },
+    size: { control: 'radio', options: ['sm', 'md', 'lg'], description: 'Key cap size.' },
+    children: { control: 'text', description: 'Key label (for example `⌘` or `K`).' },
   },
 };
 
@@ -40,7 +40,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single keys (Kbd)</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Single keys (Kbd)</p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <Kbd>⌘</Kbd>
           <Kbd>K</Kbd>
@@ -48,7 +48,7 @@ export const Variants: Story = {
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Shortcuts (Shortcut)</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Shortcuts (Shortcut)</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <Shortcut keys={['⌘', 'K']} />
           <Shortcut keys={['Ctrl', 'Shift', 'P']} />
@@ -65,7 +65,7 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '12px', color: '#9BA5BE', width: '28px' }}>{size}</span>
+          <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)', width: '28px' }}>{size}</span>
           <Kbd size={size}>⌘</Kbd>
           <Kbd size={size}>K</Kbd>
           <Kbd size={size}>Shift</Kbd>
@@ -90,9 +90,9 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
       <Kbd size="md">Esc</Kbd>
-      <span style={{ fontSize: 13, color: '#6b7694' }}>Close</span>
+      <span style={{ fontSize: 13, color: 'var(--color-text-tertiary)' }}>Close</span>
       <Kbd size="md">?</Kbd>
-      <span style={{ fontSize: 13, color: '#6b7694' }}>Help</span>
+      <span style={{ fontSize: 13, color: 'var(--color-text-tertiary)' }}>Help</span>
     </div>
   ),
 };
@@ -112,17 +112,17 @@ export const Combinations: Story = {
       ].map(({ keys, label }) => (
         <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Shortcut keys={keys} />
-          <span style={{ fontSize: '13px', color: '#6B7694' }}>{label}</span>
+          <span style={{ fontSize: '13px', color: 'var(--color-text-tertiary)' }}>{label}</span>
         </div>
       ))}
 
       <div style={{ marginTop: '8px' }}>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 600, color: '#9BA5BE' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Separator: "then"
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Shortcut keys={['G', 'I']} separator="then" />
-          <span style={{ fontSize: '13px', color: '#6B7694' }}>Go to Issues</span>
+          <span style={{ fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Go to Issues</span>
         </div>
       </div>
     </div>

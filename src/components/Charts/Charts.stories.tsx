@@ -29,7 +29,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          'Gráficos basados en **Recharts**: Bar, Line, Pie, Donut y Sparkline. El objeto **Charts** expone los mismos componentes por nombre.',
+          'Chart primitives built on Recharts: Bar, Line, Pie, Donut, and Sparkline. The **Charts** namespace re-exports the same components by name.',
       },
     },
   },
@@ -57,7 +57,7 @@ export const SparklineStory: StoryObj = {
   name: 'Sparkline',
   render: () => (
     <div style={{ maxWidth: 320 }}>
-      <p style={{ margin: '0 0 8px', fontSize: 13, color: '#6b7694' }}>Tendencia 7 días</p>
+      <p style={{ margin: '0 0 8px', fontSize: 13, color: 'var(--color-text-tertiary)' }}>Tendencia 7 días</p>
       <Sparkline data={[12, 14, 11, 18, 16, 22, 20]} height={56} />
     </div>
   ),
@@ -68,7 +68,7 @@ export const NamespaceCharts: StoryObj = {
   render: () => (
     <div style={{ display: 'grid', gap: 24 }}>
       <Charts.Bar data={series} height={220} />
-      <Charts.Sparkline data={[3, 5, 4, 7, 6, 9, 8]} color="#0a9f6e" />
+      <Charts.Sparkline data={[3, 5, 4, 7, 6, 9, 8]} color="var(--color-success-default)" />
     </div>
   ),
 };

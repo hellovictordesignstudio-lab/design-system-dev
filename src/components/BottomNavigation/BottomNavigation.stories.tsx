@@ -11,7 +11,7 @@ const meta: Meta<typeof BottomNavigation> = {
     docs: {
       description: {
         component:
-          'Fixed bottom tab bar for mobile-style primary navigation. Use with icons + short labels; supports badges and disabled items.',
+          'A fixed bottom tab bar for primary navigation on small screens. Pair icons with short labels. Supports badges and disabled items.',
       },
     },
   },
@@ -19,12 +19,12 @@ const meta: Meta<typeof BottomNavigation> = {
     items: {
       control: false,
       description:
-        'Tab items: value, label, icon, badge, isDisabled. Playground uses a fixed sample (icons are React nodes); see Variants for layouts.',
+        'Tab items: `value`, `label`, `icon`, optional `badge`, optional `isDisabled`. Icons are React nodes (set in code).',
     },
-    value: { control: 'text', description: 'Controlled: active item value' },
-    defaultValue: { control: 'text', description: 'Uncontrolled: initial active value' },
-    onChange: { control: false, description: 'Called when the active tab changes' },
-    'aria-label': { control: 'text', description: 'Accessible name for the navigation landmark' },
+    value: { control: 'text', description: 'Controlled active item `value`.' },
+    defaultValue: { control: 'text', description: 'Initial active `value` when uncontrolled.' },
+    onChange: { control: false, description: 'Called when the active tab changes.' },
+    'aria-label': { control: 'text', description: 'Accessible name for the navigation landmark.' },
   },
 };
 
@@ -61,7 +61,7 @@ const fiveItems = [
 
 export const Playground: Story = {
   render: (args) => (
-    <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+    <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
       <BottomNavigation
         items={sampleItems}
         defaultValue={args.defaultValue}
@@ -83,22 +83,22 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Four items (with badge on Inbox)
         </p>
-        <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={sampleItems} defaultValue="home" aria-label="Four tabs" />
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Three items</p>
-        <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Three items</p>
+        <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={threeItems} defaultValue="home" aria-label="Three tabs" />
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Five items</p>
-        <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Five items</p>
+        <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={fiveItems} defaultValue="home" aria-label="Five tabs" />
         </div>
       </div>
@@ -119,14 +119,14 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Narrow (280px)</p>
-        <div style={{ width: 280, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Narrow (280px)</p>
+        <div style={{ width: 280, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={threeItems} defaultValue="explore" aria-label="Narrow" />
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Wide (420px)</p>
-        <div style={{ width: 420, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Wide (420px)</p>
+        <div style={{ width: 420, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={sampleItems} defaultValue="home" aria-label="Wide" />
         </div>
       </div>
@@ -140,18 +140,18 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Uncontrolled (defaultValue)</p>
-        <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Uncontrolled (defaultValue)</p>
+        <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation items={sampleItems} defaultValue="search" aria-label="Uncontrolled" />
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Controlled</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Controlled</p>
         <ControlledDemo />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With disabled item</p>
-        <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With disabled item</p>
+        <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
           <BottomNavigation
             items={[
               ...sampleItems.slice(0, 3),
@@ -169,17 +169,17 @@ export const States: Story = {
 function ControlledDemo() {
   const [tab, setTab] = useState('home');
   return (
-    <div style={{ width: 360, border: '1px solid #e2e5ed', borderRadius: 12, overflow: 'hidden' }}>
+    <div style={{ width: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, overflow: 'hidden' }}>
       <div
         style={{
           padding: 16,
           minHeight: 72,
           fontSize: 13,
-          color: '#6b7694',
-          borderBottom: '1px solid #e2e5ed',
+          color: 'var(--color-text-tertiary)',
+          borderBottom: '1px solid var(--color-border-default)',
         }}
       >
-        Active: <strong style={{ color: '#111827' }}>{tab}</strong>
+        Active: <strong style={{ color: 'var(--color-text-primary)' }}>{tab}</strong>
       </div>
       <BottomNavigation items={sampleItems} value={tab} onChange={setTab} aria-label="Controlled" />
     </div>
@@ -195,7 +195,7 @@ export const DarkMode: Story = {
       data-theme="dark"
       style={{
         width: 360,
-        border: '1px solid #2e3550',
+        border: '1px solid var(--color-border-default)',
         borderRadius: 12,
         overflow: 'hidden',
       }}

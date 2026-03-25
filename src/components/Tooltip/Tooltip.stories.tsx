@@ -12,16 +12,16 @@ const meta: Meta<typeof Tooltip> = {
     docs: {
       description: {
         component:
-          'Tooltip shows contextual info on hover/focus. Renders in a portal to avoid overflow clipping. Supports all four placements and a configurable delay.',
+          'Shows short help on hover or keyboard focus. Renders in a portal to avoid clipping. Supports four placements and a configurable delay.',
       },
     },
   },
   argTypes: {
-    placement: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
-    delay: { control: { type: 'number', min: 0, max: 1000 } },
-    isDisabled: { control: 'boolean' },
-    maxWidth: { control: { type: 'number', min: 80, max: 400 } },
-    content: { control: 'text' },
+    placement: { control: 'select', options: ['top', 'bottom', 'left', 'right'], description: 'Side relative to the trigger.' },
+    delay: { control: { type: 'number', min: 0, max: 1000 }, description: 'Milliseconds before showing.' },
+    isDisabled: { control: 'boolean', description: 'Suppresses the tooltip.' },
+    maxWidth: { control: { type: 'number', min: 80, max: 400 }, description: 'Max width of the tooltip body.' },
+    content: { control: 'text', description: 'Tooltip body text.' },
   },
 };
 
@@ -70,7 +70,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tooltip width is capped; adjust `maxWidth` for dense vs wide hints.',
+        story: 'Width is capped by default. Change `maxWidth` for narrow tooltips versus wide content.',
       },
     },
   },
@@ -214,5 +214,5 @@ export const DarkMode: Story = {
       </Tooltip>
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

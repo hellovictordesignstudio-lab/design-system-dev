@@ -8,12 +8,12 @@ const Box = styled.div<{ $height: number }>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 
   .recharts-cartesian-axis-tick-value {
-    fill: #6b7694;
+    fill: ${({ theme }) => theme.colors['color-text-tertiary']};
     font-size: 12px;
   }
 
   .recharts-legend-item-text {
-    color: #374151 !important;
+    color: ${({ theme }) => theme.colors['color-text-secondary']} !important;
     font-size: 13px !important;
   }
 `;

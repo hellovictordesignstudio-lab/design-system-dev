@@ -1,37 +1,50 @@
 import styled, { keyframes, css } from 'styled-components';
 import type { ToastVariant, ToastPosition } from './Toast.types';
 
-// ── Variant config (hardcoded primitives — no semantic token exists for these) ─
+function toastBorderLeft(theme: { colors: Record<string, string> }, variant: ToastVariant): string {
+  switch (variant) {
+    case 'success':
+      return theme.colors['color-success-default'];
+    case 'error':
+      return theme.colors['color-error-default'];
+    case 'warning':
+      return theme.colors['color-warning-default'];
+    case 'info':
+      return theme.colors['color-brand-primary'];
+    default:
+      return theme.colors['color-brand-primary'];
+  }
+}
 
-export const variantConfig: Record<
-  ToastVariant,
-  { lightBg: string; darkBg: string; accent: string; border: string }
-> = {
-  success: {
-    lightBg: '#E6F5EE',
-    darkBg:  'rgba(10, 136, 83, 0.12)',
-    accent:  '#0A8853',
-    border:  'rgba(10, 136, 83, 0.30)',
-  },
-  error: {
-    lightBg: '#FCEAEC',
-    darkBg:  'rgba(210, 34, 50, 0.12)',
-    accent:  '#D22232',
-    border:  'rgba(210, 34, 50, 0.30)',
-  },
-  warning: {
-    lightBg: '#FEF2EB',
-    darkBg:  'rgba(240, 115, 50, 0.12)',
-    accent:  '#F07332',
-    border:  'rgba(240, 115, 50, 0.30)',
-  },
-  info: {
-    lightBg: '#E6EEFF',
-    darkBg:  'rgba(0, 85, 255, 0.12)',
-    accent:  '#0055FF',
-    border:  'rgba(0, 85, 255, 0.30)',
-  },
-};
+function toastBorder(theme: { colors: Record<string, string> }, variant: ToastVariant): string {
+  switch (variant) {
+    case 'success':
+      return theme.colors['color-success-border'];
+    case 'error':
+      return theme.colors['color-error-border'];
+    case 'warning':
+      return theme.colors['color-warning-border'];
+    case 'info':
+      return theme.colors['color-brand-primary-muted'];
+    default:
+      return theme.colors['color-border-default'];
+  }
+}
+
+function toastBackground(theme: { colors: Record<string, string> }, variant: ToastVariant): string {
+  switch (variant) {
+    case 'success':
+      return theme.colors['color-success-subtle'];
+    case 'error':
+      return theme.colors['color-error-subtle'];
+    case 'warning':
+      return theme.colors['color-warning-subtle'];
+    case 'info':
+      return theme.colors['color-brand-primary-subtle'];
+    default:
+      return theme.colors['color-bg-default'];
+  }
+}
 
 // ── Animations ────────────────────────────────────────────────────────────────
 
@@ -70,12 +83,9 @@ export const ToastCard = styled.div<{ $variant: ToastVariant; $isExiting: boolea
   width: 360px;
   padding: 14px 16px 17px; /* extra 3px bottom for progress bar */
   border-radius: 14px;
-  border: 1px solid ${({ $variant }) => variantConfig[$variant].border};
-  border-left: 4px solid ${({ $variant }) => variantConfig[$variant].accent};
-  background-color: ${({ theme, $variant }) =>
-    theme.mode === 'dark'
-      ? variantConfig[$variant].darkBg
-      : variantConfig[$variant].lightBg};
+  border: 1px solid ${({ theme, $variant }) => toastBorder(theme, $variant)};
+  border-left: 4px solid ${({ theme, $variant }) => toastBorderLeft(theme, $variant)};
+  background-color: ${({ theme, $variant }) => toastBackground(theme, $variant)};
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   overflow: hidden;
@@ -99,7 +109,7 @@ export const IconSlot = styled.span<{ $variant: ToastVariant }>`
   display: flex;
   flex-shrink: 0;
   margin-top: 1px;
-  color: ${({ $variant }) => variantConfig[$variant].accent};
+  color: ${({ theme, $variant }) => toastBorderLeft(theme, $variant)};
 `;
 
 export const ContentSlot = styled.div`
@@ -161,7 +171,7 @@ export const ProgressBar = styled.div<{
   bottom: 0;
   left: 0;
   height: 3px;
-  background-color: ${({ $variant }) => variantConfig[$variant].accent};
+  background-color: ${({ theme, $variant }) => toastBorderLeft(theme, $variant)};
   opacity: 0.5;
   animation: ${progressShrink} ${({ $duration }) => $duration}ms linear forwards;
   animation-play-state: ${({ $isPaused }) => ($isPaused ? 'paused' : 'running')};

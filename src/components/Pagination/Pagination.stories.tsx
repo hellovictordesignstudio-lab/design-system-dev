@@ -10,15 +10,18 @@ const meta: Meta<typeof Pagination> = {
     docs: {
       description: {
         component:
-          'Pagination navigates multi-page content. Automatically collapses middle pages with ellipsis when there are many pages.',
+          'Moves through multi-page lists. Collapses middle pages with an ellipsis when the page count is large.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    siblingCount: { control: { type: 'number', min: 0, max: 3 } },
-    showFirstLast: { control: 'boolean' },
-    totalPages: { control: { type: 'number', min: 1, max: 100 } },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Control and label size.' },
+    siblingCount: {
+      control: { type: 'number', min: 0, max: 3 },
+      description: 'Page buttons shown on each side of the current page.',
+    },
+    showFirstLast: { control: 'boolean', description: 'Shows first and last page buttons.' },
+    totalPages: { control: { type: 'number', min: 1, max: 100 }, description: 'Total number of pages.' },
   },
 };
 
@@ -33,7 +36,7 @@ export const Playground: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <Pagination {...args} currentPage={page} onPageChange={setPage} />
-        <p style={{ fontSize: 12, color: '#9BA5BE' }}>Current page: {page}</p>
+        <p style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>Current page: {page}</p>
       </div>
     );
   },
@@ -56,15 +59,15 @@ export const Sizes: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Small (28px)</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Small (28px)</p>
           <Pagination size="sm" currentPage={a} totalPages={10} onPageChange={setA} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Medium (36px)</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Medium (36px)</p>
           <Pagination size="md" currentPage={b} totalPages={10} onPageChange={setB} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Large (44px)</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Large (44px)</p>
           <Pagination size="lg" currentPage={c} totalPages={10} onPageChange={setC} />
         </div>
       </div>
@@ -81,11 +84,11 @@ export const Variants: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>With first/last</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>With first/last</p>
           <Pagination size="md" currentPage={p1} totalPages={10} onPageChange={setP1} showFirstLast />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Without first/last</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Without first/last</p>
           <Pagination size="md" currentPage={p2} totalPages={10} onPageChange={setP2} showFirstLast={false} />
         </div>
       </div>
@@ -103,25 +106,25 @@ export const ManyPages: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>
             Page 1 of 50
           </p>
           <Pagination currentPage={a} totalPages={50} onPageChange={setA} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>
             Page 8 of 50
           </p>
           <Pagination currentPage={b} totalPages={50} onPageChange={setB} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>
             Last page of 50
           </p>
           <Pagination currentPage={c} totalPages={50} onPageChange={setC} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>
             No first/last buttons, sibling=2
           </p>
           <Pagination
@@ -147,15 +150,15 @@ export const States: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>First page</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>First page</p>
           <Pagination currentPage={a} totalPages={10} onPageChange={setA} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Middle page</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Middle page</p>
           <Pagination currentPage={b} totalPages={10} onPageChange={setB} />
         </div>
         <div>
-          <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 8, fontWeight: 600 }}>Last page</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8, fontWeight: 600 }}>Last page</p>
           <Pagination currentPage={c} totalPages={12} onPageChange={setC} />
         </div>
       </div>
@@ -169,7 +172,7 @@ export const DarkMode: Story = {
   render: () => {
     const [page, setPage] = useState(5);
     return (
-      <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12 }}>
+      <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12 }}>
         <Pagination currentPage={page} totalPages={20} onPageChange={setPage} />
       </div>
     );

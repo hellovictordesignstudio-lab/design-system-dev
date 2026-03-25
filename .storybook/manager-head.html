@@ -1,40 +1,50 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap"
+  rel="stylesheet"
+/>
 <style>
-    /* Item activo — sutil */
-    [data-selected="true"] > button,
-    [data-selected="true"] > a {
-      background: #EEF2FF !important;
-      color: #0044CC !important;
-      font-weight: 600 !important;
-      border-radius: 6px !important;
-      box-shadow: none !important;
-    }
-  
-    [data-selected="true"] {
-      background: transparent !important;
-    }
-  
-    /* Stories indentadas */
-    [data-nodetype="story"] button,
-    [data-nodetype="docs"] button {
-      font-size: 12px !important;
-      font-weight: 400 !important;
-      color: #6B7694 !important;
-    }
-  
-    [data-nodetype="story"][data-selected="true"] button,
-    [data-nodetype="docs"][data-selected="true"] button {
-      color: #0044CC !important;
-      background: #EEF2FF !important;
-      font-weight: 600 !important;
-    }
-  
-    /* Componentes */
-    [data-nodetype="component"] > button {
-      font-weight: 700 !important;
-      font-size: 13px !important;
-      color: #1A1A1A !important;
-    }
-  
-    /* Hover */
-    button:hover { background: #F5F7FF !important; }
-  </style>
+  /**
+   * Shell chrome — structure only. Colors come from manager theme (vdsLight / vdsDark)
+   * in manager.ts. Do NOT hardcode hex here: it breaks Dark Mode (dark text on dark bg).
+   */
+  input[type='search'] {
+    border-radius: 8px !important;
+  }
+
+  /* Hierarchy & selection: weight + radius only — inherit text color from theme */
+  [data-nodetype='story'] button,
+  [data-nodetype='docs'] button {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
+  }
+
+  [data-nodetype='component'] > button {
+    font-weight: 800 !important;
+    font-size: 13px !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .sidebar-subheading,
+  [data-nodetype='group'] button {
+    font-weight: 800 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+  }
+
+  [data-selected='true'] > button,
+  [data-selected='true'] > a {
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
+  }
+
+  [data-selected='true'] {
+    background: transparent !important;
+  }
+</style>

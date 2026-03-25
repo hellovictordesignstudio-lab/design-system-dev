@@ -17,9 +17,15 @@ const meta: Meta<typeof CommandPalette> = {
     docs: {
       description: {
         component:
-          'CommandPalette is a keyboard-driven search + command launcher. Open with a button or hook into a global keyboard shortcut. Supports groups, icons, shortcuts, fuzzy search, and full keyboard navigation.',
+          'A keyboard-driven command palette. Open from a button or a global shortcut. Supports grouped items, icons, shortcut badges, fuzzy search, and full keyboard navigation.',
       },
     },
+  },
+  argTypes: {
+    isOpen: { control: 'boolean', description: 'Whether the palette is visible.' },
+    onClose: { control: false, description: 'Called when the palette should close.' },
+    placeholder: { control: 'text', description: 'Search field placeholder.' },
+    groups: { control: false, description: 'Grouped commands with `label` and `items`.' },
   },
 };
 
@@ -93,8 +99,8 @@ function Demo({ groups, placeholder }: { groups: CommandGroup[]; placeholder?: s
       >
         Open command palette
       </Button>
-      <p style={{ marginTop: 8, fontSize: 12, color: '#9BA5BE' }}>
-        Or press <kbd style={{ background: '#F0F2F5', padding: '2px 6px', borderRadius: 4, fontFamily: 'monospace', fontSize: 11 }}>⌘K</kbd>
+      <p style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-tertiary)' }}>
+        Or press <kbd style={{ background: 'var(--color-bg-subtle)', padding: '2px 6px', borderRadius: 4, fontFamily: 'monospace', fontSize: 11 }}>⌘K</kbd>
       </p>
       <CommandPalette
         isOpen={cmd.isOpen}
@@ -171,7 +177,7 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>Open the palette and type to filter; empty queries show all groups.</p>
+      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>Open the palette and type to filter; empty queries show all groups.</p>
       <Demo groups={FULL_GROUPS} placeholder="Try searching…" />
     </div>
   ),
@@ -182,6 +188,6 @@ export const States: Story = {
 export const DarkMode: Story = {
   render: () => <Demo groups={FULL_GROUPS} />,
   parameters: {
-    docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } },
+    docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } },
   },
 };

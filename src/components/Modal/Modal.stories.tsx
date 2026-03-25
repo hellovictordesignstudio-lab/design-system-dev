@@ -17,7 +17,7 @@ const meta: Meta<typeof Modal> = {
     docs: {
       description: {
         component:
-          'A portal-based dialog with focus trap, body scroll lock, ESC-to-close, and overlay-click-to-close. Compose with Modal.Header, Modal.Body, and Modal.Footer.',
+          'A modal dialog in a portal with focus trap, scroll lock, Esc to close, and overlay click to close. Compose with **Modal.Header**, **Modal.Body**, and **Modal.Footer**.',
       },
     },
   },
@@ -25,12 +25,13 @@ const meta: Meta<typeof Modal> = {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', 'fullscreen'],
+      description: 'Max width of the dialog surface.',
     },
-    closeOnOverlayClick: { control: 'boolean' },
-    closeOnEsc: { control: 'boolean' },
-    title: { control: 'text' },
-    isOpen: { control: false },
-    onClose: { control: false },
+    closeOnOverlayClick: { control: 'boolean', description: 'Close when the overlay is clicked.' },
+    closeOnEsc: { control: 'boolean', description: 'Close when Esc is pressed.' },
+    title: { control: 'text', description: 'Title in the header region.' },
+    isOpen: { control: false, description: 'Controlled open state (set in stories).' },
+    onClose: { control: false, description: 'Called when the modal requests close.' },
   },
 };
 
@@ -126,7 +127,7 @@ export const Variants: Story = {
           <Modal isOpen={isOpen} onClose={close} size="md">
             <Modal.Header title="Edit settings" subtitle="Changes apply immediately." onClose={close} />
             <Modal.Body>
-              <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Body content.</p>
+              <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Body content.</p>
             </Modal.Body>
             <Modal.Footer>
               <Button size="sm" variant="ghost" onClick={close}>
@@ -144,7 +145,7 @@ export const Variants: Story = {
           <Modal isOpen={isOpen} onClose={close} size="sm">
             <Modal.Header title="Quick confirm" onClose={close} />
             <Modal.Body>
-              <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Short message.</p>
+              <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Short message.</p>
             </Modal.Body>
             <Modal.Footer>
               <Button size="sm" onClick={close}>
@@ -232,7 +233,7 @@ export const WithForm: Story = {
                   </label>
                   <select style={{
                     width: '100%', height: '40px', padding: '0 12px',
-                    border: '1px solid #D8DCE5', borderRadius: '8px',
+                    border: '1px solid var(--color-border-strong)', borderRadius: '8px',
                     fontSize: '14px', fontFamily: 'inherit', background: 'white',
                   }}>
                     <option>Viewer</option>
@@ -258,15 +259,15 @@ export const WithForm: Story = {
               <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                 <div style={{
                   width: '40px', height: '40px', flexShrink: 0, borderRadius: '50%',
-                  background: '#FCEAEC', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--color-error-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <AlertTriangle size={20} color="#D22232" />
+                  <AlertTriangle size={20} color="var(--color-error-default)" />
                 </div>
                 <div>
-                  <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px', color: '#0C0D10' }}>
+                  <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px', color: 'var(--color-text-primary)' }}>
                     This action cannot be undone
                   </p>
-                  <p style={{ margin: '0 0 16px', fontSize: '13px', color: '#4E5A6E', lineHeight: 1.6 }}>
+                  <p style={{ margin: '0 0 16px', fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                     All your data, projects, and settings will be permanently deleted.
                     Type your email to confirm.
                   </p>
@@ -305,10 +306,10 @@ export const NestedContent: Story = {
             <Modal.Body isScrollable>
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} style={{ marginBottom: '20px' }}>
-                  <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px', color: '#0C0D10' }}>
+                  <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px', color: 'var(--color-text-primary)' }}>
                     Section {i + 1}: {['Acceptance', 'Privacy', 'Data Use', 'Termination', 'Liability', 'Governing Law', 'Changes', 'Contact'][i]}
                   </p>
-                  <p style={{ margin: 0, fontSize: '13px', color: '#4E5A6E', lineHeight: 1.6 }}>
+                  <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -338,7 +339,7 @@ export const NestedContent: Story = {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                     <Badge variant="success">New features</Badge>
                   </div>
-                  <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '13px', color: '#4E5A6E', lineHeight: 2 }}>
+                  <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 2 }}>
                     <li>Card component with compound sub-components</li>
                     <li>Modal with focus trap and body scroll lock</li>
                     <li>TextInput with prefix/suffix and status icons</li>
@@ -348,14 +349,14 @@ export const NestedContent: Story = {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                     <Badge variant="warning">Breaking changes</Badge>
                   </div>
-                  <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '13px', color: '#4E5A6E', lineHeight: 2 }}>
+                  <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 2 }}>
                     <li>Button <code>loading</code> prop renamed to <code>isLoading</code></li>
                     <li>Badge <code>colour</code> prop replaced by <code>variant</code></li>
                   </ul>
                 </div>
-                <div style={{ display: 'flex', gap: '10px', padding: '14px', background: '#E6EEFF', borderRadius: '8px' }}>
-                  <Info size={16} color="#0055FF" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <p style={{ margin: 0, fontSize: '13px', color: '#003399', lineHeight: 1.6 }}>
+                <div style={{ display: 'flex', gap: '10px', padding: '14px', background: 'var(--color-brand-primary-subtle)', borderRadius: '8px' }}>
+                  <Info size={16} color="var(--color-brand-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-brand-primary-active)', lineHeight: 1.6 }}>
                     Run <code>npm install @design-system/core@latest</code> and check the migration
                     guide for full details.
                   </p>

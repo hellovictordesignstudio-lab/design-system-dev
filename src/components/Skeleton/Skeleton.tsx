@@ -38,12 +38,6 @@ const shimmer = keyframes`
   100% { background-position: 600px 0; }
 `;
 
-const shimmerStyles = css`
-  background: linear-gradient(90deg, #f0f2f5 25%, #e4e7ef 50%, #f0f2f5 75%);
-  background-size: 1200px 100%;
-  animation: ${shimmer} 1.5s infinite linear;
-`;
-
 const Base = styled.span<{
   $w?: string;
   $h?: string;
@@ -51,12 +45,23 @@ const Base = styled.span<{
   $animated: boolean;
 }>`
   display: block;
-  background-color: #f0f2f5;
+  background-color: ${({ theme }) => theme.colors['color-bg-muted']};
   width: ${({ $w }) => $w ?? '100%'};
   height: ${({ $h }) => $h ?? '14px'};
   border-radius: ${({ $r }) => $r ?? '6px'};
   flex-shrink: 0;
-  ${({ $animated }) => $animated && shimmerStyles}
+  ${({ $animated, theme }) =>
+    $animated &&
+    css`
+      background: linear-gradient(
+        90deg,
+        ${theme.colors['color-bg-muted']} 25%,
+        ${theme.colors['color-bg-emphasized']} 50%,
+        ${theme.colors['color-bg-muted']} 75%
+      );
+      background-size: 1200px 100%;
+      animation: ${shimmer} 1.5s infinite linear;
+    `}
 `;
 
 const AVATAR_PX: Record<SkeletonAvatarSize, number> = {
@@ -143,8 +148,8 @@ const CardShell = styled.div`
   gap: 12px;
   padding: 16px;
   border-radius: 14px;
-  border: 1px solid #e2e5ed;
-  background: #ffffff;
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   width: 100%;
 `;
 

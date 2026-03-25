@@ -6,24 +6,24 @@ export const variantStyles: Record<
   ReturnType<typeof css>
 > = {
   default: css`
-    background-color: #f0f2f5;
-    color: #4a5270;
+    background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+    color: ${({ theme }) => theme.colors['color-text-secondary']};
   `,
   primary: css`
-    background-color: #e8eeff;
-    color: #2952cc;
+    background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+    color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
   `,
   success: css`
-    background-color: #e6f5ee;
-    color: #1a7a45;
+    background-color: ${({ theme }) => theme.colors['color-success-subtle']};
+    color: ${({ theme }) => theme.colors['color-success-text']};
   `,
   error: css`
-    background-color: #fceaec;
-    color: #a81b28;
+    background-color: ${({ theme }) => theme.colors['color-error-subtle']};
+    color: ${({ theme }) => theme.colors['color-error-text']};
   `,
   warning: css`
-    background-color: #fff0e3;
-    color: #c05c00;
+    background-color: ${({ theme }) => theme.colors['color-warning-subtle']};
+    color: ${({ theme }) => theme.colors['color-warning-text']};
   `,
 };
 
@@ -58,25 +58,11 @@ export const StyledTag = styled.span<{
     $variant === 'outline'
       ? css`
           background-color: transparent;
-          border: 1px solid #dde1ea;
-          color: #4a5270;
-
-          [data-theme='dark'] &,
-          .dark & {
-            border-color: #2e3550;
-            color: #9ba5be;
-          }
+          border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+          color: ${({ theme }) => theme.colors['color-text-secondary']};
         `
       : variantStyles[$variant]}
 
-  [data-theme='dark'] &,
-  .dark & {
-    ${({ $variant }) =>
-      $variant !== 'outline' &&
-      css`
-        filter: brightness(0.92);
-      `}
-  }
 `;
 
 export const RemoveButton = styled.button<{ $size: TagSize }>`
@@ -111,7 +97,7 @@ export const RemoveButton = styled.button<{ $size: TagSize }>`
   }
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 1px;
   }
 `;

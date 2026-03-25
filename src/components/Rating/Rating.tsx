@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { useTheme } from 'styled-components';
 
 export type RatingSize = 'sm' | 'md' | 'lg';
 export type RatingPrecision = 'full' | 'half';
@@ -30,12 +30,7 @@ const Wrapper = styled.div`
 const Label = styled.span`
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #F0F2F5;
-  }
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const StarsRow = styled.div`
@@ -46,13 +41,8 @@ const StarsRow = styled.div`
 
 const ValueText = styled.span`
   font-size: 12px;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   margin-left: 6px;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #9BA5BE;
-  }
 `;
 
 const StarButton = styled.button<{ $isReadOnly: boolean; $size: number }>`
@@ -71,7 +61,7 @@ const StarButton = styled.button<{ $isReadOnly: boolean; $size: number }>`
   flex-shrink: 0;
 
   &:focus-visible {
-    outline: 2px solid #0055FF;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     border-radius: 3px;
   }
 
@@ -95,6 +85,9 @@ interface StarIconProps {
 
 function StarIcon({ fill, size }: StarIconProps) {
   const id = React.useId();
+  const theme = useTheme();
+  const empty = theme.colors['color-border-default'];
+  const filled = theme.colors['color-warning-default'];
   return (
     <svg
       width={size}
@@ -106,15 +99,15 @@ function StarIcon({ fill, size }: StarIconProps) {
       {fill === 0.5 && (
         <defs>
           <linearGradient id={id} x1="0" x2="1" y1="0" y2="0">
-            <stop offset="50%" stopColor="#F07332" />
-            <stop offset="50%" stopColor="#DDE1EA" />
+            <stop offset="50%" stopColor={filled} />
+            <stop offset="50%" stopColor={empty} />
           </linearGradient>
         </defs>
       )}
       <path
         d={STAR_PATH}
-        fill={fill === 0 ? '#DDE1EA' : fill === 0.5 ? `url(#${id})` : '#F07332'}
-        stroke={fill === 0 ? '#DDE1EA' : '#F07332'}
+        fill={fill === 0 ? empty : fill === 0.5 ? `url(#${id})` : filled}
+        stroke={fill === 0 ? empty : filled}
         strokeWidth="0"
         strokeLinecap="round"
         strokeLinejoin="round"

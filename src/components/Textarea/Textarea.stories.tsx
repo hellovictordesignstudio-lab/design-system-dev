@@ -8,24 +8,29 @@ const meta: Meta<typeof Textarea> = {
   parameters: {
     docs: {
       description: {
-        component: 'Multi-line text input. Supports auto-resize, character count, validation states, and all standard input behaviors.',
+        component:
+          'A multi-line text field. Supports auto-resize, character count, validation states, and standard input behaviors.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    resize: { control: 'select', options: ['none', 'vertical', 'horizontal', 'both'] },
-    isDisabled: { control: 'boolean' },
-    isReadOnly: { control: 'boolean' },
-    isRequired: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    hasSuccess: { control: 'boolean' },
-    showCount: { control: 'boolean' },
-    autoResize: { control: 'boolean' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
-    placeholder: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Height and font size.' },
+    resize: {
+      control: 'select',
+      options: ['none', 'vertical', 'horizontal', 'both'],
+      description: 'CSS resize behavior.',
+    },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    isReadOnly: { control: 'boolean', description: 'Focusable but not editable.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    hasSuccess: { control: 'boolean', description: 'Applies success styling.' },
+    showCount: { control: 'boolean', description: 'Shows character count.' },
+    autoResize: { control: 'boolean', description: 'Grows height with content.' },
+    label: { control: 'text', description: 'Label above the field.' },
+    helperText: { control: 'text', description: 'Hint below the field.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
+    placeholder: { control: 'text', description: 'Placeholder when empty.' },
   },
 };
 
@@ -110,7 +115,7 @@ export const WithCharCount: Story = {
 
 export const AutoResize: Story = {
   parameters: {
-    docs: { description: { story: 'Grows automatically as you type. No manual resize handle.' } },
+    docs: { description: { story: 'Height grows with the content. There is no resize handle.' } },
   },
   render: () => (
     <div style={{ maxWidth: 480 }}>
@@ -129,7 +134,7 @@ export const AutoResize: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 480 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 480 }}>
       <Textarea label="Default" placeholder="Default on dark..." />
       <Textarea label="Error" hasError errorText="Something went wrong." defaultValue="Bad input" />
       <Textarea label="With count" placeholder="Type here..." showCount maxLength={200} />

@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 export const EditorRoot = styled.div`
-  border: 1.5px solid #c8d4e8;
+  border: 1.5px solid ${({ theme }) => theme.colors['color-border-strong']};
   border-radius: 14px;
   overflow: hidden;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-within {
-    border-color: #0055ff;
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 `;
 
@@ -20,8 +20,8 @@ export const Toolbar = styled.div`
   align-items: center;
   gap: 2px;
   padding: 8px 10px;
-  border-bottom: 1px solid #e2e5ed;
-  background: #fafbfc;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) => theme.colors['color-bg-subtle']};
 `;
 
 export const ToolbarBtn = styled.button<{ $active?: boolean }>`
@@ -32,13 +32,16 @@ export const ToolbarBtn = styled.button<{ $active?: boolean }>`
   height: 34px;
   border: none;
   border-radius: 8px;
-  background: ${({ $active }) => ($active ? '#e8eeff' : 'transparent')};
-  color: ${({ $active }) => ($active ? '#0055ff' : '#374151')};
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors['color-brand-primary-subtle'] : 'transparent'};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors['color-brand-primary'] : theme.colors['color-text-secondary']};
   cursor: pointer;
   transition: background-color 100ms ease, color 100ms ease;
 
   &:hover:not(:disabled) {
-    background-color: ${({ $active }) => ($active ? '#dce6ff' : '#f0f2f5')};
+    background-color: ${({ $active, theme }) =>
+      $active ? theme.colors['color-brand-primary-muted'] : theme.colors['color-bg-muted']};
   }
 
   &:disabled {
@@ -47,7 +50,7 @@ export const ToolbarBtn = styled.button<{ $active?: boolean }>`
   }
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 1px;
   }
 `;
@@ -55,7 +58,7 @@ export const ToolbarBtn = styled.button<{ $active?: boolean }>`
 export const ToolbarSep = styled.span`
   width: 1px;
   height: 20px;
-  background: #dde1ea;
+  background: ${({ theme }) => theme.colors['color-border-default']};
   margin: 0 4px;
   flex-shrink: 0;
 `;
@@ -67,7 +70,7 @@ export const EditorArea = styled.div<{ $minHeight: number }>`
     outline: none;
     font-size: 14px;
     line-height: 1.65;
-    color: #111827;
+    color: ${({ theme }) => theme.colors['color-text-primary']};
 
     p {
       margin: 0 0 0.75em;
@@ -96,18 +99,18 @@ export const EditorArea = styled.div<{ $minHeight: number }>`
     blockquote {
       margin: 0 0 0.75em;
       padding-left: 12px;
-      border-left: 3px solid #0055ff;
-      color: #4b5563;
+      border-left: 3px solid ${({ theme }) => theme.colors['color-brand-primary']};
+      color: ${({ theme }) => theme.colors['color-text-secondary']};
     }
 
     hr {
       border: none;
-      border-top: 1px solid #e2e5ed;
+      border-top: 1px solid ${({ theme }) => theme.colors['color-border-default']};
       margin: 1em 0;
     }
 
     a.rte-link {
-      color: #0055ff;
+      color: ${({ theme }) => theme.colors['color-text-link']};
       text-decoration: underline;
       cursor: pointer;
     }
@@ -115,7 +118,7 @@ export const EditorArea = styled.div<{ $minHeight: number }>`
     p.is-editor-empty:first-child::before {
       content: attr(data-placeholder);
       float: left;
-      color: #9ba5be;
+      color: ${({ theme }) => theme.colors['color-text-tertiary']};
       pointer-events: none;
       height: 0;
     }

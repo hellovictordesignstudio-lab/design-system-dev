@@ -15,7 +15,7 @@ const meta: Meta<typeof Card> = {
     docs: {
       description: {
         component:
-          'A flexible container component with sub-components for structured layouts. Supports images, headers, bodies, and footers with configurable padding, shadow, and interaction states.',
+          'A container with optional header, body, footer, and media. Configure padding, shadow, and interactive (hover or press) behavior.',
       },
     },
   },
@@ -23,16 +23,16 @@ const meta: Meta<typeof Card> = {
     padding: {
       control: 'select',
       options: ['none', 'sm', 'md', 'lg'],
-      description: 'Internal padding applied to all sub-components',
+      description: 'Inner padding for header, body, and footer regions.',
     },
     shadow: {
       control: 'select',
       options: ['none', 'sm', 'md', 'lg'],
-      description: 'Box shadow depth',
+      description: 'Elevation shadow.',
     },
-    hasBorder: { control: 'boolean', description: 'Show a 1px border' },
-    isHoverable: { control: 'boolean', description: 'Lift on hover' },
-    isClickable: { control: 'boolean', description: 'Pointer cursor + active press scale' },
+    hasBorder: { control: 'boolean', description: 'Draws a 1px border around the card.' },
+    isHoverable: { control: 'boolean', description: 'Raises shadow on hover.' },
+    isClickable: { control: 'boolean', description: 'Pointer cursor and press feedback.' },
   },
 };
 
@@ -77,7 +77,7 @@ export const Variants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
 
       <div>
-        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: '#6B7589' }}>
+        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Shadow levels
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -90,7 +90,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: '#6B7589' }}>
+        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Padding levels
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -103,7 +103,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: '#6B7589' }}>
+        <p style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           No border
         </p>
         <Card hasBorder={false} shadow="md">
@@ -190,7 +190,7 @@ export const Hoverable: Story = {
             slightly on press.
           </Card.Body>
           <Card.Footer align="left">
-            <span style={{ fontSize: '12px', color: '#6B7589' }}>Click anywhere on the card</span>
+            <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Click anywhere on the card</span>
           </Card.Footer>
         </Card>
       </div>
@@ -221,10 +221,10 @@ export const Compositions: Story = {
               <Badge variant="primary">Design</Badge>
               <Badge variant="default">5 min read</Badge>
             </div>
-            <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '15px', color: '#0C0D10', lineHeight: 1.4 }}>
+            <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '15px', color: 'var(--color-text-primary)', lineHeight: 1.4 }}>
               Building a scalable design token system
             </p>
-            <p style={{ margin: 0, fontSize: '13px', color: '#4E5A6E', lineHeight: 1.6 }}>
+            <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
               A deep dive into structuring primitive and semantic tokens for multi-brand products.
             </p>
           </Card.Body>
@@ -232,13 +232,13 @@ export const Compositions: Story = {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div style={{
                 width: '28px', height: '28px', borderRadius: '50%',
-                background: '#D8DCE5', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: 'var(--color-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <User size={14} color="#6B7589" />
+                <User size={14} color="var(--color-text-tertiary)" />
               </div>
-              <span style={{ fontSize: '12px', color: '#6B7589' }}>Victor Aldana</span>
+              <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Victor Aldana</span>
             </div>
-            <span style={{ fontSize: '12px', color: '#9AA2B3' }}>Mar 22, 2026</span>
+            <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Mar 22, 2026</span>
           </Card.Footer>
         </Card>
       </div>
@@ -253,10 +253,10 @@ export const Compositions: Story = {
             hasDivider={false}
           />
           <Card.Body>
-            <div style={{ margin: '12px 0 20px', fontSize: '32px', fontWeight: 700, color: '#0C0D10' }}>
-              $49<span style={{ fontSize: '14px', fontWeight: 400, color: '#6B7589' }}>/mo</span>
+            <div style={{ margin: '12px 0 20px', fontSize: '32px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+              $49<span style={{ fontSize: '14px', fontWeight: 400, color: 'var(--color-text-tertiary)' }}>/mo</span>
             </div>
-            <ul style={{ margin: 0, padding: '0 0 0 16px', color: '#4E5A6E', fontSize: '13px', lineHeight: 2 }}>
+            <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--color-text-secondary)', fontSize: '13px', lineHeight: 2 }}>
               <li>Unlimited projects</li>
               <li>Up to 25 team members</li>
               <li>Advanced analytics</li>
@@ -286,10 +286,10 @@ export const Compositions: Story = {
               ].map(({ label, desc }) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: '13px', fontWeight: 600, color: '#0C0D10' }}>{label}</p>
-                    <p style={{ margin: 0, fontSize: '12px', color: '#6B7589' }}>{desc}</p>
+                    <p style={{ margin: 0, fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>{label}</p>
+                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-tertiary)' }}>{desc}</p>
                   </div>
-                  <div style={{ width: '36px', height: '20px', borderRadius: '10px', background: '#0055FF', flexShrink: 0 }} />
+                  <div style={{ width: '36px', height: '20px', borderRadius: '10px', background: 'var(--color-brand-primary)', flexShrink: 0 }} />
                 </div>
               ))}
             </div>
@@ -306,15 +306,15 @@ export const Compositions: Story = {
         <Card shadow="sm" padding="lg" isHoverable>
           <Card.Body>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#E6EEFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Star size={18} color="#0055FF" />
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'var(--color-brand-primary-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Star size={18} color="var(--color-brand-primary)" />
               </div>
               <Badge variant="success">+12%</Badge>
             </div>
-            <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: 700, color: '#0C0D10', lineHeight: 1 }}>
+            <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1 }}>
               4,821
             </p>
-            <p style={{ margin: 0, fontSize: '13px', color: '#6B7589' }}>Total reviews</p>
+            <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Total reviews</p>
           </Card.Body>
         </Card>
       </div>
@@ -418,15 +418,15 @@ export const DarkMode: Story = {
           <Card shadow="sm" padding="lg">
             <Card.Body>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#001133', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Star size={18} color="#3370FF" />
+                <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'var(--color-bg-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Star size={18} color="var(--color-brand-primary)" />
                 </div>
                 <Badge variant="success">+8%</Badge>
               </div>
-              <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: 700, color: '#F5F6F8', lineHeight: 1 }}>
+              <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1 }}>
                 2,048
               </p>
-              <p style={{ margin: 0, fontSize: '13px', color: '#9AA2B3' }}>Active users</p>
+              <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Active users</p>
             </Card.Body>
           </Card>
         </div>

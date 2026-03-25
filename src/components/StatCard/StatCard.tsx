@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { colorPrimitives } from '../../tokens/primitives';
 import { Skeleton } from '../Skeleton';
 
 export type StatCardIconColor = 'blue' | 'green' | 'orange' | 'red' | 'purple';
@@ -18,37 +19,30 @@ export interface StatCardProps {
 }
 
 const iconBg: Record<StatCardIconColor, string> = {
-  blue: '#E6EEFF',
-  green: '#E6F5EE',
-  orange: '#FEF0E6',
-  red: '#FCEAEC',
-  purple: '#F0E9FF',
+  blue: colorPrimitives.blue[50],
+  green: colorPrimitives.green[50],
+  orange: colorPrimitives.orange[50],
+  red: colorPrimitives.red[50],
+  purple: colorPrimitives.violet[50],
 };
 
 const iconFg: Record<StatCardIconColor, string> = {
-  blue: '#0055FF',
-  green: '#1A7A45',
-  orange: '#C05B1A',
-  red: '#A81B28',
-  purple: '#6B1FC2',
+  blue: colorPrimitives.blue[500],
+  green: colorPrimitives.green[400],
+  orange: colorPrimitives.orange[500],
+  red: colorPrimitives.red[500],
+  purple: colorPrimitives.violet[600],
 };
 
 const CardRoot = styled.div`
-  border: 1px solid #E2E5ED;
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
   border-radius: 14px;
   padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
 `;
 
 const TopRow = styled.div`
@@ -74,26 +68,16 @@ const Label = styled.p`
   margin: 0 0 4px;
   font-size: 13px;
   font-weight: 600;
-  color: #9BA5BE;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #6B7694;
-  }
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 const Value = styled.p`
   margin: 0;
   font-size: 28px;
   font-weight: 800;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   letter-spacing: -0.02em;
   line-height: 1;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 const BottomRow = styled.div`
@@ -113,16 +97,29 @@ const ChangePill = styled.span<{ $trend: StatCardTrend }>`
   font-size: 11px;
   font-weight: 600;
 
-  ${({ $trend }) => {
-    if ($trend === 'up') return `background-color: #E6F5EE; color: #1A7A45;`;
-    if ($trend === 'down') return `background-color: #FCEAEC; color: #A81B28;`;
-    return `background-color: #F0F2F5; color: #4A5270;`;
+  ${({ theme, $trend }) => {
+    if ($trend === 'up') {
+      return css`
+        background-color: ${theme.colors['color-success-subtle']};
+        color: ${theme.colors['color-success-text']};
+      `;
+    }
+    if ($trend === 'down') {
+      return css`
+        background-color: ${theme.colors['color-error-subtle']};
+        color: ${theme.colors['color-error-text']};
+      `;
+    }
+    return css`
+      background-color: ${theme.colors['color-bg-muted']};
+      color: ${theme.colors['color-text-secondary']};
+    `;
   }}
 `;
 
 const ChangeLabel = styled.span`
   font-size: 12px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 function getTrend(change?: number, explicitTrend?: StatCardTrend): StatCardTrend {

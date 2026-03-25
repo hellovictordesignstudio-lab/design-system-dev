@@ -1,9 +1,10 @@
 import React from 'react';
 import { Cell, Pie, PieChart as RePieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { ChartContainer } from './ChartContainer';
+import { chartTooltipBorder, defaultSeriesColors } from './chartTokens';
 import type { PieChartProps } from './Chart.types';
 
-const DEFAULT_COLORS = ['#0055ff', '#2952cc', '#0a9f6e', '#f59e0b', '#d22232', '#8b5cf6'];
+const DEFAULT_COLORS = [...defaultSeriesColors];
 
 export function PieChart({ data, height, showLabels = true, className }: PieChartProps) {
   return (
@@ -13,7 +14,7 @@ export function PieChart({ data, height, showLabels = true, className }: PieChar
           <Tooltip
             contentStyle={{
               borderRadius: 12,
-              border: '1px solid #e2e5ed',
+              border: `1px solid ${chartTooltipBorder}`,
               boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
             }}
           />

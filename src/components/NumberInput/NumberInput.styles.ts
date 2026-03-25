@@ -24,10 +24,10 @@ export const Label = styled.label`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-primary, #0C0D10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 
   span.required {
-    color: #D22232;
+    color: ${({ theme }) => theme.colors['color-error-default']};
     margin-left: 3px;
   }
 `;
@@ -43,24 +43,31 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   align-items: stretch;
   border-radius: 8px;
-  border: 1.5px solid ${({ $hasError, $isFocused }) =>
-    $hasError ? '#D22232' : $isFocused ? 'var(--color-border-brand, #0055FF)' : 'var(--color-border-default, #DDE1EA)'};
-  background: ${({ $isDisabled }) =>
-    $isDisabled ? 'var(--color-bg-tertiary, #EFF1F5)' : 'var(--color-bg-primary, #FFFFFF)'};
+  border: 1.5px solid
+    ${({ theme, $hasError, $isFocused }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isFocused
+          ? theme.colors['color-border-focus']
+          : theme.colors['color-border-default']};
+  background: ${({ theme, $isDisabled }) =>
+    $isDisabled ? theme.colors['color-bg-muted'] : theme.colors['color-bg-default']};
   overflow: hidden;
   transition: border-color 0.15s, box-shadow 0.15s;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.6 : 1)};
 
-  box-shadow: ${({ $hasError, $isFocused }) =>
+  box-shadow: ${({ theme, $hasError, $isFocused }) =>
     $isFocused
       ? $hasError
-        ? '0 0 0 3px rgba(210,34,50,0.15)'
-        : '0 0 0 3px var(--color-bg-brand-subtle, #E6EEFF)'
+        ? theme.mode === 'dark'
+          ? '0 0 0 3px rgba(255, 69, 58, 0.2)'
+          : '0 0 0 3px rgba(210, 34, 50, 0.15)'
+        : `0 0 0 3px ${theme.colors['color-brand-primary-subtle']}`
       : 'none'};
 
   &:hover:not([data-disabled='true']) {
-    border-color: ${({ $hasError }) =>
-      $hasError ? '#A81B28' : 'var(--color-border-strong, #C5CBDA)'};
+    border-color: ${({ theme, $hasError }) =>
+      $hasError ? theme.colors['color-error-text'] : theme.colors['color-border-strong']};
   }
 `;
 
@@ -71,15 +78,15 @@ export const Affix = styled.span<{ $size: NumberInputSize }>`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: ${({ $size }) => ($size === 'sm' ? '13px' : $size === 'lg' ? '15px' : '14px')};
   font-weight: 600;
-  color: var(--color-text-tertiary, #9BA5BE);
-  background: var(--color-bg-secondary, #F8F9FC);
-  border-right: 1.5px solid var(--color-border-default, #DDE1EA);
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
+  background: ${({ theme }) => theme.colors['color-bg-subtle']};
+  border-right: 1.5px solid ${({ theme }) => theme.colors['color-border-default']};
   white-space: nowrap;
   user-select: none;
 
   &.suffix {
     border-right: none;
-    border-left: 1.5px solid var(--color-border-default, #DDE1EA);
+    border-left: 1.5px solid ${({ theme }) => theme.colors['color-border-default']};
   }
 `;
 
@@ -91,19 +98,19 @@ export const StyledInput = styled.input<{ $size: NumberInputSize }>`
   background: transparent;
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-weight: 600;
-  color: var(--color-text-primary, #0C0D10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   text-align: center;
 
   ${({ $size }) => sizeStyles[$size]}
 
   &::placeholder {
-    color: var(--color-text-tertiary, #9BA5BE);
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
     font-weight: 400;
   }
 
   &:disabled {
     cursor: not-allowed;
-    color: var(--color-text-disabled, #9BA5BE);
+    color: ${({ theme }) => theme.colors['color-text-disabled']};
   }
 
   /* Hide native number arrows */
@@ -122,28 +129,28 @@ export const StepBtn = styled.button<{ $size: NumberInputSize }>`
   flex-shrink: 0;
   border: none;
   background: transparent;
-  color: var(--color-text-secondary, #4A5270);
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   cursor: pointer;
   font-weight: 700;
   line-height: 1;
   transition: background 0.12s, color 0.12s;
-  border-left: 1.5px solid var(--color-border-default, #DDE1EA);
+  border-left: 1.5px solid ${({ theme }) => theme.colors['color-border-default']};
 
   ${({ $size }) => btnSizeStyles[$size]}
 
   &:first-child {
     border-left: none;
-    border-right: 1.5px solid var(--color-border-default, #DDE1EA);
+    border-right: 1.5px solid ${({ theme }) => theme.colors['color-border-default']};
     order: -1;
   }
 
   &:hover:not(:disabled) {
-    background: var(--color-bg-secondary, #F8F9FC);
-    color: var(--color-text-brand, #0055FF);
+    background: ${({ theme }) => theme.colors['color-bg-subtle']};
+    color: ${({ theme }) => theme.colors['color-text-link']};
   }
 
   &:active:not(:disabled) {
-    background: var(--color-bg-brand-subtle, #E6EEFF);
+    background: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 
   &:disabled {
@@ -156,6 +163,7 @@ export const HelperText = styled.span<{ $hasError: boolean }>`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: ${({ $hasError }) => ($hasError ? '#D22232' : 'var(--color-text-secondary, #4A5270)')};
+  color: ${({ theme, $hasError }) =>
+    $hasError ? theme.colors['color-error-default'] : theme.colors['color-text-secondary']};
   line-height: 1.5;
 `;

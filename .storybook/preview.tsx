@@ -1,6 +1,7 @@
 import './storybook-docs.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { Preview, Decorator } from '@storybook/react';
+import { VdsDocsContainer } from './VdsDocsContainer';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
 import { LangProvider } from '../src/theme/LangContext';
 import { ToastProvider } from '../src/components/Toast/ToastProvider';
@@ -12,17 +13,13 @@ const withProviders: Decorator = (Story, context) => {
   const colorMode = (context.globals.colorMode ?? 'light') as ColorMode;
   const lang      = (context.globals.lang      ?? 'en')    as Language;
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-color-mode', colorMode);
-  }, [colorMode]);
-
   return (
     <LangProvider defaultLang={lang}>
-      <ThemeProvider defaultColorMode={colorMode}>
+      <ThemeProvider key={colorMode} defaultColorMode={colorMode}>
         <ToastProvider>
           <div
             style={{
-              background: colorMode === 'dark' ? '#0C0D10' : '#FFFFFF',
+              background: 'var(--color-bg-canvas)',
               minHeight: '100%',
               padding: '1rem',
             }}
@@ -86,7 +83,12 @@ const preview: Preview = {
     },
     layout: 'fullscreen',
     docs: {
-      toc: true,
+      /** Emotion theme for Controls, Args table, canvas toolbar — must track toolbar Color Mode */
+      container: VdsDocsContainer,
+      toc: {
+        title: 'On this page',
+        headingSelector: 'h1, h2, h3',
+      },
       canvas: {
         className: undefined,
       },
@@ -97,7 +99,7 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Introduction',
+          ['VDS Design System', ['Introduction', 'VDS Tone and Voice']],
           'Tokens',
           ['Colors', 'Typography', 'Spacing'],
           'Components',

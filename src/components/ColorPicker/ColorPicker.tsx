@@ -1,5 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useTheme } from 'styled-components';
+import { colorPrimitives } from '../../tokens/primitives';
 import { ChevronDown } from 'lucide-react';
 import type { ColorPickerProps, HsvColor } from './ColorPicker.types';
 import {
@@ -108,7 +110,8 @@ export function ColorPicker({
   showInput = true,
   size = 'md',
 }: ColorPickerProps) {
-  const safeValue = isValidHex(value) ? normalizeHex(value) : '#0055ff';
+  const theme = useTheme();
+  const safeValue = isValidHex(value) ? normalizeHex(value) : normalizeHex(colorPrimitives.blue[500]);
   const [isOpen, setIsOpen] = useState(false);
   const [hsv, setHsv] = useState<HsvColor>(() => hexToHsv(safeValue));
   const [inputVal, setInputVal] = useState(safeValue);
@@ -320,7 +323,17 @@ export function ColorPicker({
                 value={inputVal}
                 onChange={onInputChange}
                 onBlur={onInputBlur}
-                style={inputError ? { borderColor: '#D22232', boxShadow: '0 0 0 3px rgba(210,34,50,0.12)' } : undefined}
+                style={
+                  inputError
+                    ? {
+                        borderColor: theme.colors['color-error-default'],
+                        boxShadow:
+                          theme.mode === 'dark'
+                            ? '0 0 0 3px rgba(255, 69, 58, 0.2)'
+                            : '0 0 0 3px rgba(210, 34, 50, 0.12)',
+                      }
+                    : undefined
+                }
                 spellCheck={false}
                 aria-label="Color hex value"
               />

@@ -8,26 +8,27 @@ const meta: Meta<typeof NumberInput> = {
   parameters: {
     docs: {
       description: {
-        component: 'Numeric input with +/− stepper controls. Supports min/max clamping, precision, prefix/suffix, and all standard input states.',
+        component:
+          'A numeric field with stepper controls. Supports min and max clamping, precision, prefix and suffix, and standard validation states.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    isDisabled: { control: 'boolean' },
-    isReadOnly: { control: 'boolean' },
-    isRequired: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    noControls: { control: 'boolean' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
-    min: { control: 'number' },
-  max: { control: 'number' },
-    step: { control: 'number' },
-    precision: { control: 'number' },
-    prefix: { control: 'text' },
-    suffix: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Height and font size.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    isReadOnly: { control: 'boolean', description: 'Focusable but not editable.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    noControls: { control: 'boolean', description: 'Hides the stepper buttons.' },
+    label: { control: 'text', description: 'Label above the field.' },
+    helperText: { control: 'text', description: 'Hint below the field.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
+    min: { control: 'number', description: 'Minimum allowed value.' },
+    max: { control: 'number', description: 'Maximum allowed value.' },
+    step: { control: 'number', description: 'Increment for the stepper and arrow keys.' },
+    precision: { control: 'number', description: 'Decimal places for display and parsing.' },
+    prefix: { control: 'text', description: 'Content before the value.' },
+    suffix: { control: 'text', description: 'Content after the value.' },
   },
 };
 
@@ -103,7 +104,7 @@ export const States: Story = {
 
 export const MinMax: Story = {
   parameters: {
-    docs: { description: { story: 'Stepper buttons disable automatically when reaching min or max.' } },
+    docs: { description: { story: 'Stepper buttons disable at the minimum and maximum values.' } },
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
@@ -119,7 +120,7 @@ export const MinMax: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 320 }}>
       <NumberInput label="Quantity" defaultValue={5} min={0} max={20} />
       <NumberInput label="Price" prefix="$" defaultValue={99} precision={2} />
       <NumberInput label="Error" hasError errorText="Invalid value." defaultValue={0} />

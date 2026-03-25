@@ -38,23 +38,15 @@ const StyledKbd = styled.kbd<{ $size: KbdSize }>`
   justify-content: center;
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   font-weight: 500;
-  color: #4A5270;
-  background-color: #F0F2F5;
-  border: 1px solid #DDE1EA;
-  border-bottom: 2px solid #C5CBDA;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
+  background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  border-bottom: 2px solid ${({ theme }) => theme.colors['color-border-strong']};
   border-radius: 6px;
   line-height: 1;
   white-space: nowrap;
 
   ${({ $size }) => sizeStyles[$size]}
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #2E3550;
-    border-color: #4A5270;
-    border-bottom-color: #6B7694;
-    color: #C5CBDA;
-  }
 `;
 
 export function Kbd({ children, size = 'md' }: KbdProps) {
@@ -68,7 +60,7 @@ const ShortcutWrapper = styled.span`
 `;
 
 const Separator = styled.span`
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin: 0 3px;
   font-size: 11px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};

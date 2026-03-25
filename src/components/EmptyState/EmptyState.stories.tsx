@@ -14,15 +14,19 @@ const meta: Meta<typeof EmptyState> = {
     docs: {
       description: {
         component:
-          'Placeholder UI for empty, search, error, and offline states. Accepts an icon, title, description, and action slot.',
+          'Placeholder content for empty, search, error, or offline states. Provide an icon, title, description, and an optional action.',
       },
     },
   },
   argTypes: {
-    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
-    variant: { control: 'select', options: ['default', 'search', 'error', 'offline'] },
-    title: { control: 'text' },
-    description: { control: 'text' },
+    size: { control: 'radio', options: ['sm', 'md', 'lg'], description: 'Icon and text scale.' },
+    variant: {
+      control: 'select',
+      options: ['default', 'search', 'error', 'offline'],
+      description: 'Preset icon and tone.',
+    },
+    title: { control: 'text', description: 'Primary heading.' },
+    description: { control: 'text', description: 'Supporting line under the title.' },
   },
 };
 
@@ -39,7 +43,7 @@ export const Playground: Story = {
     description: 'Create your first item to get started.',
   },
   render: (args) => (
-    <div style={{ border: '1px solid #E2E5ED', borderRadius: '14px', maxWidth: '480px' }}>
+    <div style={{ border: '1px solid var(--color-border-default)', borderRadius: '14px', maxWidth: '480px' }}>
       <EmptyState
         {...args}
         action={<Button size="sm">Create item</Button>}
@@ -56,7 +60,7 @@ export const Variants: Story = {
       {(['default', 'search', 'error', 'offline'] as const).map((variant) => (
         <div
           key={variant}
-          style={{ border: '1px solid #E2E5ED', borderRadius: '14px', overflow: 'hidden' }}
+          style={{ border: '1px solid var(--color-border-default)', borderRadius: '14px', overflow: 'hidden' }}
         >
           <EmptyState variant={variant} title="" />
         </div>
@@ -73,7 +77,7 @@ export const Sizes: Story = {
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div
           key={size}
-          style={{ border: '1px solid #E2E5ED', borderRadius: '14px', overflow: 'hidden' }}
+          style={{ border: '1px solid var(--color-border-default)', borderRadius: '14px', overflow: 'hidden' }}
         >
           <EmptyState
             size={size}
@@ -91,7 +95,7 @@ export const Sizes: Story = {
 export const WithAction: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      <div style={{ border: '1px solid #E2E5ED', borderRadius: '14px', width: '320px' }}>
+      <div style={{ border: '1px solid var(--color-border-default)', borderRadius: '14px', width: '320px' }}>
         <EmptyState
           variant="search"
           title="No results found"
@@ -105,7 +109,7 @@ export const WithAction: Story = {
         />
       </div>
 
-      <div style={{ border: '1px solid #E2E5ED', borderRadius: '14px', width: '320px' }}>
+      <div style={{ border: '1px solid var(--color-border-default)', borderRadius: '14px', width: '320px' }}>
         <EmptyState
           icon={<FolderOpen />}
           title="No projects"
@@ -122,13 +126,13 @@ export const WithAction: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 480 }}>
-      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+      <div style={{ border: '1px solid var(--color-border-default)', borderRadius: 14 }}>
         <EmptyState variant="default" title="Empty list" description="No items yet." />
       </div>
-      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+      <div style={{ border: '1px solid var(--color-border-default)', borderRadius: 14 }}>
         <EmptyState variant="error" title="Something went wrong" description="Try again later." />
       </div>
-      <div style={{ border: '1px solid #E2E5ED', borderRadius: 14 }}>
+      <div style={{ border: '1px solid var(--color-border-default)', borderRadius: 14 }}>
         <EmptyState variant="offline" title="You are offline" description="Reconnect to sync." />
       </div>
     </div>
@@ -154,7 +158,7 @@ export const DarkMode: Story = {
           <div
             key={variant}
             style={{
-              border: '1px solid #2E3550',
+              border: '1px solid var(--color-border-default)',
               borderRadius: '14px',
               width: '280px',
             }}

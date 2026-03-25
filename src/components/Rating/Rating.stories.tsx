@@ -12,18 +12,18 @@ const meta: Meta<typeof Rating> = {
     docs: {
       description: {
         component:
-          'Star rating component. Supports interactive and read-only modes, full and half precision, and configurable sizes.',
+          'A star rating control. Supports interactive and read-only modes, full- and half-star steps, and multiple sizes.',
       },
     },
   },
   argTypes: {
-    value: { control: { type: 'number', min: 0, max: 5, step: 0.5 } },
-    max: { control: { type: 'number', min: 1, max: 10 } },
-    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
-    precision: { control: 'radio', options: ['full', 'half'] },
-    isReadOnly: { control: 'boolean' },
-    showValue: { control: 'boolean' },
-    label: { control: 'text' },
+    value: { control: { type: 'number', min: 0, max: 5, step: 0.5 }, description: 'Current rating value.' },
+    max: { control: { type: 'number', min: 1, max: 10 }, description: 'Number of stars.' },
+    size: { control: 'radio', options: ['sm', 'md', 'lg'], description: 'Icon size.' },
+    precision: { control: 'radio', options: ['full', 'half'], description: 'Whole stars or half steps.' },
+    isReadOnly: { control: 'boolean', description: 'Display-only (no clicks).' },
+    showValue: { control: 'boolean', description: 'Shows the numeric value next to stars.' },
+    label: { control: 'text', description: 'Accessible name for the control.' },
   },
 };
 
@@ -51,11 +51,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Full stars</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Full stars</p>
         <Rating value={4} precision="full" isReadOnly showValue />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Half stars</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Half stars</p>
         <Rating value={3.5} precision="half" isReadOnly showValue />
       </div>
     </div>
@@ -69,7 +69,7 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '12px', color: '#9BA5BE', width: '24px' }}>{size}</span>
+          <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)', width: '24px' }}>{size}</span>
           <Rating value={4} size={size} isReadOnly />
         </div>
       ))}
@@ -85,11 +85,11 @@ export const States: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Interactive</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Interactive</p>
           <Rating value={v} onChange={setV} precision="half" showValue />
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Read-only</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Read-only</p>
           <Rating value={4} isReadOnly showValue />
         </div>
       </div>
@@ -105,13 +105,13 @@ export const HalfPrecision: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: '13px', color: '#6B7694' }}>
+          <p style={{ margin: '0 0 8px', fontSize: '13px', color: 'var(--color-text-tertiary)' }}>
             Interactive — click or hover on the left/right half of each star
           </p>
           <Rating value={val} onChange={setVal} precision="half" showValue size="lg" />
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: '13px', color: '#6B7694' }}>
+          <p style={{ margin: '0 0 8px', fontSize: '13px', color: 'var(--color-text-tertiary)' }}>
             Read-only examples
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -135,7 +135,7 @@ export const ReadOnly: Story = {
       {[1, 2, 3, 4, 5].map((v) => (
         <div key={v} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Rating value={v} isReadOnly showValue />
-          <span style={{ fontSize: '13px', color: '#6B7694' }}>
+          <span style={{ fontSize: '13px', color: 'var(--color-text-tertiary)' }}>
             {['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'][v - 1]}
           </span>
         </div>

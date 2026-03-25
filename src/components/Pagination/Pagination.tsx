@@ -77,17 +77,17 @@ const PageBtn = styled.button<{
   transition: background-color 150ms ease, color 150ms ease;
   user-select: none;
 
-  ${({ $isActive }) =>
+  ${({ $isActive, theme }) =>
     $isActive
       ? css`
-          background-color: #0055ff;
-          color: #ffffff;
+          background-color: ${theme.colors['color-brand-primary']};
+          color: ${theme.colors['color-brand-on-primary']};
         `
       : css`
           background-color: transparent;
-          color: #4a5270;
+          color: ${theme.colors['color-text-secondary']};
           &:hover:not(:disabled) {
-            background-color: #f0f2f5;
+            background-color: ${theme.colors['color-bg-muted']};
           }
         `}
 
@@ -100,7 +100,9 @@ const PageBtn = styled.button<{
     `}
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -111,7 +113,7 @@ const Ellipsis = styled.span<{ $size: PaginationSize }>`
   width: ${({ $size }) => BTN_SIZE[$size]};
   height: ${({ $size }) => BTN_SIZE[$size]};
   font-size: ${({ $size }) => BTN_FONT[$size]};
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   user-select: none;
 `;
 

@@ -50,43 +50,27 @@ const IconWrapper = styled.div<{ $size: EmptyStateSize }>`
   width: ${({ $size }) => iconWrapperSize[$size]}px;
   height: ${({ $size }) => iconWrapperSize[$size]}px;
   border-radius: 50%;
-  background-color: #F0F2F5;
+  background-color: ${({ theme }) => theme.colors['color-bg-muted']};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   flex-shrink: 0;
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #2E3550;
-    color: #6B7694;
-  }
 `;
 
 const Title = styled.p<{ $size: EmptyStateSize }>`
   margin: 16px 0 0;
   font-size: ${({ $size }) => titleSize[$size]};
   font-weight: 700;
-  color: #111827;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #F0F2F5;
-  }
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const Description = styled.p<{ $size: EmptyStateSize }>`
   margin: 6px 0 0;
   font-size: ${({ $size }) => descSize[$size]};
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   max-width: 320px;
   line-height: 1.6;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #6B7694;
-  }
 `;
 
 const ActionSlot = styled.div`

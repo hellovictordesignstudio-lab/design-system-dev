@@ -42,8 +42,6 @@ export function useColorMode() {
     const update = () => {
       const resolved = resolveMode(colorMode);
       setResolvedMode(resolved);
-      // Apply data-theme to <html> for CSS variable switching
-      document.documentElement.setAttribute('data-theme', resolved);
     };
 
     update();

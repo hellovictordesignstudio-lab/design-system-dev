@@ -11,13 +11,13 @@ const meta: Meta<typeof Breadcrumb> = {
     docs: {
       description: {
         component:
-          'Breadcrumb shows the current page location within a navigational hierarchy. Supports collapse, icons, and multiple separators.',
+          'Shows the current location in a hierarchy. Supports collapsing long paths, icons, and multiple separator styles.',
       },
     },
   },
   argTypes: {
-    separator: { control: 'select', options: ['slash', 'chevron', 'dot'] },
-    maxItems: { control: { type: 'number', min: 2 } },
+    separator: { control: 'select', options: ['slash', 'chevron', 'dot'], description: 'Separator between items.' },
+    maxItems: { control: { type: 'number', min: 2 }, description: 'When set, collapses middle items with an ellipsis.' },
   },
 };
 
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof Breadcrumb>;
 const baseItems = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Design System', href: '/projects/design-system' },
+  { label: 'VDS Design System', href: '/projects/vds-design-system' },
   { label: 'Components', href: '/projects/design-system/components' },
   { label: 'Breadcrumb', isCurrent: true },
 ];
@@ -47,15 +47,15 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div>
-        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9BA5BE', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Slash</div>
+        <div style={{ marginBottom: '6px', fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Slash</div>
         <Breadcrumb items={baseItems.slice(0, 4)} separator="slash" />
       </div>
       <div>
-        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9BA5BE', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Chevron</div>
+        <div style={{ marginBottom: '6px', fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Chevron</div>
         <Breadcrumb items={baseItems.slice(0, 4)} separator="chevron" />
       </div>
       <div>
-        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9BA5BE', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Dot</div>
+        <div style={{ marginBottom: '6px', fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Dot</div>
         <Breadcrumb items={baseItems.slice(0, 4)} separator="dot" />
       </div>
     </div>
@@ -71,7 +71,7 @@ export const WithIcons: Story = {
       items={[
         { label: 'Home', href: '/', icon: <Home /> },
         { label: 'Projects', href: '/projects', icon: <Folder /> },
-        { label: 'Design System', href: '/projects/design-system', icon: <Settings /> },
+        { label: 'VDS Design System', href: '/projects/vds-design-system', icon: <Settings /> },
         { label: 'Breadcrumb', isCurrent: true, icon: <FileText /> },
       ]}
     />
@@ -124,11 +124,11 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Default trail</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Default trail</p>
         <Breadcrumb items={baseItems.slice(0, 3)} separator="slash" />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Collapsed (maxItems)</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Collapsed (maxItems)</p>
         <Breadcrumb items={baseItems} maxItems={3} separator="chevron" />
       </div>
     </div>
@@ -142,7 +142,7 @@ export const DarkMode: Story = {
     <div
       data-theme="dark"
       style={{
-        background: '#0c0d10',
+        background: 'var(--color-bg-canvas)',
         padding: 24,
         borderRadius: 12,
         display: 'flex',

@@ -8,14 +8,14 @@ const Block = styled.figure`
   margin: 0;
   padding: 24px;
   border-radius: 18px;
-  border: 1px solid #e2e5ed;
-  background: #ffffff;
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+  box-shadow: ${({ theme }) => theme.shadows.md};
 `;
 
 const QuoteIcon = styled.div`
-  color: #0055ff;
+  color: ${({ theme }) => theme.colors['color-text-link']};
   margin-bottom: 12px;
 `;
 
@@ -23,7 +23,7 @@ const QuoteText = styled.blockquote`
   margin: 0 0 18px;
   font-size: 16px;
   line-height: 1.55;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-weight: 500;
 `;
 
@@ -39,13 +39,13 @@ const AvatarSlot = styled.div`
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  background: #f0f2f5;
+  background: ${({ theme }) => theme.colors['color-bg-muted']};
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
   font-weight: 700;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
 `;
 
 const Meta = styled.div`
@@ -58,12 +58,12 @@ const Meta = styled.div`
 const Name = styled.span`
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const Role = styled.span`
   font-size: 13px;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
 `;
 
 const TopRow = styled.div`

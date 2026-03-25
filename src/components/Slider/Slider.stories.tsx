@@ -9,21 +9,22 @@ const meta: Meta<typeof Slider> = {
   parameters: {
     docs: {
       description: {
-        component: 'Range input with a custom track and thumb. Supports min/max, step, value formatting, and vertical orientation.',
+        component:
+          'A range control with a custom track and thumb. Supports min and max, step, formatted values, and vertical orientation.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
-    isDisabled: { control: 'boolean' },
-    showValue: { control: 'boolean' },
-    showMinMax: { control: 'boolean' },
-    min: { control: 'number' },
-    max: { control: 'number' },
-    step: { control: 'number' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Track and thumb size.' },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'], description: 'Layout direction.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    showValue: { control: 'boolean', description: 'Shows the current value near the thumb.' },
+    showMinMax: { control: 'boolean', description: 'Shows min and max labels.' },
+    min: { control: 'number', description: 'Minimum value.' },
+    max: { control: 'number', description: 'Maximum value.' },
+    step: { control: 'number', description: 'Step increment.' },
+    label: { control: 'text', description: 'Label above the track.' },
+    helperText: { control: 'text', description: 'Hint below the track.' },
   },
 };
 
@@ -110,7 +111,7 @@ export const WithFormatting: Story = {
 
 export const Controlled: Story = {
   parameters: {
-    docs: { description: { story: 'Controlled value — synced with external state.' } },
+    docs: { description: { story: 'Value is controlled and mirrored from external state.' } },
   },
   render: () => {
     const [val, setVal] = useState(40);
@@ -162,7 +163,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 28, maxWidth: 400 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 28, maxWidth: 400 }}>
       <Slider label="Volume" defaultValue={60} />
       <Slider label="Brightness" defaultValue={40} formatValue={(v) => `${v}%`} showMinMax />
       <Slider label="Disabled" defaultValue={25} isDisabled />

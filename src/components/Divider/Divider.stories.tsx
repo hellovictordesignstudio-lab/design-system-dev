@@ -12,16 +12,16 @@ const meta: Meta<typeof Divider> = {
     docs: {
       description: {
         component:
-          'A visual separator between content sections. Supports horizontal and vertical orientations, multiple line styles, and an optional label.',
+          'Separates sections of content. Supports horizontal and vertical orientation, several line styles, and an optional label.',
       },
     },
   },
   argTypes: {
-    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
-    labelPosition: { control: 'radio', options: ['left', 'center', 'right'] },
-    variant: { control: 'radio', options: ['solid', 'dashed', 'dotted'] },
-    spacing: { control: 'radio', options: ['sm', 'md', 'lg'] },
-    label: { control: 'text' },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'], description: 'Line direction.' },
+    labelPosition: { control: 'radio', options: ['left', 'center', 'right'], description: 'Label alignment on the line.' },
+    variant: { control: 'radio', options: ['solid', 'dashed', 'dotted'], description: 'Line style.' },
+    spacing: { control: 'radio', options: ['sm', 'md', 'lg'], description: 'Vertical margin around the line.' },
+    label: { control: 'text', description: 'Optional inline label.' },
   },
 };
 
@@ -40,9 +40,9 @@ export const Playground: Story = {
   },
   render: (args) => (
     <div style={{ width: '400px' }}>
-      <p style={{ margin: 0, fontSize: '14px', color: '#6B7694' }}>Content above</p>
+      <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Content above</p>
       <Divider {...args} />
-      <p style={{ margin: 0, fontSize: '14px', color: '#6B7694' }}>Content below</p>
+      <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Content below</p>
     </div>
   ),
 };
@@ -53,17 +53,17 @@ export const Orientations: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <div>
-        <p style={{ margin: '0 0 0', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>Horizontal</p>
+        <p style={{ margin: '0 0 0', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Horizontal</p>
         <Divider orientation="horizontal" />
-        <p style={{ margin: '0', fontSize: '14px', color: '#6B7694' }}>Content after</p>
+        <p style={{ margin: '0', fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Content after</p>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', height: '60px', gap: '0' }}>
-        <span style={{ fontSize: '14px', color: '#6B7694' }}>Left</span>
+        <span style={{ fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Left</span>
         <Divider orientation="vertical" />
-        <span style={{ fontSize: '14px', color: '#6B7694' }}>Middle</span>
+        <span style={{ fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Middle</span>
         <Divider orientation="vertical" />
-        <span style={{ fontSize: '14px', color: '#6B7694' }}>Right</span>
+        <span style={{ fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Right</span>
       </div>
     </div>
   ),
@@ -76,7 +76,7 @@ export const Variants: Story = {
     <div style={{ width: '400px', display: 'flex', flexDirection: 'column' }}>
       {(['solid', 'dashed', 'dotted'] as const).map((variant) => (
         <div key={variant}>
-          <p style={{ margin: '0', fontSize: '12px', fontWeight: 600, color: '#9BA5BE', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <p style={{ margin: '0', fontSize: '12px', fontWeight: 600, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {variant}
           </p>
           <Divider variant={variant} />
@@ -144,9 +144,9 @@ export const DarkMode: Story = {
           width: '480px',
         }}
       >
-        <p style={{ margin: '0 0 0', fontSize: '14px', color: '#9BA5BE' }}>Section above</p>
+        <p style={{ margin: '0 0 0', fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Section above</p>
         <Divider label="Dark mode" />
-        <p style={{ margin: '0', fontSize: '14px', color: '#9BA5BE' }}>Section below</p>
+        <p style={{ margin: '0', fontSize: '14px', color: 'var(--color-text-tertiary)' }}>Section below</p>
         <Divider variant="dashed" spacing="lg" />
         <Divider label="Dotted" variant="dotted" labelPosition="left" />
       </div>

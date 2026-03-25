@@ -77,10 +77,10 @@ const CELL_PAD: Record<TableSize, string> = {
 
 const TableWrapper = styled.div<{ $hasBorder: boolean; $isFullWidth: boolean }>`
   width: ${({ $isFullWidth }) => ($isFullWidth ? '100%' : 'auto')};
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
   overflow: hidden;
-  border: ${({ $hasBorder }) => ($hasBorder ? '1px solid #E2E5ED' : '1px solid #E2E5ED')};
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
@@ -92,19 +92,19 @@ const StyledTable = styled.table<{ $isStriped: boolean; $isFullWidth: boolean }>
     $isStriped &&
     css`
       tbody tr:nth-child(even) {
-        background-color: #fafbfc;
+        background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
       }
     `}
 `;
 
 const StyledThead = styled.thead`
-  background: #f8f9fc;
+  background: ${({ theme }) => theme.colors['color-bg-subtle']};
 `;
 
 const StyledTbody = styled.tbody``;
 
 const StyledTr = styled.tr<{ $isClickable: boolean }>`
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   cursor: ${({ $isClickable }) => ($isClickable ? 'pointer' : 'default')};
   transition: background-color 100ms ease;
 
@@ -113,7 +113,7 @@ const StyledTr = styled.tr<{ $isClickable: boolean }>`
   }
 
   tbody &:hover {
-    background-color: #f8f9fc;
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
   }
 `;
 
@@ -124,14 +124,15 @@ const StyledTh = styled.th<{ $size: TableSize; $align: string; $sortable: boolea
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   white-space: nowrap;
   width: ${({ $width }) => $width ?? 'auto'};
   cursor: ${({ $sortable }) => ($sortable ? 'pointer' : 'default')};
   user-select: none;
 
   &:hover {
-    color: ${({ $sortable }) => ($sortable ? '#6b7694' : '#9ba5be')};
+    color: ${({ theme, $sortable }) =>
+      $sortable ? theme.colors['color-text-secondary'] : theme.colors['color-text-tertiary']};
   }
 `;
 
@@ -144,14 +145,15 @@ const ThInner = styled.span`
 const SortIcon = styled.span<{ $active: boolean }>`
   display: inline-flex;
   align-items: center;
-  color: ${({ $active }) => ($active ? '#0055ff' : '#c5cbda')};
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors['color-brand-primary'] : theme.colors['color-border-strong']};
 `;
 
 const StyledTd = styled.td<{ $size: TableSize; $align: string }>`
   padding: ${({ $size }) => CELL_PAD[$size]};
   text-align: ${({ $align }) => $align};
   font-size: 14px;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   vertical-align: middle;
 `;
 
@@ -165,7 +167,7 @@ const EmptyContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   font-size: 14px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;

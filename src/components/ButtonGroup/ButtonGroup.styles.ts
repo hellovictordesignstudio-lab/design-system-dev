@@ -56,34 +56,50 @@ const sizeStyles = {
 
 const variantStyles = (isActive: boolean) => ({
   primary: css`
-    background: ${isActive ? 'var(--color-interactive-active, #003399)' : 'var(--color-interactive-default, #0055FF)'};
-    color: var(--color-text-inverse, #fff);
+    background: ${({ theme }) =>
+      isActive ? theme.colors['color-brand-primary-active'] : theme.colors['color-brand-primary']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
     border: 1.5px solid transparent;
-    &:hover:not(:disabled) { background: var(--color-interactive-hover, #0044CC); }
-    &:active:not(:disabled) { background: var(--color-interactive-active, #003399); }
+    &:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors['color-brand-primary-hover']};
+    }
+    &:active:not(:disabled) {
+      background: ${({ theme }) => theme.colors['color-brand-primary-active']};
+    }
   `,
   secondary: css`
     background: transparent;
-    color: ${isActive ? 'var(--color-interactive-active, #003399)' : 'var(--color-text-brand, #0055FF)'};
-    border: 1.5px solid ${isActive ? 'var(--color-interactive-active, #003399)' : 'var(--color-border-brand, #0055FF)'};
+    color: ${({ theme }) =>
+      isActive ? theme.colors['color-brand-primary-active'] : theme.colors['color-brand-primary']};
+    border: 1.5px solid
+      ${({ theme }) =>
+        isActive ? theme.colors['color-brand-primary'] : 'var(--color-border-default)'};
     &:hover:not(:disabled) {
-      background: var(--color-bg-brand-subtle, #E6EEFF);
-      border-color: var(--color-interactive-hover, #0044CC);
-      color: var(--color-interactive-hover, #0044CC);
+      background: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+      border-color: var(--color-border-strong);
+      color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
     }
   `,
   ghost: css`
-    background: ${isActive ? 'var(--color-bg-brand-subtle, #E6EEFF)' : 'transparent'};
-    color: ${isActive ? 'var(--color-interactive-active, #003399)' : 'var(--color-text-brand, #0055FF)'};
+    background: ${({ theme }) =>
+      isActive ? theme.colors['color-brand-primary-subtle'] : 'transparent'};
+    color: ${({ theme }) =>
+      isActive ? theme.colors['color-brand-primary-active'] : theme.colors['color-brand-primary']};
     border: 1.5px solid transparent;
-    &:hover:not(:disabled) { background: var(--color-bg-brand-subtle, #E6EEFF); }
+    &:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+    }
   `,
   destructive: css`
-    background: ${isActive ? '#A81B28' : '#D22232'};
-    color: #fff;
+    background: ${({ theme }) => theme.colors['color-error-default']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
     border: 1.5px solid transparent;
-    &:hover:not(:disabled) { background: #A81B28; }
-    &:active:not(:disabled) { background: #881522; }
+    &:hover:not(:disabled) {
+      filter: brightness(0.92);
+    }
+    &:active:not(:disabled) {
+      filter: brightness(0.85);
+    }
   `,
 });
 
@@ -112,7 +128,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${({ $variant, $isActive }) => variantStyles($isActive)[$variant]}
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px var(--color-interactive-focus, #99BDFF);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
     z-index: 2;
   }
 

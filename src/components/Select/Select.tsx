@@ -67,35 +67,40 @@ const Trigger = styled.button<{
   padding: 0 ${({ $size }) => PAD_X[$size]};
   border-radius: 14px;
   border: 1.5px solid
-    ${({ $hasError, $isOpen }) =>
-      $hasError ? '#D22232' : $isOpen ? '#0055FF' : '#C8D4E8'};
-  background-color: #ffffff;
+    ${({ theme, $hasError, $isOpen }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isOpen
+          ? theme.colors['color-brand-primary']
+          : theme.colors['color-border-default']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   font-size: ${({ $size }) => FONT_SIZE[$size]};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  color: ${({ $hasValue }) => ($hasValue ? '#111827' : '#9BA5BE')};
+  color: ${({ theme, $hasValue }) =>
+    $hasValue ? theme.colors['color-text-primary'] : theme.colors['color-text-tertiary']};
   cursor: pointer;
   text-align: left;
   outline: none;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-visible {
-    border-color: #0055FF;
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.10);
+    border-color: ${({ theme }) => theme.colors['color-brand-primary']};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 
-  ${({ $isOpen }) =>
+  ${({ theme, $isOpen }) =>
     $isOpen &&
     css`
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.10);
+      box-shadow: 0 0 0 3px ${theme.colors['color-brand-primary-subtle']};
     `}
 
-  ${({ $isDisabled }) =>
+  ${({ theme, $isDisabled }) =>
     $isDisabled &&
     css`
       opacity: 0.7;
       cursor: not-allowed;
-      background-color: #f8f9fc;
-      border-color: #dde1ea;
+      background-color: ${theme.colors['color-bg-subtle']};
+      border-color: ${theme.colors['color-border-default']};
     `}
 `;
 
@@ -112,17 +117,17 @@ const TriggerLabel = styled.span`
 const ChevronWrap = styled.span<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   flex-shrink: 0;
   transition: transform 200ms ease;
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
 
 const PanelWrapper = styled.div<{ $openUp: boolean }>`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
-  border: 1px solid #e2e5ed;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.md};
   overflow: hidden;
   animation: ${fadeIn} 150ms ease forwards;
   transform-origin: ${({ $openUp }) => ($openUp ? 'bottom center' : 'top center')};
@@ -130,14 +135,14 @@ const PanelWrapper = styled.div<{ $openUp: boolean }>`
 
 const SearchWrapper = styled.div`
   position: relative;
-  border-bottom: 1px solid #e2e5ed;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-default']};
 
   svg {
     position: absolute;
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #9ba5be;
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
     pointer-events: none;
   }
 `;
@@ -150,11 +155,11 @@ const SearchField = styled.input`
   outline: none;
   font-size: 13px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   background: transparent;
 
   &::placeholder {
-    color: #9ba5be;
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
   }
 `;
 
@@ -176,8 +181,10 @@ const OptionItem = styled.li<{ $isSelected: boolean; $isDisabled: boolean }>`
   font-size: 14px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
-  color: ${({ $isSelected }) => ($isSelected ? '#2952CC' : '#111827')};
-  background-color: ${({ $isSelected }) => ($isSelected ? '#E8EEFF' : 'transparent')};
+  color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors['color-brand-primary-active'] : theme.colors['color-text-primary']};
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors['color-brand-primary-subtle'] : 'transparent'};
   font-weight: ${({ $isSelected }) => ($isSelected ? '600' : '400')};
   transition: background-color 100ms ease;
   user-select: none;
@@ -190,7 +197,8 @@ const OptionItem = styled.li<{ $isSelected: boolean; $isDisabled: boolean }>`
     `}
 
   &:hover {
-    background-color: ${({ $isSelected }) => ($isSelected ? '#E8EEFF' : '#F0F2F5')};
+    background-color: ${({ theme, $isSelected }) =>
+      $isSelected ? theme.colors['color-brand-primary-subtle'] : theme.colors['color-bg-subtle']};
   }
 `;
 
@@ -198,13 +206,13 @@ const CheckMark = styled.span`
   margin-left: auto;
   display: flex;
   align-items: center;
-  color: #2952cc;
+  color: ${({ theme }) => theme.colors['color-brand-primary']};
 `;
 
 const EmptyMsg = styled.div`
   padding: 12px 16px;
   font-size: 13px;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   text-align: center;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
@@ -212,7 +220,8 @@ const EmptyMsg = styled.div`
 const HelperText = styled.p<{ $isError?: boolean }>`
   margin: 6px 0 0;
   font-size: 12px;
-  color: ${({ $isError }) => ($isError ? '#D22232' : '#9BA5BE')};
+  color: ${({ theme, $isError }) =>
+    $isError ? theme.colors['color-error-text'] : theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
@@ -323,7 +332,7 @@ export function Select({
       {label && (
         <FieldLabel htmlFor={inputId}>
           {label}
-          {isRequired && <span style={{ color: '#D22232', marginLeft: 2 }}>*</span>}
+          {isRequired && <span style={{ color: 'var(--color-error-text)', marginLeft: 2 }}>*</span>}
         </FieldLabel>
       )}
 

@@ -1,5 +1,5 @@
 import React, { useId, useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import type { TimePickerProps, TimePickerSize } from './TimePicker.types';
 
 const HEIGHTS: Record<TimePickerSize, string> = { sm: '32px', md: '40px', lg: '48px' };
@@ -35,41 +35,46 @@ const Select = styled.select<{
   height: ${({ $size }) => HEIGHTS[$size]};
   padding: 0 ${({ $size }) => PAD_X[$size]};
   border-radius: 14px;
-  border: 1.5px solid ${({ $hasError }) => ($hasError ? '#D22232' : '#C8D4E8')};
-  background-color: #ffffff;
+  border: 1.5px solid
+    ${({ theme, $hasError }) =>
+      $hasError ? theme.colors['color-error-default'] : theme.colors['color-border-strong']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   font-size: ${({ $size }) => FONT_SIZE[$size]};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   cursor: pointer;
   outline: none;
   min-width: 72px;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-visible {
-    border-color: #0055ff;
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.2)' : 'rgba(0, 85, 255, 0.1)'};
   }
 
-  ${({ $isDisabled }) =>
+  ${({ $isDisabled, theme }) =>
     $isDisabled &&
     css`
       opacity: 0.65;
       cursor: not-allowed;
-      background-color: #f8f9fc;
+      background-color: ${theme.colors['color-bg-subtle']};
     `}
 `;
 
 const Sep = styled.span`
   font-size: 18px;
   font-weight: 600;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   user-select: none;
 `;
 
 const HelperText = styled.p<{ $isError?: boolean }>`
   margin: 6px 0 0;
   font-size: 12px;
-  color: ${({ $isError }) => ($isError ? '#D22232' : '#9BA5BE')};
+  color: ${({ theme, $isError }) =>
+    $isError ? theme.colors['color-error-default'] : theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
@@ -119,6 +124,7 @@ export function TimePicker({
   use12Hour = false,
   minuteStep = 15,
 }: TimePickerProps) {
+  const theme = useTheme();
   const autoId = useId();
   const inputId = id ?? autoId;
   const safe = clampMinutes(value);
@@ -164,7 +170,9 @@ export function TimePicker({
       {label && (
         <FieldLabel id={`${inputId}-label`} htmlFor={`${inputId}-hour`}>
           {label}
-          {isRequired && <span style={{ color: '#D22232', marginLeft: 2 }}>*</span>}
+          {isRequired && (
+            <span style={{ color: theme.colors['color-error-default'], marginLeft: 2 }}>*</span>
+          )}
         </FieldLabel>
       )}
 

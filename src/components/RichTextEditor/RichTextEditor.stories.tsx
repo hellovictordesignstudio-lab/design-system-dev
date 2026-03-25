@@ -10,9 +10,18 @@ const meta: Meta<typeof RichTextEditor> = {
     docs: {
       description: {
         component:
-          'Editor WYSIWYG basado en **TipTap** (negrita, cursiva, títulos, listas, citas, enlaces, deshacer). El valor es HTML.',
+          'WYSIWYG rich text editor built on TipTap (bold, italic, headings, lists, block quotes, links, undo). The value is HTML.',
       },
     },
+  },
+  argTypes: {
+    value: { control: 'text', description: 'HTML string content.' },
+    onChange: { control: false, description: 'Called when HTML changes.' },
+    placeholder: { control: 'text', description: 'Placeholder in the empty editor.' },
+    isDisabled: { control: 'boolean', description: 'Disables editing.' },
+    minHeight: { control: 'number', description: 'Minimum height of the editable area in pixels.' },
+    className: { control: 'text', description: 'Optional class on the root element.' },
+    showLinkButton: { control: 'boolean', description: 'Shows link insert (uses `window.prompt` for URL).' },
   },
 };
 
@@ -30,7 +39,7 @@ export const Playground: Story = {
             marginTop: 16,
             padding: 12,
             borderRadius: 10,
-            background: '#f8f9fc',
+            background: 'var(--color-bg-subtle)',
             fontSize: 11,
             overflow: 'auto',
             maxHeight: 160,

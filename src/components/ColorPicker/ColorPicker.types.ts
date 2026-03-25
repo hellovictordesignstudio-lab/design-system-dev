@@ -2,7 +2,7 @@ export type ColorFormat = 'hex' | 'rgb' | 'hsl';
 export type ColorPickerSize = 'sm' | 'md';
 
 export interface ColorPickerProps {
-  /** Current color value as hex string (e.g. "#0055FF") */
+  /** Current color value as a CSS hex string */
   value: string;
   /** Called with the new hex string on every change */
   onChange: (hex: string) => void;

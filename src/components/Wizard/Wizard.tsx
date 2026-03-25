@@ -7,8 +7,8 @@ const PanelRoot = styled.div`
   margin-top: 20px;
   padding: 20px;
   border-radius: 16px;
-  border: 1px solid #e2e5ed;
-  background: #fafbfc;
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) => theme.colors['color-bg-subtle']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 

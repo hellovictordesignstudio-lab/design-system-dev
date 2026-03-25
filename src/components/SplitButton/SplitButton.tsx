@@ -30,35 +30,35 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: css`
-    background-color: #0055ff;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors['color-brand-primary']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
     border: 1px solid transparent;
     &:hover:not(:disabled) {
-      background-color: #0044cc;
+      background-color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
     }
   `,
   secondary: css`
     background-color: transparent;
-    color: #0055ff;
-    border: 1.5px solid #0055ff;
+    color: ${({ theme }) => theme.colors['color-brand-primary']};
+    border: 1.5px solid ${({ theme }) => theme.colors['color-brand-primary']};
     &:hover:not(:disabled) {
-      background-color: rgba(0, 85, 255, 0.06);
+      background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
     }
   `,
   ghost: css`
     background-color: transparent;
-    color: #6b7694;
+    color: ${({ theme }) => theme.colors['color-text-secondary']};
     border: 1px solid transparent;
     &:hover:not(:disabled) {
-      background-color: #f0f2f5;
+      background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
     }
   `,
   danger: css`
-    background-color: #d22232;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors['color-error-default']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
     border: 1px solid transparent;
     &:hover:not(:disabled) {
-      background-color: #b01c29;
+      filter: brightness(0.92);
     }
   `,
 };
@@ -137,7 +137,7 @@ const MenuBtn = styled.button<{
   ${({ $variant }) =>
     ($variant === 'ghost' || $variant === 'secondary') &&
     css`
-      border-left-color: #dde1ea;
+      border-left-color: ${({ theme }) => theme.colors['color-border-default']};
     `}
 `;
 

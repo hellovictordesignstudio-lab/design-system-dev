@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import type { Theme } from '../../theme/theme';
 
 export type ProgressBarVariant = 'default' | 'success' | 'error' | 'warning';
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
@@ -17,11 +18,11 @@ export interface ProgressBarProps {
 
 const HEIGHT: Record<ProgressBarSize, number> = { sm: 4, md: 8, lg: 12 };
 
-const FILL_COLOR: Record<ProgressBarVariant, string> = {
-  default: '#0055FF',
-  success: '#0A8853',
-  error: '#D22232',
-  warning: '#F07332',
+const FILL_COLOR: Record<ProgressBarVariant, keyof Theme['colors']> = {
+  default: 'color-brand-primary',
+  success: 'color-success-default',
+  error: 'color-error-default',
+  warning: 'color-warning-default',
 };
 
 const slide = keyframes`
@@ -34,7 +35,7 @@ const Track = styled.div<{ $size: ProgressBarSize }>`
   position: relative;
   width: 100%;
   height: ${({ $size }) => HEIGHT[$size]}px;
-  background-color: #f0f2f5;
+  background-color: ${({ theme }) => theme.colors['color-bg-muted']};
   border-radius: 9999px;
   overflow: hidden;
 `;
@@ -50,7 +51,7 @@ const Fill = styled.div<{
   left: 0;
   height: 100%;
   border-radius: 9999px;
-  background-color: ${({ $variant }) => FILL_COLOR[$variant]};
+  background-color: ${({ theme, $variant }) => theme.colors[FILL_COLOR[$variant]]};
 
   ${({ $isIndeterminate }) =>
     $isIndeterminate
@@ -67,7 +68,7 @@ const Fill = styled.div<{
 
 const LabelText = styled.div`
   font-size: 12px;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-bottom: 4px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
@@ -81,7 +82,7 @@ const Row = styled.div`
 const ValueText = styled.span`
   font-size: 12px;
   font-weight: 600;
-  color: #4a5270;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   white-space: nowrap;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;

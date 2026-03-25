@@ -8,9 +8,17 @@ const meta: Meta<typeof Footer> = {
   parameters: {
     docs: {
       description: {
-        component: 'Site footer with brand, link columns, and bottom bar. Suited for marketing and docs shells.',
+        component:
+          'A site footer with brand, link columns, and a bottom bar. Use in marketing and documentation shells.',
       },
     },
+  },
+  argTypes: {
+    columns: { control: 'object', description: 'Link columns with title and links array.' },
+    brand: { control: 'text', description: 'Brand name or node in the top row.' },
+    tagline: { control: 'text', description: 'Short line under the brand.' },
+    bottom: { control: 'text', description: 'Bottom bar content (for example copyright).' },
+    children: { control: false, description: 'Optional slot above the columns.' },
   },
 };
 
@@ -48,10 +56,10 @@ const defaultColumns = [
 
 export const Playground: Story = {
   args: {
-    brand: 'Design System',
+    brand: 'VDS Design System',
     tagline: 'Tokens, components, and patterns for building consistent products.',
     columns: defaultColumns,
-    bottom: '© 2026 Design System. All rights reserved.',
+    bottom: '© 2026 VDS Design System. All rights reserved.',
   },
 };
 
@@ -61,16 +69,16 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Three columns</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Three columns</p>
         <Footer
-          brand="Design System"
+          brand="VDS Design System"
           tagline="Build faster with shared UI primitives."
           columns={defaultColumns}
           bottom="© 2026 Acme Inc."
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Two columns</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Two columns</p>
         <Footer
           brand="Studio"
           tagline="Interface kits for product teams."
@@ -94,15 +102,15 @@ export const Sizes: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <div style={{ maxWidth: 480, overflow: 'hidden', borderRadius: 8, border: '1px solid #e2e5ed' }}>
+      <div style={{ maxWidth: 480, overflow: 'hidden', borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
         <Footer brand="DS" tagline="Narrow preview." columns={defaultColumns.slice(0, 2)} bottom="© 2026" />
       </div>
       <div style={{ maxWidth: '100%' }}>
         <Footer
-          brand="Design System"
+          brand="VDS Design System"
           tagline="Wide layout uses the full max-width grid."
           columns={defaultColumns}
-          bottom="© 2026 Design System."
+          bottom="© 2026 VDS Design System."
         />
       </div>
     </div>
@@ -114,11 +122,11 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>
+      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>
         Footer content is static; links use standard anchor behavior. Adjust copy for locales in your app shell.
       </p>
       <Footer
-        brand="Design System"
+        brand="VDS Design System"
         tagline="Production-ready example with three columns."
         columns={defaultColumns}
         bottom="Privacy · Terms · Cookies"
@@ -134,7 +142,7 @@ export const DarkMode: Story = {
   render: () => (
     <div data-theme="dark" style={{ borderRadius: 8, overflow: 'hidden' }}>
       <Footer
-        brand="Design System"
+        brand="VDS Design System"
         tagline="Dark shell preview — footer uses its own dark styling."
         columns={defaultColumns}
         bottom="© 2026"

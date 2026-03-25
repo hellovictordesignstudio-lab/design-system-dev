@@ -4,7 +4,7 @@
  * Exposes useTheme hook for consuming components.
  */
 
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useLayoutEffect, useMemo } from 'react';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
 import { useColorMode } from './useColorMode';
@@ -42,6 +42,13 @@ export function ThemeProvider({ children, defaultColorMode }: ThemeProviderProps
     () => ({ theme, colorMode: defaultColorMode ?? colorMode, resolvedMode: effectiveResolved as 'light' | 'dark', setColorMode }),
     [theme, colorMode, effectiveResolved, setColorMode, defaultColorMode]
   );
+
+  // Single source of truth for Storybook + app: resolved appearance on <html>
+  // useLayoutEffect avoids a frame of wrong theme (fixes docs/preview mismatch vs toolbar)
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('data-theme', effectiveResolved);
+    document.documentElement.setAttribute('data-color-mode', String(defaultColorMode ?? colorMode));
+  }, [effectiveResolved, defaultColorMode, colorMode]);
 
   return (
     <ThemeContext.Provider value={contextValue}>

@@ -1,4 +1,8 @@
 import styled, { keyframes } from 'styled-components';
+import { colorPrimitives } from '../../tokens/primitives';
+
+const white = colorPrimitives.neutral[0];
+const black = colorPrimitives.neutral[900];
 
 export const fadeIn = keyframes`
   from { opacity: 0; transform: scaleY(0.96) translateY(-4px); }
@@ -13,25 +17,21 @@ export const TriggerBtn = styled.button<{ $isDisabled: boolean }>`
   gap: 8px;
   padding: 6px 12px;
   border-radius: 8px;
-  border: 1.5px solid #C8D4E8;
-  background-color: #ffffff;
+  border: 1.5px solid ${({ theme }) => theme.colors['color-border-strong']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: 13px;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.4 : 1)};
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
   &:focus-visible {
     outline: none;
-    border-color: #0055FF;
-    box-shadow: 0 0 0 3px rgba(0,85,255,0.12);
-  }
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-    color: #F0F2F5;
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -41,7 +41,7 @@ export const Swatch = styled.span<{ $color: string }>`
   height: 20px;
   border-radius: 50%;
   background-color: ${({ $color }) => $color};
-  border: 1.5px solid rgba(0,0,0,0.12);
+  border: 1.5px solid ${({ theme }) => theme.colors['color-border-strong']};
   flex-shrink: 0;
 `;
 
@@ -55,7 +55,7 @@ export const TriggerLabel = styled.span`
 export const ChevronWrap = styled.span<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   transition: transform 200ms ease;
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
@@ -63,21 +63,16 @@ export const ChevronWrap = styled.span<{ $isOpen: boolean }>`
 // ── Popover ───────────────────────────────────────────────────────────────────
 
 export const PopoverPanel = styled.div`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
-  border: 1px solid #E2E5ED;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   animation: ${fadeIn} 150ms ease forwards;
   width: 228px;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-  }
 `;
 
 // ── SL Square ─────────────────────────────────────────────────────────────────
@@ -96,13 +91,13 @@ export const SLSquare = styled.div`
 export const SLWhiteGradient = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, #fff 0%, transparent 100%);
+  background: linear-gradient(to right, ${white} 0%, transparent 100%);
 `;
 
 export const SLBlackGradient = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, #000 100%);
+  background: linear-gradient(to bottom, transparent 0%, ${black} 100%);
 `;
 
 export const SLThumb = styled.div`
@@ -110,13 +105,13 @@ export const SLThumb = styled.div`
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.3);
+  border: 2px solid ${white};
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.3);
   transform: translate(-50%, -50%);
   pointer-events: none;
 `;
 
-// ── Hue Slider ────────────────────────────────────────────────────────────────
+// ── Hue Slider — full spectrum via HSL (no hex stops) ───────────────────────────
 
 export const HueTrack = styled.div`
   position: relative;
@@ -125,7 +120,13 @@ export const HueTrack = styled.div`
   border-radius: 9999px;
   background: linear-gradient(
     to right,
-    #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%
+    hsl(0, 100%, 50%) 0%,
+    hsl(60, 100%, 50%) 17%,
+    hsl(120, 100%, 50%) 33%,
+    hsl(180, 100%, 50%) 50%,
+    hsl(240, 100%, 50%) 67%,
+    hsl(300, 100%, 50%) 83%,
+    hsl(360, 100%, 50%) 100%
   );
   cursor: pointer;
   flex-shrink: 0;
@@ -138,9 +139,9 @@ export const HueThumb = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.25), 0 1px 4px rgba(0,0,0,0.2);
+  background: ${white};
+  border: 2px solid ${white};
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.2);
   transform: translate(-50%, -50%);
   pointer-events: none;
 `;
@@ -152,26 +153,21 @@ export const ColorInput = styled.input`
   height: 36px;
   padding: 0 12px;
   border-radius: 10px;
-  border: 1.5px solid #C8D4E8;
+  border: 1.5px solid ${({ theme }) => theme.colors['color-border-strong']};
   font-size: 13px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-variant-numeric: tabular-nums;
-  color: #111827;
-  background: #ffffff;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   outline: none;
   transition: border-color 200ms ease, box-shadow 200ms ease;
   box-sizing: border-box;
 
   &:focus {
-    border-color: #0055FF;
-    box-shadow: 0 0 0 3px rgba(0,85,255,0.12);
-  }
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #111827;
-    border-color: #2E3550;
-    color: #F0F2F5;
-    &:focus { border-color: #0055FF; }
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -188,13 +184,25 @@ export const PresetSwatch = styled.button<{ $color: string; $isActive: boolean }
   height: 20px;
   border-radius: 50%;
   background-color: ${({ $color }) => $color};
-  border: ${({ $isActive }) => ($isActive ? '2px solid #0055FF' : '1.5px solid rgba(0,0,0,0.12)')};
+  border: ${({ theme, $isActive }) =>
+    $isActive ? `2px solid ${theme.colors['color-border-focus']}` : `1.5px solid ${theme.colors['color-border-strong']}`};
   cursor: pointer;
   padding: 0;
   outline: none;
   transition: transform 100ms ease, box-shadow 100ms ease;
-  box-shadow: ${({ $isActive }) => ($isActive ? '0 0 0 2px rgba(0,85,255,0.3)' : 'none')};
+  box-shadow: ${({ theme, $isActive }) =>
+    $isActive
+      ? theme.mode === 'dark'
+        ? '0 0 0 2px rgba(10, 132, 255, 0.45)'
+        : '0 0 0 2px rgba(0, 85, 255, 0.3)'
+      : 'none'};
 
-  &:hover { transform: scale(1.15); }
-  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,85,255,0.4); }
+  &:hover {
+    transform: scale(1.15);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.45)' : 'rgba(0, 85, 255, 0.4)'};
+  }
 `;

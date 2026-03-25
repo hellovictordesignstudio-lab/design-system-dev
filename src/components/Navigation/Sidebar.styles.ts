@@ -17,21 +17,14 @@ export const SidebarNav = styled.nav<{
     $isCollapsed ? $collapsedWidth : $width}px;
   min-width: ${({ $isCollapsed, $width, $collapsedWidth }) =>
     $isCollapsed ? $collapsedWidth : $width}px;
-  background-color: #ffffff;
-  border-right: 1px solid #e2e5ed;
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
+  border-right: 1px solid ${({ theme }) => theme.colors['color-border-default']};
   overflow: hidden;
   transition:
     width 200ms ease,
     min-width 200ms ease;
   z-index: 10;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      background-color: #1a1f35;
-      border-right-color: #2e3550;
-    `}
 `;
 
 // ── Header ────────────────────────────────────────────────────────────────────
@@ -43,14 +36,8 @@ export const SidebarHeaderRoot = styled.div<{ $isCollapsed: boolean }>`
   flex-shrink: 0;
   padding: ${({ $isCollapsed }) => ($isCollapsed ? '0' : '0 8px 0 16px')};
   justify-content: ${({ $isCollapsed }) => ($isCollapsed ? 'center' : 'space-between')};
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   gap: 8px;
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      border-bottom-color: #2e3550;
-    `}
 `;
 
 export const HeaderLogoArea = styled.div<{ $isCollapsed: boolean }>`
@@ -82,30 +69,19 @@ export const ToggleBtn = styled.button`
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   cursor: pointer;
   outline: none;
   transition: background-color 150ms ease, color 150ms ease;
 
   &:hover {
-    background-color: #f0f2f5;
-    color: #111827;
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
+    color: ${({ theme }) => theme.colors['color-text-primary']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      color: #4a5270;
-
-      &:hover {
-        background-color: #2e3550;
-        color: #f8f9fc;
-      }
-    `}
 `;
 
 // ── Scrollable content ────────────────────────────────────────────────────────
@@ -118,7 +94,7 @@ export const SidebarContent = styled.div`
 
   /* Thin scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: #e2e5ed transparent;
+  scrollbar-color: ${({ theme }) => theme.colors['color-border-default']} transparent;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -127,7 +103,7 @@ export const SidebarContent = styled.div`
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #e2e5ed;
+    background-color: ${({ theme }) => theme.colors['color-border-default']};
     border-radius: 4px;
   }
 `;
@@ -145,7 +121,7 @@ export const SectionLabel = styled.div<{ $isCollapsed: boolean }>`
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   padding: 12px 16px 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -154,12 +130,6 @@ export const SectionLabel = styled.div<{ $isCollapsed: boolean }>`
   padding-top: ${({ $isCollapsed }) => ($isCollapsed ? 0 : undefined)};
   padding-bottom: ${({ $isCollapsed }) => ($isCollapsed ? 0 : undefined)};
   transition: opacity 150ms ease;
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      color: #4a5270;
-    `}
 `;
 
 // ── Item base styles (shared between button and anchor) ───────────────────────
@@ -193,21 +163,10 @@ export const itemBaseStyles = css<{
     padding 200ms ease,
     margin 200ms ease;
 
-  /* Default (light, inactive) */
   background-color: ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.mode === 'dark'
-        ? 'rgba(0,85,255,0.15)'
-        : '#E8EEFF'
-      : 'transparent'};
+    $isActive ? theme.colors['color-brand-primary-subtle'] : 'transparent'};
   color: ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.mode === 'dark'
-        ? '#669CFF'
-        : '#2952CC'
-      : theme.mode === 'dark'
-      ? '#a0abcc'
-      : '#4A5270'};
+    $isActive ? theme.colors['color-brand-primary'] : theme.colors['color-text-secondary']};
 
   /* Expanded layout */
   ${({ $isCollapsed }) =>
@@ -233,25 +192,13 @@ export const itemBaseStyles = css<{
   /* Hover */
   &:hover:not([disabled]):not([data-disabled]) {
     background-color: ${({ $isActive, theme }) =>
-      $isActive
-        ? theme.mode === 'dark'
-          ? 'rgba(0,85,255,0.2)'
-          : '#E8EEFF'
-        : theme.mode === 'dark'
-        ? '#2E3550'
-        : '#F0F2F5'};
+      $isActive ? theme.colors['color-brand-primary-muted'] : theme.colors['color-bg-subtle']};
     color: ${({ $isActive, theme }) =>
-      $isActive
-        ? theme.mode === 'dark'
-          ? '#669CFF'
-          : '#2952CC'
-        : theme.mode === 'dark'
-        ? '#F8F9FC'
-        : '#111827'};
+      $isActive ? theme.colors['color-brand-primary-hover'] : theme.colors['color-text-primary']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 `;
 
@@ -312,25 +259,18 @@ export const ItemBadge = styled.span<{ $isCollapsed: boolean }>`
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 700;
-  background-color: #e8eeff;
-  color: #2952cc;
+  background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+  color: ${({ theme }) => theme.colors['color-brand-primary']};
   flex-shrink: 0;
   opacity: ${({ $isCollapsed }) => ($isCollapsed ? 0 : 1)};
   transition: opacity 100ms ease;
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      background-color: rgba(0, 85, 255, 0.15);
-      color: #669cff;
-    `}
 `;
 
 export const ChevronWrap = styled.span<{ $isExpanded: boolean; $isCollapsed: boolean }>`
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  color: #c5cbda;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   transition: transform 200ms ease, opacity 100ms ease;
   transform: ${({ $isExpanded }) => ($isExpanded ? 'rotate(90deg)' : 'rotate(0deg)')};
   opacity: ${({ $isCollapsed }) => ($isCollapsed ? 0 : 1)};
@@ -351,12 +291,6 @@ export const SubItemsWrapper = styled.div<{ $isExpanded: boolean }>`
 
 export const SidebarFooterRoot = styled.div`
   flex-shrink: 0;
-  border-top: 1px solid #f0f2f5;
+  border-top: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   padding: 8px 0;
-
-  ${({ theme }) =>
-    theme.mode === 'dark' &&
-    css`
-      border-top-color: #2e3550;
-    `}
 `;

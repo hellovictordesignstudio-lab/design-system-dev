@@ -13,12 +13,12 @@ const meta: Meta<typeof Timeline> = {
     docs: {
       description: {
         component:
-          'A vertical timeline of events. Supports icon dots or icon circles in pastel colors, titles, descriptions, and dates.',
+          'A vertical list of events. Supports icon dots or circles, titles, descriptions, and dates.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'radio', options: ['default', 'compact'] },
+    variant: { control: 'radio', options: ['default', 'compact'], description: 'Vertical spacing and icon size.' },
   },
 };
 
@@ -64,14 +64,14 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', alignItems: 'flex-start' }}>
       <div style={{ minWidth: 260 }}>
-        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: '#9BA5BE' }}>default</p>
+        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>default</p>
         <Timeline variant="default">
           <Timeline.Item title="Step one" description="Done" date="Mar 1" />
           <Timeline.Item title="Step two" description="Now" date="Mar 5" />
         </Timeline>
       </div>
       <div style={{ minWidth: 260 }}>
-        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: '#9BA5BE' }}>compact</p>
+        <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>compact</p>
         <Timeline variant="compact">
           <Timeline.Item title="Step one" description="Done" date="Mar 1" />
           <Timeline.Item title="Step two" description="Now" date="Mar 5" />
@@ -130,7 +130,7 @@ export const WithIcons: Story = {
       <Timeline>
         <Timeline.Item
           title="Order placed"
-          description="Your order #4821 has been received and is being processed."
+          description="Your order 4821 has been received and is being processed."
           date="Mar 22, 2026 · 09:14"
           icon={<Package />}
           iconColor="blue"
@@ -167,7 +167,7 @@ export const Compact: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
       <div style={{ minWidth: '260px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>default</p>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>default</p>
         <Timeline variant="default">
           <Timeline.Item title="Step one" description="Completed" date="Mar 1" />
           <Timeline.Item title="Step two" description="In progress" date="Mar 5" />
@@ -175,7 +175,7 @@ export const Compact: Story = {
         </Timeline>
       </div>
       <div style={{ minWidth: '260px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>compact</p>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>compact</p>
         <Timeline variant="compact">
           <Timeline.Item title="Step one" description="Completed" date="Mar 1" />
           <Timeline.Item title="Step two" description="In progress" date="Mar 5" />

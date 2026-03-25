@@ -15,22 +15,22 @@ export interface AlertProps {
 const variantStyles = {
   info: css`
     background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
-    border-color: ${({ theme }) => theme.colors['color-brand-primary-muted']};
+    border-left-color: ${({ theme }) => theme.colors['color-brand-primary-muted']};
     color: ${({ theme }) => theme.colors['color-brand-primary']};
   `,
   success: css`
     background-color: ${({ theme }) => theme.colors['color-success-subtle']};
-    border-color: ${({ theme }) => theme.colors['color-success-border']};
+    border-left-color: ${({ theme }) => theme.colors['color-success-border']};
     color: ${({ theme }) => theme.colors['color-success-text']};
   `,
   error: css`
     background-color: ${({ theme }) => theme.colors['color-error-subtle']};
-    border-color: ${({ theme }) => theme.colors['color-error-border']};
+    border-left-color: ${({ theme }) => theme.colors['color-error-border']};
     color: ${({ theme }) => theme.colors['color-error-text']};
   `,
   warning: css`
     background-color: ${({ theme }) => theme.colors['color-warning-subtle']};
-    border-color: ${({ theme }) => theme.colors['color-warning-border']};
+    border-left-color: ${({ theme }) => theme.colors['color-warning-border']};
     color: ${({ theme }) => theme.colors['color-warning-text']};
   `,
 };
@@ -40,7 +40,10 @@ const StyledAlert = styled.div<{ $variant: AlertVariant }>`
   gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[4]};
   border-radius: 12px;
-  border-left: 4px solid;
+  /* Hairline perimeter + slim accent — avoids harsh “lit” edges in dark UI */
+  border: 1px solid var(--color-border-subtle);
+  border-left-width: 3px;
+  border-left-style: solid;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 
   ${({ $variant }) => variantStyles[$variant]}

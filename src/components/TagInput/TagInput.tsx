@@ -32,12 +32,8 @@ const FieldRoot = styled.div`
 const FieldLabel = styled.label`
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   margin-bottom: 6px;
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 const Container = styled.div<{
@@ -53,32 +49,31 @@ const Container = styled.div<{
   padding: 6px 10px;
   border-radius: 14px;
   border: 1.5px solid
-    ${({ $hasError, $isFocused }) =>
-      $hasError ? '#D22232' : $isFocused ? '#0055FF' : '#C8D4E8'};
-  background-color: #ffffff;
+    ${({ theme, $hasError, $isFocused }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isFocused
+          ? theme.colors['color-border-focus']
+          : theme.colors['color-border-strong']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'text')};
   transition: border-color 200ms ease, box-shadow 200ms ease;
 
-  ${({ $isFocused, $hasError }) =>
+  ${({ theme, $isFocused, $hasError }) =>
     $isFocused &&
     !$hasError &&
     css`
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.10);
+      box-shadow: 0 0 0 3px
+        ${theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.2)' : 'rgba(0, 85, 255, 0.1)'};
     `}
 
-  ${({ $isDisabled }) =>
+  ${({ theme, $isDisabled }) =>
     $isDisabled &&
     css`
       opacity: 0.7;
-      background-color: #F8F9FC;
-      border-color: #DDE1EA;
+      background-color: ${theme.colors['color-bg-subtle']};
+      border-color: ${theme.colors['color-border-default']};
     `}
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: ${({ $hasError, $isFocused }) =>
-      $hasError ? '#D22232' : $isFocused ? '#0055FF' : '#2E3550'};
-  }
 `;
 
 const Tag = styled.span`
@@ -87,18 +82,13 @@ const Tag = styled.span`
   gap: 4px;
   padding: 3px 8px;
   border-radius: 9999px;
-  background-color: #E8EEFF;
-  color: #2952CC;
+  background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+  color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
   max-width: 200px;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1E2E5E;
-    color: #7BA4FF;
-  }
 `;
 
 const TagLabel = styled.span`
@@ -115,20 +105,17 @@ const TagRemove = styled.button`
   border: none;
   padding: 0;
   cursor: pointer;
-  color: #2952CC;
+  color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
   flex-shrink: 0;
   transition: color 100ms ease;
   line-height: 1;
 
-  &:hover { color: #A81B28; }
-  &:focus-visible {
-    outline: 2px solid #0055FF;
-    border-radius: 2px;
+  &:hover {
+    color: ${({ theme }) => theme.colors['color-error-text']};
   }
-
-  [data-theme='dark'] &, .dark & {
-    color: #7BA4FF;
-    &:hover { color: #F87171; }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
+    border-radius: 2px;
   }
 `;
 
@@ -140,21 +127,20 @@ const InlineInput = styled.input<{ $isDisabled: boolean }>`
   background: transparent;
   font-size: 14px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   padding: 2px 0;
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'text')};
 
-  &::placeholder { color: #9BA5BE; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
+  &::placeholder {
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
   }
 `;
 
 const HelperText = styled.p<{ $isError?: boolean }>`
   margin: 6px 0 0;
   font-size: 12px;
-  color: ${({ $isError }) => ($isError ? '#D22232' : '#9BA5BE')};
+  color: ${({ theme, $isError }) =>
+    $isError ? theme.colors['color-error-default'] : theme.colors['color-text-tertiary']};
 `;
 
 // ── Suggestions dropdown ──────────────────────────────────────────────────────
@@ -165,20 +151,15 @@ const fadeIn = keyframes`
 `;
 
 const SuggestionsPanel = styled.div`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 14px;
-  border: 1px solid #E2E5ED;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   overflow: hidden;
   animation: ${fadeIn} 150ms ease forwards;
   transform-origin: top center;
   max-height: 200px;
   overflow-y: auto;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-  }
 `;
 
 const SuggestionItem = styled.div<{ $isHighlighted: boolean }>`
@@ -186,16 +167,13 @@ const SuggestionItem = styled.div<{ $isHighlighted: boolean }>`
   font-size: 14px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   cursor: pointer;
-  color: #111827;
-  background-color: ${({ $isHighlighted }) => ($isHighlighted ? '#F0F2F5' : 'transparent')};
+  color: ${({ theme }) => theme.colors['color-text-primary']};
+  background-color: ${({ theme, $isHighlighted }) =>
+    $isHighlighted ? theme.colors['color-bg-muted'] : 'transparent'};
   transition: background-color 100ms ease;
 
-  &:hover { background-color: #F0F2F5; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-    background-color: ${({ $isHighlighted }) => ($isHighlighted ? '#2E3550' : 'transparent')};
-    &:hover { background-color: #2E3550; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-bg-muted']};
   }
 `;
 

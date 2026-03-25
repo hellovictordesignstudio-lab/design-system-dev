@@ -10,16 +10,16 @@ const meta: Meta<typeof DatePicker> = {
     docs: {
       description: {
         component:
-          'DatePicker lets users select a date from a calendar panel. Supports min/max constraints, error states, and all TextInput sizes. No external date library.',
+          'Selects a date from a calendar popover. Supports min and max bounds, validation states, and **TextInput** sizes. No external date library required.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    isDisabled: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    placeholder: { control: 'text' },
-    label: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Matches **TextInput** sizes.' },
+    isDisabled: { control: 'boolean', description: 'Disables the field and calendar.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    placeholder: { control: 'text', description: 'Placeholder in the text field.' },
+    label: { control: 'text', description: 'Label above the field.' },
   },
 };
 
@@ -41,7 +41,7 @@ export const Playground: Story = {
           placeholder={args.placeholder ?? 'Select a date'}
         />
         {date && (
-          <p style={{ marginTop: 8, fontSize: 12, color: '#9BA5BE' }}>
+          <p style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-tertiary)' }}>
             Selected: {date.toDateString()}
           </p>
         )}
@@ -145,7 +145,7 @@ export const WithMinMax: Story = {
           maxDate={maxDate}
         />
         {v && (
-          <p style={{ marginTop: 8, fontSize: 12, color: '#9BA5BE' }}>
+          <p style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-tertiary)' }}>
             Selected: {v.toDateString()}
           </p>
         )}
@@ -165,5 +165,5 @@ export const DarkMode: Story = {
       </div>
     );
   },
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

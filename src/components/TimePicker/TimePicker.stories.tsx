@@ -10,16 +10,16 @@ const meta: Meta<typeof TimePicker> = {
     docs: {
       description: {
         component:
-          'Time selection using hour and minute dropdowns. Value is minutes since midnight (0–1439). Supports 12h/24h and validation states.',
+          'Selects a time with hour and minute fields. Values are minutes since midnight (0–1439). Supports 12- or 24-hour display and validation states.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    use12Hour: { control: 'boolean' },
-    minuteStep: { control: 'select', options: [1, 5, 10, 15, 30] },
-    isDisabled: { control: 'boolean' },
-    hasError: { control: 'boolean' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Matches **TextInput** sizes.' },
+    use12Hour: { control: 'boolean', description: '12-hour clock with AM or PM.' },
+    minuteStep: { control: 'select', options: [1, 5, 10, 15, 30], description: 'Minute dropdown step.' },
+    isDisabled: { control: 'boolean', description: 'Disables both fields.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
   },
 };
 
@@ -40,7 +40,7 @@ export const Playground: Story = {
     return (
       <div style={{ maxWidth: 420 }}>
         <TimePicker label="Time" value={v} onChange={setV} minuteStep={5} />
-        <p style={{ marginTop: 12, fontSize: 13, color: '#6b7694' }}>{formatLabel(v)}</p>
+        <p style={{ marginTop: 12, fontSize: 13, color: 'var(--color-text-tertiary)' }}>{formatLabel(v)}</p>
       </div>
     );
   },
@@ -55,11 +55,11 @@ export const Variants: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 420 }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>24-hour</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>24-hour</p>
           <TimePicker label="Start" value={a} onChange={setA} minuteStep={15} />
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>12-hour</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>12-hour</p>
           <TimePicker label="Appointment" value={b} onChange={setB} use12Hour minuteStep={15} />
         </div>
       </div>
@@ -112,7 +112,7 @@ export const Hour12: Story = {
     return (
       <div style={{ maxWidth: 420 }}>
         <TimePicker label="Appointment" value={v} onChange={setV} use12Hour minuteStep={15} />
-        <p style={{ marginTop: 12, fontSize: 13, color: '#6b7694' }}>{formatLabel(v)}</p>
+        <p style={{ marginTop: 12, fontSize: 13, color: 'var(--color-text-tertiary)' }}>{formatLabel(v)}</p>
       </div>
     );
   },
@@ -125,7 +125,7 @@ export const DarkMode: Story = {
   render: () => {
     const [v, setV] = useState(15 * 60);
     return (
-      <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12, maxWidth: 420 }}>
+      <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12, maxWidth: 420 }}>
         <TimePicker label="Time" value={v} onChange={setV} minuteStep={5} />
       </div>
     );

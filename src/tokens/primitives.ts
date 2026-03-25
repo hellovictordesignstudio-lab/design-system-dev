@@ -64,6 +64,17 @@ export const colorPrimitives = {
     500: '#C85820',
   },
 
+  // Violet / cyan accents (avatars, timeline, stat cards)
+  violet: {
+    50:  '#F0E9FF',
+    600: '#6B1FC2',
+    700: '#6D28D9',
+  },
+  cyan: {
+    50:  '#E1F5FB',
+    600: '#0E7490',
+  },
+
   // Pure values
   white: '#FFFFFF',
   black: '#000000',

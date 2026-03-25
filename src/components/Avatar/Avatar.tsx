@@ -1,5 +1,6 @@
 import React, { Children, isValidElement, cloneElement } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
+import { colorPrimitives } from '../../tokens/primitives';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type AvatarShape = 'circle' | 'square';
@@ -29,19 +30,19 @@ const RADIUS: Record<AvatarShape, Record<AvatarSize, string>> = {
 };
 
 const STATUS_COLORS: Record<AvatarStatus, string> = {
-  online: '#0A8853',
-  away: '#F07332',
-  busy: '#D22232',
-  offline: '#9BA5BE',
+  online: colorPrimitives.green[400],
+  away: colorPrimitives.orange[400],
+  busy: colorPrimitives.red[400],
+  offline: colorPrimitives.neutral[400],
 };
 
 const AVATAR_PALETTES: [string, string][] = [
-  ['#E8EEFF', '#2952CC'],
-  ['#E6F5EE', '#1A7A45'],
-  ['#FFF0E3', '#C05C00'],
-  ['#F0EAFF', '#6D28D9'],
-  ['#FCEAEC', '#A81B28'],
-  ['#E1F5FB', '#0E7490'],
+  [colorPrimitives.blue[50], colorPrimitives.blue[600]],
+  [colorPrimitives.green[50], colorPrimitives.green[400]],
+  [colorPrimitives.orange[50], colorPrimitives.orange[500]],
+  [colorPrimitives.violet[50], colorPrimitives.violet[700]],
+  [colorPrimitives.red[50], colorPrimitives.red[500]],
+  [colorPrimitives.cyan[50], colorPrimitives.cyan[600]],
 ];
 
 function getInitials(name: string): string {
@@ -76,8 +77,8 @@ const AvatarRoot = styled.span<{
   height: ${({ $size }) => PX[$size]}px;
   border-radius: ${({ $shape, $size }) => RADIUS[$shape][$size]};
   overflow: visible;
-  background-color: ${({ $bg }) => $bg ?? '#F0F2F5'};
-  color: ${({ $color }) => $color ?? '#4A5270'};
+  background-color: ${({ $bg, theme }) => $bg ?? theme.colors['color-bg-muted']};
+  color: ${({ $color, theme }) => $color ?? theme.colors['color-text-secondary']};
   font-size: ${({ $size }) => FONT[$size]}px;
   font-weight: 700;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
@@ -100,7 +101,7 @@ const StatusDot = styled.span<{ $status: AvatarStatus; $size: AvatarSize }>`
   height: ${({ $size }) => ($size === 'xs' ? 7 : 10)}px;
   border-radius: 50%;
   background-color: ${({ $status }) => STATUS_COLORS[$status]};
-  border: 2px solid #ffffff;
+  border: 2px solid ${({ theme }) => theme.colors['color-bg-default']};
 `;
 
 const BadgeWrapper = styled.span`
@@ -131,12 +132,12 @@ const OverflowAvatar = styled.span<{ $size: AvatarSize }>`
   width: ${({ $size }) => PX[$size]}px;
   height: ${({ $size }) => PX[$size]}px;
   border-radius: 50%;
-  background-color: #f0f2f5;
-  color: #4a5270;
+  background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   font-size: ${({ $size }) => FONT[$size]}px;
   font-weight: 700;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  border: 2px solid #ffffff;
+  border: 2px solid ${({ theme }) => theme.colors['color-bg-default']};
   user-select: none;
 `;
 
@@ -183,9 +184,13 @@ export function Avatar({
 }
 
 export function AvatarGroup({ children, max = 4, size = 'md', overlap = true }: AvatarGroupProps) {
+  const theme = useTheme();
   const validChildren = Children.toArray(children).filter(isValidElement);
   const shown = validChildren.slice(0, max);
   const extra = validChildren.length - max;
+  const overlapBorder = overlap
+    ? { border: `2px solid ${theme.colors['color-bg-default']}` }
+    : undefined;
 
   return (
     <GroupRoot $overlap={overlap}>
@@ -193,11 +198,11 @@ export function AvatarGroup({ children, max = 4, size = 'md', overlap = true }: 
         cloneElement(child as React.ReactElement<AvatarProps>, {
           size,
           key: i,
-          style: overlap ? { border: '2px solid #ffffff' } : undefined,
+          style: overlapBorder,
         } as AvatarProps & { style: React.CSSProperties; key: number })
       )}
       {extra > 0 && (
-        <OverflowAvatar $size={size} style={overlap ? { border: '2px solid #ffffff' } : {}}>
+        <OverflowAvatar $size={size} style={overlapBorder}>
           +{extra}
         </OverflowAvatar>
       )}

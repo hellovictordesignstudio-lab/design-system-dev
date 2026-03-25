@@ -11,9 +11,13 @@ const meta: Meta<typeof Wizard> = {
     docs: {
       description: {
         component:
-          'Wizard layout helper: use `WizardStepper` (alias of `Stepper`) plus `Wizard.Panel` for step bodies.',
+          'Layout for multi-step flows. Combine **WizardStepper** (alias of **Stepper**) with **Wizard.Panel** for step content.',
       },
     },
+  },
+  argTypes: {
+    activeStep: { control: 'number', description: 'Zero-based index of the visible step.' },
+    children: { control: false, description: 'Stepper and **Wizard.Panel** children.' },
   },
 };
 
@@ -32,14 +36,14 @@ function WizardDemo({ orientation }: { orientation: 'horizontal' | 'vertical' })
         </WizardStepper>
 
         <Wizard.Panel stepIndex={0}>
-          <p style={{ margin: 0, fontSize: 14, color: '#374151' }}>Step 1 — account fields go here.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-secondary)' }}>Step 1 — account fields go here.</p>
           <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
             <Button onClick={() => setStep(1)}>Next</Button>
           </div>
         </Wizard.Panel>
 
         <Wizard.Panel stepIndex={1}>
-          <p style={{ margin: 0, fontSize: 14, color: '#374151' }}>Step 2 — choose a plan.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-secondary)' }}>Step 2 — choose a plan.</p>
           <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
             <Button variant="ghost" onClick={() => setStep(0)}>
               Back
@@ -49,7 +53,7 @@ function WizardDemo({ orientation }: { orientation: 'horizontal' | 'vertical' })
         </Wizard.Panel>
 
         <Wizard.Panel stepIndex={2}>
-          <p style={{ margin: 0, fontSize: 14, color: '#374151' }}>Step 3 — confirm and submit.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-secondary)' }}>Step 3 — confirm and submit.</p>
           <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
             <Button variant="ghost" onClick={() => setStep(1)}>
               Back
@@ -74,11 +78,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Horizontal stepper</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Horizontal stepper</p>
         <WizardDemo orientation="horizontal" />
       </div>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Vertical stepper</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Vertical stepper</p>
         <WizardDemo orientation="vertical" />
       </div>
     </div>
@@ -97,10 +101,10 @@ export const Sizes: Story = {
   },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <div style={{ maxWidth: 360, border: '1px solid #e2e5ed', borderRadius: 12, padding: 16 }}>
+      <div style={{ maxWidth: 360, border: '1px solid var(--color-border-default)', borderRadius: 12, padding: 16 }}>
         <WizardDemo orientation="horizontal" />
       </div>
-      <div style={{ maxWidth: 640, border: '1px solid #e2e5ed', borderRadius: 12, padding: 16 }}>
+      <div style={{ maxWidth: 640, border: '1px solid var(--color-border-default)', borderRadius: 12, padding: 16 }}>
         <WizardDemo orientation="horizontal" />
       </div>
     </div>
@@ -112,7 +116,7 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ maxWidth: 560 }}>
-      <p style={{ margin: '0 0 12px', fontSize: 13, color: '#6b7694' }}>
+      <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-tertiary)' }}>
         Active step is driven by <code>activeStep</code> and <code>Wizard.Panel</code> index. Use Next/Back buttons
         or your own routing.
       </p>
@@ -126,7 +130,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12 }}>
       <WizardDemo orientation="horizontal" />
     </div>
   ),

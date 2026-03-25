@@ -8,17 +8,12 @@ const listBase = css<{ $variant: ListVariant }>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   width: 100%;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'bordered' &&
     css`
-      border: 1px solid #e2e5ed;
+      border: 1px solid ${theme.colors['color-border-default']};
       border-radius: 10px;
       overflow: hidden;
-
-      [data-theme='dark'] &,
-      .dark & {
-        border-color: #2e3550;
-      }
     `}
 `;
 
@@ -34,16 +29,11 @@ export const ItemOuter = styled.li<{ $variant: ListVariant }>`
   display: flex;
   align-items: stretch;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'bordered' &&
     css`
       & + & {
-        border-top: 1px solid #e2e5ed;
-
-        [data-theme='dark'] &,
-        .dark & {
-          border-top-color: #2e3550;
-        }
+        border-top: 1px solid ${theme.colors['color-border-default']};
       }
     `}
 
@@ -58,14 +48,7 @@ export const ItemOuter = styled.li<{ $variant: ListVariant }>`
 
 const interactiveHover = css`
   &:hover {
-    background-color: #f5f7fa;
-  }
-
-  [data-theme='dark'] &,
-  .dark & {
-    &:hover {
-      background-color: #1a1d26;
-    }
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
   }
 `;
 
@@ -102,7 +85,7 @@ export const ItemSurface = styled.div<{ $isInteractive: boolean; $isDisabled: bo
     `}
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 2px;
   }
 `;
@@ -136,7 +119,7 @@ export const ItemLink = styled.a<{ $isDisabled: boolean }>`
     `}
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 2px;
   }
 `;
@@ -144,13 +127,8 @@ export const ItemLink = styled.a<{ $isDisabled: boolean }>`
 export const LeadingSlot = styled.span`
   display: inline-flex;
   flex-shrink: 0;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-top: 2px;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #9ba5be;
-  }
 `;
 
 export const Body = styled.div`
@@ -162,33 +140,23 @@ export const TitleText = styled.span`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   line-height: 1.4;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #f0f2f5;
-  }
 `;
 
 export const Description = styled.span`
   display: block;
   margin-top: 2px;
   font-size: 13px;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   line-height: 1.5;
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: #9ba5be;
-  }
 `;
 
 export const TrailingSlot = styled.span`
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  color: #9ba5be;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   font-size: 12px;
   margin-top: 2px;
 `;

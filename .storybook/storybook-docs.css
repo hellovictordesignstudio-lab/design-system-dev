@@ -1,111 +1,293 @@
-/* ── DOCS PAGE LAYOUT ── */
+/* ── Base: docs shell ── */
+#storybook-docs,
 .sbdocs-wrapper {
-  padding: 48px 56px !important;
-  max-width: 1100px !important;
+  scroll-behavior: smooth;
+}
+
+.sbdocs-wrapper {
+  padding: 48px 56px 80px !important;
+  max-width: 1120px !important;
   margin: 0 auto !important;
   font-family: 'Nunito Sans', system-ui, sans-serif !important;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  /* Base text color follows DS vars (fixes washed-out body when vars lag) */
+  color: var(--color-text-primary) !important;
 }
 
-/* ── COMPONENT TITLE ── */
+/* ── Page background — uses DS CSS variables from GlobalStyles ── */
+#storybook-docs {
+  background: var(--color-bg-canvas) !important;
+  min-height: 100%;
+}
+
+/* Storybook docs root + wrapper: follow html[data-theme] (toolbar dark = full page dark) */
+html[data-theme='dark'] #storybook-docs,
+html[data-theme='dark'] #storybook-docs .sbdocs-wrapper {
+  --vds-docs-preview-stroke: rgba(255, 255, 255, 0.034);
+  background: var(--color-bg-canvas) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme='dark'] .sbdocs-wrapper {
+  color-scheme: dark;
+}
+
+/* ── Title ── */
 .sbdocs-wrapper h1 {
-  font-size: 40px !important;
+  font-size: 2.25rem !important;
   font-weight: 900 !important;
-  letter-spacing: -0.025em !important;
-  color: #0C0D10 !important;
-  margin-bottom: 12px !important;
-  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--color-text-primary, #0c0d10) !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.12 !important;
 }
 
-/* ── DESCRIPTION ── */
+.sbdocs-wrapper h1 + p,
+.sbdocs-wrapper .sbdocs-subtitle {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+  color: var(--color-text-secondary, #6b7694) !important;
+  max-width: 42rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* ── Body copy ── */
 .sbdocs-wrapper .sbdocs-p,
 .sbdocs-wrapper > p {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
-  color: #4A5270 !important;
-  max-width: 680px !important;
-  margin-bottom: 32px !important;
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+  color: var(--color-text-secondary, #4a5270) !important;
+  max-width: 42rem !important;
+  margin-bottom: 1.25rem !important;
 }
 
-/* ── STORY TITLES (Playground, Variants, etc) ── */
+.sbdocs-wrapper a {
+  color: var(--color-text-link, #0055ff) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid rgba(0, 85, 255, 0.25) !important;
+  transition: color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.sbdocs-wrapper a:hover {
+  color: var(--color-text-link-hover, #0044cc) !important;
+  border-bottom-color: rgba(0, 68, 204, 0.45) !important;
+}
+
+[data-theme='dark'] .sbdocs-wrapper a {
+  border-bottom-color: rgba(10, 132, 255, 0.35) !important;
+}
+
+[data-theme='dark'] .sbdocs-wrapper a:hover {
+  border-bottom-color: rgba(102, 176, 255, 0.45) !important;
+}
+
+.sbdocs-wrapper a:focus-visible {
+  outline: 2px solid var(--color-border-focus, #0055ff) !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
+}
+
+/* ── Inline code ── */
+.sbdocs-wrapper p code,
+.sbdocs-wrapper li code,
+.sbdocs-wrapper td code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 0.875em !important;
+  font-weight: 600 !important;
+  padding: 0.15em 0.45em !important;
+  border-radius: 6px !important;
+  background: var(--color-bg-subtle, #f0f2f8) !important;
+  color: var(--color-text-primary, #1a1f35) !important;
+  border: 1px solid var(--color-border-default, #e8ecf5) !important;
+}
+
+/* ── Section headings ── */
 .sbdocs-wrapper h2 {
-  font-size: 13px !important;
+  font-size: 0.8125rem !important;
   font-weight: 800 !important;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  color: #9BA5BE !important;
-  margin: 48px 0 16px !important;
-  padding-top: 40px !important;
-  border-top: 1px solid #EFF1F5 !important;
+  color: var(--color-text-tertiary, #9ba5be) !important;
+  margin: 3rem 0 1rem !important;
+  padding-top: 2.5rem !important;
+  border-top: 1px solid var(--color-border-default, #eff1f5) !important;
+}
+
+.sbdocs-wrapper h2:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
 }
 
 .sbdocs-wrapper h3 {
-  font-size: 18px !important;
+  font-size: 1.125rem !important;
   font-weight: 800 !important;
-  color: #0C0D10 !important;
-  margin: 32px 0 12px !important;
+  color: var(--color-text-primary, #0c0d10) !important;
+  margin: 2rem 0 0.75rem !important;
   letter-spacing: -0.01em !important;
 }
 
-/* ── CANVAS (preview del componente) ── */
+.sbdocs-wrapper ul,
+.sbdocs-wrapper ol {
+  color: var(--color-text-secondary, #4a5270) !important;
+  line-height: 1.75 !important;
+  padding-left: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.sbdocs-wrapper li {
+  margin-bottom: 0.35rem !important;
+}
+
+/* ── Code / source panels ── */
+.sbdocs-wrapper pre,
+.docblock-source pre.prismjs,
+pre.prismjs {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--color-border-default, #e8ecf5) !important;
+  background: var(--color-bg-subtle, #f8f9fc) !important;
+  box-shadow: 0 1px 0 rgba(12, 13, 16, 0.04) !important;
+}
+
+html[data-theme='dark'] .sbdocs-wrapper pre,
+html[data-theme='dark'] .docblock-source pre.prismjs,
+html[data-theme='dark'] pre.prismjs {
+  border-color: var(--vds-docs-preview-stroke) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.sbdocs-wrapper pre code {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ── Story canvas (elevated surface in dark — Apple-style luminance hierarchy) ── */
 .docs-story {
-  border: 1px solid #EFF1F5 !important;
+  border: 1px solid var(--color-border-default, #e8ecf5) !important;
   border-radius: 16px !important;
   overflow: hidden !important;
-  background: #FAFBFF !important;
+  background: var(--color-bg-default, #fafbff) !important;
+  box-shadow: 0 12px 40px rgba(12, 13, 16, 0.06) !important;
 }
 
 .sb-story-container,
 .sbdocs-preview {
-  background: #FAFBFF !important;
+  background: var(--color-bg-default, #fafbff) !important;
   border-radius: 16px !important;
 }
 
-/* ── TOOLBAR DEL CANVAS ── */
+/*
+ * Dark Docs: Storybook Emotion wraps toolbar + canvas in an inner div and often adds a
+ * box-shadow “ring” + border — stacked with .docs-story it reads as a bright white frame.
+ * Match nested “Dark Mode” story cards: ONE hairline (~3.4% white) + soft depth, no double rim.
+ */
+html[data-theme='dark'] .sbdocs-wrapper h2 {
+  border-top-color: var(--vds-docs-preview-stroke) !important;
+}
+
+html[data-theme='dark'] #storybook-docs .sbdocs-preview {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Primary chrome ring (toolbar + story) */
+html[data-theme='dark'] #storybook-docs .sbdocs-preview > div {
+  border: 1px solid var(--vds-docs-preview-stroke) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28) !important;
+  background: var(--color-bg-default) !important;
+}
+
+html[data-theme='dark'] #storybook-docs .docs-story {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='dark'] #storybook-docs .sb-story-container {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* If a Storybook version inlines preview without the inner wrapper, keep a single soft edge */
+html[data-theme='dark'] #storybook-docs .sbdocs-preview:not(:has(> div)) .docs-story {
+  border: 1px solid var(--vds-docs-preview-stroke) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28) !important;
+}
+
 .docs-story .os-viewport {
   border-radius: 16px 16px 0 0 !important;
 }
 
-/* ── SHOW CODE BUTTON ── */
-button[aria-label="Show code"] {
+/* Show code */
+button[aria-label='Show code'],
+button[aria-label='Hide code'] {
   font-family: 'Nunito Sans', sans-serif !important;
   font-size: 12px !important;
   font-weight: 700 !important;
-  color: #0055FF !important;
-  background: transparent !important;
-  border: 1px solid #C5D5FF !important;
-  border-radius: 6px !important;
-  padding: 4px 12px !important;
+  color: var(--color-text-link, #0055ff) !important;
+  background: var(--color-brand-primary-subtle, rgba(0, 85, 255, 0.06)) !important;
+  border: 1px solid var(--color-border-default, #c5d5ff) !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  transition: background 0.15s ease, border-color 0.15s ease !important;
 }
 
-/* ── PROPS TABLE ── */
+button[aria-label='Show code']:hover,
+button[aria-label='Hide code']:hover {
+  background: var(--color-brand-primary-muted, rgba(0, 85, 255, 0.1)) !important;
+  border-color: var(--color-border-strong, #99bdff) !important;
+}
+
+html[data-theme='dark'] button[aria-label='Show code'],
+html[data-theme='dark'] button[aria-label='Hide code'] {
+  border: 1px solid var(--vds-docs-preview-stroke) !important;
+}
+
+html[data-theme='dark'] button[aria-label='Show code']:hover,
+html[data-theme='dark'] button[aria-label='Hide code']:hover {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* ── Props table ── */
 .docblock-argstable {
-  border: 1px solid #EFF1F5 !important;
+  border: 1px solid var(--color-border-default, #e8ecf5) !important;
   border-radius: 12px !important;
   overflow: hidden !important;
-  margin-top: 8px !important;
+  margin-top: 0.5rem !important;
+  box-shadow: 0 1px 0 rgba(12, 13, 16, 0.03) !important;
 }
 
 .docblock-argstable thead tr th {
-  background: #F8F9FC !important;
+  background: var(--color-bg-subtle, #f8f9fc) !important;
   font-size: 10px !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  color: #9BA5BE !important;
-  padding: 10px 16px !important;
-  border-bottom: 1px solid #EFF1F5 !important;
+  color: var(--color-text-tertiary, #9ba5be) !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--color-border-default, #eff1f5) !important;
 }
 
 .docblock-argstable tbody tr td {
   padding: 12px 16px !important;
   font-size: 13px !important;
-  color: #4A5270 !important;
-  border-bottom: 1px solid #F5F6FA !important;
+  color: var(--color-text-secondary, #4a5270) !important;
+  border-bottom: 1px solid var(--color-border-subtle, #f5f6fa) !important;
+  vertical-align: top !important;
 }
 
 .docblock-argstable tbody tr td:first-child {
   font-weight: 700 !important;
-  color: #0C0D10 !important;
+  color: var(--color-text-primary, #0c0d10) !important;
 }
 
 .docblock-argstable tbody tr:last-child td {
@@ -113,69 +295,142 @@ button[aria-label="Show code"] {
 }
 
 .docblock-argstable tbody tr:hover td {
-  background: #F8F9FC !important;
+  background: var(--color-bg-subtle, #f8f9fc) !important;
 }
 
-/* ── DARK MODE ── */
-[data-color-mode="dark"] .docs-story,
-[data-color-mode="dark"] .sb-story-container,
-[data-color-mode="dark"] .sbdocs-preview {
-  background: #1A1F35 !important;
-  border-color: #2E3550 !important;
+html[data-theme='dark'] .docblock-argstable {
+  border: 1px solid var(--vds-docs-preview-stroke) !important;
+  box-shadow: none !important;
 }
 
-[data-color-mode="dark"] .sbdocs-wrapper h1 {
-  color: #F0F2F8 !important;
+html[data-theme='dark'] .docblock-argstable thead tr th {
+  border-bottom-color: var(--vds-docs-preview-stroke) !important;
 }
 
-[data-color-mode="dark"] .sbdocs-wrapper h2 {
-  color: #4A5270 !important;
-  border-top-color: #2E3550 !important;
+html[data-theme='dark'] .docblock-argstable tbody tr td {
+  border-bottom-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-[data-color-mode="dark"] .sbdocs-wrapper h3 {
-  color: #F0F2F8 !important;
+/* ── TOC (Docs page) — “On this page” right rail ── */
+/* Storybook 8: sibling of .sbdocs-content; inner .toc-wrapper + ul.toc-list / a.toc-link */
+
+.sbdocs-wrapper > div:not(.sbdocs-content) {
+  width: 12rem !important;
+  min-width: 12rem !important;
+  flex-shrink: 0 !important;
 }
 
-[data-color-mode="dark"] .sbdocs-wrapper .sbdocs-p,
-[data-color-mode="dark"] .sbdocs-wrapper > p {
-  color: #6B7694 !important;
+.sbdocs-wrapper > div:not(.sbdocs-content) > div {
+  width: 12rem !important;
+  max-width: 12rem !important;
+  padding-top: 3rem !important;
+  padding-bottom: 2rem !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-family: 'Nunito Sans', system-ui, sans-serif !important;
 }
 
-[data-color-mode="dark"] .docblock-argstable {
-  border-color: #2E3550 !important;
+/* Header: icon (three lines) + “On this page” */
+.sbdocs-wrapper div:has(> .toc-wrapper) > div:first-child:not(.toc-wrapper) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding-bottom: 0.75rem !important;
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--color-text-primary, #0c0d10) !important;
 }
 
-[data-color-mode="dark"] .docblock-argstable thead tr th {
-  background: #1A1F35 !important;
-  border-bottom-color: #2E3550 !important;
-  color: #4A5270 !important;
+.sbdocs-wrapper div:has(> .toc-wrapper) > div:first-child:not(.toc-wrapper)::before {
+  content: '' !important;
+  flex-shrink: 0;
+  width: 14px;
+  height: 2px;
+  background: #9ba5be;
+  border-radius: 1px;
+  box-shadow:
+    0 4px 0 #9ba5be,
+    0 8px 0 #9ba5be;
 }
 
-[data-color-mode="dark"] .docblock-argstable tbody tr td {
-  color: #6B7694 !important;
-  border-bottom-color: #1A1F35 !important;
+/* Single light rail + list */
+.sbdocs-wrapper .toc-wrapper {
+  margin-top: 0 !important;
+  border-left: 1px solid var(--color-border-default, #e0e3eb) !important;
+  padding-left: 0.75rem !important;
+  box-sizing: border-box !important;
 }
 
-[data-color-mode="dark"] .docblock-argstable tbody tr td:first-child {
-  color: #C5CBDA !important;
+.sbdocs-wrapper .toc-wrapper > .toc-list,
+.sbdocs-wrapper .toc-wrapper .toc-list {
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
 }
 
-[data-color-mode="dark"] .docblock-argstable tbody tr:hover td {
-  background: #1A1F35 !important;
+.sbdocs-wrapper .toc-list-item {
+  position: relative !important;
+  list-style: none !important;
+  margin-left: 0 !important;
+  padding-top: 0.3rem !important;
+  padding-bottom: 0.3rem !important;
 }
 
-/* ── STORYBOOK ROOT BG ── */
+.sbdocs-wrapper .toc-list-item::before {
+  display: none !important;
+  content: none !important;
+}
+
+.sbdocs-wrapper .toc-list-item > a.toc-link {
+  display: block !important;
+  color: var(--color-text-secondary, #666666) !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: color 0.15s ease !important;
+}
+
+.sbdocs-wrapper .toc-list-item > a.toc-link:hover {
+  color: var(--color-text-link, #0055ff) !important;
+}
+
+.sbdocs-wrapper .toc-list-item.is-active-li > a.toc-link {
+  color: var(--color-text-primary, #0c0d10) !important;
+  font-weight: 700 !important;
+}
+
+/* Nested heading levels */
+.sbdocs-wrapper .toc-wrapper .toc-list .toc-list {
+  margin-top: 0.15rem !important;
+  padding-left: 0.65rem !important;
+}
+
+/* TOC: dark refinements (icons + rail — semantic tokens already drive text) */
+[data-theme='dark'] .sbdocs-wrapper div:has(> .toc-wrapper) > div:first-child:not(.toc-wrapper)::before {
+  background: #6b7694;
+  box-shadow:
+    0 4px 0 #6b7694,
+    0 8px 0 #6b7694;
+}
+
+[data-theme='dark'] .sbdocs-wrapper .toc-wrapper {
+  border-left-color: var(--color-border-default) !important;
+}
+
+[data-theme='dark'] .sbdocs-wrapper .toc-list-item > a.toc-link:hover {
+  color: var(--color-text-link-hover) !important;
+}
+
+/* ── Story iframe roots ── */
 .docs-story,
 .sb-story-container,
 .sbdocs-preview .docs-story,
-#storybook-root,
-#storybook-docs {
-  background: white !important;
-}
-
-[data-color-mode="dark"] .docs-story,
-[data-color-mode="dark"] .sb-story-container,
-[data-color-mode="dark"] #storybook-root {
-  background: #0C0D10 !important;
+#storybook-root {
+  background: var(--color-bg-default) !important;
 }

@@ -9,17 +9,18 @@ const meta: Meta<typeof Link> = {
   parameters: {
     docs: {
       description: {
-        component: 'Navigational element for internal and external links. Supports icons, underline styles, and disabled state.',
+        component:
+          'A link for internal or external navigation. Supports icons, underline styles, and a disabled state.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['default', 'subtle', 'inverse'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    underline: { control: 'select', options: ['always', 'hover', 'none'] },
-    isExternal: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    children: { control: 'text' },
+    variant: { control: 'select', options: ['default', 'subtle', 'inverse'], description: 'Color treatment for the surface.' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Font size.' },
+    underline: { control: 'select', options: ['always', 'hover', 'none'], description: 'When to show an underline.' },
+    isExternal: { control: 'boolean', description: 'Opens in a new tab with `rel` attributes.' },
+    isDisabled: { control: 'boolean', description: 'Non-interactive styling.' },
+    children: { control: 'text', description: 'Link text.' },
   },
 };
 
@@ -43,7 +44,7 @@ export const Variants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <Link href="#" variant="default">Default — brand color</Link>
       <Link href="#" variant="subtle">Subtle — secondary text color</Link>
-      <div style={{ background: '#0C0D10', padding: '12px 16px', borderRadius: 8, display: 'inline-flex' }}>
+      <div style={{ background: 'var(--color-bg-canvas)', padding: '12px 16px', borderRadius: 8, display: 'inline-flex' }}>
         <Link href="#" variant="inverse">Inverse — for dark backgrounds</Link>
       </div>
     </div>
@@ -84,10 +85,10 @@ export const WithIcons: Story = {
 
 export const Inline: Story = {
   parameters: {
-    docs: { description: { story: 'Links used inline within body text.' } },
+    docs: { description: { story: 'Inline links inside body text.' } },
   },
   render: () => (
-    <p style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 15, color: 'var(--color-text-primary, #0C0D10)', lineHeight: 1.7, maxWidth: 480 }}>
+    <p style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 15, color: 'var(--color-text-primary)', lineHeight: 1.7, maxWidth: 480 }}>
       Our{' '}
       <Link href="#" size="md">design tokens</Link>
       {' '}follow the same structure used by{' '}
@@ -113,7 +114,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
       <Link href="#" variant="default">Default on dark</Link>
       <Link href="#" variant="subtle">Subtle on dark</Link>
       <Link href="#" variant="inverse">Inverse on dark</Link>

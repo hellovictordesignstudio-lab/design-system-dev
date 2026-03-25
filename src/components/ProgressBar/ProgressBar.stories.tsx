@@ -10,18 +10,22 @@ const meta: Meta<typeof ProgressBar> = {
     docs: {
       description: {
         component:
-          'ProgressBar communicates completion of a task. Supports variants, sizes, indeterminate mode, and value display.',
+          'Shows how much of a task is complete. Supports variants, sizes, an indeterminate state, and an optional value label.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['default', 'success', 'error', 'warning'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    value: { control: { type: 'range', min: 0, max: 100 } },
-    isIndeterminate: { control: 'boolean' },
-    showValue: { control: 'boolean' },
-    isAnimated: { control: 'boolean' },
-    label: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['default', 'success', 'error', 'warning'],
+      description: 'Semantic color of the fill.',
+    },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Bar height.' },
+    value: { control: { type: 'range', min: 0, max: 100 }, description: 'Completion from 0 to 100.' },
+    isIndeterminate: { control: 'boolean', description: 'Indeterminate animation (ignores value).' },
+    showValue: { control: 'boolean', description: 'Shows the numeric value.' },
+    isAnimated: { control: 'boolean', description: 'Animates the fill.' },
+    label: { control: 'text', description: 'Accessible label for the bar.' },
   },
 };
 
@@ -120,5 +124,5 @@ export const DarkMode: Story = {
       <ProgressBar isIndeterminate label="Indeterminate" />
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

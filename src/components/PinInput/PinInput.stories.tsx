@@ -9,22 +9,23 @@ const meta: Meta<typeof PinInput> = {
   parameters: {
     docs: {
       description: {
-        component: 'OTP / PIN input with individual cells. Supports numeric and alphanumeric modes, masking, paste, keyboard navigation, and auto-advance.',
+        component:
+          'A one-time or PIN field with one cell per character. Supports numeric or alphanumeric input, masking, paste, keyboard navigation, and auto-advance.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    type: { control: 'radio', options: ['number', 'alphanumeric'] },
-    length: { control: { type: 'range', min: 4, max: 8, step: 1 } },
-    mask: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    isRequired: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    autoFocus: { control: 'boolean' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Cell size.' },
+    type: { control: 'radio', options: ['number', 'alphanumeric'], description: 'Allowed character set.' },
+    length: { control: { type: 'range', min: 4, max: 8, step: 1 }, description: 'Number of cells.' },
+    mask: { control: 'boolean', description: 'Masks input (password style).' },
+    isDisabled: { control: 'boolean', description: 'Disables all cells.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    autoFocus: { control: 'boolean', description: 'Focuses the first cell on mount.' },
+    label: { control: 'text', description: 'Label above the cells.' },
+    helperText: { control: 'text', description: 'Hint below the cells.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
   },
 };
 
@@ -132,7 +133,7 @@ export const Controlled: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 28 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 28 }}>
       <PinInput label="Verification code" length={6} helperText="Enter the code from your authenticator app." />
       <PinInput label="Error state" length={6} hasError errorText="Code has expired." />
       <PinInput label="Masked" length={6} mask helperText="Hidden input." />

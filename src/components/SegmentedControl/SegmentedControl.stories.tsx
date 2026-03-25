@@ -10,14 +10,15 @@ const meta: Meta<typeof SegmentedControl> = {
   parameters: {
     docs: {
       description: {
-        component: 'A set of mutually exclusive options rendered as a pill group. Ideal for switching views, modes, or filters.',
+        component:
+          'A set of mutually exclusive options in a pill layout. Use for views, modes, or filters.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    fullWidth: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Height and font size.' },
+    fullWidth: { control: 'boolean', description: 'Stretches to the container width.' },
+    isDisabled: { control: 'boolean', description: 'Disables all segments.' },
   },
 };
 
@@ -44,7 +45,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'flex-start' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Text only</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Text only</p>
         <SegmentedControl
           defaultValue="a"
           aria-label="View"
@@ -55,7 +56,7 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With icons</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With icons</p>
         <SegmentedControl
           defaultValue="left"
           aria-label="Align"
@@ -204,7 +205,7 @@ export const Controlled: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0C0D10', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start' }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 32, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start' }}>
       <SegmentedControl
         defaultValue="grid"
         options={[

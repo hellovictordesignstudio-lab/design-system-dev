@@ -21,14 +21,14 @@ export const Label = styled.label`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-primary, #0C0D10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 export const ValueDisplay = styled.span`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-brand, #0055FF);
+  color: ${({ theme }) => theme.colors['color-text-link']};
   min-width: 32px;
   text-align: right;
 `;
@@ -66,7 +66,7 @@ interface TrackProps {
 
 export const Track = styled.div<TrackProps>`
   position: relative;
-  background: var(--color-border-default, #DDE1EA);
+  background: ${({ theme }) => theme.colors['color-border-default']};
   border-radius: 9999px;
   overflow: hidden;
 
@@ -89,7 +89,7 @@ interface FilledTrackProps {
 
 export const FilledTrack = styled.div<FilledTrackProps>`
   position: absolute;
-  background: var(--color-interactive-default, #0055FF);
+  background: ${({ theme }) => theme.colors['color-brand-primary']};
   border-radius: 9999px;
 
   ${({ $orientation, $percent }) =>
@@ -120,9 +120,9 @@ export const Thumb = styled.div<ThumbProps>`
   width: ${({ $size }) => thumbSize[$size]};
   height: ${({ $size }) => thumbSize[$size]};
   border-radius: 50%;
-  background: #fff;
-  border: 2.5px solid var(--color-interactive-default, #0055FF);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  background: ${({ theme }) => theme.colors['color-bg-default']};
+  border: 2.5px solid ${({ theme }) => theme.colors['color-brand-primary']};
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   transform: translate(-50%, -50%);
   transition: box-shadow 0.15s, transform 0.1s;
   cursor: grab;
@@ -141,17 +141,21 @@ export const Thumb = styled.div<ThumbProps>`
           left: ${$percent}%;
         `}
 
-  ${({ $isDragging }) =>
+  ${({ $isDragging, $orientation, theme }) =>
     $isDragging &&
     css`
-      box-shadow: 0 0 0 4px var(--color-bg-brand-subtle, #E6EEFF);
+      box-shadow: 0 0 0 4px ${theme.colors['color-brand-primary-subtle']};
       cursor: grabbing;
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: ${$orientation === 'vertical'
+        ? 'translate(-50%, 50%) scale(1.1)'
+        : 'translate(-50%, -50%) scale(1.1)'};
     `}
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 4px var(--color-interactive-focus, #99BDFF);
+    box-shadow: 0 0 0 4px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.4)' : 'rgba(0, 85, 255, 0.25)'};
   }
 `;
 
@@ -164,14 +168,14 @@ export const MinMaxLabel = styled.span`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-tertiary, #9BA5BE);
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 export const HelperText = styled.span`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-secondary, #4A5270);
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
 `;
 
 export const NativeInput = styled.input`

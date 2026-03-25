@@ -9,16 +9,17 @@ const meta: Meta<typeof Switch> = {
   parameters: {
     docs: {
       description: {
-        component: 'Switch toggles a boolean state on/off. Supports sizes, labels on either side, and disabled state.',
+        component:
+          'A switch turns a setting on or off. Supports sizes, optional labels on either side, and a disabled state.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    labelPosition: { control: 'select', options: ['left', 'right'] },
-    checked: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    label: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Track and thumb size.' },
+    labelPosition: { control: 'select', options: ['left', 'right'], description: 'Label side relative to the track.' },
+    checked: { control: 'boolean', description: 'On or off state.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    label: { control: 'text', description: 'Label text.' },
   },
 };
 
@@ -93,5 +94,5 @@ export const DarkMode: Story = {
       <Switch checked isDisabled label="Disabled" onChange={() => {}} />
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

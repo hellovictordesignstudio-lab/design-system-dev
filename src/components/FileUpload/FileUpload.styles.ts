@@ -16,7 +16,7 @@ export const fadeIn = keyframes`
 // ── Drag Zone heights ──────────────────────────────────────────────────────────
 
 const zoneHeights: Record<FileUploadSize, string> = {
-  sm: '0px',  // sm = list-only, no drag zone
+  sm: '0px', // sm = list-only, no drag zone
   md: '140px',
   lg: '200px',
 };
@@ -44,58 +44,45 @@ export const DropZone = styled.div<{
   gap: 8px;
   min-height: ${({ $size }) => zoneHeights[$size]};
   border-radius: 14px;
-  border: 1.5px dashed ${({ $isDragging }) => ($isDragging ? '#0055FF' : '#C8D4E8')};
-  background-color: ${({ $isDragging }) =>
-    $isDragging ? 'rgba(0,85,255,0.04)' : '#F8F9FC'};
+  border: 1.5px dashed
+    ${({ theme, $isDragging }) =>
+      $isDragging ? theme.colors['color-border-focus'] : theme.colors['color-border-strong']};
+  background-color: ${({ theme, $isDragging }) =>
+    $isDragging
+      ? theme.mode === 'dark'
+        ? 'rgba(10, 132, 255, 0.12)'
+        : 'rgba(0, 85, 255, 0.04)'
+      : theme.colors['color-bg-subtle']};
   cursor: pointer;
   transition: border-color 200ms ease, background-color 200ms ease;
   padding: 24px 16px;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isDragging }) =>
-      $isDragging ? 'rgba(0,85,255,0.08)' : '#1A1F35'};
-    border-color: ${({ $isDragging }) => ($isDragging ? '#0055FF' : '#2E3550')};
-  }
 `;
 
 export const ZoneIcon = styled.div`
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   display: flex;
   align-items: center;
-
-  [data-theme='dark'] &, .dark & {
-    color: #6B7694;
-  }
 `;
 
 export const ZoneLabel = styled.p`
   margin: 0;
   font-size: 14px;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   text-align: center;
 
   span {
-    color: #0055FF;
+    color: ${({ theme }) => theme.colors['color-text-link']};
     font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
-  }
-
-  [data-theme='dark'] &, .dark & {
-    color: #9BA5BE;
-    span { color: #7BA4FF; }
   }
 `;
 
 export const ZoneHint = styled.p`
   margin: 0;
   font-size: 12px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   text-align: center;
-
-  [data-theme='dark'] &, .dark & {
-    color: #6B7694;
-  }
 `;
 
 // ── File List ─────────────────────────────────────────────────────────────────
@@ -113,35 +100,32 @@ export const FileRow = styled.div<{ $status: 'uploading' | 'success' | 'error' }
   padding: 10px 12px;
   border-radius: 12px;
   border: 1.5px solid
-    ${({ $status }) =>
-      $status === 'success' ? '#16A34A' : $status === 'error' ? '#D22232' : '#E2E5ED'};
-  background-color: ${({ $status }) =>
+    ${({ theme, $status }) =>
+      $status === 'success'
+        ? theme.colors['color-success-default']
+        : $status === 'error'
+          ? theme.colors['color-error-default']
+          : theme.colors['color-border-default']};
+  background-color: ${({ theme, $status }) =>
     $status === 'success'
-      ? 'rgba(22,163,74,0.04)'
+      ? theme.colors['color-success-subtle']
       : $status === 'error'
-      ? 'rgba(210,34,50,0.04)'
-      : '#ffffff'};
+        ? theme.colors['color-error-subtle']
+        : theme.colors['color-bg-default']};
   animation: ${fadeIn} 200ms ease forwards;
   transition: border-color 300ms ease, background-color 300ms ease;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $status }) =>
-      $status === 'success'
-        ? 'rgba(22,163,74,0.08)'
-        : $status === 'error'
-        ? 'rgba(210,34,50,0.08)'
-        : '#1A1F35'};
-    border-color: ${({ $status }) =>
-      $status === 'success' ? '#16A34A' : $status === 'error' ? '#D22232' : '#2E3550'};
-  }
 `;
 
 export const FileIcon = styled.div<{ $status: 'uploading' | 'success' | 'error' }>`
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: ${({ $status }) =>
-    $status === 'success' ? '#16A34A' : $status === 'error' ? '#D22232' : '#6B7694'};
+  color: ${({ theme, $status }) =>
+    $status === 'success'
+      ? theme.colors['color-success-default']
+      : $status === 'error'
+        ? theme.colors['color-error-default']
+        : theme.colors['color-text-secondary']};
 `;
 
 export const FileMeta = styled.div`
@@ -153,38 +137,30 @@ export const FileName = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 export const FileSize = styled.p`
   margin: 2px 0 0;
   font-size: 11px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 export const ProgressBar = styled.div`
   margin-top: 6px;
   height: 3px;
   border-radius: 9999px;
-  background-color: #E2E5ED;
+  background-color: ${({ theme }) => theme.colors['color-border-default']};
   overflow: hidden;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #2E3550;
-  }
 `;
 
 export const ProgressFill = styled.div<{ $progress: number; $animate: boolean }>`
   height: 100%;
   border-radius: 9999px;
-  background-color: #0055FF;
+  background-color: ${({ theme }) => theme.colors['color-brand-primary']};
   width: ${({ $progress }) => $progress}%;
   transition: width 200ms ease;
 
@@ -200,7 +176,7 @@ export const ProgressFill = styled.div<{ $progress: number; $animate: boolean }>
 export const ErrorMsg = styled.p`
   margin: 3px 0 0;
   font-size: 11px;
-  color: #D22232;
+  color: ${({ theme }) => theme.colors['color-error-default']};
 `;
 
 export const RemoveBtn = styled.button`
@@ -213,16 +189,16 @@ export const RemoveBtn = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   flex-shrink: 0;
   transition: background-color 150ms ease, color 150ms ease;
 
-  &:hover { background-color: #F0F2F5; color: #D22232; }
-  &:focus-visible { outline: 2px solid #0055FF; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #6B7694;
-    &:hover { background-color: #2E3550; color: #F87171; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+    color: ${({ theme }) => theme.colors['color-error-default']};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
   }
 `;
 

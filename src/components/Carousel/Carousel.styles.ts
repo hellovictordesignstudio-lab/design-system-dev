@@ -39,29 +39,30 @@ export const ArrowBtn = styled.button<{ $side: 'left' | 'right'; $visible: boole
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid #E2E5ED;
-  background: rgba(255,255,255,0.9);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background: ${({ theme }) =>
+    theme.mode === 'dark' ? 'rgba(30, 31, 50, 0.9)' : 'rgba(255, 255, 255, 0.9)'};
   backdrop-filter: blur(4px);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #111827;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   z-index: 2;
   transition: opacity 200ms ease, background-color 150ms ease, transform 150ms ease;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
   outline: none;
 
-  &:hover { background: #ffffff; transform: translateY(-50%) scale(1.05); }
-  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,85,255,0.2); }
-
-  [data-theme='dark'] &, .dark & {
-    background: rgba(30,31,50,0.9);
-    border-color: #2E3550;
-    color: #F0F2F5;
-    &:hover { background: #1A1F35; }
+  &:hover {
+    background: ${({ theme }) => theme.colors['color-bg-default']};
+    transform: translateY(-50%) scale(1.05);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.2)'};
   }
 `;
 
@@ -80,19 +81,20 @@ export const Dot = styled.button<{ $isActive: boolean }>`
   padding: 0;
   cursor: pointer;
   border-radius: 9999px;
-  background-color: ${({ $isActive }) => ($isActive ? '#0055FF' : '#C8D4E8')};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-brand-primary'] : theme.colors['color-border-strong']};
   height: 6px;
   width: ${({ $isActive }) => ($isActive ? '20px' : '6px')};
   transition: width 200ms ease, background-color 200ms ease;
   outline: none;
 
-  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,85,255,0.3); }
+  &:focus-visible {
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.45)' : 'rgba(0, 85, 255, 0.3)'};
+  }
 
   @media (prefers-reduced-motion: reduce) {
     transition: background-color 200ms ease;
-  }
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isActive }) => ($isActive ? '#0055FF' : '#2E3550')};
   }
 `;

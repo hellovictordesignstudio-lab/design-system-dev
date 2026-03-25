@@ -16,9 +16,26 @@ const meta: Meta<typeof Combobox> = {
   parameters: {
     docs: {
       description: {
-        component: 'Autocomplete combobox: filter options by typing or pick from the list.',
+        component:
+          'A combobox filters options as you type and selects a single value from the list.',
       },
     },
+  },
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Field height and font size.' },
+    options: { control: false, description: 'Array of options with `value` and `label` (set in code).' },
+    value: { control: 'text', description: 'Selected value.' },
+    allowFreeText: { control: 'boolean', description: 'Allows values not listed in options.' },
+    placeholder: { control: 'text', description: 'Placeholder when empty.' },
+    label: { control: 'text', description: 'Label above the field.' },
+    helperText: { control: 'text', description: 'Hint below the field.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    isDisabled: { control: 'boolean', description: 'Disables the field.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    emptyText: { control: 'text', description: 'Message when the filter has no matches.' },
+    onChange: { control: false, description: 'Called when the selection changes.' },
+    onInputChange: { control: false, description: 'Called when the typed text changes.' },
   },
 };
 
@@ -39,7 +56,7 @@ export const Playground: Story = {
           onChange={setV}
           placeholder="Search language…"
         />
-        <p style={{ marginTop: 12, fontSize: 13, color: '#6b7694' }}>Value: {v ?? '—'}</p>
+        <p style={{ marginTop: 12, fontSize: 13, color: 'var(--color-text-tertiary)' }}>Value: {v ?? '—'}</p>
       </div>
     );
   },
@@ -54,11 +71,11 @@ export const Variants: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 360 }}>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Select from list</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Select from list</p>
           <Combobox label="Language" options={options} value={a} onChange={setA} placeholder="Pick one…" />
         </div>
         <div>
-          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Free text (tags)</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Free text (tags)</p>
           <Combobox
             label="Tags"
             options={[
@@ -153,7 +170,7 @@ export const DarkMode: Story = {
   render: () => {
     const [v, setV] = useState<string | undefined>();
     return (
-      <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12, maxWidth: 360 }}>
+      <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12, maxWidth: 360 }}>
         <Combobox label="Language" options={options} value={v} onChange={setV} placeholder="Search…" />
       </div>
     );

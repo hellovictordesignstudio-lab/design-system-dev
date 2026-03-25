@@ -10,17 +10,17 @@ const meta: Meta<typeof Radio> = {
     docs: {
       description: {
         component:
-          'Radio buttons let users select exactly one option. Use RadioGroup to manage a set of related radios.',
+          'A radio button selects exactly one option in a group. Use **RadioGroup** to associate related radios.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    isDisabled: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Control and label size.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    label: { control: 'text', description: 'Label beside the control.' },
+    helperText: { control: 'text', description: 'Hint below the group.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
   },
 };
 
@@ -102,7 +102,7 @@ export const RadioGroupStory: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <div style={{ marginBottom: '8px', fontSize: '13px', fontWeight: 700, color: '#111827' }}>
+          <div style={{ marginBottom: '8px', fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
             Billing period
           </div>
           <RadioGroup name="plan" value={plan} onChange={setPlan}>
@@ -111,7 +111,7 @@ export const RadioGroupStory: Story = {
             <Radio value="lifetime" label="Lifetime" helperText="One-time payment" />
           </RadioGroup>
         </div>
-        <div style={{ fontSize: '12px', color: '#9BA5BE' }}>Selected: {plan}</div>
+        <div style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Selected: {plan}</div>
       </div>
     );
   },
@@ -130,5 +130,5 @@ export const DarkMode: Story = {
       </RadioGroup>
     );
   },
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

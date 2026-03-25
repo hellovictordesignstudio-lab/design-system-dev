@@ -66,16 +66,12 @@ const RootWrapper = styled.div<{ $variant: AccordionVariant }>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   width: 100%;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'bordered' &&
     css`
-      border: 1px solid #E2E5ED;
+      border: 1px solid ${theme.colors['color-border-default']};
       border-radius: 14px;
       overflow: hidden;
-
-      [data-theme='dark'] &, .dark & {
-        border-color: #2E3550;
-      }
     `}
 
   ${({ $variant }) =>
@@ -88,40 +84,32 @@ const RootWrapper = styled.div<{ $variant: AccordionVariant }>`
 `;
 
 const ItemWrapper = styled.div<{ $variant: AccordionVariant; $isDisabled: boolean }>`
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'default' &&
     css`
-      border-bottom: 1px solid #F0F2F5;
+      border-bottom: 1px solid ${theme.colors['color-border-subtle']};
 
-      [data-theme='dark'] &, .dark & {
-        border-bottom-color: #2E3550;
+      &:last-child {
+        border-bottom: none;
       }
-
-      &:last-child { border-bottom: none; }
     `}
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'bordered' &&
     css`
-      border-bottom: 1px solid #E2E5ED;
+      border-bottom: 1px solid ${theme.colors['color-border-default']};
 
-      [data-theme='dark'] &, .dark & {
-        border-bottom-color: #2E3550;
+      &:last-child {
+        border-bottom: none;
       }
-
-      &:last-child { border-bottom: none; }
     `}
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'separated' &&
     css`
-      border: 1px solid #E2E5ED;
+      border: 1px solid ${theme.colors['color-border-default']};
       border-radius: 12px;
       overflow: hidden;
-
-      [data-theme='dark'] &, .dark & {
-        border-color: #2E3550;
-      }
     `}
 
   ${({ $isDisabled }) =>
@@ -145,25 +133,19 @@ const TriggerButton = styled.button<{ $isOpen: boolean }>`
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   text-align: left;
   gap: 12px;
   transition: background-color 150ms ease;
 
   &:hover {
-    background-color: #F8F9FC;
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
   }
 
   &:focus-visible {
-    outline: 2px solid #0055FF;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: -2px;
-  }
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-
-    &:hover { background-color: #1E2438; }
   }
 `;
 
@@ -179,7 +161,7 @@ const ChevronWrap = styled.span<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   transition: transform 200ms ease;
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
@@ -193,12 +175,8 @@ const ContentOuter = styled.div<{ $isOpen: boolean }>`
 const ContentInner = styled.div`
   padding: 0 16px 16px;
   font-size: 14px;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   line-height: 1.7;
-
-  [data-theme='dark'] &, .dark & {
-    color: #9BA5BE;
-  }
 `;
 
 // ── Root ──────────────────────────────────────────────────────────────────────

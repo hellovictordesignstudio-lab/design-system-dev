@@ -8,14 +8,19 @@ const meta: Meta<typeof Alert> = {
   parameters: {
     docs: {
       description: {
-        component: 'Alerts communicate feedback or status messages to users.',
+        component:
+          'An alert presents a short, important message. Choose **info**, **success**, **warning**, or **error** to match the situation.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['info', 'success', 'error', 'warning'] },
-    title: { control: 'text' },
-    children: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['info', 'success', 'error', 'warning'],
+      description: 'Tone and icon treatment.',
+    },
+    title: { control: 'text', description: 'Heading line.' },
+    children: { control: 'text', description: 'Body content.' },
   },
 };
 
@@ -132,7 +137,7 @@ export const DarkMode: Story = {
   render: () => (
     <div
       data-theme="dark"
-      style={{ background: '#0c0d10', padding: 24, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}
+      style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}
     >
       <Alert variant="info" title="Information">
         Neutral message on dark background.

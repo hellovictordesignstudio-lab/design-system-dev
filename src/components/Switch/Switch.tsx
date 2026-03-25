@@ -36,7 +36,8 @@ const Track = styled.span<{ $size: SwitchSize; $checked: boolean }>`
   width: ${({ $size }) => TRACK[$size].width}px;
   height: ${({ $size }) => TRACK[$size].height}px;
   border-radius: 9999px;
-  background-color: ${({ $checked }) => ($checked ? '#0055FF' : '#DDE1EA')};
+  background-color: ${({ theme, $checked }) =>
+    $checked ? theme.colors['color-brand-primary'] : theme.colors['color-border-default']};
   transition: background-color 200ms ease;
 `;
 
@@ -50,7 +51,7 @@ const Thumb = styled.span<{ $size: SwitchSize; $checked: boolean }>`
   width: ${({ $size }) => TRACK[$size].thumb}px;
   height: ${({ $size }) => TRACK[$size].thumb}px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   transition: left 200ms ease;
 `;
@@ -61,7 +62,9 @@ const SwitchContainer = styled.span`
   align-items: center;
 
   &:focus-within ${Track} {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -78,7 +81,7 @@ const Wrapper = styled.label<{ $isDisabled: boolean; $labelPosition: LabelPositi
 const LabelText = styled.span`
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 

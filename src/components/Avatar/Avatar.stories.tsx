@@ -11,16 +11,20 @@ const meta: Meta<typeof Avatar> = {
     docs: {
       description: {
         component:
-          'Avatar displays a user image, initials fallback, status indicator, or badge. AvatarGroup stacks multiple avatars.',
+          'Presents an image, initials, status, or badge. Use **AvatarGroup** to stack multiple avatars.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'] },
-    shape: { control: 'select', options: ['circle', 'square'] },
-    status: { control: 'select', options: ['online', 'away', 'busy', 'offline', ''] },
-    src: { control: 'text' },
-    name: { control: 'text' },
+    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'], description: 'Diameter of the avatar.' },
+    shape: { control: 'select', options: ['circle', 'square'], description: 'Outer shape.' },
+    status: {
+      control: 'select',
+      options: ['online', 'away', 'busy', 'offline', ''],
+      description: 'Optional status dot; empty hides the dot.',
+    },
+    src: { control: 'text', description: 'Image URL.' },
+    name: { control: 'text', description: 'Used for initials when `src` is missing.' },
   },
 };
 
@@ -43,11 +47,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <span style={{ fontSize: 11, fontWeight: 600, color: '#6b7694' }}>Circle</span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Circle</span>
         <Avatar name="Circle User" shape="circle" size="lg" />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <span style={{ fontSize: 11, fontWeight: 600, color: '#6b7694' }}>Square</span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Square</span>
         <Avatar name="Square User" shape="square" size="lg" />
       </div>
     </div>
@@ -117,7 +121,7 @@ export const AvatarGroupStory: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#9BA5BE' }}>max=4 (default)</div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>max=4 (default)</div>
         <AvatarGroup max={4}>
           <Avatar name="Alice" />
           <Avatar name="Bob Smith" />
@@ -128,7 +132,7 @@ export const AvatarGroupStory: Story = {
         </AvatarGroup>
       </div>
       <div>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#9BA5BE' }}>max=3, size=lg</div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>max=3, size=lg</div>
         <AvatarGroup max={3} size="lg">
           <Avatar name="Alice" />
           <Avatar name="Bob Smith" />
@@ -138,7 +142,7 @@ export const AvatarGroupStory: Story = {
         </AvatarGroup>
       </div>
       <div>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#9BA5BE' }}>No overlap</div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>No overlap</div>
         <AvatarGroup overlap={false} max={4}>
           <Avatar name="Alice" />
           <Avatar name="Bob Smith" />
@@ -167,5 +171,5 @@ export const DarkMode: Story = {
       </AvatarGroup>
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

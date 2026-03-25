@@ -11,7 +11,7 @@ const meta: Meta<typeof DropdownMenu> = {
     docs: {
       description: {
         component:
-          'Dropdown menu anchored to a trigger. **Menu** is an alias of **DropdownMenu** for parity with design checklists.',
+          'A menu anchored to a trigger. **Menu** is an alias of **DropdownMenu**.',
       },
     },
   },
@@ -116,11 +116,11 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, minHeight: 200 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With sections</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With sections</p>
         {trigger}
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Destructive action</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Destructive action</p>
         <DropdownMenu>
           <DropdownMenu.Trigger>
             <Button variant="secondary">Delete…</Button>
@@ -141,7 +141,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12, minHeight: 200 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12, minHeight: 200 }}>
       {trigger}
     </div>
   ),

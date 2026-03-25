@@ -18,7 +18,7 @@ interface TrackProps {
 export const Track = styled.div<TrackProps>`
   display: inline-flex;
   align-items: center;
-  background: var(--color-bg-tertiary, #EFF1F5);
+  background: ${({ theme }) => theme.colors['color-bg-muted']};
   border-radius: 10px;
   padding: ${({ $size }) => trackPadding[$size]};
   gap: 2px;
@@ -53,31 +53,27 @@ export const Segment = styled.button<SegmentProps>`
 
   ${({ $size }) => sizeStyles[$size]}
 
-  background: ${({ $isActive }) =>
-    $isActive ? 'var(--color-bg-primary, #FFFFFF)' : 'transparent'};
-  color: ${({ $isActive, $isDisabled }) =>
+  background: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-bg-default'] : 'transparent'};
+  color: ${({ theme, $isActive, $isDisabled }) =>
     $isDisabled
-      ? 'var(--color-text-tertiary, #9BA5BE)'
+      ? theme.colors['color-text-tertiary']
       : $isActive
-      ? 'var(--color-text-primary, #0C0D10)'
-      : 'var(--color-text-secondary, #4A5270)'};
+        ? theme.colors['color-text-primary']
+        : theme.colors['color-text-secondary']};
 
-  box-shadow: ${({ $isActive }) =>
-    $isActive
-      ? '0 1px 4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04)'
-      : 'none'};
+  box-shadow: ${({ theme, $isActive }) => ($isActive ? theme.shadows.sm : 'none')};
 
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.45 : 1)};
 
   &:hover:not(:disabled) {
-    color: ${({ $isActive }) =>
-      $isActive ? 'var(--color-text-primary, #0C0D10)' : 'var(--color-text-primary, #0C0D10)'};
-    background: ${({ $isActive }) =>
-      $isActive ? 'var(--color-bg-primary, #FFFFFF)' : 'rgba(0,0,0,0.04)'};
+    color: ${({ theme }) => theme.colors['color-text-primary']};
+    background: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors['color-bg-default'] : theme.colors['color-bg-subtle']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px var(--color-interactive-focus, #99BDFF);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
     z-index: 2;
   }
 

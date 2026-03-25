@@ -38,7 +38,7 @@ const Item = styled.li`
 `;
 
 const Sep = styled.span`
-  color: #c5cbda;
+  color: ${({ theme }) => theme.colors['color-border-strong']};
   margin: 0 6px;
   font-size: 12px;
   display: inline-flex;
@@ -52,7 +52,7 @@ const LinkItem = styled.a`
   gap: 4px;
   font-size: 13px;
   font-weight: 500;
-  color: #0055ff;
+  color: ${({ theme }) => theme.colors['color-text-link']};
   text-decoration: none;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   cursor: pointer;
@@ -68,7 +68,7 @@ const CurrentItem = styled.span`
   gap: 4px;
   font-size: 13px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
@@ -77,7 +77,7 @@ const CollapseButton = styled.button`
   align-items: center;
   font-size: 13px;
   font-weight: 500;
-  color: #0055ff;
+  color: ${({ theme }) => theme.colors['color-text-link']};
   background: none;
   border: none;
   padding: 0;

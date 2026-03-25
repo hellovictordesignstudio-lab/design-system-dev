@@ -13,24 +13,24 @@ export interface BadgeProps {
 
 const variantStyles = {
   default: css`
-    background-color: #F0F2F5;
-    color: #4A5270;
+    background-color: ${({ theme }) => theme.colors['color-bg-muted']};
+    color: ${({ theme }) => theme.colors['color-text-secondary']};
   `,
   primary: css`
-    background-color: #E8EEFF;
-    color: #2952CC;
+    background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+    color: ${({ theme }) => theme.colors['color-brand-primary-hover']};
   `,
   success: css`
-    background-color: #E6F5EE;
-    color: #1A7A45;
+    background-color: ${({ theme }) => theme.colors['color-success-subtle']};
+    color: ${({ theme }) => theme.colors['color-success-text']};
   `,
   error: css`
-    background-color: #FCEAEC;
-    color: #A81B28;
+    background-color: ${({ theme }) => theme.colors['color-error-subtle']};
+    color: ${({ theme }) => theme.colors['color-error-text']};
   `,
   warning: css`
-    background-color: #FFF0E3;
-    color: #C05C00;
+    background-color: ${({ theme }) => theme.colors['color-warning-subtle']};
+    color: ${({ theme }) => theme.colors['color-warning-text']};
   `,
 };
 

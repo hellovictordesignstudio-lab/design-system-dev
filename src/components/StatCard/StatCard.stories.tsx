@@ -13,14 +13,18 @@ const meta: Meta<typeof StatCard> = {
     docs: {
       description: {
         component:
-          'KPI / metric card for dashboards. Displays a label, value, trend pill, and optional icon.',
+          'A metric card for dashboards: label, value, optional trend, and optional icon.',
       },
     },
   },
   argTypes: {
-    iconColor: { control: 'select', options: ['blue', 'green', 'orange', 'red', 'purple'] },
-    trend: { control: 'radio', options: ['up', 'down', 'neutral'] },
-    isLoading: { control: 'boolean' },
+    iconColor: {
+      control: 'select',
+      options: ['blue', 'green', 'orange', 'red', 'purple'],
+      description: 'Tint for the icon container.',
+    },
+    trend: { control: 'radio', options: ['up', 'down', 'neutral'], description: 'Direction of the change pill.' },
+    isLoading: { control: 'boolean', description: 'Shows a skeleton instead of values.' },
   },
 };
 

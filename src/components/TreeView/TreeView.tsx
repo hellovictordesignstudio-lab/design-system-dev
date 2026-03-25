@@ -26,7 +26,7 @@ const RowHead = styled.div<{ $depth: number; $isDisabled?: boolean; $isFocused: 
   padding: 4px 8px 4px ${({ $depth }) => 8 + $depth * 16}px;
   border-radius: 10px;
   font-size: 14px;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'default' : 'pointer')};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.45 : 1)};
   user-select: none;
@@ -36,13 +36,13 @@ const RowHead = styled.div<{ $depth: number; $isDisabled?: boolean; $isFocused: 
   ${({ $isFocused }) =>
     $isFocused &&
     css`
-      box-shadow: 0 0 0 2px #0055ff;
-      background-color: #f8f9fc;
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.colors['color-border-focus']};
+      background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
     `}
 
   &:hover {
-    background-color: ${({ $isDisabled, $isFocused }) =>
-      $isDisabled ? 'transparent' : $isFocused ? '#f0f2f5' : '#f0f2f5'};
+    background-color: ${({ theme, $isDisabled }) =>
+      $isDisabled ? 'transparent' : theme.colors['color-bg-muted']};
   }
 
   ${({ $isDisabled }) =>
@@ -62,12 +62,12 @@ const Toggle = styled.button<{ $isLeaf: boolean }>`
   background: transparent;
   padding: 0;
   border-radius: 6px;
-  color: #6b7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   cursor: pointer;
   visibility: ${({ $isLeaf }) => ($isLeaf ? 'hidden' : 'visible')};
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 1px;
   }
 `;

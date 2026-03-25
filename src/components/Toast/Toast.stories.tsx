@@ -17,7 +17,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          'A portal-based notification system. Wrap your app with `<ToastProvider>` then call `useToast()` anywhere inside to fire toasts. Supports 4 variants, 4 positions, auto-dismiss with hover-pause, and a progress bar.',
+          'Portal-based notifications. Wrap the app with `<ToastProvider>`, then call `useToast()` to enqueue messages. Supports four variants, four positions, auto-dismiss with hover pause, and a progress bar.',
       },
     },
   },
@@ -32,7 +32,7 @@ function PlaygroundDemo() {
   const toast = useToast();
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '480px' }}>
-      <p style={{ margin: 0, fontSize: '14px', color: '#4E5A6E', lineHeight: 1.6 }}>
+      <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
         Click the buttons below to fire toasts. Hover a toast to pause its timer.
         The progress bar at the bottom shows remaining time.
       </p>
@@ -131,7 +131,7 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 480 }}>
-      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>
+      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>
         Use the buttons — includes persistent toast (duration 0) and dismiss-all.
       </p>
       <PlaygroundDemo />
@@ -255,7 +255,7 @@ export const DarkMode: Story = {
       <div
         style={{
           padding: '24px',
-          backgroundColor: '#0C0D10',
+          backgroundColor: 'var(--color-bg-canvas)',
           borderRadius: '12px',
           display: 'flex',
           flexDirection: 'column',
@@ -263,7 +263,7 @@ export const DarkMode: Story = {
           maxWidth: '400px',
         }}
       >
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: '#6B7589' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
           Static preview — dark-mode token values applied to all variants
         </p>
         {mockToasts.map((t) => (

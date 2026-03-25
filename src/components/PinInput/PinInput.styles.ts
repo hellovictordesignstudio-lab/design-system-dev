@@ -17,10 +17,10 @@ export const Label = styled.label`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-primary, #0C0D10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 
   span.required {
-    color: #D22232;
+    color: ${({ theme }) => theme.colors['color-error-default']};
     margin-left: 3px;
   }
 `;
@@ -48,42 +48,47 @@ export const Cell = styled.input<CellProps>`
   font-weight: 700;
   border-radius: 10px;
   outline: none;
-  border: 2px solid ${({ $hasError, $isFocused, $isFilled }) =>
-    $hasError
-      ? '#D22232'
-      : $isFocused
-      ? 'var(--color-border-brand, #0055FF)'
-      : $isFilled
-      ? 'var(--color-border-strong, #C5CBDA)'
-      : 'var(--color-border-default, #DDE1EA)'};
-  background: ${({ $isDisabled }) =>
-    $isDisabled ? 'var(--color-bg-tertiary, #EFF1F5)' : 'var(--color-bg-primary, #FFFFFF)'};
-  color: var(--color-text-primary, #0C0D10);
+  border: 2px solid
+    ${({ theme, $hasError, $isFocused, $isFilled }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $isFocused
+          ? theme.colors['color-border-focus']
+          : $isFilled
+            ? theme.colors['color-border-strong']
+            : theme.colors['color-border-default']};
+  background: ${({ theme, $isDisabled }) =>
+    $isDisabled ? theme.colors['color-bg-muted'] : theme.colors['color-bg-default']};
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   transition: border-color 0.15s, box-shadow 0.15s;
-  caret-color: var(--color-interactive-default, #0055FF);
+  caret-color: ${({ theme }) => theme.colors['color-brand-primary']};
   padding: 0;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'text')};
 
   ${({ $size }) => sizeStyles[$size]}
 
-  box-shadow: ${({ $isFocused, $hasError }) =>
+  box-shadow: ${({ theme, $isFocused, $hasError }) =>
     $isFocused
       ? $hasError
-        ? '0 0 0 3px rgba(210,34,50,0.15)'
-        : '0 0 0 3px var(--color-bg-brand-subtle, #E6EEFF)'
+        ? theme.mode === 'dark'
+          ? '0 0 0 3px rgba(255, 69, 58, 0.2)'
+          : '0 0 0 3px rgba(210, 34, 50, 0.15)'
+        : `0 0 0 3px ${theme.colors['color-brand-primary-subtle']}`
       : 'none'};
 
   /* Hide cursor blinking on number inputs */
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button { -webkit-appearance: none; }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `;
 
 export const Separator = styled.span`
   font-size: 20px;
   font-weight: 700;
-  color: var(--color-text-tertiary, #9BA5BE);
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   user-select: none;
   flex-shrink: 0;
 `;
@@ -92,6 +97,7 @@ export const HelperText = styled.span<{ $hasError: boolean }>`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: ${({ $hasError }) => ($hasError ? '#D22232' : 'var(--color-text-secondary, #4A5270)')};
+  color: ${({ theme, $hasError }) =>
+    $hasError ? theme.colors['color-error-default'] : theme.colors['color-text-secondary']};
   line-height: 1.5;
 `;

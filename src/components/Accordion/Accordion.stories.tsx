@@ -13,13 +13,13 @@ const meta: Meta<typeof Accordion> = {
     docs: {
       description: {
         component:
-          'Collapsible content sections. Supports single and multiple open modes, three visual variants, icons, and animated open/close transitions.',
+          'Collapsible sections of content. Supports one or many open panels at once, three visual variants, icons, and animated transitions.',
       },
     },
   },
   argTypes: {
-    type: { control: 'radio', options: ['single', 'multiple'] },
-    variant: { control: 'radio', options: ['default', 'bordered', 'separated'] },
+    type: { control: 'radio', options: ['single', 'multiple'], description: 'One open panel or many.' },
+    variant: { control: 'radio', options: ['default', 'bordered', 'separated'], description: 'Container and divider style.' },
   },
 };
 
@@ -56,7 +56,7 @@ export const Types: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
       <div style={{ flex: '1', minWidth: '260px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           type="single" (default)
         </p>
         <Accordion type="single" defaultValue="a" variant="bordered">
@@ -70,7 +70,7 @@ export const Types: Story = {
       </div>
 
       <div style={{ flex: '1', minWidth: '260px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           type="multiple"
         </p>
         <Accordion type="multiple" defaultValue={['a', 'b']} variant="bordered">
@@ -93,7 +93,7 @@ export const Variants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '560px' }}>
       {(['default', 'bordered', 'separated'] as const).map((variant) => (
         <div key={variant}>
-          <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: '#9BA5BE' }}>
+          <p style={{ margin: '0 0 12px', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
             variant="{variant}"
           </p>
           <Accordion variant={variant} defaultValue="a">
@@ -117,7 +117,7 @@ export const WithIcons: Story = {
     <div style={{ maxWidth: '560px' }}>
       <Accordion variant="separated" defaultValue="account">
         <Accordion.Item value="account">
-          <Accordion.Trigger leftIcon={<Settings size={16} color="#6B7694" />}>
+          <Accordion.Trigger leftIcon={<Settings size={16} color="var(--color-text-tertiary)" />}>
             Account settings
           </Accordion.Trigger>
           <Accordion.Content>
@@ -125,7 +125,7 @@ export const WithIcons: Story = {
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="notifications">
-          <Accordion.Trigger leftIcon={<Bell size={16} color="#6B7694" />}>
+          <Accordion.Trigger leftIcon={<Bell size={16} color="var(--color-text-tertiary)" />}>
             Notifications
           </Accordion.Trigger>
           <Accordion.Content>
@@ -133,7 +133,7 @@ export const WithIcons: Story = {
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="billing">
-          <Accordion.Trigger leftIcon={<CreditCard size={16} color="#6B7694" />}>
+          <Accordion.Trigger leftIcon={<CreditCard size={16} color="var(--color-text-tertiary)" />}>
             Billing & payments
           </Accordion.Trigger>
           <Accordion.Content>
@@ -141,7 +141,7 @@ export const WithIcons: Story = {
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="privacy">
-          <Accordion.Trigger leftIcon={<Shield size={16} color="#6B7694" />}>
+          <Accordion.Trigger leftIcon={<Shield size={16} color="var(--color-text-tertiary)" />}>
             Privacy & data
           </Accordion.Trigger>
           <Accordion.Content>
@@ -149,7 +149,7 @@ export const WithIcons: Story = {
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="help" isDisabled>
-          <Accordion.Trigger leftIcon={<HelpCircle size={16} color="#6B7694" />}>
+          <Accordion.Trigger leftIcon={<HelpCircle size={16} color="var(--color-text-tertiary)" />}>
             Help center (disabled)
           </Accordion.Trigger>
           <Accordion.Content>This item is disabled.</Accordion.Content>
@@ -201,7 +201,7 @@ export const States: Story = {
   render: () => (
     <div style={{ maxWidth: 560, display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single open</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Single open</p>
         <Accordion type="single" defaultValue="a" variant="bordered">
           {sampleItems.map(({ value, label, content }) => (
             <Accordion.Item key={value} value={value}>
@@ -212,7 +212,7 @@ export const States: Story = {
         </Accordion>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Multiple open</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Multiple open</p>
         <Accordion type="multiple" defaultValue={['a']} variant="bordered">
           {sampleItems.map(({ value, label, content }) => (
             <Accordion.Item key={value} value={value}>

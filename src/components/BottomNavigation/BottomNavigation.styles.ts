@@ -8,16 +8,10 @@ export const Nav = styled.nav`
   min-height: 56px;
   padding: 6px 8px 8px;
   box-sizing: border-box;
-  background-color: #ffffff;
-  border-top: 1px solid #e2e5ed;
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
+  border-top: 1px solid ${({ theme }) => theme.colors['color-border-default']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   gap: 4px;
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #12141a;
-    border-top-color: #2e3550;
-  }
 `;
 
 export const NavButton = styled.button<{ $isActive: boolean }>`
@@ -35,29 +29,21 @@ export const NavButton = styled.button<{ $isActive: boolean }>`
   background: transparent;
   cursor: pointer;
   font: inherit;
-  color: ${({ $isActive }) => ($isActive ? '#0055ff' : '#6b7694')};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-brand-primary'] : theme.colors['color-text-tertiary']};
   transition:
     color 120ms ease,
     background-color 120ms ease;
   position: relative;
 
   &:hover:not(:disabled) {
-    color: ${({ $isActive }) => ($isActive ? '#0055ff' : '#111827')};
-    background-color: rgba(0, 85, 255, 0.06);
-  }
-
-  [data-theme='dark'] &,
-  .dark & {
-    color: ${({ $isActive }) => ($isActive ? '#5b8cff' : '#9ba5be')};
-
-    &:hover:not(:disabled) {
-      color: ${({ $isActive }) => ($isActive ? '#5b8cff' : '#f0f2f5')};
-      background-color: rgba(91, 140, 255, 0.08);
-    }
+    color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors['color-brand-primary'] : theme.colors['color-text-primary']};
+    background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
   }
 
   &:focus-visible {
-    outline: 2px solid #0055ff;
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
     outline-offset: 2px;
   }
 
@@ -94,8 +80,8 @@ export const Badge = styled.span`
   height: 16px;
   padding: 0 4px;
   border-radius: 9999px;
-  background-color: #a81b28;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors['color-error-default']};
+  color: ${({ theme }) => theme.colors['color-brand-on-primary']};
   font-size: 9px;
   font-weight: 700;
   line-height: 16px;

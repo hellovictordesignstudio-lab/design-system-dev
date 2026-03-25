@@ -14,13 +14,13 @@ const meta: Meta<typeof Stepper> = {
     docs: {
       description: {
         component:
-          'A progress indicator for multi-step flows. Supports horizontal and vertical orientations, completed / active / upcoming / error states, and optional step descriptions.',
+          'Shows progress through a multi-step flow. Supports horizontal and vertical layouts, completed, active, upcoming, and error steps, and optional descriptions.',
       },
     },
   },
   argTypes: {
-    activeStep: { control: { type: 'number', min: 0, max: 3 } },
-    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
+    activeStep: { control: { type: 'number', min: 0, max: 3 }, description: 'Zero-based index of the active step.' },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'], description: 'Layout direction.' },
   },
 };
 
@@ -55,7 +55,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 600 }}>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Horizontal</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Horizontal</p>
         <Stepper activeStep={1}>
           <Stepper.Step label="One" />
           <Stepper.Step label="Two" />
@@ -63,7 +63,7 @@ export const Variants: Story = {
         </Stepper>
       </div>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Vertical</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Vertical</p>
         <Stepper activeStep={1} orientation="vertical">
           <Stepper.Step label="One" description="First" />
           <Stepper.Step label="Two" description="Second" />
@@ -124,7 +124,7 @@ export const Horizontal: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
       {[0, 1, 2, 3].map((active) => (
         <div key={active}>
-          <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, color: '#9BA5BE' }}>
+          <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
             activeStep={active}
           </p>
           <Stepper activeStep={active}>
@@ -146,7 +146,7 @@ export const Vertical: Story = {
     <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
       {[0, 2].map((active) => (
         <div key={active}>
-          <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, color: '#9BA5BE' }}>
+          <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
             activeStep={active}
           </p>
           <Stepper activeStep={active} orientation="vertical">
@@ -199,7 +199,7 @@ export const WithError: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '640px' }}>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', color: '#6B7694' }}>Horizontal with error on step 2</p>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Horizontal with error on step 2</p>
         <Stepper activeStep={2}>
           <Stepper.Step label="Account" />
           <Stepper.Step label="Profile" />
@@ -208,7 +208,7 @@ export const WithError: Story = {
         </Stepper>
       </div>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: '13px', color: '#6B7694' }}>Vertical with error</p>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Vertical with error</p>
         <Stepper activeStep={2} orientation="vertical">
           <Stepper.Step label="Account" description="Done" />
           <Stepper.Step label="Profile" description="Done" />

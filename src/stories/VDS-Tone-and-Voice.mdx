@@ -1,0 +1,133 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="VDS Design System/VDS Tone and Voice" />
+
+# VDS Tone and Voice
+
+**VDS Tone** is the attitude documentation maintains across every page: direct, calm, and precise. **VDS Voice** is how that tone shows up in sentences—word choice, structure, and terminology—so the VDS Design System reads as one coherent product.
+
+This guide defines both. Use it when you write or revise documentation, UI copy in examples, and release notes. **VDS Tone and Voice** are the product standard for how we write about this design system.
+
+---
+
+## Overview
+
+Documentation should help someone finish a task or understand a concept without friction. VDS Tone keeps the reader in mind. VDS Voice keeps language consistent so teams do not invent new names for the same idea.
+
+---
+
+## VDS Tone
+
+VDS Tone is stable. It does not shift between marketing language on one page and academic language on the next.
+
+**Characteristics**
+
+- **Respectful of time.** State the purpose early. Avoid long introductions that repeat the title.
+- **Instructional.** Prefer telling the reader what to do, what something does, or when to use it—over abstract praise.
+- **Neutral and confident.** Describe behavior and constraints. Do not sell; demonstrate.
+- **Inclusive.** Write so that engineers, designers, and PMs can all follow. Define jargon on first use when it is unavoidable.
+- **Accessible by default.** Call out contrast, keyboard use, and assistive technologies when they matter to correct usage.
+
+**Avoid**
+
+- Empty superlatives (“world-class,” “seamless,” “revolutionary”).
+- Vague claims (“best-in-class experience”) without a measurable or testable meaning.
+- Exclamation marks except in rare UI examples where the product truly uses them.
+
+---
+
+## VDS Voice
+
+VDS Voice is the practical application of VDS Tone: how we form titles, sentences, and lists.
+
+**Tense and point of view**
+
+- Use **present tense** for how the system works: “The token resolves to a color value.”
+- Use **second person** (*you*) for tasks: “Install the package, then wrap your app in `ThemeProvider`.”
+- Use **first person plural** (*we*) sparingly—mainly for changelog or internal notes—not for reference pages.
+
+**Titles**
+
+- **Page titles** use title case: “VDS Tone and Voice,” “Button.”
+- **Section headings** use sentence case: “When to use a modal,” “Props reference.”
+- Prefer nouns or gerunds that describe the content: “Installing,” “Behavior,” “Accessibility.”
+
+**Lists**
+
+- Keep items parallel (all sentences, or all fragments; not mixed in one list).
+- Start task lists with verbs: “Run,” “Select,” “Open.”
+- Start descriptive lists with consistent grammar.
+
+**Code and names**
+
+- Format API names, file paths, and props in monospace: `Button`, `color/bg/primary`.
+- Introduce the package as **`@design-system/core`** where install or import instructions appear.
+- Refer to the product as **VDS Design System** or **VDS** after first mention—not “the DS” in external-facing text.
+
+**Terminology (use consistently)**
+
+| Term | Meaning |
+| --- | --- |
+| VDS Design System | The full library: components, tokens, themes, and this documentation. |
+| Component | A documented React building block in the sidebar under **Components**. |
+| Token | A named design value (color, spacing, type scale) defined under **Tokens**. |
+| Story | A Storybook example: Playground, Variants, or a named state. |
+| Appearance | Light, dark, or system color mode for previews. |
+
+---
+
+## Page types (how to structure content)
+
+Use these shapes so readers know what to expect:
+
+**Overview**
+
+- What the topic is, who it is for, and how it fits the rest of VDS.
+- Short; link out to reference and tasks.
+
+**Reference**
+
+- Props, types, tokens tables—facts, not narrative.
+
+**Task (how-to)**
+
+- Numbered steps, one action per step, with expected outcomes where helpful.
+
+**Concept (guidance)**
+
+- Principles and “when to use / when to avoid,” with patterns and constraints over opinion.
+
+---
+
+## Storybook: `parameters.docs.description`
+
+In component stories, set VDS Voice in two places when helpful:
+
+- **`description.component`** — One or two sentences at the top of the docs page: what the component is for and what it supports. Prefer present tense and precise nouns.
+- **`description.story`** — Optional note under a single story (layout, how to preview dark appearance, or behavior to watch).
+
+Avoid repeating the component name as filler (“The X component is used to…”). Start with the role: *A button triggers…*, *A modal presents…*.
+
+**`argTypes` in Storybook**
+
+For each control exposed in the Docs panel, add a short `description`: what the prop does, its units, and when to use `false` on the control (for example callbacks or React nodes set in code). Use sentence case and end with a period.
+
+## Revision checklist
+
+Before you publish or merge documentation:
+
+1. Does the first paragraph answer *what this page is for*?
+2. Are headings scannable without reading the body?
+3. Did you replace marketing adjectives with concrete behavior?
+4. Are terms consistent with the table in **Terminology**?
+5. For UI examples, did you note accessibility where it affects usage?
+6. In Storybook, do `parameters.docs.description` strings follow the patterns above?
+7. Does every meaningful `argTypes` entry include a `description` in VDS Voice?
+
+---
+
+## See also
+
+- **VDS Design System / Introduction** — entry point and inventory.
+- **Tokens** — color, typography, and spacing reference.
+- **Components** — individual component reference and stories.

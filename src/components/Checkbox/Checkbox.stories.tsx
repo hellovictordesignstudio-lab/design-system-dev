@@ -10,20 +10,20 @@ const meta: Meta<typeof Checkbox> = {
     docs: {
       description: {
         component:
-          'Checkbox lets users select one or more items. Supports indeterminate state, sizes, error, and helper text.',
+          'A checkbox selects or clears one option. Supports an indeterminate state (for nested lists), sizes, validation, and helper text.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    checked: { control: 'boolean' },
-    indeterminate: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    isRequired: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    label: { control: 'text' },
-    helperText: { control: 'text' },
-    errorText: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Control and label size.' },
+    checked: { control: 'boolean', description: 'Selected state.' },
+    indeterminate: { control: 'boolean', description: 'Indeterminate state for nested lists.' },
+    isDisabled: { control: 'boolean', description: 'Disables interaction.' },
+    isRequired: { control: 'boolean', description: 'Marks the field as required.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    label: { control: 'text', description: 'Label beside the control.' },
+    helperText: { control: 'text', description: 'Hint below the control.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
   },
 };
 
@@ -103,5 +103,5 @@ export const DarkMode: Story = {
       <Checkbox label="Disabled" checked isDisabled onChange={() => {}} />
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

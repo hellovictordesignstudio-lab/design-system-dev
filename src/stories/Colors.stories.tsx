@@ -85,7 +85,7 @@ function ColorsPage() {
     <Page>
       <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '8px' }}>Color Tokens</h1>
       <p style={{ marginBottom: '40px', opacity: 0.7 }}>
-        Primitive color values that form the foundation of the design system.
+        Primitive color scales that feed semantic tokens in the VDS Design System.
       </p>
       <ColorScale name="Blue (Primary)" scale={colorPrimitives.blue} />
       <ColorScale name="Neutral" scale={colorPrimitives.neutral} />

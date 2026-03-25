@@ -13,9 +13,21 @@ const meta: Meta<typeof DataTable> = {
     docs: {
       description: {
         component:
-          'Table provides low-level sub-components for full control. DataTable is the high-level abstraction with sorting, loading, and empty states built in.',
+          'Low-level table primitives for full control. **DataTable** adds sorting, loading, and empty states.',
       },
     },
+  },
+  argTypes: {
+    columns: { control: 'object', description: 'Column definitions with `key` and `label`.' },
+    data: { control: 'object', description: 'Row objects; keys align with column keys.' },
+    isLoading: { control: 'boolean', description: 'Shows a loading state.' },
+    emptyMessage: { control: 'text', description: 'Message when `data` is empty.' },
+    sortKey: { control: 'text', description: 'Controlled sort column key.' },
+    sortDirection: { control: 'select', options: ['asc', 'desc'], description: 'Sort direction.' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Cell padding scale.' },
+    isStriped: { control: 'boolean', description: 'Alternating row background.' },
+    hasBorder: { control: 'boolean', description: 'Border around the table wrapper.' },
+    onSort: { control: false, description: 'Called when a sortable header is activated.' },
   },
 };
 
@@ -127,7 +139,7 @@ export const WithCustomCells: Story = {
               <Avatar name={String(val)} size="sm" />
               <div>
                 <div style={{ fontWeight: 600, fontSize: 14 }}>{String(val)}</div>
-                <div style={{ fontSize: 12, color: '#9BA5BE' }}>{String(row.email)}</div>
+                <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>{String(row.email)}</div>
               </div>
             </div>
           ),
@@ -189,11 +201,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Bordered, not striped</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Bordered, not striped</p>
         <DataTable columns={BASE_COLUMNS} data={USERS as Record<string, unknown>[]} hasBorder isStriped={false} />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Striped rows</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Striped rows</p>
         <DataTable columns={BASE_COLUMNS} data={USERS as Record<string, unknown>[]} isStriped hasBorder />
       </div>
     </div>
@@ -218,11 +230,11 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Loading</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Loading</p>
         <DataTable columns={BASE_COLUMNS} data={[]} isLoading />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Empty</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Empty</p>
         <DataTable columns={BASE_COLUMNS} data={[]} emptyMessage="No rows to display." />
       </div>
     </div>
@@ -244,5 +256,5 @@ export const DarkMode: Story = {
       isStriped
     />
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

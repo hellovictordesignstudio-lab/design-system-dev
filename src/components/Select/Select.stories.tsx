@@ -11,17 +11,17 @@ const meta: Meta<typeof Select> = {
     docs: {
       description: {
         component:
-          'Select lets users choose one option from a dropdown. Supports search, icons, disabled options, and all TextInput sizes.',
+          'A single-select menu. Supports search, icons, disabled options, and the same sizes as **TextInput**.',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    isSearchable: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
-    hasError: { control: 'boolean' },
-    placeholder: { control: 'text' },
-    label: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Matches **TextInput** sizes.' },
+    isSearchable: { control: 'boolean', description: 'Enables filtering options by typing.' },
+    isDisabled: { control: 'boolean', description: 'Disables opening the menu.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    placeholder: { control: 'text', description: 'Placeholder when no value is selected.' },
+    label: { control: 'text', description: 'Label above the control.' },
   },
 };
 
@@ -29,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof Select>;
 
 const FRUITS = [
-  { value: 'apple', label: 'Apple' },
+  { value: 'it', label: 'Italiano' },
   { value: 'banana', label: 'Banana' },
   { value: 'cherry', label: 'Cherry' },
   { value: 'durian', label: 'Durian', isDisabled: true },
@@ -179,5 +179,5 @@ export const DarkMode: Story = {
       </div>
     );
   },
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

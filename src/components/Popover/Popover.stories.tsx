@@ -14,7 +14,7 @@ const meta: Meta<typeof Popover> = {
     docs: {
       description: {
         component:
-          'Popover renders rich content anchored to a trigger. Supports controlled/uncontrolled modes and six placement options.',
+          'Anchors rich content to a trigger. Supports controlled or uncontrolled mode and six placements.',
       },
     },
     layout: 'centered',
@@ -23,6 +23,7 @@ const meta: Meta<typeof Popover> = {
     placement: {
       control: 'select',
       options: ['top', 'bottom', 'left', 'right', 'bottom-start', 'bottom-end'],
+      description: 'Preferred position; flips to stay on screen.',
     },
   },
 };
@@ -40,7 +41,7 @@ export const Playground: Story = {
           <Button>Open popover</Button>
         </Popover.Trigger>
         <Popover.Content title="Popover title">
-          <p style={{ margin: 0, fontSize: 14, color: '#6B7694', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)', lineHeight: 1.5 }}>
             This is popover content. You can put anything here — forms, menus, info panels.
           </p>
         </Popover.Content>
@@ -70,7 +71,7 @@ export const Placements: Story = {
             <Button size="sm" variant="secondary">{p}</Button>
           </Popover.Trigger>
           <Popover.Content title={`Placement: ${p}`}>
-            <p style={{ margin: 0, fontSize: 13, color: '#6B7694' }}>
+            <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>
               Content anchored to <strong>{p}</strong>.
             </p>
           </Popover.Content>
@@ -141,13 +142,13 @@ const MenuRow = ({
       cursor: 'pointer',
       fontSize: 14,
       fontWeight: 500,
-      color: danger ? '#D22232' : '#111827',
+      color: danger ? 'var(--color-error-default)' : 'var(--color-text-primary)',
       transition: 'background 100ms',
     }}
-    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = '#F0F2F5')}
+    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--color-bg-subtle)')}
     onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = 'transparent')}
   >
-    <span style={{ color: danger ? '#D22232' : '#6B7694', display: 'flex' }}>{icon}</span>
+    <span style={{ color: danger ? 'var(--color-error-default)' : 'var(--color-text-tertiary)', display: 'flex' }}>{icon}</span>
     {label}
   </div>
 );
@@ -166,7 +167,7 @@ export const WithMenu: Story = {
             <MenuRow icon={<User size={15} />} label="Profile" />
             <MenuRow icon={<Bell size={15} />} label="Notifications" />
             <MenuRow icon={<Palette size={15} />} label="Appearance" />
-            <div style={{ borderTop: '1px solid #F0F2F5', margin: '4px 0' }} />
+            <div style={{ borderTop: '1px solid var(--color-bg-subtle)', margin: '4px 0' }} />
             <MenuRow icon={<LogOut size={15} />} label="Sign out" danger />
           </div>
         </Popover.Content>
@@ -185,7 +186,7 @@ export const Variants: Story = {
           <Button size="sm">Text only</Button>
         </Popover.Trigger>
         <Popover.Content>
-          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Simple body copy.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Simple body copy.</p>
         </Popover.Content>
       </Popover>
       <Popover placement="bottom-start">
@@ -195,7 +196,7 @@ export const Variants: Story = {
           </Button>
         </Popover.Trigger>
         <Popover.Content title="Settings" width={260}>
-          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Titled panel with fixed width.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Titled panel with fixed width.</p>
         </Popover.Content>
       </Popover>
     </div>
@@ -212,7 +213,7 @@ export const Sizes: Story = {
           <Button size="sm">Narrow</Button>
         </Popover.Trigger>
         <Popover.Content width={200}>
-          <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>width 200</p>
+          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>width 200</p>
         </Popover.Content>
       </Popover>
       <Popover placement="bottom-start">
@@ -220,7 +221,7 @@ export const Sizes: Story = {
           <Button size="sm">Wide</Button>
         </Popover.Trigger>
         <Popover.Content width={360}>
-          <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>width 360</p>
+          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>width 360</p>
         </Popover.Content>
       </Popover>
     </div>
@@ -237,7 +238,7 @@ export const States: Story = {
           <Button>Open</Button>
         </Popover.Trigger>
         <Popover.Content title="Interactive">
-          <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Click outside or Escape to close.</p>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Click outside or Escape to close.</p>
         </Popover.Content>
       </Popover>
     </div>
@@ -262,5 +263,5 @@ export const DarkMode: Story = {
       </Popover>
     </div>
   ),
-  parameters: { docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview.' } } },
+  parameters: { docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview this story.' } } },
 };

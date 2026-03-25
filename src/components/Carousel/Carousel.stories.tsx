@@ -13,18 +13,18 @@ const meta: Meta<typeof Carousel> = {
     docs: {
       description: {
         component:
-          'A smooth sliding carousel with CSS transform-based navigation, auto-play (paused on hover / hidden tab), arrow buttons, pill dot indicators, and support for 1–3 visible items. Keyboard: ← → Home End.',
+          'A horizontal carousel with CSS transforms, optional auto-play (paused on hover or when the tab is hidden), arrows, dot indicators, and one to three visible items. Arrow keys, Home, and End move focus.',
       },
     },
   },
   argTypes: {
-    visibleItems: { control: 'select', options: [1, 2, 3] },
-    autoPlay: { control: 'boolean' },
-    loop: { control: 'boolean' },
-    showArrows: { control: 'boolean' },
-    showDots: { control: 'boolean' },
-    gap: { control: 'number' },
-    interval: { control: 'number' },
+    visibleItems: { control: 'select', options: [1, 2, 3], description: 'Slides visible at once.' },
+    autoPlay: { control: 'boolean', description: 'Advances automatically (pauses on hover or hidden tab).' },
+    loop: { control: 'boolean', description: 'Wraps from last slide to first.' },
+    showArrows: { control: 'boolean', description: 'Previous and next buttons.' },
+    showDots: { control: 'boolean', description: 'Dot indicators for position.' },
+    gap: { control: 'number', description: 'Gap between slides in pixels.' },
+    interval: { control: 'number', description: 'Auto-play interval in milliseconds.' },
   },
 };
 
@@ -34,11 +34,11 @@ type Story = StoryObj<typeof Carousel>;
 // ── Slide colors ──────────────────────────────────────────────────────────────
 
 const SLIDES = [
-  { bg: '#E8EEFF', color: '#2952CC', label: 'Slide 1 — Design Tokens' },
-  { bg: '#DCFCE7', color: '#15803D', label: 'Slide 2 — Components' },
-  { bg: '#FEF3C7', color: '#92400E', label: 'Slide 3 — Typography' },
-  { bg: '#FEE2E2', color: '#B91C1C', label: 'Slide 4 — Spacing' },
-  { bg: '#F3E8FF', color: '#6B21A8', label: 'Slide 5 — Colors' },
+  { bg: 'var(--color-brand-primary-subtle)', color: 'var(--color-brand-primary)', label: 'Slide 1 — Design Tokens' },
+  { bg: 'var(--color-success-subtle)', color: 'var(--color-success-text)', label: 'Slide 2 — Components' },
+  { bg: 'var(--color-warning-subtle)', color: 'var(--color-warning-text)', label: 'Slide 3 — Typography' },
+  { bg: 'var(--color-error-subtle)', color: 'var(--color-error-text)', label: 'Slide 4 — Spacing' },
+  { bg: 'var(--color-bg-muted)', color: 'var(--color-brand-primary)', label: 'Slide 5 — Colors' },
 ];
 
 function SlideCard({ bg, color, label }: { bg: string; color: string; label: string }) {
@@ -80,7 +80,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>One slide visible</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>One slide visible</p>
         <Carousel visibleItems={1} gap={16}>
           {SLIDES.map((s) => (
             <SlideCard key={s.label} {...s} />
@@ -88,7 +88,7 @@ export const Variants: Story = {
         </Carousel>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Two slides visible</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Two slides visible</p>
         <Carousel visibleItems={2} gap={12}>
           {SLIDES.map((s) => (
             <SlideCard key={s.label} {...s} />
@@ -135,7 +135,7 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With arrows & dots</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With arrows & dots</p>
         <Carousel showArrows showDots loop>
           {SLIDES.slice(0, 4).map((s) => (
             <SlideCard key={s.label} {...s} />
@@ -143,7 +143,7 @@ export const States: Story = {
         </Carousel>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>No loop</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>No loop</p>
         <Carousel loop={false} showArrows>
           {SLIDES.slice(0, 3).map((s) => (
             <SlideCard key={s.label} {...s} />
@@ -172,13 +172,13 @@ export const MultipleItems: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>2 visible</p>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>2 visible</p>
         <Carousel visibleItems={2} gap={12}>
           {SLIDES.map((s) => <SlideCard key={s.label} {...s} />)}
         </Carousel>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>3 visible</p>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>3 visible</p>
         <Carousel visibleItems={3} gap={12}>
           {SLIDES.map((s) => <SlideCard key={s.label} {...s} />)}
         </Carousel>
@@ -207,7 +207,7 @@ export const Languages: Story = {
       {(['en', 'es', 'fr'] as const).map((lang) => (
         <LangProvider key={lang} defaultLang={lang}>
           <div>
-            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>{lang}</p>
+            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>{lang}</p>
             <Carousel>
               {SLIDES.slice(0, 3).map((s) => <SlideCard key={s.label} {...s} />)}
             </Carousel>

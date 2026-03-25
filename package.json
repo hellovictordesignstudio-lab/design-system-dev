@@ -1,7 +1,7 @@
 {
   "name": "@design-system/core",
   "version": "1.0.0",
-  "description": "Professional Design System with React 18, TypeScript, and Styled Components",
+  "description": "VDS Design System — React 18, TypeScript, styled-components, and Storybook documentation",
   "homepage": "https://hellovictordesignstudio-lab.github.io/design-system-dev/",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colorPrimitives } from '../../tokens/primitives';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -22,24 +23,24 @@ export interface TimelineItemProps {
   _variant?: TimelineVariant;
 }
 
-// ── Colors ────────────────────────────────────────────────────────────────────
+// ── Colors (fixed palette from primitives) ───────────────────────────────────
 
 const iconBgMap: Record<TimelineIconColor, string> = {
-  blue: '#E6EEFF',
-  green: '#E6F5EE',
-  orange: '#FEF0E6',
-  red: '#FCEAEC',
-  purple: '#F0E9FF',
-  gray: '#F0F2F5',
+  blue: colorPrimitives.blue[50],
+  green: colorPrimitives.green[50],
+  orange: colorPrimitives.orange[50],
+  red: colorPrimitives.red[50],
+  purple: colorPrimitives.violet[50],
+  gray: colorPrimitives.neutral[100],
 };
 
 const iconFgMap: Record<TimelineIconColor, string> = {
-  blue: '#0055FF',
-  green: '#1A7A45',
-  orange: '#C05B1A',
-  red: '#A81B28',
-  purple: '#6B1FC2',
-  gray: '#6B7694',
+  blue: colorPrimitives.blue[500],
+  green: colorPrimitives.green[400],
+  orange: colorPrimitives.orange[500],
+  red: colorPrimitives.red[500],
+  purple: colorPrimitives.violet[600],
+  gray: colorPrimitives.neutral[500],
 };
 
 // ── Styled ────────────────────────────────────────────────────────────────────
@@ -80,26 +81,19 @@ const DotCircle = styled.div<{ $isFirst: boolean; $variant: TimelineVariant }>`
   width: ${({ $variant }) => ($variant === 'compact' ? '8px' : '10px')};
   height: ${({ $variant }) => ($variant === 'compact' ? '8px' : '10px')};
   border-radius: 50%;
-  background-color: ${({ $isFirst }) => ($isFirst ? '#0055FF' : '#DDE1EA')};
+  background-color: ${({ theme, $isFirst }) =>
+    $isFirst ? theme.colors['color-brand-primary'] : theme.colors['color-border-default']};
   flex-shrink: 0;
   z-index: 1;
   margin: ${({ $variant }) => ($variant === 'compact' ? '8px 0' : '11px 0')};
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isFirst }) => ($isFirst ? '#0055FF' : '#2E3550')};
-  }
 `;
 
 const ConnectorLine = styled.div<{ $variant: TimelineVariant }>`
   width: 2px;
   flex: 1;
-  background-color: #E2E5ED;
+  background-color: ${({ theme }) => theme.colors['color-border-default']};
   margin-top: 4px;
   min-height: ${({ $variant }) => ($variant === 'compact' ? '12px' : '16px')};
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #2E3550;
-  }
 `;
 
 const ContentCol = styled.div<{ $isLast: boolean; $variant: TimelineVariant }>`
@@ -114,28 +108,20 @@ const Title = styled.p`
   margin: 0;
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 `;
 
 const Description = styled.p`
   margin: 4px 0 0;
   font-size: 13px;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   line-height: 1.6;
-
-  [data-theme='dark'] &, .dark & {
-    color: #9BA5BE;
-  }
 `;
 
 const DateText = styled.p`
   margin: 4px 0 0;
   font-size: 11px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 // ── Root ──────────────────────────────────────────────────────────────────────

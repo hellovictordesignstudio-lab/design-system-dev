@@ -8,15 +8,19 @@ const meta: Meta<typeof Badge> = {
   parameters: {
     docs: {
       description: {
-        component: 'Badges are used to highlight status, labels, or counts.',
+        component: 'A badge shows a compact label, status, or count.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['default', 'primary', 'success', 'error', 'warning'] },
-    size: { control: 'select', options: ['sm', 'md'] },
-    dot: { control: 'boolean' },
-    children: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['default', 'primary', 'success', 'error', 'warning'],
+      description: 'Semantic color role.',
+    },
+    size: { control: 'select', options: ['sm', 'md'], description: 'Padding and font size.' },
+    dot: { control: 'boolean', description: 'Shows a dot instead of text.' },
+    children: { control: 'text', description: 'Label content.' },
   },
 };
 
@@ -64,7 +68,7 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ width: 100, fontSize: 12, fontWeight: 600, color: '#6b7694' }}>With dot</span>
+        <span style={{ width: 100, fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>With dot</span>
         <Badge variant="default" dot>
           Inactive
         </Badge>
@@ -79,7 +83,7 @@ export const States: Story = {
         </Badge>
       </div>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ width: 100, fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Text only</span>
+        <span style={{ width: 100, fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Text only</span>
         <Badge variant="primary">New</Badge>
         <Badge variant="success">Live</Badge>
       </div>
@@ -95,7 +99,7 @@ export const DarkMode: Story = {
     <div
       data-theme="dark"
       style={{
-        background: '#0c0d10',
+        background: 'var(--color-bg-canvas)',
         padding: 24,
         borderRadius: 12,
         display: 'flex',

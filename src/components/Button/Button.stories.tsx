@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
     docs: {
       description: {
         component:
-          'The Button component is used to trigger actions or navigate. It supports multiple variants, sizes, loading states, and icon slots.',
+          'A button triggers an action or navigation. Supports variants, sizes, loading state, and leading or trailing icons.',
       },
     },
   },
@@ -18,20 +18,20 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: 'select',
       options: ['primary', 'secondary', 'ghost', 'danger'],
-      description: 'Visual style of the button',
+      description: 'Visual style (variant).',
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Size of the button',
+      description: 'Height and horizontal padding.',
     },
     isLoading: {
       control: 'boolean',
-      description: 'Shows a spinner and disables interaction',
+      description: 'Shows a spinner and disables the control.',
     },
     fullWidth: {
       control: 'boolean',
-      description: 'Stretches the button to fill its container',
+      description: 'Fills the width of the container.',
     },
     disabled: {
       control: 'boolean',
@@ -124,7 +124,7 @@ export const DarkMode: Story = {
     <div
       data-theme="dark"
       style={{
-        background: '#0c0d10',
+        background: 'var(--color-bg-canvas)',
         padding: 24,
         borderRadius: 12,
         display: 'flex',

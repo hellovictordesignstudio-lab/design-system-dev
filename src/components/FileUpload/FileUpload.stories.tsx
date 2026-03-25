@@ -13,16 +13,16 @@ const meta: Meta<typeof FileUpload> = {
     docs: {
       description: {
         component:
-          'A drag-and-drop file upload zone with per-file progress bars, success and error states. Supports single or multiple files, size limits, and accepted MIME type hints. Sizes: sm (list only), md (default), lg (tall zone).',
+          'A drag-and-drop upload area with per-file progress and success or error states. Supports single or multiple files, size limits, and accepted MIME types. Sizes: **sm** (compact list), **md** (default), **lg** (tall drop zone).',
       },
     },
   },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    maxSize: { control: 'number' },
-    maxFiles: { control: 'number' },
-    multiple: { control: 'boolean' },
-    isDisabled: { control: 'boolean' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Layout density of the drop zone.' },
+    maxSize: { control: 'number', description: 'Maximum file size in bytes per file.' },
+    maxFiles: { control: 'number', description: 'Maximum number of files in one batch.' },
+    multiple: { control: 'boolean', description: 'Allows selecting more than one file.' },
+    isDisabled: { control: 'boolean', description: 'Disables drag, drop, and file picking.' },
   },
 };
 
@@ -52,11 +52,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Single file</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Single file</p>
         <FileUpload multiple={false} accept="image/*" maxSize={5 * 1024 * 1024} onUpload={() => {}} />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Multiple files</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Multiple files</p>
         <FileUpload multiple maxFiles={5} accept="image/*,.pdf" maxSize={10 * 1024 * 1024} onUpload={() => {}} />
       </div>
     </div>
@@ -70,7 +70,7 @@ export const Sizes: Story = {
     <div style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size}>
-          <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {size}
           </p>
           <FileUpload
@@ -92,15 +92,15 @@ export const States: Story = {
   render: () => (
     <div style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>Default</p>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>Default</p>
         <FileUpload onUpload={() => {}} accept="image/*" maxSize={2 * 1024 * 1024} />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>Disabled</p>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>Disabled</p>
         <FileUpload onUpload={() => {}} isDisabled />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>Custom hint</p>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>Custom hint</p>
         <FileUpload onUpload={() => {}} hint="SVG, PNG, JPG — max 2MB" accept=".svg,.png,.jpg" />
       </div>
     </div>
@@ -115,7 +115,7 @@ export const Languages: Story = {
       {(['en', 'es', 'fr'] as const).map((lang) => (
         <LangProvider key={lang} defaultLang={lang}>
           <div>
-            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#9BA5BE', textTransform: 'uppercase' }}>
+            <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>
               {lang.toUpperCase()}
             </p>
             <FileUpload

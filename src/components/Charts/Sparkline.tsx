@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
+import { chartTooltipBorder, lineBrandColor } from './chartTokens';
 import type { SparklineProps } from './Chart.types';
 
 const Wrap = styled.div<{ $height: number }>`
@@ -9,11 +10,9 @@ const Wrap = styled.div<{ $height: number }>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
-const BRAND = '#0055ff';
-
 export function Sparkline({
   data,
-  color = BRAND,
+  color = lineBrandColor,
   height = 48,
   className,
 }: SparklineProps) {
@@ -30,7 +29,7 @@ export function Sparkline({
             cursor={false}
             contentStyle={{
               borderRadius: 8,
-              border: '1px solid #e2e5ed',
+              border: `1px solid ${chartTooltipBorder}`,
               fontSize: 12,
             }}
             formatter={(v) => [v, '']}

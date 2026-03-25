@@ -11,12 +11,16 @@ const meta: Meta<typeof Tabs> = {
     docs: {
       description: {
         component:
-          'Tabs organise content into switchable panels. Use line, pill, or enclosed variants. Supports icons, badges, disabled tabs, and keyboard arrow navigation.',
+          'Switches between related panels. Offers line, pill, and enclosed styles. Supports icons, badges, disabled tabs, and arrow-key navigation.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'select', options: ['line', 'pill', 'enclosed'] },
+    variant: {
+      control: 'select',
+      options: ['line', 'pill', 'enclosed'],
+      description: 'Visual style of the tab list.',
+    },
   },
 };
 
@@ -25,7 +29,7 @@ type Story = StoryObj<typeof Tabs>;
 
 const PANEL_STYLE = {
   fontSize: 14,
-  color: '#6B7694',
+  color: 'var(--color-text-tertiary)',
   padding: '8px 0',
 };
 
@@ -61,7 +65,7 @@ export const Variants: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
       {/* Line */}
       <div>
-        <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Line
         </p>
         <Tabs defaultValue="a" variant="line">
@@ -78,7 +82,7 @@ export const Variants: Story = {
 
       {/* Pill */}
       <div>
-        <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Pill
         </p>
         <Tabs defaultValue="a" variant="pill">
@@ -95,7 +99,7 @@ export const Variants: Story = {
 
       {/* Enclosed */}
       <div>
-        <p style={{ fontSize: 11, color: '#9BA5BE', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Enclosed
         </p>
         <Tabs defaultValue="a" variant="enclosed">
@@ -241,7 +245,7 @@ export const DarkMode: Story = {
     <div
       data-theme="dark"
       style={{
-        background: '#0c0d10',
+        background: 'var(--color-bg-canvas)',
         padding: 24,
         borderRadius: 12,
         display: 'flex',

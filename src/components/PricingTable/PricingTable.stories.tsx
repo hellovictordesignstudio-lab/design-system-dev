@@ -8,9 +8,14 @@ const meta: Meta<typeof PricingTable> = {
   parameters: {
     docs: {
       description: {
-        component: 'Responsive pricing grid with highlighted plan, feature rows, and CTAs.',
+        component:
+          'A responsive pricing table with a highlighted plan, feature rows, and calls to action.',
       },
     },
+  },
+  argTypes: {
+    plans: { control: false, description: 'Plan cards with features, price, CTA, optional highlight.' },
+    title: { control: 'text', description: 'Optional heading above the grid.' },
   },
 };
 
@@ -80,11 +85,11 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Two columns</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Two columns</p>
         <PricingTable title="Simple comparison" plans={twoPlans} />
       </div>
       <div>
-        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Three columns</p>
+        <p style={{ margin: '0 0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Three columns</p>
         <PricingTable title="Scale with your team" plans={threePlans} />
       </div>
     </div>
@@ -118,7 +123,7 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <p style={{ margin: 0, fontSize: 13, color: '#6b7694' }}>
+      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-tertiary)' }}>
         Highlight one plan with <code>isHighlighted</code> and <code>badge</code>; wire CTAs to checkout or contact flows.
       </p>
       <PricingTable title="Highlighted Pro" plans={twoPlans} />
@@ -131,7 +136,7 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { backgrounds: { default: 'dark' } },
   render: () => (
-    <div data-theme="dark" style={{ background: '#0c0d10', padding: 24, borderRadius: 12 }}>
+    <div data-theme="dark" style={{ background: 'var(--color-bg-canvas)', padding: 24, borderRadius: 12 }}>
       <PricingTable title="Plans" plans={twoPlans} />
     </div>
   ),

@@ -1,129 +1,130 @@
-# Design System — hellovictordesignstudio-lab
+# VDS Design System
 
-> Professional Design System built with React 18, TypeScript, Styled Components v6, and Storybook 8.
+**VDS Design System** (VDS) is a React component library with semantic design tokens, light and dark appearance, and Storybook documentation. This repository ships the package `@design-system/core` and the published Storybook site.
 
-🔗 **Live:** https://hellovictordesignstudio-lab.github.io/design-system-dev
+**Live documentation:** https://hellovictordesignstudio-lab.github.io/design-system-dev
 
----
-
-## Stack técnico
-
-| Herramienta | Versión | Rol |
-|---|---|---|
-| React | 18 | UI framework |
-| TypeScript | 5 | Type safety |
-| Styled Components | v6 | CSS-in-JS + theming |
-| Storybook | 8.6.18 | Documentación interactiva |
-| Vite | 5 | Build tool |
-| GitHub Pages | — | Hosting gratuito |
+Writing for this project follows **VDS Tone** and **VDS Voice**—see the Storybook page **VDS Design System → VDS Tone and Voice** for terminology, structure, and style. That page is the source of truth for how VDS documentation should read and sound.
 
 ---
 
-## Arquitectura
+## Technology
+
+| Tool | Version | Role |
+| --- | --- | --- |
+| React | 18 | UI |
+| TypeScript | 5 | Types |
+| Styled Components | v6 | Theming and styles |
+| Storybook | 8.6.x | Docs and dev |
+| Vite | 5 | Build |
+| GitHub Pages | — | Hosted Storybook |
+
+---
+
+## Repository layout
 
 ### Tokens
+
 ```
 src/tokens/
-  primitives.ts   ← valores crudos (blue/500, neutral/900...)
-  semantic.ts     ← tokens con significado (color/bg/primary...)
+  primitives.ts   ← raw values (e.g. blue/500, neutral/900)
+  semantic.ts     ← semantic roles (e.g. color/bg/primary)
 ```
 
 ### Theme
+
 ```
 src/theme/
-  theme.ts           ← lightTheme, darkTheme, Theme type
-  ThemeProvider.tsx  ← contexto de tema
-  useColorMode.ts    ← hook para cambiar modo
-  GlobalStyles.ts    ← CSS global + variables
-  LangContext.tsx    ← contexto de idioma
-  i18n.ts            ← traducciones EN/ES/FR
+  theme.ts           ← lightTheme, darkTheme, Theme
+  ThemeProvider.tsx
+  useColorMode.ts
+  GlobalStyles.ts
+  LangContext.tsx
+  i18n.ts            ← EN / ES / FR
 ```
 
-### Componentes
+### Components
+
 ```
-src/components/
-  ComponentName/
-    ComponentName.tsx        ← componente principal
-    ComponentName.styles.ts  ← styled-components
-    ComponentName.types.ts   ← TypeScript interfaces
-    ComponentName.stories.tsx← stories Storybook
-    index.ts                 ← exports
+src/components/ComponentName/
+  ComponentName.tsx
+  ComponentName.styles.ts
+  ComponentName.types.ts
+  ComponentName.stories.tsx
+  index.ts
 ```
 
 ---
 
-## Decisiones de arquitectura
+## Architecture notes
 
-**¿Por qué Styled Components v6 y no Tailwind?**
-El DS necesita theming dinámico con tokens semánticos que cambien en runtime (Light/Dark/System). Styled Components permite pasar el tema como prop y acceder a tokens desde cualquier componente sin clases utilitarias.
+**Styled Components instead of utility-only CSS:** Appearance (light / dark / system) is driven at runtime through semantic tokens. The theme is available to every styled component.
 
-**¿Por qué `context.globals` en el decorator y no `useGlobals`?**
-`useGlobals` es un hook de React que falla en el build de producción de Storybook. El decorator recibe `context` como segundo parámetro que contiene los globals directamente — sin hooks, sin problemas en producción.
+**Storybook decorator:** Color mode and language come from `context.globals` in the preview decorator (not `useGlobals` in the decorator path), so production Storybook builds stay stable.
 
-**¿Por qué el base path importa?**
-Storybook buildea assets con rutas relativas al `base` de Vite (`.storybook/main.ts` → `viteFinal.base`, hoy `/design-system-dev/`). Debe coincidir con el segmento de la URL en GitHub Pages: `https://hellovictordesignstudio-lab.github.io/design-system-dev/`. Si cambias el nombre del repo o la ruta de Pages, actualiza ese `base` y el campo `homepage` en `package.json`.
+**Base URL:** Storybook’s Vite `base` in `.storybook/main.ts` must match the GitHub Pages path (today `/design-system-dev/`). If the repo URL changes, update `base` and `homepage` in `package.json`.
 
 ---
 
-## Componentes exportados (60)
+## Exported components
 
-Inventario alineado con `src/components/index.ts`. **Chip** es un alias de **Tag**; **Menu** suele usarse junto a **DropdownMenu**.
+Inventory matches `src/components/index.ts`. **Chip** is an alias of **Tag**; **Menu** is often used with **DropdownMenu**.
 
-| Categoría | Componentes |
-|---|---|
-| **Inputs y formulario** | Button, ButtonGroup, Checkbox, Radio, Switch, TextInput, Textarea, Select, DatePicker, ColorPicker, FileUpload, NumberInput, Slider, PinInput, SegmentedControl, TagInput, Combobox, TimePicker, RichTextEditor |
+| Category | Components |
+| --- | --- |
+| **Inputs** | Button, ButtonGroup, Checkbox, Radio, Switch, TextInput, Textarea, Select, DatePicker, ColorPicker, FileUpload, NumberInput, Slider, PinInput, SegmentedControl, TagInput, Combobox, TimePicker, RichTextEditor |
 | **Display** | Avatar, Badge, Card, Carousel, Divider, EmptyState, Kbd, ProgressBar, Rating, StatCard, Tag, Table, Timeline, List |
 | **Feedback** | Alert, Modal, Drawer, Popover, Toast, NotificationCenter |
-| **Navegación** | Breadcrumb, Navigation, Pagination, Tabs, BottomNavigation, Link |
+| **Navigation** | Breadcrumb, Navigation, Pagination, Tabs, BottomNavigation, Link |
 | **Overlay** | ContextMenu, CommandPalette |
-| **Layout y flujos** | Accordion, Stepper, Wizard |
-| **Menús** | DropdownMenu, SplitButton |
+| **Layout** | Accordion, Stepper, Wizard |
+| **Menus** | DropdownMenu, SplitButton |
 | **Marketing** | PricingTable, Testimonial, Footer |
-| **Datos** | Charts (BarChart, LineChart, PieChart, DonutChart, Sparkline, contenedor) |
-| **Utilidad** | Tooltip, Spinner, Skeleton, TreeView |
+| **Data** | Charts (BarChart, LineChart, PieChart, DonutChart, Sparkline, container) |
+| **Utility** | Tooltip, Spinner, Skeleton, TreeView |
 
 ---
 
-## Features
+## Behavior
 
-- 🌗 **Light / Dark / System** mode — persiste en localStorage
-- 🌐 **EN / ES / FR** — selector de idioma en Storybook toolbar
-- ♿ **A11y** — addon de accesibilidad en cada story
-- 📋 **Autodocs** — props table auto-generada desde TypeScript; muchas stories incluyen Playground, Variants, Sizes, States y Dark Mode cuando aplica
-- ⚡ **GitHub Actions** — deploy automático en cada `git push`
+- **Appearance:** Light, dark, or system (toolbar in Storybook).
+- **Language:** English, Spanish, or French for demo strings (toolbar).
+- **Accessibility:** Use the Storybook Accessibility addon on stories.
+- **Docs:** Autodocs and MDX; props tables from TypeScript where configured.
 
 ---
 
-## Cómo agregar un componente nuevo
+## Add a component
+
 ```bash
-# 1. Crear la carpeta
-mkdir src/components/NombreComponente
-
-# 2. Crear los 5 archivos
-touch src/components/NombreComponente/NombreComponente.tsx
-touch src/components/NombreComponente/NombreComponente.styles.ts
-touch src/components/NombreComponente/NombreComponente.types.ts
-touch src/components/NombreComponente/NombreComponente.stories.tsx
-touch src/components/NombreComponente/index.ts
-
-# 3. Exportar desde el índice principal
-# Agregar en src/components/index.ts:
-export * from './NombreComponente';
+mkdir src/components/YourComponent
+touch src/components/YourComponent/YourComponent.tsx
+touch src/components/YourComponent/YourComponent.styles.ts
+touch src/components/YourComponent/YourComponent.types.ts
+touch src/components/YourComponent/YourComponent.stories.tsx
+touch src/components/YourComponent/index.ts
 ```
 
-### Template mínimo de story
+Export from `src/components/index.ts`:
+
+```ts
+export * from './YourComponent';
+```
+
+Minimal story:
+
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
-import { NombreComponente } from './NombreComponente';
+import { YourComponent } from './YourComponent';
 
-const meta: Meta<typeof NombreComponente> = {
-  title: 'Components/NombreComponente',
-  component: NombreComponente,
+const meta: Meta<typeof YourComponent> = {
+  title: 'Components/YourComponent',
+  component: YourComponent,
   tags: ['autodocs'],
 };
 export default meta;
 
-type Story = StoryObj<typeof NombreComponente>;
+type Story = StoryObj<typeof YourComponent>;
 
 export const Default: Story = {
   args: {},
@@ -133,19 +134,15 @@ export const Default: Story = {
 ---
 
 ## Scripts
+
 ```bash
-npm run storybook        # Dev server en localhost:6006
-npm run build-storybook  # Build para producción
-npm run build            # Build de la librería
+npm run storybook        # http://localhost:6006
+npm run build-storybook  # output: storybook-static
+npm run build            # library build
 ```
 
 ---
 
 ## Deploy
 
-**URL publicada:** la misma que el enlace “Live” del encabezado (Storybook estático).
-
-Cada `git push` a `main` dispara el GitHub Action `.github/workflows/deploy.yml` que:
-1. Instala dependencias
-2. Corre `build-storybook`
-3. Publica en GitHub Pages automáticamente
+GitHub Actions builds Storybook and publishes to GitHub Pages on push to `main`. The published URL is the same as **Live documentation** above.

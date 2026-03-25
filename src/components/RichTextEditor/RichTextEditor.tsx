@@ -87,7 +87,7 @@ export function RichTextEditor({
   if (!editor) {
     return (
       <EditorRoot className={className} aria-busy="true">
-        <div style={{ padding: 16, color: '#9ba5be', fontSize: 13 }}>Cargando editor…</div>
+        <div style={{ padding: 16, color: 'var(--color-text-tertiary)', fontSize: 13 }}>Cargando editor…</div>
       </EditorRoot>
     );
   }

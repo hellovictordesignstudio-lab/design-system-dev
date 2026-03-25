@@ -12,9 +12,22 @@ const meta: Meta<typeof TagInput> = {
     docs: {
       description: {
         component:
-          'A token/tag input field. Users can type and press Enter, comma, or Tab to add tags. Backspace removes the last tag. Supports suggestions dropdown, max tags, and error states.',
+          'A field for entering tags. Add a tag with Enter, comma, or Tab; remove the last tag with Backspace. Supports suggestions, a maximum count, and error states.',
       },
     },
+  },
+  argTypes: {
+    placeholder: { control: 'text', description: 'Placeholder in the input area.' },
+    label: { control: 'text', description: 'Label above the field.' },
+    helperText: { control: 'text', description: 'Hint below the field.' },
+    hasError: { control: 'boolean', description: 'Applies error styling.' },
+    errorText: { control: 'text', description: 'Error text; applies error styling.' },
+    isDisabled: { control: 'boolean', description: 'Disables editing.' },
+    maxTags: { control: 'number', description: 'Maximum number of tags.' },
+    allowDuplicates: { control: 'boolean', description: 'Allows the same tag more than once.' },
+    value: { control: 'object', description: 'Controlled list of tags.' },
+    onChange: { control: false, description: 'Called when the tag list changes.' },
+    suggestions: { control: 'object', description: 'Optional strings for the suggestion list.' },
   },
 };
 

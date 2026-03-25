@@ -11,7 +11,7 @@ const meta: Meta<typeof List> = {
     docs: {
       description: {
         component:
-          'Structured rows for settings, menus, and search results. Supports links, buttons, leading/trailing slots, and bordered grouping.',
+          'Rows for settings, menus, or results. Supports links, buttons, leading and trailing slots, and bordered grouping.',
       },
     },
   },
@@ -19,10 +19,10 @@ const meta: Meta<typeof List> = {
     variant: {
       control: 'select',
       options: ['default', 'bordered'],
-      description: 'Default adds spacing between rows; bordered groups items in one frame',
+      description: 'Default adds spacing between rows; bordered groups rows in one frame.',
     },
-    ordered: { control: 'boolean', description: 'Use ordered list semantics (ol)' },
-    'aria-label': { control: 'text', description: 'Accessible name for the list' },
+    ordered: { control: 'boolean', description: 'Uses `<ol>` instead of `<ul>`.' },
+    'aria-label': { control: 'text', description: 'Accessible name for the list.' },
   },
 };
 
@@ -56,7 +56,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Default</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Default</p>
         <div style={{ maxWidth: 400 }}>
           <List variant="default" aria-label="Default variant">
             <List.Item leading={<User size={18} />}>Account</List.Item>
@@ -65,7 +65,7 @@ export const Variants: Story = {
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Bordered</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Bordered</p>
         <div style={{ maxWidth: 400 }}>
           <List variant="bordered" aria-label="Bordered variant">
             <List.Item leading={<User size={18} />} description="Profile and security">
@@ -95,7 +95,7 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Compact rows (title only)
         </p>
         <div style={{ maxWidth: 360 }}>
@@ -107,7 +107,7 @@ export const Sizes: Story = {
         </div>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>
           Expanded rows (title + description)
         </p>
         <div style={{ maxWidth: 480 }}>
@@ -138,13 +138,13 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 400 }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Static</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Static</p>
         <List variant="bordered" aria-label="Static rows">
           <List.Item leading={<User size={18} />}>Display only</List.Item>
         </List>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Link (href)</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Link (href)</p>
         <List variant="bordered" aria-label="Links">
           <List.Item leading={<Inbox size={18} />} href="#" description="Opens in same tab">
             Notifications
@@ -152,7 +152,7 @@ export const States: Story = {
         </List>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Button (onClick)</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Button (onClick)</p>
         <List variant="bordered" aria-label="Actions">
           <List.Item
             leading={<Settings size={18} />}
@@ -165,7 +165,7 @@ export const States: Story = {
         </List>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Disabled</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Disabled</p>
         <List variant="bordered" aria-label="Disabled row">
           <List.Item leading={<Home size={18} />} isDisabled description="Unavailable">
             Home
@@ -173,7 +173,7 @@ export const States: Story = {
         </List>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: '#6b7694' }}>Ordered list</p>
+        <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)' }}>Ordered list</p>
         <List ordered aria-label="Steps">
           <List.Item>Sign up</List.Item>
           <List.Item>Verify email</List.Item>
@@ -192,7 +192,7 @@ export const DarkMode: Story = {
     <div
       data-theme="dark"
       style={{
-        background: '#0c0d10',
+        background: 'var(--color-bg-canvas)',
         padding: 24,
         borderRadius: 12,
         maxWidth: 400,

@@ -16,15 +16,15 @@ const meta: Meta<typeof Drawer> = {
     docs: {
       description: {
         component:
-          'A slide-in panel anchored to any screen edge. Supports left, right, top, and bottom placements with four size options. Includes focus trap, scroll lock, and overlay click/Esc close.',
+          'A slide-in panel from any screen edge. Supports four sizes, focus trap, scroll lock, and overlay or Esc to close.',
       },
     },
   },
   argTypes: {
-    placement: { control: 'select', options: ['left', 'right', 'top', 'bottom'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg', 'full'] },
-    closeOnOverlayClick: { control: 'boolean' },
-    closeOnEsc: { control: 'boolean' },
+    placement: { control: 'select', options: ['left', 'right', 'top', 'bottom'], description: 'Edge the panel slides from.' },
+    size: { control: 'select', options: ['sm', 'md', 'lg', 'full'], description: 'Width or height of the panel.' },
+    closeOnOverlayClick: { control: 'boolean', description: 'Close when the overlay is clicked.' },
+    closeOnEsc: { control: 'boolean', description: 'Close when Esc is pressed.' },
   },
 };
 
@@ -42,7 +42,7 @@ export const Playground: Story = {
         <Button onClick={() => setIsOpen(true)}>Open drawer</Button>
         <Drawer {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Drawer.Body>
-            <p style={{ margin: 0, fontSize: '14px', color: '#6B7694', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-tertiary)', lineHeight: 1.7 }}>
               This is the drawer body. It scrolls independently from the rest of the page. Add
               any content here — forms, settings, detail views, and more.
             </p>
@@ -74,12 +74,12 @@ export const Variants: Story = {
         </div>
         <Drawer isOpen={open === 'left'} onClose={() => setOpen(null)} placement="left" title="Left drawer" size="sm">
           <Drawer.Body>
-            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Left placement.</p>
+            <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Left placement.</p>
           </Drawer.Body>
         </Drawer>
         <Drawer isOpen={open === 'right'} onClose={() => setOpen(null)} placement="right" title="Right drawer" size="sm">
           <Drawer.Body>
-            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Right placement.</p>
+            <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Right placement.</p>
           </Drawer.Body>
         </Drawer>
       </>
@@ -112,7 +112,7 @@ export const Placements: Story = {
             size="sm"
           >
             <Drawer.Body>
-              <p style={{ margin: 0, fontSize: '14px', color: '#6B7694' }}>
+              <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-tertiary)' }}>
                 Sliding in from the <strong>{p}</strong>.
               </p>
             </Drawer.Body>
@@ -148,7 +148,7 @@ export const Sizes: Story = {
             title={`Size: ${s}`}
           >
             <Drawer.Body>
-              <p style={{ margin: 0, fontSize: '14px', color: '#6B7694' }}>
+              <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-tertiary)' }}>
                 Width: {s === 'sm' ? '320px' : s === 'md' ? '480px' : s === 'lg' ? '640px' : '100vw'}.
               </p>
             </Drawer.Body>
@@ -177,13 +177,13 @@ export const WithForm: Story = {
         <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="Edit profile" size="md">
           <Drawer.Body>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingBottom: '20px', borderBottom: '1px solid #F0F2F5' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#E8EEFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <User size={28} color="#2952CC" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingBottom: '20px', borderBottom: '1px solid var(--color-bg-subtle)' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--color-brand-primary-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <User size={28} color="var(--color-brand-primary)" />
                 </div>
                 <div>
-                  <p style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#111827' }}>Victor Aldana</p>
-                  <p style={{ margin: '2px 0 0', fontSize: '13px', color: '#9BA5BE' }}>victor@example.com</p>
+                  <p style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Victor Aldana</p>
+                  <p style={{ margin: '2px 0 0', fontSize: '13px', color: 'var(--color-text-tertiary)' }}>victor@example.com</p>
                 </div>
               </div>
 
@@ -229,7 +229,7 @@ export const States: Story = {
         <Button onClick={() => setOpen(true)}>Open drawer</Button>
         <Drawer isOpen={open} onClose={() => setOpen(false)} title="Interactive" size="md">
           <Drawer.Body>
-            <p style={{ margin: 0, fontSize: 14, color: '#6b7694' }}>Close via overlay, Esc, or footer actions.</p>
+            <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-tertiary)' }}>Close via overlay, Esc, or footer actions.</p>
           </Drawer.Body>
           <Drawer.Footer>
             <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
@@ -257,9 +257,9 @@ export const DarkMode: Story = {
             <Drawer.Body>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {['New comment on your post', 'Version 2.0 released', 'Your export is ready'].map((msg) => (
-                  <div key={msg} style={{ padding: '12px', borderRadius: '10px', border: '1px solid #2E3550' }}>
-                    <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#F0F2F5' }}>{msg}</p>
-                    <p style={{ margin: '4px 0 0', fontSize: '12px', color: '#6B7694' }}>Just now</p>
+                  <div key={msg} style={{ padding: '12px', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+                    <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: 'var(--color-bg-subtle)' }}>{msg}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Just now</p>
                   </div>
                 ))}
               </div>

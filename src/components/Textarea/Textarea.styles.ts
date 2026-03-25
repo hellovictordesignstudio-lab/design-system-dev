@@ -18,10 +18,10 @@ export const Label = styled.label`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-primary, #0C0D10);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
 
   span.required {
-    color: #D22232;
+    color: ${({ theme }) => theme.colors['color-error-default']};
     margin-left: 3px;
   }
 `;
@@ -40,48 +40,66 @@ export const StyledTextarea = styled.textarea<StyledTextareaProps>`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--color-text-primary, #0C0D10);
-  background: var(--color-bg-primary, #FFFFFF);
+  color: ${({ theme }) => theme.colors['color-text-primary']};
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
   resize: ${({ $resize }) => $resize};
 
-  border: 1.5px solid ${({ $hasError, $hasSuccess }) =>
-    $hasError
-      ? '#D22232'
-      : $hasSuccess
-      ? '#0A8853'
-      : 'var(--color-border-default, #DDE1EA)'};
+  border: 1.5px solid
+    ${({ theme, $hasError, $hasSuccess }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $hasSuccess
+          ? theme.colors['color-success-default']
+          : theme.colors['color-border-default']};
 
   ${({ $size }) => sizeStyles[$size]}
 
   &::placeholder {
-    color: var(--color-text-tertiary, #9BA5BE);
+    color: ${({ theme }) => theme.colors['color-text-tertiary']};
   }
 
   &:hover:not(:disabled):not(:read-only) {
-    border-color: ${({ $hasError, $hasSuccess }) =>
-      $hasError ? '#A81B28' : $hasSuccess ? '#086B42' : 'var(--color-border-strong, #C5CBDA)'};
+    border-color: ${({ theme, $hasError, $hasSuccess }) =>
+      $hasError
+        ? theme.colors['color-error-text']
+        : $hasSuccess
+          ? theme.colors['color-success-text']
+          : theme.colors['color-border-strong']};
   }
 
   &:focus {
-    border-color: ${({ $hasError, $hasSuccess }) =>
-      $hasError ? '#D22232' : $hasSuccess ? '#0A8853' : 'var(--color-border-brand, #0055FF)'};
-    box-shadow: 0 0 0 3px ${({ $hasError, $hasSuccess }) =>
-      $hasError ? 'rgba(210,34,50,0.15)' : $hasSuccess ? 'rgba(10,136,83,0.15)' : 'var(--color-bg-brand-subtle, #E6EEFF)'};
+    border-color: ${({ theme, $hasError, $hasSuccess }) =>
+      $hasError
+        ? theme.colors['color-error-default']
+        : $hasSuccess
+          ? theme.colors['color-success-default']
+          : theme.colors['color-border-focus']};
+    box-shadow: 0 0 0 3px
+      ${({ theme, $hasError, $hasSuccess }) =>
+        $hasError
+          ? theme.mode === 'dark'
+            ? 'rgba(255, 69, 58, 0.2)'
+            : 'rgba(210, 34, 50, 0.15)'
+          : $hasSuccess
+            ? theme.mode === 'dark'
+              ? 'rgba(50, 215, 75, 0.2)'
+              : 'rgba(10, 136, 83, 0.15)'
+            : theme.colors['color-brand-primary-subtle']};
   }
 
   &:disabled {
-    background: var(--color-bg-tertiary, #EFF1F5);
-    color: var(--color-text-disabled, #9BA5BE);
+    background: ${({ theme }) => theme.colors['color-bg-muted']};
+    color: ${({ theme }) => theme.colors['color-text-disabled']};
     cursor: not-allowed;
     opacity: 0.6;
     resize: none;
   }
 
   &:read-only {
-    background: var(--color-bg-secondary, #F8F9FC);
+    background: ${({ theme }) => theme.colors['color-bg-subtle']};
     cursor: default;
     resize: none;
   }
@@ -102,8 +120,12 @@ export const HelperText = styled.span<{ $hasError: boolean; $hasSuccess: boolean
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: ${({ $hasError, $hasSuccess }) =>
-    $hasError ? '#D22232' : $hasSuccess ? '#0A8853' : 'var(--color-text-secondary, #4A5270)'};
+  color: ${({ theme, $hasError, $hasSuccess }) =>
+    $hasError
+      ? theme.colors['color-error-default']
+      : $hasSuccess
+        ? theme.colors['color-success-default']
+        : theme.colors['color-text-secondary']};
   line-height: 1.5;
 `;
 
@@ -111,7 +133,8 @@ export const CharCount = styled.span<{ $isOver: boolean }>`
   font-family: 'Nunito Sans', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: ${({ $isOver }) => ($isOver ? '#D22232' : 'var(--color-text-tertiary, #9BA5BE)')};
+  color: ${({ theme, $isOver }) =>
+    $isOver ? theme.colors['color-error-default'] : theme.colors['color-text-tertiary']};
   white-space: nowrap;
   flex-shrink: 0;
   margin-left: auto;

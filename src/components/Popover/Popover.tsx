@@ -100,10 +100,10 @@ const PosOuter = styled.div`
 
 const Panel = styled.div<{ $placement: PopoverPlacement; $w: number }>`
   width: ${({ $w }) => $w}px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 16px;
-  border: 1px solid #e2e5ed;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   padding: 16px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   animation: ${scaleIn} 150ms ease forwards;
@@ -115,8 +115,8 @@ const ArrowEl = styled.div<{ $placement: PopoverPlacement }>`
   position: absolute;
   width: 10px;
   height: 10px;
-  background: #ffffff;
-  border: 1px solid #e2e5ed;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
   transform: rotate(45deg);
 
   ${({ $placement }) => {
@@ -158,7 +158,7 @@ const ArrowEl = styled.div<{ $placement: PopoverPlacement }>`
 const PanelTitle = styled.div`
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   margin-bottom: 12px;
 `;
 

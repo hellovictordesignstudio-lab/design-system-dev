@@ -28,8 +28,8 @@ const fadeScale = keyframes`
 const Box = styled.div<{ $maxWidth: number; $placement: TooltipPlacement }>`
   position: fixed;
   z-index: 9999;
-  background: #111827;
-  color: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-inverse']};
+  color: ${({ theme }) => theme.colors['color-text-inverse']};
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 12px;
@@ -54,35 +54,36 @@ const Box = styled.div<{ $maxWidth: number; $placement: TooltipPlacement }>`
     content: '';
     position: absolute;
     border: 6px solid transparent;
-    ${({ $placement }) => {
+    ${({ $placement, theme }) => {
+      const tip = theme.colors['color-bg-inverse'];
       switch ($placement) {
         case 'top':
           return `
             top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            border-top-color: #111827;
+            border-top-color: ${tip};
           `;
         case 'bottom':
           return `
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            border-bottom-color: #111827;
+            border-bottom-color: ${tip};
           `;
         case 'left':
           return `
             top: 50%;
             left: 100%;
             transform: translateY(-50%);
-            border-left-color: #111827;
+            border-left-color: ${tip};
           `;
         case 'right':
           return `
             top: 50%;
             right: 100%;
             transform: translateY(-50%);
-            border-right-color: #111827;
+            border-right-color: ${tip};
           `;
       }
     }}

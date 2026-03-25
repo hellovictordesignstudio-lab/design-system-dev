@@ -37,67 +37,67 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: css`
-    background-color: #0055FF;
-    color: #ffffff;
+    background-color: var(--color-brand-primary);
+    color: var(--color-brand-on-primary);
     border: 1px solid transparent;
     font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: #0044CC;
+      background-color: var(--color-brand-primary-hover);
     }
     &:active:not(:disabled) {
-      background-color: #003399;
+      background-color: var(--color-brand-primary-active);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-primary) 38%, transparent);
     }
   `,
   secondary: css`
     background-color: transparent;
-    color: #0055FF;
-    border: 1.5px solid #0055FF;
+    color: var(--color-brand-primary);
+    border: 1.5px solid var(--color-brand-primary);
     font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: rgba(0, 85, 255, 0.06);
+      background-color: var(--color-brand-primary-subtle);
     }
     &:active:not(:disabled) {
-      background-color: rgba(0, 85, 255, 0.12);
+      background-color: var(--color-brand-primary-muted);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-primary) 38%, transparent);
     }
   `,
   ghost: css`
     background-color: transparent;
-    color: #6B7694;
+    color: var(--color-text-secondary);
     border: 1px solid transparent;
     font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: #F0F2F5;
+      background-color: var(--color-bg-subtle);
     }
     &:active:not(:disabled) {
-      background-color: #E4E7EF;
+      background-color: var(--color-bg-muted);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.25);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-primary) 38%, transparent);
     }
   `,
   danger: css`
-    background-color: #D22232;
-    color: #ffffff;
+    background-color: var(--color-error-default);
+    color: var(--color-brand-on-primary);
     border: 1px solid transparent;
     font-weight: 600;
 
     &:hover:not(:disabled) {
-      background-color: #B01C29;
+      filter: brightness(0.92);
     }
     &:active:not(:disabled) {
-      filter: brightness(0.9);
+      filter: brightness(0.85);
     }
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(210, 34, 50, 0.25);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error-default) 42%, transparent);
     }
   `,
 };

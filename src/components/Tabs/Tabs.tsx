@@ -60,14 +60,14 @@ const ListLine = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 0;
-  border-bottom: 2px solid #e2e5ed;
+  border-bottom: 2px solid ${({ theme }) => theme.colors['color-border-default']};
 `;
 
 const ListPill = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #f0f2f5;
+  background: ${({ theme }) => theme.colors['color-bg-muted']};
   border-radius: 9999px;
   padding: 4px;
 `;
@@ -76,7 +76,7 @@ const ListEnclosed = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 0;
-  border-bottom: 2px solid #e2e5ed;
+  border-bottom: 2px solid ${({ theme }) => theme.colors['color-border-default']};
 `;
 
 const TabLine = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
@@ -90,7 +90,8 @@ const TabLine = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
   font-family: inherit;
   border: none;
   background: transparent;
-  color: ${({ $isActive }) => ($isActive ? '#0055FF' : '#6B7694')};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-text-link'] : theme.colors['color-text-secondary']};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.4 : 1)};
   transition: color 150ms ease;
@@ -106,16 +107,20 @@ const TabLine = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
     right: 0;
     height: 2px;
     border-radius: 2px 2px 0 0;
-    background-color: ${({ $isActive }) => ($isActive ? '#0055FF' : 'transparent')};
+    background-color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors['color-brand-primary'] : 'transparent'};
     transition: background-color 150ms ease;
   }
 
   &:hover:not(:disabled) {
-    color: ${({ $isActive }) => ($isActive ? '#0055FF' : '#111827')};
+    color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors['color-text-link'] : theme.colors['color-text-primary']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
     border-radius: 6px 6px 0 0;
   }
 `;
@@ -130,8 +135,10 @@ const TabPill = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
   font-family: inherit;
   border: none;
   border-radius: 9999px;
-  background-color: ${({ $isActive }) => ($isActive ? '#0055FF' : 'transparent')};
-  color: ${({ $isActive }) => ($isActive ? '#ffffff' : '#6B7694')};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-brand-primary'] : 'transparent'};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors['color-brand-on-primary'] : theme.colors['color-text-secondary']};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.4 : 1)};
   transition: background-color 150ms ease, color 150ms ease;
@@ -140,11 +147,14 @@ const TabPill = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
   user-select: none;
 
   &:hover:not(:disabled) {
-    background-color: ${({ $isActive }) => ($isActive ? '#0044CC' : 'rgba(0,0,0,0.05)')};
+    background-color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors['color-brand-primary-hover'] : theme.colors['color-bg-emphasized']};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -164,29 +174,31 @@ const TabEnclosed = styled.button<{ $isActive: boolean; $isDisabled: boolean }>`
   transition: background-color 150ms ease, color 150ms ease;
   margin-bottom: -2px;
 
-  ${({ $isActive }) =>
+  ${({ $isActive, theme }) =>
     $isActive
       ? css`
-          background: #ffffff;
-          color: #111827;
-          border: 2px solid #e2e5ed;
-          border-bottom-color: #ffffff;
+          background: ${theme.colors['color-bg-default']};
+          color: ${theme.colors['color-text-primary']};
+          border: 2px solid ${theme.colors['color-border-default']};
+          border-bottom-color: ${theme.colors['color-bg-default']};
           border-radius: 12px 12px 0 0;
         `
       : css`
           background: transparent;
-          color: #6b7694;
+          color: ${theme.colors['color-text-secondary']};
           border: 2px solid transparent;
           border-radius: 12px 12px 0 0;
 
           &:hover:not(:disabled) {
-            background: #f0f2f5;
-            color: #111827;
+            background: ${theme.colors['color-bg-muted']};
+            color: ${theme.colors['color-text-primary']};
           }
         `}
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    box-shadow: 0 0 0 3px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.12)'};
   }
 `;
 
@@ -200,13 +212,13 @@ const BadgePill = styled.span`
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 700;
-  background-color: rgba(0, 85, 255, 0.12);
-  color: #0055ff;
+  background-color: ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+  color: ${({ theme }) => theme.colors['color-text-link']};
 `;
 
 const ActiveBadgePill = styled(BadgePill)`
   background-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors['color-brand-on-primary']};
 `;
 
 const PanelRoot = styled.div`

@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { darkColorTokens, lightColorTokens } from '../../tokens/semantic';
 import type { NotificationType } from './NotificationCenter.types';
 
 export const fadeIn = keyframes`
@@ -23,21 +24,20 @@ export const TriggerBtn = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  border: 1px solid #E2E5ED;
-  background-color: #ffffff;
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   cursor: pointer;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   transition: background-color 150ms ease, color 150ms ease;
   outline: none;
 
-  &:hover { background-color: #F0F2F5; color: #111827; }
-  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,85,255,0.12); border-color: #0055FF; }
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-    color: #9BA5BE;
-    &:hover { background-color: #2E3550; color: #F0F2F5; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
+    color: ${({ theme }) => theme.colors['color-text-primary']};
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors['color-brand-primary-subtle']};
+    border-color: ${({ theme }) => theme.colors['color-border-focus']};
   }
 `;
 
@@ -49,8 +49,8 @@ export const Badge = styled.span`
   height: 16px;
   padding: 0 4px;
   border-radius: 9999px;
-  background-color: #D22232;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors['color-error-default']};
+  color: ${({ theme }) => theme.colors['color-brand-on-primary']};
   font-size: 10px;
   font-weight: 700;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
@@ -58,30 +58,21 @@ export const Badge = styled.span`
   align-items: center;
   justify-content: center;
   line-height: 1;
-  border: 2px solid #ffffff;
-
-  [data-theme='dark'] &, .dark & {
-    border-color: #1A1F35;
-  }
+  border: 2px solid ${({ theme }) => theme.colors['color-bg-default']};
 `;
 
 // ── Panel ─────────────────────────────────────────────────────────────────────
 
 export const Panel = styled.div`
   width: 380px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors['color-bg-default']};
   border-radius: 16px;
-  border: 1px solid #E2E5ED;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  border: 1px solid ${({ theme }) => theme.colors['color-border-default']};
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   animation: ${fadeIn} 150ms ease forwards;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: #1A1F35;
-    border-color: #2E3550;
-  }
 `;
 
 export const PanelHeader = styled.div`
@@ -95,12 +86,8 @@ export const PanelTitle = styled.h3`
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 export const MarkAllBtn = styled.button`
@@ -108,19 +95,19 @@ export const MarkAllBtn = styled.button`
   background: none;
   font-size: 12px;
   font-weight: 600;
-  color: #0055FF;
+  color: ${({ theme }) => theme.colors['color-text-link']};
   cursor: pointer;
   padding: 0;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   transition: color 150ms ease;
   outline: none;
 
-  &:hover { color: #2952CC; }
-  &:focus-visible { outline: 2px solid #0055FF; border-radius: 4px; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #7BA4FF;
-    &:hover { color: #A3BEFF; }
+  &:hover {
+    color: ${({ theme }) => theme.colors['color-text-link-hover']};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
+    border-radius: 4px;
   }
 `;
 
@@ -130,32 +117,28 @@ export const TabsRow = styled.div`
   display: flex;
   gap: 0;
   padding: 12px 16px 0;
-  border-bottom: 1px solid #F0F2F5;
-
-  [data-theme='dark'] &, .dark & {
-    border-bottom-color: #2E3550;
-  }
+  border-bottom: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
 `;
 
 export const Tab = styled.button<{ $isActive: boolean }>`
   border: none;
   background: none;
   padding: 6px 12px;
-  border-bottom: 2px solid ${({ $isActive }) => ($isActive ? '#0055FF' : 'transparent')};
+  border-bottom: 2px solid
+    ${({ $isActive, theme }) => ($isActive ? theme.colors['color-border-focus'] : 'transparent')};
   font-size: 13px;
   font-weight: ${({ $isActive }) => ($isActive ? 700 : 500)};
-  color: ${({ $isActive }) => ($isActive ? '#0055FF' : '#6B7694')};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors['color-text-link'] : theme.colors['color-text-tertiary']};
   cursor: pointer;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   transition: color 150ms ease, border-color 150ms ease;
   margin-bottom: -1px;
   outline: none;
 
-  &:focus-visible { outline: 2px solid #0055FF; border-radius: 4px; }
-
-  [data-theme='dark'] &, .dark & {
-    color: ${({ $isActive }) => ($isActive ? '#7BA4FF' : '#6B7694')};
-    border-bottom-color: ${({ $isActive }) => ($isActive ? '#7BA4FF' : 'transparent')};
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
+    border-radius: 4px;
   }
 `;
 
@@ -176,28 +159,24 @@ export const EmptyWrap = styled.div`
   justify-content: center;
   gap: 8px;
   padding: 40px 24px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
 `;
 
 export const EmptyText = styled.p`
   margin: 0;
   font-size: 14px;
   font-weight: 500;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
 `;
 
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 export const PanelFooter = styled.div`
-  border-top: 1px solid #F0F2F5;
+  border-top: 1px solid ${({ theme }) => theme.colors['color-border-subtle']};
   padding: 10px 16px;
   display: flex;
   justify-content: center;
-
-  [data-theme='dark'] &, .dark & {
-    border-top-color: #2E3550;
-  }
 `;
 
 export const ViewAllBtn = styled.button`
@@ -205,40 +184,53 @@ export const ViewAllBtn = styled.button`
   background: none;
   font-size: 13px;
   font-weight: 600;
-  color: #0055FF;
+  color: ${({ theme }) => theme.colors['color-text-link']};
   cursor: pointer;
   padding: 0;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   outline: none;
   transition: color 150ms ease;
 
-  &:hover { color: #2952CC; }
-  &:focus-visible { outline: 2px solid #0055FF; border-radius: 4px; }
-
-  [data-theme='dark'] &, .dark & {
-    color: #7BA4FF;
+  &:hover {
+    color: ${({ theme }) => theme.colors['color-text-link-hover']};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
+    border-radius: 4px;
   }
 `;
 
-// ── Item ──────────────────────────────────────────────────────────────────────
+// ── Item type surfaces (semantic tokens) ─────────────────────────────────────
 
-const itemBg: Record<NotificationType, string> = {
-  info:    '#E8EEFF',
-  success: '#DCFCE7',
-  warning: '#FEF3C7',
-  error:   '#FEE2E2',
+const L = lightColorTokens;
+const D = darkColorTokens;
+
+const itemBgLight: Record<NotificationType, string> = {
+  info: L['color-brand-primary-subtle'],
+  success: L['color-success-subtle'],
+  warning: L['color-warning-subtle'],
+  error: L['color-error-subtle'],
 };
+
 const itemBgDark: Record<NotificationType, string> = {
-  info:    '#1E2E5E',
-  success: '#14532D',
-  warning: '#451A03',
-  error:   '#450A0A',
+  info: D['color-brand-primary-subtle'],
+  success: D['color-success-subtle'],
+  warning: D['color-warning-subtle'],
+  error: D['color-error-subtle'],
 };
-const itemColor: Record<NotificationType, string> = {
-  info:    '#2952CC',
-  success: '#15803D',
-  warning: '#92400E',
-  error:   '#B91C1C',
+
+const itemInk: Record<NotificationType, string> = {
+  info: L['color-brand-primary'],
+  success: L['color-success-text'],
+  warning: L['color-warning-text'],
+  error: L['color-error-text'],
+};
+
+const itemInkDark: Record<NotificationType, string> = {
+  info: D['color-text-link'],
+  success: D['color-success-text'],
+  warning: D['color-warning-text'],
+  error: D['color-error-text'],
 };
 
 export const ItemRow = styled.div<{ $isRead: boolean }>`
@@ -248,13 +240,11 @@ export const ItemRow = styled.div<{ $isRead: boolean }>`
   padding: 12px 16px;
   cursor: pointer;
   transition: background-color 150ms ease;
-  background-color: ${({ $isRead }) => ($isRead ? 'transparent' : 'rgba(0,85,255,0.04)')};
+  background-color: ${({ $isRead, theme }) =>
+    $isRead ? 'transparent' : theme.colors['color-brand-primary-subtle']};
 
-  &:hover { background-color: #F0F2F5; }
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isRead }) => ($isRead ? 'transparent' : 'rgba(0,85,255,0.08)')};
-    &:hover { background-color: #2E3550; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-bg-subtle']};
   }
 `;
 
@@ -262,18 +252,15 @@ export const ItemAvatar = styled.div<{ $type: NotificationType }>`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: ${({ $type }) => itemBg[$type]};
-  color: ${({ $type }) => itemColor[$type]};
+  background-color: ${({ $type, theme }) =>
+    theme.mode === 'dark' ? itemBgDark[$type] : itemBgLight[$type]};
+  color: ${({ $type, theme }) => (theme.mode === 'dark' ? itemInkDark[$type] : itemInk[$type])};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: 13px;
   font-weight: 700;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $type }) => itemBgDark[$type]};
-  }
 `;
 
 export const ItemContent = styled.div`
@@ -285,29 +272,21 @@ export const ItemTitle = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 700;
-  color: #111827;
+  color: ${({ theme }) => theme.colors['color-text-primary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-
-  [data-theme='dark'] &, .dark & {
-    color: #F0F2F5;
-  }
 `;
 
 export const ItemDesc = styled.p`
   margin: 2px 0 0;
   font-size: 12px;
-  color: #6B7694;
+  color: ${({ theme }) => theme.colors['color-text-secondary']};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   line-height: 1.5;
-
-  [data-theme='dark'] &, .dark & {
-    color: #9BA5BE;
-  }
 `;
 
 export const ItemTime = styled.span`
   font-size: 11px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-top: 3px;
   display: block;
 `;
@@ -324,7 +303,7 @@ export const UnreadDot = styled.span<{ $visible: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #0055FF;
+  background-color: ${({ theme }) => theme.colors['color-brand-primary']};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 200ms ease;
   margin-top: 2px;
@@ -339,7 +318,7 @@ export const RemoveBtn = styled.button`
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   cursor: pointer;
   opacity: 0;
   transition: opacity 150ms ease, background-color 150ms ease;
@@ -349,11 +328,13 @@ export const RemoveBtn = styled.button`
     opacity: 1;
   }
 
-  &:hover { background-color: #E2E5ED; color: #D22232; }
-  &:focus-visible { outline: 2px solid #0055FF; opacity: 1; }
-
-  [data-theme='dark'] &, .dark & {
-    &:hover { background-color: #2E3550; }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['color-border-default']};
+    color: ${({ theme }) => theme.colors['color-error-default']};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors['color-border-focus']};
+    opacity: 1;
   }
 `;
 

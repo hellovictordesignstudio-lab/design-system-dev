@@ -33,7 +33,7 @@ const meta: Meta<typeof Sidebar> = {
     docs: {
       description: {
         component:
-          'Sidebar is a sticky navigation panel with collapsible support, grouped sections, badges, sub-items, and tooltip labels in collapsed mode.',
+          'A sticky sidebar with collapsible width, grouped sections, badges, nested items, and tooltips when collapsed.',
       },
     },
   },
@@ -52,26 +52,26 @@ function Shell({
   activeItem?: string;
 }) {
   return (
-    <div style={{ display: 'flex', height: '560px', border: '1px solid #E2E5ED', borderRadius: 14, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '560px', border: '1px solid var(--color-border-default)', borderRadius: 14, overflow: 'hidden' }}>
       {sidebar}
       <main
         style={{
           flex: 1,
           padding: 28,
-          background: '#F8F9FC',
+          background: 'var(--color-bg-subtle)',
           overflow: 'auto',
           display: 'flex',
           flexDirection: 'column',
           gap: 12,
         }}
       >
-        <div style={{ fontSize: 20, fontWeight: 700, color: '#111827', fontFamily: 'Nunito Sans, sans-serif' }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--color-text-primary)', fontFamily: 'Nunito Sans, sans-serif' }}>
           {activeItem.charAt(0).toUpperCase() + activeItem.slice(1)}
         </div>
         <div
           style={{
             fontSize: 14,
-            color: '#9BA5BE',
+            color: 'var(--color-text-tertiary)',
             lineHeight: 1.6,
             fontFamily: 'Nunito Sans, sans-serif',
           }}
@@ -100,15 +100,15 @@ export const Playground: Story = {
                     width: 28,
                     height: 28,
                     borderRadius: 8,
-                    background: '#0055FF',
+                    background: 'var(--color-brand-primary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <Zap size={16} color="#fff" />
+                  <Zap size={16} color="var(--color-brand-on-primary)" />
                 </div>
-                <span style={{ fontWeight: 800, fontSize: 15, color: '#111827', fontFamily: 'Nunito Sans, sans-serif' }}>
+                <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--color-text-primary)', fontFamily: 'Nunito Sans, sans-serif' }}>
                   Acme Inc
                 </span>
               </div>
@@ -181,7 +181,7 @@ export const Variants: Story = {
     },
   },
   render: () => (
-    <div style={{ padding: 16, fontSize: 14, color: '#6b7694', lineHeight: 1.6 }}>
+    <div style={{ padding: 16, fontSize: 14, color: 'var(--color-text-tertiary)', lineHeight: 1.6 }}>
       Use <strong>Playground</strong> for the expanded sidebar and <strong>Collapsed</strong> for the
       icon-only variant. <strong>WithBadges</strong> and <strong>WithSubItems</strong> show common composition patterns.
     </div>
@@ -199,7 +199,7 @@ export const Sizes: Story = {
     },
   },
   render: () => (
-    <div style={{ padding: 16, fontSize: 14, color: '#6b7694' }}>
+    <div style={{ padding: 16, fontSize: 14, color: 'var(--color-text-tertiary)' }}>
       Resize the Storybook viewport or wrap <code>Sidebar</code> in your app layout; the component fills the column height.
     </div>
   ),
@@ -216,7 +216,7 @@ export const States: Story = {
     },
   },
   render: () => (
-    <div style={{ padding: 16, fontSize: 14, color: '#6b7694' }}>
+    <div style={{ padding: 16, fontSize: 14, color: 'var(--color-text-tertiary)' }}>
       Open <strong>WithBadges</strong> for counts and <strong>WithSubItems</strong> for nested navigation.{' '}
       <strong>DarkMode</strong> shows token-aware styling.
     </div>
@@ -239,13 +239,13 @@ export const Collapsed: Story = {
                   width: 28,
                   height: 28,
                   borderRadius: 8,
-                  background: '#0055FF',
+                  background: 'var(--color-brand-primary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <Zap size={16} color="#fff" />
+                <Zap size={16} color="var(--color-brand-on-primary)" />
               </div>
             </Sidebar.Header>
 
@@ -284,11 +284,11 @@ export const WithBadges: Story = {
           <Sidebar isCollapsed={sidebar.isCollapsed} onCollapse={sidebar.collapse}>
             <Sidebar.Header>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 28, height: 28, borderRadius: 8, background: '#0055FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Zap size={16} color="#fff" />
+                <div style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--color-brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Zap size={16} color="var(--color-brand-on-primary)" />
                 </div>
                 {!sidebar.isCollapsed && (
-                  <span style={{ fontWeight: 800, fontSize: 15, color: '#111827', fontFamily: 'Nunito Sans, sans-serif' }}>
+                  <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--color-text-primary)', fontFamily: 'Nunito Sans, sans-serif' }}>
                     Acme Inc
                   </span>
                 )}
@@ -329,10 +329,10 @@ export const WithSubItems: Story = {
           <Sidebar>
             <Sidebar.Header>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 28, height: 28, borderRadius: 8, background: '#0055FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Zap size={16} color="#fff" />
+                <div style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--color-brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Zap size={16} color="var(--color-brand-on-primary)" />
                 </div>
-                <span style={{ fontWeight: 800, fontSize: 15, color: '#111827', fontFamily: 'Nunito Sans, sans-serif' }}>Acme Inc</span>
+                <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--color-text-primary)', fontFamily: 'Nunito Sans, sans-serif' }}>Acme Inc</span>
               </div>
             </Sidebar.Header>
 
@@ -385,8 +385,8 @@ export const DarkMode: Story = {
           <Sidebar>
             <Sidebar.Header>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 28, height: 28, borderRadius: 8, background: '#0055FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Zap size={16} color="#fff" />
+                <div style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--color-brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Zap size={16} color="var(--color-brand-on-primary)" />
                 </div>
                 <span style={{ fontWeight: 800, fontSize: 15, fontFamily: 'Nunito Sans, sans-serif' }}>Acme Inc</span>
               </div>
@@ -414,7 +414,7 @@ export const DarkMode: Story = {
     );
   },
   parameters: {
-    docs: { description: { story: 'Use the Dark Mode toolbar toggle to preview dark styles.' } },
+    docs: { description: { story: 'Choose Dark in the toolbar color mode control to preview dark styles.' } },
   },
 };
 
@@ -437,16 +437,16 @@ export const FullExample: Story = {
                     width: 28,
                     height: 28,
                     borderRadius: 8,
-                    background: 'linear-gradient(135deg, #0055FF, #6C3BF5)',
+                    background: 'linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-primary-active))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
                   }}
                 >
-                  <Zap size={16} color="#fff" />
+                  <Zap size={16} color="var(--color-brand-on-primary)" />
                 </div>
-                <span style={{ fontWeight: 800, fontSize: 15, color: '#111827', fontFamily: 'Nunito Sans, sans-serif' }}>
+                <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--color-text-primary)', fontFamily: 'Nunito Sans, sans-serif' }}>
                   Acme Inc
                 </span>
               </div>

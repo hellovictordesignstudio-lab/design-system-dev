@@ -35,32 +35,18 @@ const VerticalWrapper = styled.div<{ $spacing: DividerSpacing }>`
   margin-right: ${({ $spacing }) => spacingMap[$spacing]};
 `;
 
-const lineColor = css`
-  background-color: #E2E5ED;
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #2E3550;
-  }
-`;
-
 const HorizontalLine = styled.div<{ $variant: DividerVariant }>`
   flex: 1;
   height: 1px;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'solid'
       ? css`
-          ${lineColor}
+          background-color: ${theme.colors['color-border-default']};
         `
       : css`
           background: transparent;
-          border-top: 1px ${$variant} #E2E5ED;
-
-          [data-theme='dark'] &,
-          .dark & {
-            border-top-color: #2E3550;
-          }
+          border-top: 1px ${$variant} ${theme.colors['color-border-default']};
         `}
 `;
 
@@ -68,19 +54,14 @@ const VerticalLine = styled.div<{ $variant: DividerVariant }>`
   width: 1px;
   height: 100%;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === 'solid'
       ? css`
-          ${lineColor}
+          background-color: ${theme.colors['color-border-default']};
         `
       : css`
           background: transparent;
-          border-left: 1px ${$variant} #E2E5ED;
-
-          [data-theme='dark'] &,
-          .dark & {
-            border-left-color: #2E3550;
-          }
+          border-left: 1px ${$variant} ${theme.colors['color-border-default']};
         `}
 `;
 
@@ -89,15 +70,9 @@ const Label = styled.span`
   padding: 0 12px;
   font-size: 12px;
   font-weight: 600;
-  color: #9BA5BE;
-  background-color: #ffffff;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
+  background-color: ${({ theme }) => theme.colors['color-bg-default']};
   white-space: nowrap;
-
-  [data-theme='dark'] &,
-  .dark & {
-    background-color: #1A1F35;
-    color: #9BA5BE;
-  }
 `;
 
 export function Divider({

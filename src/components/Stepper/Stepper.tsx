@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { Check, AlertCircle } from 'lucide-react';
+import { colorPrimitives } from '../../tokens/primitives';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -70,30 +71,27 @@ const StepHead = styled.div<{ $orientation: StepperOrientation }>`
 
 const circleStateStyles: Record<StepState, ReturnType<typeof css>> = {
   completed: css`
-    background-color: #0055FF;
-    border: 2px solid #0055FF;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors['color-brand-primary']};
+    border: 2px solid ${({ theme }) => theme.colors['color-brand-primary']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
   `,
   active: css`
-    background-color: #0055FF;
-    border: 2px solid #0055FF;
-    color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.15);
+    background-color: ${({ theme }) => theme.colors['color-brand-primary']};
+    border: 2px solid ${({ theme }) => theme.colors['color-brand-primary']};
+    color: ${({ theme }) => theme.colors['color-brand-on-primary']};
+    box-shadow: 0 0 0 4px
+      ${({ theme }) =>
+        theme.mode === 'dark' ? 'rgba(10, 132, 255, 0.35)' : 'rgba(0, 85, 255, 0.15)'};
   `,
   upcoming: css`
-    background-color: #ffffff;
-    border: 2px solid #DDE1EA;
-    color: #9BA5BE;
-
-    [data-theme='dark'] &, .dark & {
-      background-color: #1A1F35;
-      border-color: #4A5270;
-    }
+    background-color: ${({ theme }) => theme.colors['color-bg-default']};
+    border: 2px solid ${({ theme }) => theme.colors['color-border-default']};
+    color: ${({ theme }) => theme.colors['color-text-disabled']};
   `,
   error: css`
-    background-color: #D22232;
-    border: 2px solid #D22232;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors['color-error-default']};
+    border: 2px solid ${({ theme }) => theme.colors['color-error-default']};
+    color: ${colorPrimitives.white};
   `,
 };
 
@@ -116,29 +114,23 @@ const Circle = styled.div<{ $state: StepState }>`
 const HorizontalConnector = styled.div<{ $isCompleted: boolean }>`
   flex: 1;
   height: 2px;
-  background-color: ${({ $isCompleted }) => ($isCompleted ? '#0055FF' : '#DDE1EA')};
+  background-color: ${({ theme, $isCompleted }) =>
+    $isCompleted ? theme.colors['color-brand-primary'] : theme.colors['color-border-default']};
   transition: background-color 200ms ease;
   margin: 0 -1px;
   align-self: center;
   position: relative;
   top: -16px; /* align with circle center */
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isCompleted }) => ($isCompleted ? '#0055FF' : '#2E3550')};
-  }
 `;
 
 const VerticalConnector = styled.div<{ $isCompleted: boolean }>`
   width: 2px;
   height: 24px;
-  background-color: ${({ $isCompleted }) => ($isCompleted ? '#0055FF' : '#DDE1EA')};
+  background-color: ${({ theme, $isCompleted }) =>
+    $isCompleted ? theme.colors['color-brand-primary'] : theme.colors['color-border-default']};
   margin-left: 15px; /* (32px circle / 2) - 1px */
   flex-shrink: 0;
   transition: background-color 200ms ease;
-
-  [data-theme='dark'] &, .dark & {
-    background-color: ${({ $isCompleted }) => ($isCompleted ? '#0055FF' : '#2E3550')};
-  }
 `;
 
 // Labels
@@ -154,32 +146,23 @@ const StepLabel = styled.span<{ $state: StepState }>`
   display: block;
   font-size: 14px;
   font-weight: 700;
-  color: ${({ $state }) =>
-    $state === 'upcoming' ? '#9BA5BE' : '#111827'};
+  color: ${({ theme, $state }) =>
+    $state === 'upcoming' ? theme.colors['color-text-tertiary'] : theme.colors['color-text-primary']};
   transition: color 200ms ease;
-
-  [data-theme='dark'] &, .dark & {
-    color: ${({ $state }) =>
-      $state === 'upcoming' ? '#4A5270' : '#F0F2F5'};
-  }
 `;
 
 const StepDescription = styled.span`
   display: block;
   font-size: 12px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-top: 2px;
   line-height: 1.4;
-
-  [data-theme='dark'] &, .dark & {
-    color: #4A5270;
-  }
 `;
 
 const OptionalLabel = styled.span`
   display: block;
   font-size: 11px;
-  color: #9BA5BE;
+  color: ${({ theme }) => theme.colors['color-text-tertiary']};
   margin-top: 1px;
 `;
 
