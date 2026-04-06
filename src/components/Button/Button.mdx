@@ -1,0 +1,194 @@
+import {
+  Meta,
+  Title,
+  Description,
+  Primary,
+  Controls,
+  Canvas,
+} from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+<Title />
+<Description />
+
+Buttons communicate **actions** users can take. VDS `Button` is a pill-shaped control with four variants, three sizes, optional icons, loading state, and full-width layout—built with tokens and consistent focus styles for light and dark surfaces.
+
+Example props (JSON):
+
+```json
+{
+  "variant": "primary",
+  "size": "md",
+  "fullWidth": false,
+  "isLoading": false,
+  "disabled": false,
+  "children": "Continue",
+  "leftIcon": null,
+  "rightIcon": null
+}
+```
+
+---
+
+## Principles
+
+- **One primary action per surface.** Use `primary` for the main outcome; support with `secondary` or `ghost`.
+- **Label with a verb.** Prefer short, specific copy (“Save draft”, “Continue”) over vague words (“OK”).
+- **Destructive actions need friction.** Use `danger` for irreversible or data-loss actions; pair with confirmation when needed.
+- **Preserve feedback.** Loading replaces the label with a spinner; disabled and loading states are not clickable.
+
+<Canvas of={ButtonStories.DocPrinciples} />
+
+---
+
+## Anatomy
+
+The button is a single `<button>` element: optional **leading** and **trailing** icon slots, **label** text, and an overlaid **spinner** when `isLoading` is true.
+
+<Canvas of={ButtonStories.DocAnatomy} />
+
+| Part | Role |
+| --- | --- |
+| Leading icon | Optional; use for metaphors (add, download). Hidden while loading. |
+| Label | Required for accessibility unless an icon-only pattern is explicitly supported elsewhere. |
+| Trailing icon | Optional; common for “next” or external links. |
+| Spinner | Shown when `isLoading`; replaces visible label and icons. |
+
+---
+
+## Shape
+
+VDS buttons use a **fully rounded** profile (`border-radius: 9999px`) so the control reads as a **pill** at every size. Height and horizontal padding define the silhouette; width grows with content unless `fullWidth` is set.
+
+Illustrative CSS (tokens; actual styles live in the styled-component):
+
+```css
+/* Silhouette */
+border-radius: 9999px;
+/* Primary fill */
+background: var(--color-brand-primary);
+color: var(--color-brand-on-primary);
+```
+
+<Canvas of={ButtonStories.DocShape} />
+
+---
+
+## Usage
+
+Use a button when the user **commits an action** on the same page (submit, delete, open modal). Use links (`<a>`) or router components for **navigation** to another URL. Avoid nesting interactive elements inside `Button`.
+
+<Canvas of={ButtonStories.DocUsage} />
+
+---
+
+## Hierarchy
+
+- **Primary** — High-emphasis: one per region for the default or “happy path” action.
+- **Secondary** — Medium-emphasis: alternative actions that stay visible but defer to primary.
+- **Ghost** — Low-emphasis: tertiary actions, toolbars, or dense UIs.
+- **Danger** — Destructive: delete, remove, or irreversible operations.
+
+<Canvas of={ButtonStories.DocHierarchy} />
+
+---
+
+## Do & don’t
+
+<Canvas of={ButtonStories.DocDoDont} />
+
+---
+
+## Destructive buttons
+
+Use **`variant="danger"`** for harmful actions. Keep labels explicit (“Delete project”). Combine with confirmation dialogs for high-impact deletes. Icons (`leftIcon`) can reinforce meaning but must not be the only cue in critical flows.
+
+<Canvas of={ButtonStories.DocDestructive} />
+
+---
+
+## Best practices
+
+- **Sentence case** for labels unless product copy says otherwise.
+- **Don’t disable** without explanation in complex forms; prefer validation messages.
+- **Loading** already disables interaction; don’t stack redundant `disabled` unless you need to block for other reasons.
+- **Icons** should be 14–18px depending on `size` (component scales Lucide icons accordingly in stories).
+
+<Canvas of={ButtonStories.DocBestPractices} />
+
+---
+
+## Behavior
+
+- **Pointer:** Hover and active styles use token-driven background/border changes.
+- **Focus:** `:focus-visible` shows a high-contrast ring (brand or error tint by variant).
+- **Loading:** `isLoading` shows a spinner, hides label/icons visually, and sets `disabled` on the native button.
+- **Disabled:** `disabled` lowers opacity and blocks clicks.
+
+<Canvas of={ButtonStories.DocBehavior} />
+
+---
+
+## Touch targets
+
+VDS sizes map to **32px**, **40px**, and **48px** height. For touch UIs, **44×44px** minimum is a common guideline (WCAG 2.5.5 Target Size). Treat **`sm`** as dense/desktop-first; on touch-heavy layouts prefer **`md`** or **`lg`**, or add extra hit padding in the parent layout.
+
+<Canvas of={ButtonStories.DocTouchTargets} />
+
+---
+
+## States
+
+Default, hover/active (pointer), focus-visible, loading, and disabled.
+
+<Canvas of={ButtonStories.States} />
+
+---
+
+## Width
+
+By default the button is **as wide as its content**. With **`fullWidth`**, the button stretches to the width of its container—typical for mobile footers or form stacks.
+
+<Canvas of={ButtonStories.DocWidth} />
+
+---
+
+## Breakpoints
+
+The Button component does **not** change size by breakpoint automatically. Responsive behavior is **container-driven**: adjust layout, grid columns, or `fullWidth` at the screen level. Below, the same buttons sit in a narrow vs wide container.
+
+<Canvas of={ButtonStories.DocBreakpoints} />
+
+---
+
+## Examples
+
+Common combinations: icons, variants, and full-width.
+
+<Canvas of={ButtonStories.WithIcons} />
+
+---
+
+## Wide
+
+Full-width buttons in a **card-width** column (typical mobile or narrow panel).
+
+<Canvas of={ButtonStories.DocWide} />
+
+---
+
+## Dark mode
+
+Surfaces using `data-theme="dark"` (or the Storybook toolbar **Color Mode**) pick up semantic tokens; buttons keep the same variant logic with adjusted contrast.
+
+<Canvas of={ButtonStories.DarkMode} />
+
+---
+
+## API
+
+<Primary />
+
+<Controls />
